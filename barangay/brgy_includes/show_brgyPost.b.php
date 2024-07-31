@@ -158,7 +158,6 @@ while ($data = mysqli_fetch_assoc($result)) {
                             Delete post
                         </h4>
                     </div>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
                     <form action="brgy_includes/deletePost.b.php" method="POST">
@@ -172,7 +171,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         <div class="text-center">
                             <?php $_SESSION['getImg'] = $img; ?>
                             <input type="hidden" id="getPostIdToDelete" name="getPostIdToDelete">
-                            <button type="submit" name="baBtnDeletePost" class="btn btn-primary me-2 fw-bold">Delete</button>
+                            <button type="submit" name="baBtnDeletePost" class="btn btn-success me-2 fw-bold">Delete</button>
                             <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>

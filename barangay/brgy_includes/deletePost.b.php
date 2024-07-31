@@ -4,7 +4,6 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['baBtnDeletePost'])) {
     $post_id =  $_POST['getPostIdToDelete'];
-    echo $post_id;
     $img = $_SESSION['getImg'];
     $imgArray = json_decode($img, true);
 
