@@ -40,15 +40,15 @@ if ($user_role != 1) {
     <title>Barangay Post</title>
     <!-- local css -->
     <link rel="stylesheet" href="brgyMaterials/style.b.css">
-    <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap icon CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery ajax cdn -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -275,8 +275,18 @@ if (isset($_SESSION['post_message'])) {
         </script>';
     unset($_SESSION['post_message']);
 }
+
+//delete post
+if (isset($_SESSION['delete_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['delete_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['delete_message']);
+}
 ?>
-
-
 
 </html>

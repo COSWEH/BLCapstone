@@ -4,7 +4,7 @@ session_start();
 
 //bgUpdatePhotos
 if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $post_id = $_POST['getPostId'];
+    $post_id = $_POST['getPostIdToUpdate'];
     $userid = $_SESSION['user_id'];
     $post_brgy = $_SESSION['getAdminBrgy'];
     $content = $_POST['baTextContent'];

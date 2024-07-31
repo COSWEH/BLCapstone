@@ -44,12 +44,14 @@ while ($data = mysqli_fetch_assoc($result)) {
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <button class="btn btn-sm dropdown-item edit-post" data-post-id="<?php echo $postId; ?>" data-bs-toggle="modal" data-bs-target="#editPostModal">
+                            <button type="button" class="btn btn-sm dropdown-item btnUpdatePost" data-post-id="<?php echo $postId; ?>" data-bs-toggle="modal" data-bs-target="#editPostModal">
                                 Edit post
                             </button>
                         </li>
                         <li>
-                            <button class="btn btn-sm dropdown-item">Delete post</button>
+                            <button type="button" class="btn btn-sm dropdown-item btnDeletePost" data-post-id="<?php echo $postId; ?>" data-bs-toggle="modal" data-bs-target="#deletePostModal">
+                                Delete post
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -91,7 +93,6 @@ while ($data = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
-
     <!-- update modal -->
     <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -102,7 +103,6 @@ while ($data = mysqli_fetch_assoc($result)) {
                             Edit post
                         </h4>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="updatePostForm" action="brgy_includes/updatePost.b.php" method="POST" enctype="multipart/form-data">
@@ -139,8 +139,8 @@ while ($data = mysqli_fetch_assoc($result)) {
 
                             </div>
                         </div>
-                        <input type="hidden" id="epost_idd" name="getPostId">
-                        <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary me-2">Save changes</button>
+                        <input type="hidden" id="getPostIdToUpdate" name="getPostIdToUpdate">
+                        <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary me-2">Update post</button>
                         <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal">Cancel</button>
                     </form>
                 </div>
@@ -148,6 +148,38 @@ while ($data = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 
+    <!-- delete modal -->
+    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="deletePostModalLabel">
+                            Delete post
+                        </h4>
+                    </div>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <form action="brgy_includes/deletePost.b.php" method="POST">
+                        <div class="text-center mb-3">
+                            <div class="mb-3">
+                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                            </div>
+                            <h1 class="mb-3">Are you sure?</h1>
+                            <h6 class="lead">Once deleted, you will not be able to recover it.</h6>
+                        </div>
+                        <div class="text-center">
+                            <?php $_SESSION['getImg'] = $img; ?>
+                            <input type="hidden" id="getPostIdToDelete" name="getPostIdToDelete">
+                            <button type="submit" name="baBtnDeletePost" class="btn btn-primary me-2 fw-bold">Delete</button>
+                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php
 }
@@ -280,10 +312,12 @@ while ($data = mysqli_fetch_assoc($result)) {
 
 
     $(document).ready(function() {
-        $(document).on('click', '.edit-post', function() {
-            let p_id = $(this).data('post-id'); // Retrieve post ID from data attribute
-            console.log(p_id); // Print post id
-            $('#epost_idd').val(p_id);
+        // update post
+        $(document).on('click', '.btnUpdatePost', function() {
+            let p_id = $(this).data('post-id'); // Retrieve post ID from update button
+            $('#getPostIdToUpdate').val(p_id);
+
+            console.log(p_id);
 
             $.post('brgy_includes/getBrgyContent.php', {
                 value: p_id
@@ -296,6 +330,18 @@ while ($data = mysqli_fetch_assoc($result)) {
             }, function(data) {
                 const existingPhotos = JSON.parse(data);
                 loadDbPhotos(existingPhotos);
+            });
+        });
+
+        //delete post
+        $(document).on('click', '.btnDeletePost', function() {
+            let p_id = $(this).data('post-id'); // Retrieve post ID from update button
+            $('#getPostIdToDelete').val(p_id);
+
+            console.log(p_id);
+
+            $.post('brgy_includes/deletePost.b.php', {
+                value: p_id
             });
         });
     });

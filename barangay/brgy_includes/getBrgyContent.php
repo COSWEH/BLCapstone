@@ -12,4 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['value'])) {
     $contentData = mysqli_fetch_assoc($query);
 
     echo $post_content = $contentData['post_content'];
+} else {
+    header('location: ../adminPost.b.php');
+    exit;
 }
