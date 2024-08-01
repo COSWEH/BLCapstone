@@ -125,36 +125,23 @@ if ($user_role != 0) {
             <main class="col-12 col-md-9 content border rounded p-3">
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill fw-bold" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Barangay</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Municipal</button>
+                        <button class="nav-link active flex-fill fw-bold" id="nav-brgy-tab" data-bs-toggle="tab" data-bs-target="#nav-brgy" type="button" role="tab" aria-controls="nav-brgy" aria-selected="true">Barangay</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-municipal-tab" data-bs-toggle="tab" data-bs-target="#nav-municipal" type="button" role="tab" aria-controls="nav-municipal" aria-selected="false">Municipal</button>
                     </div>
                 </nav>
                 <div class="tab-content mt-2 p-1" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        <!-- show all barangay post -->
+                    <div class="tab-pane fade show active" id="nav-brgy" role="tabpanel" aria-labelledby="nav-brgy-tab" tabindex="0">
+                        <!-- show all barangay post where you are registered -->
                         <div id="brgyPost">
 
                         </div>
-                        <!-- --- -->
                     </div>
 
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div class="tab-pane fade " id="nav-municipal" role="tabpanel" aria-labelledby="nav-municipal-tab" tabindex="0">
                         <!-- show all municipal post -->
+                        <div id="municipalPost">
 
-                        <div class="card mb-3 shadow">
-                            <div class="card-body">
-                                <img src="https://via.placeholder.com/100" alt="Paolo Ramos" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">
-                                Paolo Ramos
-                                <p><small>Tuesday, 3:44pm</small></p>
-                                <hr>
-                                <div class="mb-3">
-                                    Barangay Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam optio maiores eum. Rem officia repellendus, suscipit quibusdam cum excepturi nisi. Doloribus laborum eius veniam. Rerum!
-                                </div>
-                                <!-- if user add photo limit with 600x400 -->
-                                <img src="https://via.placeholder.com/600x400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
-                            </div>
                         </div>
-                        <!-- --- -->
                     </div>
                 </div>
             </main>
@@ -163,21 +150,33 @@ if ($user_role != 0) {
     </div>
 
     <script>
-        //load all brgy post from database
+        //load brgy post and municipal post from database
         $(document).ready(function() {
             $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
                 $("#brgyPost").html(data);
             });
-        });
-
-        function updateMessages() {
-            $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
-                $("#brgyPost").html(data);
-                setTimeout(updateMessages, 1000); // Poll again after 1 second
+            $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
+                $("#municipalPost").html(data);
             });
-        }
-        // Initial call to load messages
-        updateMessages();
+
+            function updateBrgyPost() {
+                $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
+                    $("#brgyPost").html(data);
+                    setTimeout(updateBrgyPost, 500);
+                });
+            }
+
+            function updateMunicipalPost() {
+                $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
+                    $("#municipalPost").html(data);
+                    setTimeout(updateMunicipalPost, 500);
+                });
+            }
+
+            // Initial call to load messages
+            updateBrgyPost();
+            updateMunicipalPost();
+        });
     </script>
 
     <script src="civilianMaterials/script.c.js"></script>

@@ -7,7 +7,7 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     $email_result = preg_match($email_pattern, $email);
 
-    $password = $_POST['password'];
+    $password = $_POST['signinPassword'];
     $password_pattern = "/.{8,}/";
     $password_result = preg_match($password_pattern, $password);
 

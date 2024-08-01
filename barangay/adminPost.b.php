@@ -262,16 +262,16 @@ if ($user_role != 1) {
             $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
                 $("#brgyPost").html(data);
             });
+
+            function updateMessages() {
+                $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
+                    $("#brgyPost").html(data);
+
+                });
+            }
+            // Initial call to load messages
+            updateMessages();
         });
-
-        function updateMessages() {
-            $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
-                $("#brgyPost").html(data);
-
-            });
-        }
-        // Initial call to load messages
-        updateMessages();
     </script>
 
     <script src="brgyMaterials/script.b.js"></script>

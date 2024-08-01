@@ -79,8 +79,8 @@ session_start();
                             <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password*</label>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required pattern=".{8,}">
+                            <label for="signinPassword" class="form-label">Password*</label>
+                            <input type="password" name="signinPassword" class="form-control" id="signinPassword" placeholder="Enter your password" required pattern=".{8,}">
                         </div>
 
                         <div class="row mb-3">
@@ -146,17 +146,17 @@ session_start();
 
                         <!-- Full Name -->
                         <div class="row mb-3">
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3">
                                 <label for="user_fname" class="form-label">First Name*</label>
-                                <input type="text" name="fname" class="form-control" id="user_fname" placeholder="Enter your first name" required $pattern="/^[a-zA-Z\s\-]+$/">
+                                <input type="text" name="fname" class="form-control" id="user_fname" placeholder="Enter your first name" required pattern="^[a-zA-Z\s\-]+$">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3">
                                 <label for="user_mname" class="form-label">Middle Name*</label>
-                                <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Enter your middle name" required $pattern="/^[a-zA-Z\s\-]+$/">
+                                <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Enter your middle name" pattern="^[a-zA-Z\s\-]+$">
                             </div>
                             <div class="col-md-4">
                                 <label for="user_lname" class="form-label">Last Name*</label>
-                                <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Enter your last name" required $pattern="/^[a-zA-Z\s\-]+$/">
+                                <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Enter your last name" required pattern="^[a-zA-Z\s\-]+$">
                             </div>
                         </div>
 
@@ -172,13 +172,13 @@ session_start();
 
                         <!-- Address and Contact Number -->
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="user_address" class="form-label">Address*</label>
-                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Enter your address" required $pattern="/^[a-zA-Z0-9\s\-.,]+$/">
+                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Enter your address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="user_contactNum" class="form-label">Contact Number*</label>
-                                <input type="number" name="contactNum" class="form-control" id="user_contactNum" placeholder="Enter your contact number" required $pattern="/^(09\d{9}|639\d{9})$/">
+                                <input type="text" name="contactNum" class="form-control" id="user_contactNum" placeholder="Enter your contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
                             </div>
                         </div>
                         <hr>
@@ -186,21 +186,21 @@ session_start();
                         <h4 class="h4 fw-bold mb-3">Account Information</h4>
                         <!-- Email and Username -->
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="user_email" class="form-label">Email*</label>
-                                <input type="email" name="email" class="form-control" id="user_email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                                <input type="email" name="email" class="form-control" id="user_email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com">
                             </div>
                             <div class="col-md-6">
                                 <label for="username" class="form-label">Username*</label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$">
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more">
                             </div>
                         </div>
 
                         <!-- Password and Confirm Password -->
                         <div class="row mb-3">
-                            <div style="position: relative" class="col-md-6">
-                                <label for="password" class="form-label">Password*</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required pattern=".{8,}">
+                            <div style="position: relative" class="col-md-6 mb-3">
+                                <label for="signupPassword" class="form-label">Password*</label>
+                                <input type="password" name="signupPassword" class="form-control" id="signupPassword" placeholder="Enter your password" required pattern=".{8,}">
                             </div>
                             <div style="position: relative" class="col-md-6">
                                 <label for="confirm-password" class="form-label">Confirm Password*</label>
@@ -230,7 +230,7 @@ session_start();
             </div>
             <!-- Image Section -->
             <div class="col-md-6">
-                <img src="img/img1.png" width="600px" height="400px" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
+                <img src="img/img1.png" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
             </div>
         </div>
         <hr>

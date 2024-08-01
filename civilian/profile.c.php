@@ -188,7 +188,7 @@ if ($user_role != 0) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                    <h4 class="modal-title fw-bold" id="changePasswordModalLabel">Change Password</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -223,7 +223,7 @@ if ($user_role != 0) {
                 </div>
                 <div class="modal-body">
                     <form action="civilian_includes/update_information.c.php" method="POST">
-                        <h4 class="h4 fw-bold mb-3">Personal Information</h4>
+                        <h4 class="h4 fw-bold">Personal Information</h4>
                         <!-- Dropdown for San Isidro -->
                         <div class="mb-3">
                             <label for="fromSanIsidro" class="form-label">Are you from San Isidro?*</label>
@@ -255,15 +255,15 @@ if ($user_role != 0) {
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="user_fname" class="form-label">First Name*</label>
-                                <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First name" required value="<?php echo $_SESSION['user_fname']; ?>">
+                                <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First name" required pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_fname']; ?>">
                             </div>
                             <div class="col-md-4">
                                 <label for="user_mname" class="form-label">Middle Name*</label>
-                                <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Middle name" required value="<?php echo $_SESSION['user_mname']; ?>">
+                                <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Middle name" pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_mname']; ?>">
                             </div>
                             <div class="col-md-4">
                                 <label for="user_lname" class="form-label">Last Name*</label>
-                                <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Last name" required value="<?php echo $_SESSION['user_lname']; ?>">
+                                <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Last name" pattern="^[a-zA-Z\s\-]+$" required value="<?php echo $_SESSION['user_lname']; ?>">
                             </div>
                         </div>
                         <!-- gender -->
@@ -287,24 +287,24 @@ if ($user_role != 0) {
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="user_address" class="form-label">Address*</label>
-                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Address" required value="<?php echo $_SESSION['user_address']; ?>">
+                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Address" required pattern="^[a-zA-Z0-9\s\-.,]+$" value="<?php echo $_SESSION['user_address']; ?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="user_contactNum" class="form-label">Contact Number*</label>
-                                <input type="tel" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact number" required value="<?php echo $_SESSION['user_contactNum']; ?>">
+                                <input type="tel" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
                             </div>
                         </div>
                         <hr>
-                        <h4 class="h4 fw-bold mb-3">Account Information</h4>
+                        <h4 class="h4 fw-bold">Account Information</h4>
                         <!-- Email and Username -->
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="user_email" class="form-label">Email*</label>
-                                <input type="email" name="email" class="form-control" id="user_email" placeholder="Email" required value="<?php echo $_SESSION['user_email']; ?>">
+                                <input type="email" name="email" class="form-control" id="user_email" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com" value="<?php echo $_SESSION['user_email']; ?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="username" class="form-label">Username*</label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required value="<?php echo $_SESSION['username']; ?>">
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more" value="<?php echo $_SESSION['username']; ?>">
                                 <input type="hidden" name="password" value="<?php echo $_SESSION['password']; ?>">
                             </div>
                         </div>

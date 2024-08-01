@@ -13,7 +13,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $contactNum = $_POST['contactNum'];
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = $_POST['signupPassword'];
     $confirmPassword = $_POST['confirmPassword'];
     $role_id = 0;
 

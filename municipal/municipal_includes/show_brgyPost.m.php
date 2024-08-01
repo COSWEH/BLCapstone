@@ -2,16 +2,17 @@
 include('../../includes/conn.inc.php');
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-    header('location: ../post.c.php');
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    header('location: ../superAdminPost.m.php');
     exit;
 }
 
-$civilian_brgy = $_SESSION['user_brgy'];
+$municipal = "Municipal";
 
-$query = "SELECT p.post_id, p.user_id, p.post_brgy, p.post_content, p.post_img, p.post_date
-          FROM tbl_posts AS p
-          WHERE p.post_brgy = '$civilian_brgy'
+$query = "SELECT p.post_id, p.user_id, p.post_brgy, p.post_content, p.post_img, p.post_date, u.user_brgy, u.user_fname, u.user_mname, u.user_lname
+          FROM tbl_posts AS p 
+          INNER JOIN tbl_useracc AS u ON p.user_id = u.user_id
+          WHERE p.post_brgy != '$municipal'
           ORDER BY p.post_date DESC";
 
 $result = mysqli_query($con, $query);
@@ -21,8 +22,10 @@ if (!$result) {
 }
 
 while ($data = mysqli_fetch_assoc($result)) {
-    // $postId = $data['post_id'];
-    $brgy = $data['post_brgy'];
+    $postId = $data['post_id'];
+    $brgy = $data['user_brgy'];
+    $fullname = $data['user_fname'] . " " . $data['user_mname'] . " " . $data['user_lname'];
+    $fullname = ucwords(strtolower($fullname));
     $content = $data['post_content'];
     $img = $data['post_img'];
     $getTime = $data['post_date'];
@@ -46,21 +49,16 @@ while ($data = mysqli_fetch_assoc($result)) {
                 <p id="post-text" class="post-text">
                     <?php echo $content; ?>
                 </p>
-                <!-- <button id="see-more-btn" class="btn btn-link p-0">See more</button> -->
             </div>
-            <!-- if user add photo and get it from database -->
             <div class="row">
                 <?php
                 if (!empty($img)) {
                     $imgArray = json_decode($img, true);
 
-                    // Ensure $imgArray is an array before calling count()
                     if (is_array($imgArray)) {
-                        // Get the count of images
                         $imgCount = count($imgArray);
 
                         for ($i = 0; $i < $imgCount; $i++) {
-                            // Get the image name from the array
                             $imgName = $imgArray[$i];
                 ?>
                             <div class="col-12 col-md-6 col-sm-3 p-2">
@@ -69,10 +67,9 @@ while ($data = mysqli_fetch_assoc($result)) {
                 <?php
                         }
                     } else {
-                        // Handle the case where $imgArray is not an array
                         echo "<div class='col-12 col-md-6 col-sm-3 p-2'>
-                <p class='text-danger'>Error loading images</p>
-              </div>";
+                                <p class='text-danger'>Error loading images</p>
+                              </div>";
                     }
                 }
                 ?>

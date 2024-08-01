@@ -2,18 +2,17 @@
 include('../../includes/conn.inc.php');
 session_start();
 
-//bgUpdatePhotos
-if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST['mBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $post_id = $_POST['getPostIdToUpdate'];
     $userid = $_SESSION['user_id'];
     $post_brgy = $_SESSION['getAdminBrgy'];
-    $content = $_POST['baTextContent'];
+    $content = $_POST['textContent'];
 
     $dbImgArray = [];
     $selectedImgArray = [];
 
-    if (isset($_POST['bgDbPhotos'])) {
-        $jsonString = $_POST['bgDbPhotos'];
+    if (isset($_POST['mDbPhotos'])) {
+        $jsonString = $_POST['mDbPhotos'];
         $dbImgArray = json_decode($jsonString, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -23,15 +22,15 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             print_r($dbImgArray);
         }
     } else {
-        echo 'bgDbPhotos is not set.';
+        echo 'mDbPhotos is not set.';
     }
 
-    if (!empty($_FILES['bgUpdatePhotos']['name'][0])) {
-        $imgCount = count($_FILES['bgUpdatePhotos']['name']);
+    if (!empty($_FILES['updatePhotos']['name'][0])) {
+        $imgCount = count($_FILES['updatePhotos']['name']);
 
         for ($i = 0; $i < $imgCount; $i++) {
-            $imgName = $_FILES['bgUpdatePhotos']['name'][$i];
-            $tmpName = $_FILES['bgUpdatePhotos']['tmp_name'][$i];
+            $imgName = $_FILES['updatePhotos']['name'][$i];
+            $tmpName = $_FILES['updatePhotos']['tmp_name'][$i];
 
             $imgExtension = explode('.', $imgName);
             $imgExtension = strtolower(end($imgExtension));
@@ -40,7 +39,7 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             $newImgName = $imgBaseName . '-[BayanLink-' . uniqid() . '].' . $imgExtension;
 
             // move to the local folder
-            move_uploaded_file($tmpName, '../brgy_dbImages/' . $newImgName);
+            move_uploaded_file($tmpName, '../municipal_dbImages/' . $newImgName);
             $selectedImgArray[] = $newImgName;
         }
     } else {
@@ -77,15 +76,15 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     `post_date` = CURRENT_TIMESTAMP 
     WHERE `post_id` = '$post_id'");
 
-    // Check for success
+    //Check for success
     if ($query) {
         $_SESSION['post_message'] = "Post successfully updated";
-        header('Location: ../adminPost.b.php');
+        header('Location: ../superAdminPost.m.php');
         exit;
     } else {
         die('Error: ' . mysqli_error($con));
     }
 } else {
-    header('location: ../adminPost.b.php');
+    header('location: ../superAdminPost.m.php');
     exit;
 }

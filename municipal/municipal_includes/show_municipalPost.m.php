@@ -1,21 +1,20 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-
 <?php
 include('../../includes/conn.inc.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('location: ../adminPost.b.php');
+    header('location: ../superAdminPost.m.php');
     exit;
 }
 
-$admin_brgy = $_SESSION['user_brgy'];
+$municipal = "Municipal";
 
 $query = "SELECT p.post_id, p.user_id, p.post_brgy, p.post_content, p.post_img, p.post_date, u.user_brgy, u.user_fname, u.user_mname, u.user_lname
           FROM tbl_posts AS p 
           INNER JOIN tbl_useracc AS u ON p.user_id = u.user_id
-          WHERE p.post_brgy = '$admin_brgy'
+          WHERE p.post_brgy = '$municipal'
           ORDER BY p.post_date DESC";
 
 $result = mysqli_query($con, $query);
@@ -82,7 +81,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                             $imgName = $imgArray[$i];
                 ?>
                             <div class="col-12 col-md-6 col-sm-3 p-2">
-                                <img src="../barangay/brgy_dbImages/<?php echo htmlspecialchars($imgName); ?>" class="img-fluid rounded shadow-sm">
+                                <img src="../municipal/municipal_dbImages/<?php echo htmlspecialchars($imgName); ?>" class="img-fluid rounded shadow-sm">
                             </div>
                 <?php
                         }
@@ -108,7 +107,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                     </div>
                 </div>
                 <div class="modal-body">
-                    <form id="updatePostForm" action="brgy_includes/updatePost.b.php" method="POST" enctype="multipart/form-data">
+                    <form id="updatePostForm" action="municipal_includes/updatePost.m.php" method="POST" enctype="multipart/form-data">
                         <div class="d-flex align-items-center mb-3">
                             <img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 75px; height: 75px;">
                             <div>
@@ -116,23 +115,23 @@ while ($data = mysqli_fetch_assoc($result)) {
                                     <?php echo $fullname; ?>
                                 </h6>
                                 <h6 class="text-muted mb-0">
-                                    <?php echo "<small class='fw-bold'>From: Brgy. </small>" . $brgy;
+                                    <?php echo "<small class='fw-bold'>From: </small>" . $brgy;
                                     $_SESSION['getAdminBrgy'] = $brgy; ?>
                                 </h6>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <textarea name="baTextContent" class="form-control" id="postContent" rows="3" placeholder="What's on your mind?"></textarea>
+                            <textarea name="textContent" class="form-control" id="postContent" rows="3" placeholder="What's on your mind?"></textarea>
                         </div>
                         <div class="mb-3">
-                            <div for="bgUpdatePhotos" class="rounded border bg-light-subtle text-center p-3 d-flex flex-column align-items-center justify-content-center" style="height: 150px; cursor: pointer;">
+                            <div for="updatePhotos" class="rounded border bg-light-subtle text-center p-3 d-flex flex-column align-items-center justify-content-center" style="height: 150px; cursor: pointer;">
                                 <i class="bi bi-images mb-2"></i>
                                 <p class="m-0 fw-bold">Add Photos</p>
-                                <input type="file" name="bgUpdatePhotos[]" id="bgUpdatePhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
+                                <input type="file" name="updatePhotos[]" id="updatePhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>
                             <hr>
                             <!-- show photos from db -->
-                            <input type="hidden" name="bgDbPhotos" id="bgDbPhotos">
+                            <input type="hidden" name="mDbPhotos" id="mDbPhotos">
                             <div id="dbPhotos" class="row g-2">
 
                             </div>
@@ -143,7 +142,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </div>
                         </div>
                         <input type="hidden" id="getPostIdToUpdate" name="getPostIdToUpdate">
-                        <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary me-2">Update post</button>
+                        <button type="submit" name="mBtnEditPost" class="btn btn-sm btn-primary me-2">Update post</button>
                         <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal">Cancel</button>
                     </form>
                 </div>
@@ -163,7 +162,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                     </div>
                 </div>
                 <div class="modal-body">
-                    <form action="brgy_includes/deletePost.b.php" method="POST">
+                    <form action="municipal_includes/deletePost.m.php" method="POST">
                         <div class="text-center mb-3">
                             <div class="mb-3">
                                 <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
@@ -182,7 +181,6 @@ while ($data = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
-
 <?php
 }
 ?>
@@ -190,9 +188,9 @@ while ($data = mysqli_fetch_assoc($result)) {
 <script>
     $(document).ready(function() {
         var selectedImages = [];
+        var dbPhotos = [];
 
-        // Handle image file selection
-        $('#bgUpdatePhotos').on('change', function(event) {
+        $('#updatePhotos').on('change', function(event) {
             const imageFiles = event.target.files;
             const $photoContainer = $('#selectedPhotosForUpdate');
 
@@ -236,53 +234,51 @@ while ($data = mysqli_fetch_assoc($result)) {
             });
         });
 
-        // Handle form submission
         $('#updatePostForm').on('submit', function(event) {
             const dataTransfer = new DataTransfer();
             $.each(selectedImages, function(index, imageFile) {
                 dataTransfer.items.add(imageFile);
             });
-            $('#bgUpdatePhotos')[0].files = dataTransfer.files;
+            $('#updatePhotos')[0].files = dataTransfer.files;
 
             console.log("Submitting form with images:", selectedImages.map(f => f.name)); // Log images before submission
         });
 
-        // Load database photos
         function loadDbPhotos(photos) {
-            const $photoContainer = $('#dbPhotos');
-            if (!$photoContainer.length) {
+            const photoContainer = document.getElementById("dbPhotos");
+            if (!photoContainer) {
                 console.error("Element with ID 'dbPhotos' not found.");
                 return;
             }
 
-            $photoContainer.empty(); // Clear existing content
+            photoContainer.innerHTML = ''; // Clear existing content
 
             if (Array.isArray(photos) && photos.length > 0) {
                 dbPhotos = photos;
 
-                $.each(photos, function(index, photo) {
+                photos.forEach(photo => {
                     if (!photo) {
                         console.error("Invalid photo:", photo);
                         return;
                     }
 
-                    const $photoWrapper = $('<div></div>')
-                        .addClass('col-12 col-md-4 position-relative');
+                    const photoWrapper = document.createElement("div");
+                    photoWrapper.classList.add("col-12", "col-md-4", "position-relative");
 
-                    const $imgElement = $('<img>')
-                        .attr('src', `../barangay/brgy_dbImages/${photo}`)
-                        .addClass('img-fluid rounded shadow-sm');
+                    const imgElement = document.createElement("img");
+                    imgElement.src = `../municipal/municipal_dbImages/${photo}`;
+                    imgElement.classList.add("img-fluid", "rounded", "shadow-sm");
 
-                    const $removeButton = $('<button></button>')
-                        .addClass('btn bg-dark-subtle position-absolute top-0 end-0 m-2')
-                        .html('<i class="bi bi-x"></i>');
+                    const removeButton = document.createElement("button");
+                    removeButton.classList.add("btn", "bg-dark-subtle", "position-absolute", "top-0", "end-0", "m-2");
+                    removeButton.innerHTML = '<i class="bi bi-x"></i>';
 
-                    $photoWrapper.append($imgElement);
-                    $photoWrapper.append($removeButton);
-                    $photoContainer.append($photoWrapper);
+                    photoWrapper.appendChild(imgElement);
+                    photoWrapper.appendChild(removeButton);
+                    photoContainer.appendChild(photoWrapper);
 
-                    $removeButton.on('click', function() {
-                        $photoWrapper.remove();
+                    removeButton.addEventListener("click", function() {
+                        photoContainer.removeChild(photoWrapper);
                         dbPhotos = dbPhotos.filter(p => p !== photo);
                         updateHiddenInput();
                         console.log("Removed image from array: ", photo);
@@ -292,21 +288,20 @@ while ($data = mysqli_fetch_assoc($result)) {
 
                 updateHiddenInput();
             } else {
-                const $noPhotosMessage = $('<p></p>')
-                    .text("No photos available.")
-                    .addClass('text-muted text-center');
-                $photoContainer.append($noPhotosMessage);
+                const noPhotosMessage = document.createElement("p");
+                noPhotosMessage.textContent = "No photos available.";
+                noPhotosMessage.classList.add("text-muted", "text-center");
+                photoContainer.appendChild(noPhotosMessage);
             }
         }
 
-        // Update hidden input field
         function updateHiddenInput() {
-            const $bgUpdatePhotosInput = $('#bgDbPhotos');
-            if (!$bgUpdatePhotosInput.length) {
-                console.error("Element with ID 'bgDbPhotos' not found.");
+            const updatePhotosInput = document.getElementById("mDbPhotos");
+            if (!updatePhotosInput) {
+                console.error("Element with ID 'mDbPhotos' not found.");
                 return;
             }
-            $bgUpdatePhotosInput.val(JSON.stringify(dbPhotos));
+            updatePhotosInput.value = JSON.stringify(dbPhotos);
         }
 
         // update post
@@ -316,13 +311,13 @@ while ($data = mysqli_fetch_assoc($result)) {
 
             console.log(p_id);
 
-            $.post('brgy_includes/getBrgyContent.php', {
+            $.post('municipal_includes/getMunicipalContent.php', {
                 value: p_id
             }, function(data) {
                 $("#postContent").html(data);
             });
 
-            $.post('brgy_includes/getBrgyImg.php', {
+            $.post('municipal_includes/getMunicipalImg.php', {
                 value: p_id
             }, function(data) {
                 const existingPhotos = JSON.parse(data);
@@ -337,7 +332,7 @@ while ($data = mysqli_fetch_assoc($result)) {
 
             console.log(p_id);
 
-            $.post('brgy_includes/deletePost.b.php', {
+            $.post('municipal_includes/deletePost.m.php', {
                 value: p_id
             });
         });
