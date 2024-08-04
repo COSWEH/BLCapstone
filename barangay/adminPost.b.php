@@ -129,7 +129,14 @@ if ($user_role != 1) {
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
                         <!-- Profile Image -->
-                        <img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 75px; height: 75px;">
+                        <?php
+                        $getGender = $_SESSION['user_gender'];
+                        if ($getGender == "Male") {
+                            echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        } else {
+                            echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        }
+                        ?>
                         <button type="button" class="btn btn-lg ms-3 fw-bold rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
                             <i class="bi bi-images me-2"></i>
                             Create post
