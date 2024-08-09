@@ -42,6 +42,8 @@ if ($user_role != 0) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap icon CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery ajax cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -120,8 +122,8 @@ if ($user_role != 0) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <h4 class="fw-bold">Document</h4>
-                <hr>
+                <!-- <h4 class="fw-bold">Document</h4> -->
+                <!-- <hr> -->
                 <!-- create post section-->
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
@@ -142,62 +144,8 @@ if ($user_role != 0) {
                 </div>
 
                 <!-- List of Document Requests -->
-                <div class="row">
-                    <!-- Document Card -->
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow border border-2">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">Barangay Clearance</h4>
-                                <hr>
-                                <!-- Additional details, initially hidden -->
-                                <div class="additional-details d-none">
-                                    <div class="d-flex flex-column mb-3">
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <h6 class="font-weight-bold">
-                                                <i class="bi bi-person-fill me-2"></i>
-                                                <?php echo $_SESSION['user_fname'] . " " . $_SESSION['user_lname']; ?>
-                                            </h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <h6 class="font-weight-bold">
-                                                <i class="bi bi-phone me-2"></i>
-                                                <?php echo $_SESSION['user_contactNum']; ?>
-                                            </h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <h6 class="font-weight-bold">
-                                                <i class="bi bi-house-door me-2"></i>
-                                                <?php echo $_SESSION['user_brgy']; ?>
-                                            </h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <h6 class="font-weight-bold">
-                                                <i class="bi bi-file-earmark-text-fill me-2"></i>
-                                                Barangay Clearance
-                                            </h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <h6 class="font-weight-bold">
-                                                <i class="bi bi-calendar me-2"></i>
-                                                Aug. 04, 2024
-                                            </h6>
-                                        </div>
+                <div id="show_brgy_reqDoc" class="row">
 
-                                        <div class="d-flex justify-content-between">
-                                            <h6>
-                                                <i class="bi bi-check-circle-fill me-2"></i>
-                                                <span class="text-warning font-weight-bold">
-                                                    Pending
-                                                </span>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <button class="btn btn-primary w-100 toggle-button">See more</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </main>
@@ -216,7 +164,7 @@ if ($user_role != 0) {
                 </div>
                 <div class="modal-body">
                     <!-- Request Document Form -->
-                    <form id="requestDocumentForm" action="" method="POST">
+                    <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST">
                         <!-- Document Request Type Radio Buttons in a Row -->
                         <div class="mb-3">
                             <label class="form-label">Request For</label>
@@ -242,67 +190,62 @@ if ($user_role != 0) {
                         <!-- Personal Information Fields -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <input type="hidden" name="getUserid" value="<?php echo $getUserid; ?>">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input id="firstName" class="form-control" type="text" placeholder="First Name" disabled value="<?php echo $_SESSION['user_fname']; ?>" required>
+                                <input id="firstName" class="form-control" type="text" name="fName" placeholder="First Name" disabled value="<?php echo $_SESSION['user_fname']; ?>" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input id="lastName" class="form-control" type="text" placeholder="Last Name" disabled value="<?php echo $_SESSION['user_lname']; ?>" required>
+                                <input id="lastName" class="form-control" type="text" name="lName" placeholder="Last Name" disabled value="<?php echo $_SESSION['user_lname']; ?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="contactNumber" class="form-label">Contact Number</label>
-                                <input id="contactNumber" class="form-control" type="text" placeholder="Contact Number" disabled value="<?php echo $_SESSION['user_contactNum']; ?>" required>
+                                <input id="contactNumber" class="form-control" type="text" name="contNumber" placeholder="Contact Number" disabled value="<?php echo $_SESSION['user_contactNum']; ?>" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="barangay" class="form-label">Barangay</label>
-                                <input id="barangay" class="form-control" type="text" placeholder="Barangay" disabled value="<?php echo $_SESSION['user_brgy']; ?>" required>
+                                <input id="barangay" class="form-control" type="text" name="userBrgy" placeholder="Barangay" disabled value="<?php echo $_SESSION['user_brgy']; ?>" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="documentType" class="form-label">Type of Document</label>
-                            <select id="documentType" class="form-select" required>
+                            <select id="documentType" name="docType" class="form-select" required>
                                 <option value="" disabled selected>Select document type</option>
-                                <option value="birth_certificate">Birth Certificate</option>
-                                <option value="marriage_certificate">Marriage Certificate</option>
-                                <option value="passport">Passport</option>
-                                <option value="driver_license">Driver's License</option>
-                                <option value="id_card">ID Card</option>
+                                <option value="Birth Certificate">Birth Certificate</option>
+                                <option value="Marriage Certificate">Marriage Certificate</option>
+                                <option value="Passport">Passport</option>
+                                <option value="Drivers License">Driver's License</option>
+                                <option value="ID Card">ID Card</option>
                                 <!-- Add more options as needed -->
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="userPassword" class="form-label">Password</label>
-                            <input id="userPassword" class="form-control" type="password" placeholder="Password" required>
+                            <input id="userPassword" class="form-control" type="password" name="password" placeholder="Password" required>
                         </div>
-                        <button type="submit" name="btnReqDocument" class="btn btn-primary fw-bold w-100">Submit</button>
+                        <button id="btnReqDocument" type="submit" name="btnReqDocument" class="btn btn-primary fw-bold w-100">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
     <script>
         $(document).ready(function() {
-            $('.toggle-button').on('click', function() {
-                var $cardBody = $(this).closest('.card-body');
-                var $additionalDetails = $cardBody.find('.additional-details');
-                var isVisible = !$additionalDetails.hasClass('d-none');
-
-                if (isVisible) {
-                    $additionalDetails.addClass('d-none');
-                    $(this).text('See more');
-                } else {
-                    $additionalDetails.removeClass('d-none');
-                    $(this).text('See less');
-                }
+            $.post('civilian_includes/show_brgy_reqDoc.php', {}, function(data) {
+                $("#show_brgy_reqDoc").html(data);
             });
+
+            function updateReqDoc() {
+                $.post('civilian_includes/show_brgy_reqDoc.php', {}, function(data) {
+                    $("#show_brgy_reqDoc").html(data);
+                    setTimeout(updateReqDoc, 10000);
+                });
+            }
+
+            updateReqDoc();
 
             // others selected
             function updateFields() {
@@ -317,9 +260,12 @@ if ($user_role != 0) {
                     $('#contactNumber').val('<?php echo $_SESSION['user_contactNum']; ?>').prop('disabled', true);
                     $('#barangay').val('<?php echo $_SESSION['user_brgy']; ?>').prop('disabled', true);
                 }
+
+                $('#btnReqDocument').on('click', function() {
+                    $('#firstName, #lastName, #contactNumber, #barangay').prop('disabled', false);
+                });
             }
 
-            // Initial update
             updateFields();
 
             // Event listeners for radio buttons
@@ -331,5 +277,30 @@ if ($user_role != 0) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<?php
+// success post
+if (isset($_SESSION['reqDoc_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['reqDoc_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['reqDoc_message']);
+}
+// reqDoc_invalid_password
+if (isset($_SESSION['reqDoc_invalid_password'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Error",
+                text: "' . $_SESSION['reqDoc_invalid_password'] . '",
+                icon: "error",
+            });
+        </script>';
+    unset($_SESSION['reqDoc_invalid_password']);
+}
+?>
 
 </html>

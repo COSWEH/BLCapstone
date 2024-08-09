@@ -83,10 +83,7 @@ if ($user_role != 1) {
                             <a class="nav-link fw-bold active-post" aria-current="page" href="adminPost.b.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="#prifle">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="#document">Document</a>
+                            <a class="nav-link fw-bold" aria-current="page" href="adminDocument.b.php">Document</a>
                         </li>
                         <hr>
                     </ul>
