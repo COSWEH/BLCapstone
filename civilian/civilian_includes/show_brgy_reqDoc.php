@@ -87,13 +87,19 @@ while ($data = mysqli_fetch_assoc($result)) {
                             <?php
                             if ($status == "Approved") {
                             ?>
-                                <span class="text-success font-weight-bold">
+                                <span class="badge fw-bold text-bg-success" style="width: 6rem;">
+                                    <?php echo $status; ?>
+                                </span>
+                            <?php
+                            } elseif ($status == "Processing") {
+                            ?>
+                                <span class="badge fw-bold text-bg-primary" style="width: 6rem;">
                                     <?php echo $status; ?>
                                 </span>
                             <?php
                             } else {
                             ?>
-                                <span class="text-warning font-weight-bold">
+                                <span class="text-bg-warning badge fw-bold" style="width: 6rem;">
                                     <?php echo $status; ?>
                                 </span>
                             <?php

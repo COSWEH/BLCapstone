@@ -153,6 +153,17 @@ if ($user_role != 1) {
 </body>
 
 <?php
+if (isset($_SESSION['processing_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Processing",
+                text: "' . $_SESSION['processing_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['processing_message']);
+}
+
 if (isset($_SESSION['approved_message'])) {
     echo '<script>
             Swal.fire({

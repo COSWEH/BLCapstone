@@ -164,7 +164,7 @@ if ($user_role != 0) {
                 </div>
                 <div class="modal-body">
                     <!-- Request Document Form -->
-                    <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST">
+                    <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST" enctype="multipart/form-data">
                         <!-- Document Request Type Radio Buttons in a Row -->
                         <div class="mb-3">
                             <label class="form-label">Request For</label>
@@ -220,6 +220,10 @@ if ($user_role != 0) {
                                 <option value="ID Card">ID Card</option>
                                 <!-- Add more options as needed -->
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userValidID" class="form-label">Valid ID</label>
+                            <input id="userValidID" class="form-control" type="file" name="userValidID" accept=".jpg, jpeg, .png" required>
                         </div>
                         <div class="mb-3">
                             <label for="userPassword" class="form-label">Password</label>
