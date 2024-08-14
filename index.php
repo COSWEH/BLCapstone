@@ -18,6 +18,8 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap icon CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- JQUERY CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -68,7 +70,9 @@ session_start();
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-3 fw-bold" id="loginModalLabel">Sign In</h5>
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="loginModalLabel">Sign In</h4>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -92,43 +96,75 @@ session_start();
                             </div>
                             <div class="col text-end">
                                 <small>
-                                    <a href="#" class="link-offset-2">Forgot Password?</a>
+                                    <a type="button" class="link-offset-2" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
                                 </small>
                             </div>
                         </div>
-                        <hr>
-                        <button type="submit" name="btnSignin" class="btn btn-primary fw-bold w-100">Sign in</button>
+                        <button type="submit" name="btnSignin" class="btn btn-primary fw-bold w-100">
+                            Sign in
+                            <i class="bi bi-box-arrow-right"></i>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- forgot password modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="forgotPasswordLabel">Forgot Password</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="forgot-password.php">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="fpEmail" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="text-center mb-3">
+                            <small>
+                                <p class="text-muted">
+                                    Enter your email address to reset your password.
+                                </p>
+                            </small>
+                        </div>
+
+                        <button type="submit" name="btnForgotPassword" class="btn btn-primary fw-bold w-100">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Sign up Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-3 fw-bold" id="registerModalLabel">Sign Up</h5>
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="registerModalLabel">Sign Up</h4>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="signup.code.php" method="POST">
-                        <h4 class="h4 fw-bold mb-3">Personal Information</h4>
-                        <!-- Dropdown for San Isidro -->
-                        <div class="mb-3">
+                        <div id="group1" class="form-step">
+                            <h4 class="h4 fw-bold mb-3">Personal Information</h4>
                             <label for="fromSanIsidro" class="form-label">Are you from San Isidro?*</label>
-                            <select id="fromSanIsidro" name="fromSanIsidro" class="form-select" required>
+                            <select id="fromSanIsidro" name="fromSanIsidro" class="form-select mb-3" required>
                                 <option value="" disabled selected>Select Yes or No</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
-                        </div>
 
-                        <!-- Barangay -->
-                        <div class="mb-3">
                             <label for="user_brgy" class="form-label">Which Barangay are you from?*</label>
-                            <select name="barangay" id="user_brgy" class="form-select" required>
+                            <select name="barangay" id="user_brgy" class="form-select mb-3" required>
                                 <option value="" disabled selected>Select Barangay</option>
                                 <option value="Alua">Alua</option>
                                 <option value="Calaba">Calaba</option>
@@ -141,79 +177,118 @@ session_start();
                                 <option value="Tabon">Tabon</option>
                                 <option value="N/A">N/A</option>
                             </select>
-                        </div>
-                        <hr>
 
-                        <!-- Full Name -->
-                        <div class="row mb-3">
-                            <div class="col-md-4 mb-3">
-                                <label for="user_fname" class="form-label">First Name*</label>
-                                <input type="text" name="fname" class="form-control" id="user_fname" placeholder="Enter your first name" required pattern="^[a-zA-Z\s\-]+$">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="user_mname" class="form-label">Middle Name*</label>
-                                <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Enter your middle name" pattern="^[a-zA-Z\s\-]+$">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="user_lname" class="form-label">Last Name*</label>
-                                <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Enter your last name" required pattern="^[a-zA-Z\s\-]+$">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn1">
+                                        Next
+                                        <i class="bi bi-arrow-right-square"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- gender -->
-                        <div class="mb-3">
+                        <div id="group2" class="form-step d-none">
+                            <h4 class="h4 fw-bold mb-3">Personal Information</h4>
+                            <!-- Full Name -->
+                            <label for="user_fname" class="form-label">First Name*</label>
+                            <input type="text" name="fname" class="form-control mb-3" id="user_fname" placeholder="Enter your first name" required pattern="^[a-zA-Z\s\-]+$">
+
+                            <label for="user_mname" class="form-label">Middle Name*</label>
+                            <input type="text" name="mname" class="form-control mb-3" id="user_mname" placeholder="Enter your middle name" pattern="^[a-zA-Z\s\-]+$">
+
+                            <label for="user_lname" class="form-label">Last Name*</label>
+                            <input type="text" name="lname" class="form-control mb-3" id="user_lname" placeholder="Enter your last name" required pattern="^[a-zA-Z\s\-]+$">
+
+                            <div class="row">
+                                <!-- Use Bootstrap’s responsive grid system -->
+                                <div class="col-12 col-md-6 mb-2">
+                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn1">
+                                        <i class="bi bi-arrow-left-square"></i>
+                                        Previous
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn2">
+                                        Next <i class="bi bi-arrow-right-square"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="group3" class="form-step d-none">
+                            <h4 class="h4 fw-bold mb-3">Personal Information</h4>
+                            <!-- Address and Contact Number -->
                             <label for="user_gender" class="form-label">Gender*</label>
-                            <select id="user_gender" name="gender" class="form-select" required>
+                            <select id="user_gender" name="gender" class="form-select mb-3" required>
                                 <option value="" disabled selected>Select Male or Female</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                        </div>
 
-                        <!-- Address and Contact Number -->
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3">
-                                <label for="user_address" class="form-label">Address*</label>
-                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Enter your address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="user_contactNum" class="form-label">Contact Number*</label>
-                                <input type="text" name="contactNum" class="form-control" id="user_contactNum" placeholder="Enter your contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
-                            </div>
-                        </div>
-                        <hr>
+                            <label for="user_address" class="form-label">Address*</label>
+                            <input type="text" name="address" class="form-control mb-3" id="user_address" placeholder="Enter your address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
 
-                        <h4 class="h4 fw-bold mb-3">Account Information</h4>
-                        <!-- Email and Username -->
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3">
-                                <label for="user_email" class="form-label">Email*</label>
-                                <input type="email" name="email" class="form-control" id="user_email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="username" class="form-label">Username*</label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more">
+                            <label for="user_contactNum" class="form-label">Contact Number*</label>
+                            <input type="text" name="contactNum" class="form-control mb-3" id="user_contactNum" placeholder="Enter your contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+
+                            <div class="row">
+                                <div class="col-12 col-md-6 mb-2">
+                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn2">
+                                        <i class="bi bi-arrow-left-square"></i>
+                                        Previous
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn3">Next <i class="bi bi-arrow-right-square"></i></button>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Password and Confirm Password -->
-                        <div class="row mb-3">
-                            <div style="position: relative" class="col-md-6 mb-3">
-                                <label for="signupPassword" class="form-label">Password*</label>
-                                <input type="password" name="signupPassword" class="form-control" id="signupPassword" placeholder="Enter your password" required pattern=".{8,}">
+                        <div id="group4" class="form-step d-none">
+                            <h4 class="h4 fw-bold mb-3">Account Information</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="user_email" class="form-label">Email*</label>
+                                    <input type="email" name="email" class="form-control mb-3" id="user_email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="username" class="form-label">Username*</label>
+                                    <input type="text" name="username" class="form-control mb-3" id="username" placeholder="Enter your username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more">
+                                </div>
                             </div>
-                            <div style="position: relative" class="col-md-6">
-                                <label for="confirm-password" class="form-label">Confirm Password*</label>
-                                <input type="password" name="confirmPassword" class="form-control" id="confirm-password" placeholder="Confirm your password" required pattern=".{8,}">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="signupPassword" class="form-label">Password*</label>
+                                    <input type="password" name="signupPassword" class="form-control mb-3" id="signupPassword" placeholder="Enter your password" required pattern=".{8,}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="confirm-password" class="form-label">Confirm Password*</label>
+                                    <input type="password" name="confirmPassword" class="form-control mb-3" id="confirm-password" placeholder="Confirm your password" required pattern=".{8,}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 mb-2">
+                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn3">
+                                        <i class="bi bi-arrow-left-square"></i>
+                                        Previous
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <button type="submit" name="btnSignup" class="btn btn-success fw-bold w-100">
+                                        Sign up
+                                        <i class="bi bi-hand-index-thumb"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
-                        <button type="submit" name="btnSignup" class="btn btn-success fw-bold w-100">Sign up</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Home Section -->
     <section id="home" class="container my-5">
@@ -410,6 +485,70 @@ session_start();
     <script src="indexMaterials/script.im.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const barangayOptions = [
+                "Alua", "Calaba", "Malapit", "Mangga", "Poblacion",
+                "Pulo", "San Roque", "Sto. Cristo", "Tabon"
+            ];
+
+            const $barangaySelect = $('#user_brgy');
+            const $fromSanIsidroSelect = $('#fromSanIsidro');
+
+            // Function to update the barangay select options
+            function updateBarangayOptions() {
+                const selectedValue = $fromSanIsidroSelect.val();
+                $barangaySelect.empty(); // Clear existing options
+
+                if (selectedValue === "Yes") {
+                    $barangaySelect.append('<option value="" disabled selected>Select Barangay</option>');
+                    barangayOptions.forEach(option => {
+                        $barangaySelect.append(`<option value="${option}">${option}</option>`);
+                    });
+                } else if (selectedValue === "No") {
+                    $barangaySelect.append('<option value="N/A" selected>N/A</option>');
+                }
+            }
+
+            // Update options when selection changes
+            $fromSanIsidroSelect.change(function() {
+                updateBarangayOptions();
+            });
+
+            // Initial load
+            updateBarangayOptions();
+            $('#nextBtn1').click(function() {
+                $('#group1').addClass('d-none');
+                $('#group2').removeClass('d-none');
+            });
+
+            $('#prevBtn1').click(function() {
+                $('#group2').addClass('d-none');
+                $('#group1').removeClass('d-none');
+            });
+
+            $('#nextBtn2').click(function() {
+                $('#group2').addClass('d-none');
+                $('#group3').removeClass('d-none');
+            });
+
+            $('#prevBtn2').click(function() {
+                $('#group3').addClass('d-none');
+                $('#group2').removeClass('d-none');
+            });
+
+            $('#nextBtn3').click(function() {
+                $('#group3').addClass('d-none');
+                $('#group4').removeClass('d-none');
+            });
+
+            $('#prevBtn3').click(function() {
+                $('#group4').addClass('d-none');
+                $('#group3').removeClass('d-none');
+            });
+        });
+    </script>
 </body>
 
 <?php
