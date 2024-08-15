@@ -121,9 +121,9 @@ session_start();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="forgot-password.php">
+                    <form method="POST" action="includes/forgot-password.php">
                         <div class="form-floating mb-3">
-                            <input type="email" name="fpEmail" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" name="fpEmail" class="form-control" id="floatingInput" required placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="text-center mb-3">
@@ -229,8 +229,8 @@ session_start();
                             <label for="user_address" class="form-label">Address*</label>
                             <input type="text" name="address" class="form-control mb-3" id="user_address" placeholder="Enter your address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
 
-                            <label for="user_contactNum" class="form-label">Contact Number*</label>
-                            <input type="text" name="contactNum" class="form-control mb-3" id="user_contactNum" placeholder="Enter your contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+                            <label for="contactNum" class="form-label">Contact Number*</label>
+                            <input type="text" name="contactNum" class="form-control mb-3" id="contactNum" placeholder="Enter your contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
 
                             <div class="row">
                                 <div class="col-12 col-md-6 mb-2">
@@ -250,7 +250,7 @@ session_start();
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="user_email" class="form-label">Email*</label>
-                                    <input type="email" name="email" class="form-control mb-3" id="user_email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com">
+                                    <input type="email" name="email" class="form-control mb-3" id="user_email" placeholder="Enter your email" required title="e.g., juandelacruz143@gmail.com">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="username" class="form-label">Username*</label>
@@ -288,7 +288,6 @@ session_start();
             </div>
         </div>
     </div>
-
 
     <!-- Home Section -->
     <section id="home" class="container my-5">
@@ -583,6 +582,18 @@ if (isset($_SESSION['signup_success_message'])) {
             });
         </script>';
     unset($_SESSION['signup_success_message']);
+}
+
+// forgot password message
+if (isset($_SESSION['fpMessage'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['fpMessage'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['fpMessage']);
 }
 ?>
 

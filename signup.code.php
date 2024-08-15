@@ -1,4 +1,12 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
 include('includes/conn.inc.php');
 session_start();
 
@@ -16,6 +24,19 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['signupPassword'];
     $confirmPassword = $_POST['confirmPassword'];
     $role_id = 0;
+
+    $_SESSION['fromSanIsidro'] = $fromSanIsidro;
+    $_SESSION['barangay'] = $barangay;
+    $_SESSION['fname'] = $fname;
+    $_SESSION['mname'] = $mname;
+    $_SESSION['lname'] = $lname;
+    $_SESSION['gender'] = $gender;
+    $_SESSION['address'] = $address;
+    $_SESSION['contactNum'] = $contactNum;
+    $_SESSION['email'] = $email;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $password;
+    $_SESSION['role_id'] = $role_id;
 
     function validateName($name)
     {
@@ -108,15 +129,46 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['signup_error_message'] = "Password did not match!";
                 header('Location: index.php');
             } else {
-                //if non is existed, proceed to insert
-                $password = password_hash($password, PASSWORD_DEFAULT);
-                $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_address, user_contactNum, user_email, username, password, role_id) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$address', '$contactNum', '$email', '$username', '$password', '$role_id')");
+                $verification_code = mt_rand(100000, 999999);
 
-                if ($insert) {
-                    $_SESSION['signup_success_message'] = "Register successfully!";
-                    header('Location: index.php');
-                    exit;
-                }
+                $message = "<h3>Your OTP number is <span class='fw-bold' style='font-size: 20px'>$verification_code</span></h3>
+                <p>Use this code to register your account.</p>
+                <br>
+                <br>
+                <p>With regards,</p>
+                <p>BayanLink Team</p>";
+
+                $mail = new PHPMailer(true);
+
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'bayanlink.connects@gmail.com';
+                $mail->Password = 'eweboblrrbsaqdhz';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = 465;
+
+                $mail->setFrom('bayanlink.connects@gmail.com', 'BayanLink');
+
+                $mail->addAddress($email);
+
+                $mail->isHTML(true);
+
+                $mail->Subject = "BayanLink Verification Code";
+                $mail->Body = $message;
+
+                $mail->send();
+
+                $_SESSION['verification_code'] = $verification_code;
+                echo '
+            <form id="redirectForm" action="verify_account.php" method="POST">
+                <input type="hidden" name="verification_code" value="' . htmlspecialchars($verification_code) . '">
+                <input type="hidden" name="email" value="' . htmlspecialchars($email) . '">
+            </form>
+            <script>
+                document.getElementById("redirectForm").submit();
+            </script>
+            ';
                 exit;
             }
             exit;
@@ -127,4 +179,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['signup_error_message'] = $error_message;
         header('Location: index.php');
     }
+} else {
+    header('Location: index.php');
+    exit;
 }
