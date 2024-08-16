@@ -8,6 +8,7 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
 include('includes/conn.inc.php');
+$config = include('config/config.php');
 session_start();
 
 if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -143,12 +144,12 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'bayanlink.connects@gmail.com';
-                $mail->Password = 'eweboblrrbsaqdhz';
+                $mail->Username = $config['email'];
+                $mail->Password = $config['password'];
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
 
-                $mail->setFrom('bayanlink.connects@gmail.com', 'BayanLink');
+                $mail->setFrom($config['email'], 'BayanLink');
 
                 $mail->addAddress($email);
 
