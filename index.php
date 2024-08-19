@@ -78,13 +78,14 @@ session_start();
                 <div class="modal-body">
                     <form action="signin.code.php" method="POST">
                         <h4 class="h4 fw-bold mb-3">Account Information</h4>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address*</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                            <label for="email" class="form-label">Email address</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="signinPassword" class="form-label">Password*</label>
-                            <input type="password" name="signinPassword" class="form-control" id="signinPassword" placeholder="Enter your password" required pattern=".{8,}">
+
+                        <div class="form-floating mb-3">
+                            <input type="password" name="signinPassword" class="form-control" id="signinPassword" placeholder="Password" required pattern=".{8,}">
+                            <label for="signinPassword" class="form-label">Password</label>
                         </div>
 
                         <div class="row mb-3">
@@ -156,27 +157,31 @@ session_start();
                     <form action="signup.code.php" method="POST">
                         <div id="group1" class="form-step">
                             <h4 class="h4 fw-bold mb-3">Personal Information</h4>
-                            <label for="fromSanIsidro" class="form-label">Are you from San Isidro?*</label>
-                            <select id="fromSanIsidro" name="fromSanIsidro" class="form-select mb-3" required>
-                                <option value="" disabled selected>Select Yes or No</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
+                            <div class="form-floating mb-3">
+                                <select id="fromSanIsidro" name="fromSanIsidro" class="form-select" required>
+                                    <option value="" disabled selected>Select Yes or No</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <label for="fromSanIsidro" class="form-label">Are you from San Isidro?</label>
+                            </div>
 
-                            <label for="user_brgy" class="form-label">Which Barangay are you from?*</label>
-                            <select name="barangay" id="user_brgy" class="form-select mb-3" required>
-                                <option value="" disabled selected>Select Barangay</option>
-                                <option value="Alua">Alua</option>
-                                <option value="Calaba">Calaba</option>
-                                <option value="Malapit">Malapit</option>
-                                <option value="Mangga">Mangga</option>
-                                <option value="Poblacion">Poblacion</option>
-                                <option value="Pulo">Pulo</option>
-                                <option value="San Roque">San Roque</option>
-                                <option value="Sto. Cristo">Sto. Cristo</option>
-                                <option value="Tabon">Tabon</option>
-                                <option value="N/A">N/A</option>
-                            </select>
+                            <div class="form-floating mb-3">
+                                <select name="barangay" id="user_brgy" class="form-select" required>
+                                    <option value="" disabled selected>Select Barangay</option>
+                                    <option value="Alua">Alua</option>
+                                    <option value="Calaba">Calaba</option>
+                                    <option value="Malapit">Malapit</option>
+                                    <option value="Mangga">Mangga</option>
+                                    <option value="Poblacion">Poblacion</option>
+                                    <option value="Pulo">Pulo</option>
+                                    <option value="San Roque">San Roque</option>
+                                    <option value="Sto. Cristo">Sto. Cristo</option>
+                                    <option value="Tabon">Tabon</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                                <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
+                            </div>
 
                             <div class="row">
                                 <div class="col-12">
@@ -191,14 +196,19 @@ session_start();
                         <div id="group2" class="form-step d-none">
                             <h4 class="h4 fw-bold mb-3">Personal Information</h4>
                             <!-- Full Name -->
-                            <label for="user_fname" class="form-label">First Name*</label>
-                            <input type="text" name="fname" class="form-control mb-3" id="user_fname" placeholder="Enter your first name" required pattern="^[a-zA-Z\s\-]+$">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First Name" required pattern="^[a-zA-Z\s\-]+$">
+                                <label for="user_fname" class="form-label">First Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Middle Name" pattern="^[a-zA-Z\s\-]+$">
+                                <label for="user_mname" class="form-label">Middle Name</label>
+                            </div>
 
-                            <label for="user_mname" class="form-label">Middle Name*</label>
-                            <input type="text" name="mname" class="form-control mb-3" id="user_mname" placeholder="Enter your middle name" pattern="^[a-zA-Z\s\-]+$">
-
-                            <label for="user_lname" class="form-label">Last Name*</label>
-                            <input type="text" name="lname" class="form-control mb-3" id="user_lname" placeholder="Enter your last name" required pattern="^[a-zA-Z\s\-]+$">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Last Name" required pattern="^[a-zA-Z\s\-]+$">
+                                <label for="user_lname" class="form-label">Last Name</label>
+                            </div>
 
                             <div class="row">
                                 <!-- Use Bootstrap’s responsive grid system -->
@@ -219,18 +229,24 @@ session_start();
                         <div id="group3" class="form-step d-none">
                             <h4 class="h4 fw-bold mb-3">Personal Information</h4>
                             <!-- Address and Contact Number -->
-                            <label for="user_gender" class="form-label">Gender*</label>
-                            <select id="user_gender" name="gender" class="form-select mb-3" required>
-                                <option value="" disabled selected>Select Male or Female</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
+                            <div class="form-floating mb-3">
+                                <select id="user_gender" name="gender" class="form-select" required>
+                                    <option value="" disabled selected>Select Male or Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <label for="user_gender" class="form-label">Gender</label>
+                            </div>
 
-                            <label for="user_address" class="form-label">Address*</label>
-                            <input type="text" name="address" class="form-control mb-3" id="user_address" placeholder="Enter your address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
+                                <label for="user_address" class="form-label">Address</label>
+                            </div>
 
-                            <label for="contactNum" class="form-label">Contact Number*</label>
-                            <input type="text" name="contactNum" class="form-control mb-3" id="contactNum" placeholder="Enter your contact number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+                                <label for="contactNum" class="form-label">Contact Number</label>
+                            </div>
 
                             <div class="row">
                                 <div class="col-12 col-md-6 mb-2">
@@ -249,23 +265,31 @@ session_start();
                             <h4 class="h4 fw-bold mb-3">Account Information</h4>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="user_email" class="form-label">Email*</label>
-                                    <input type="email" name="email" class="form-control mb-3" id="user_email" placeholder="Enter your email" required title="e.g., juandelacruz143@gmail.com">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" name="email" class="form-control" id="user_email" placeholder="Email Address" required title="e.g., juandelacruz143@gmail.com">
+                                        <label for="user_email" class="form-label">Email Address</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="username" class="form-label">Username*</label>
-                                    <input type="text" name="username" class="form-control mb-3" id="username" placeholder="Enter your username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="username" class="form-control" id="username" placeholder="Username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more">
+                                        <label for="username" class="form-label">Username</label>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="signupPassword" class="form-label">Password*</label>
-                                    <input type="password" name="signupPassword" class="form-control mb-3" id="signupPassword" placeholder="Enter your password" required pattern=".{8,}">
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="signupPassword" class="form-control mb-3" id="signupPassword" placeholder="Password" required pattern=".{8,}">
+                                        <label for="signupPassword" class="form-label">Password</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="confirm-password" class="form-label">Confirm Password*</label>
-                                    <input type="password" name="confirmPassword" class="form-control mb-3" id="confirm-password" placeholder="Confirm your password" required pattern=".{8,}">
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="confirmPassword" class="form-control mb-3" id="confirm-password" placeholder="Confirm Password" required pattern=".{8,}">
+                                        <label for="confirm-password" class="form-label">Confirm Password</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -517,6 +541,7 @@ session_start();
 
             // Initial load
             updateBarangayOptions();
+
             $('#nextBtn1').click(function() {
                 $('#group1').addClass('d-none');
                 $('#group2').removeClass('d-none');
@@ -594,6 +619,18 @@ if (isset($_SESSION['fpMessage'])) {
             });
         </script>';
     unset($_SESSION['fpMessage']);
+}
+
+// reset password message
+if (isset($_SESSION['npMessage'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['npMessage'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['npMessage']);
 }
 ?>
 

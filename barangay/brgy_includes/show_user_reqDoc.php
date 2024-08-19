@@ -1,3 +1,11 @@
+<style>
+    .table-header {
+        width: 100px;
+        height: 50px;
+        vertical-align: middle;
+    }
+</style>
+
 <?php
 include('../../includes/conn.inc.php');
 session_start();
@@ -9,11 +17,10 @@ if (empty($_SESSION['user_id'])) {
 
 $civilian_brgy = $_SESSION['user_brgy'];
 
-$query = "SELECT req_id, user_id, req_date, req_fname, req_lname, req_contactNo, req_brgy, req_typeOfDoc, req_valid_id, req_password, req_status
+$query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_eSignature, req_typeOfDoc, req_valid_id, req_password, req_status
           FROM tbl_requests
           WHERE req_brgy = '$civilian_brgy'
           ORDER BY req_date DESC";
-
 $result = mysqli_query($con, $query);
 
 if (!$result) {
@@ -27,17 +34,24 @@ if ($rowCount == 0) {
 ?>
     <div class="container">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+            <table class="table table-sm table-striped table-bordered border-secondary table-hover">
                 <thead>
                     <tr>
-                        <th>Document Type</th>
-                        <th>Requester</th>
-                        <th>Contact Number</th>
-                        <th>Barangay</th>
-                        <th>Date Requested</th>
-                        <th>Valid ID</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th class="p-2 text-center table-header">Document Type</th>
+                        <th class="p-2 text-center table-header">Requester</th>
+                        <th class="p-2 text-center table-header">Purok</th>
+                        <th class="p-2 text-center table-header">Age</th>
+                        <th class="p-2 text-center table-header">Date of Birth</th>
+                        <th class="p-2 text-center table-header">Place of Birth</th>
+                        <th class="p-2 text-center table-header">Gender</th>
+                        <th class="p-2 text-center table-header">Civil Status</th>
+                        <th class="p-2 text-center table-header">Contact Number</th>
+                        <th class="p-2 text-center table-header">Barangay</th>
+                        <th class="p-2 text-center table-header">Date Requested</th>
+                        <th class="p-2 text-center table-header">e-Signature</th>
+                        <th class="p-2 text-center table-header">Valid ID</th>
+                        <th class="p-2 text-center table-header">Status</th>
+                        <th class="p-2 text-center table-header">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,40 +62,65 @@ if ($rowCount == 0) {
                         $userId = $data['user_id'];
                         $reqDate = $data['req_date'];
                         $fname = $data['req_fname'];
+                        $mname = $data['req_mname'];
                         $lname = $data['req_lname'];
                         $contactNo = $data['req_contactNo'];
+                        $gender = $data['req_gender'];
                         $brgy = $data['req_brgy'];
+                        $purok = $data['req_purok'];
+                        $age = $data['req_age'];
+                        $dateOfBirth = $data['req_dateOfBirth'];
+                        $req_placeOfBirth = $data['req_placeOfBirth'];
+                        $req_civilStatus = $data['req_civilStatus'];
+                        $req_eSignature = $data['req_eSignature'];
                         $docType = $data['req_typeOfDoc'];
-                        $req_valid_id = $data['req_valid_id'];
                         $status = $data['req_status'];
+                        $req_valid_id = $data['req_valid_id']; // Ensure this is fetched correctly
 
                         $get_Time_And_Day = new DateTime($reqDate);
                         $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
                     ?>
                         <tr>
-                            <td><?php echo $docType; ?></td>
-                            <td><?php echo $fname . " " . $lname; ?></td>
-                            <td><?php echo $contactNo; ?></td>
-                            <td><?php echo $brgy; ?></td>
-                            <td><?php echo $formattedDate; ?></td>
-                            <td>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-src="../civilian/civilian_dbValidID/<?php echo $req_valid_id; ?>">
-                                    <img src="../civilian/civilian_dbValidID/<?php echo $req_valid_id; ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                </a>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($docType); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($fname . " " . $mname . " " . $lname); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($purok); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($age); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($dateOfBirth); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($req_placeOfBirth); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($gender); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($req_civilStatus); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($contactNo); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($brgy); ?></td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($formattedDate); ?></td>
+                            <td class="p-2">
+                                <?php if (!empty($req_eSignature)) { ?>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
+                                        <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                    </a>
+                                <?php } else { ?>
+                                    <span>No E-Signature</span>
+                                <?php } ?>
                             </td>
-                            <td><?php echo $status; ?></td>
-                            <td>
-
+                            <td class="p-2">
+                                <?php if (!empty($req_valid_id)) { ?>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>">
+                                        <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                    </a>
+                                <?php } else { ?>
+                                    <span>No Valid ID</span>
+                                <?php } ?>
+                            </td>
+                            <td class="p-2 text-center"><?php echo htmlspecialchars($status); ?></td>
+                            <td class="p-2">
                                 <div class="dropdown-center">
                                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item aProcess" data-post-id="<?php echo $reqId; ?>" data-bs-toggle="modal" data-bs-target="#processModal">Process</a></li>
-                                        <li><a class="dropdown-item aAprrove" data-post-id="<?php echo $reqId; ?>" data-bs-toggle="modal" data-bs-target="#approveModal">Approve</a></li>
+                                        <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal">Process</a></li>
+                                        <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal">Approve</a></li>
                                     </ul>
                                 </div>
-
                             </td>
                         </tr>
                     <?php
@@ -91,6 +130,7 @@ if ($rowCount == 0) {
             </table>
         </div>
     </div>
+
 
     <!-- Image Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
