@@ -120,8 +120,6 @@ if ($user_role != 1) {
             </nav>
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <h4 class="fw-bold">Barangay Post</h4>
-                <hr>
                 <!-- create post -->
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
@@ -160,7 +158,7 @@ if ($user_role != 1) {
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <!-- Post Content Form -->
                     <form id="createPostForm" action="brgy_includes/createPost.b.php" method="POST" enctype="multipart/form-data">
                         <div class="d-flex align-items-center mb-3">

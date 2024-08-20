@@ -158,10 +158,12 @@ if ($user_role != 0) {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h4 class="modal-title fw-bold" id="reqDocModalLabel">Request Document</h4>
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="reqDocModalLabel">Request Document</h4>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <!-- Request Document Form -->
                     <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST" enctype="multipart/form-data">
                         <!-- Step 1: Request For and Document Type -->

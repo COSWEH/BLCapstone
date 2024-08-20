@@ -45,6 +45,8 @@ if ($user_role != 0) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap icon CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- JQUERY CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -188,10 +190,12 @@ if ($user_role != 0) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fw-bold" id="changePasswordModalLabel">Change Password</h4>
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="changePasswordModalLabel">Change Password</h4>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <!-- Password Change Form -->
                     <form action="civilian_includes/change_password.c.php" method="POST">
                         <div class="form-floating mb-3">
@@ -206,7 +210,7 @@ if ($user_role != 0) {
                             <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password" required pattern=".{8,}">
                             <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
                         </div>
-                        <button type="submit" name="btnChangePass" class="btn btn-primary">Change Password</button>
+                        <button type="submit" name="btnChangePass" class="btn btn-primary w-100">Change Password</button>
                     </form>
                 </div>
             </div>
@@ -218,24 +222,32 @@ if ($user_role != 0) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-3 fw-bold" id="updateModalLabel">Update information</h5>
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="updateModalLabel">Update information</h4>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <form action="civilian_includes/update_information.c.php" method="POST">
                         <h4 class="h4 fw-bold">Personal Information</h4>
                         <!-- Dropdown for San Isidro -->
                         <div class="form-floating mb-3">
-                            <select id="fromSanIsidro" name="fromSanIsidro" class="form-select" required>
-                                <option value="" disabled selected>Select Yes or No</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                            <?php
+                            $selectedValue = isset($_SESSION['fromSanIsidro']) ? $_SESSION['fromSanIsidro'] : '';
+                            ?>
+                            <select id="fromSanIsidroYN" name="fromSanIsidro" class="form-select" required>
+                                <option value="" disabled <?php echo $selectedValue === '' ? 'selected' : ''; ?>>Select Yes or No</option>
+                                <option value="Yes" <?php echo $selectedValue === 'Yes' ? 'selected' : ''; ?>>Yes</option>
+                                <option value="No" <?php echo $selectedValue === 'No' ? 'selected' : ''; ?>>No</option>
                             </select>
-                            <label for="fromSanIsidro" class="form-label">Are you from San Isidro?</label>
+                            <label for="fromSanIsidroYN" class="form-label">Are you from San Isidro?</label>
                         </div>
 
                         <!-- Barangay -->
                         <div class="form-floating mb-3">
+                            <?php
+                            $selectedBarangay = isset($_SESSION['user_brgy']) ? $_SESSION['user_brgy'] : '';
+                            ?>
                             <select name="barangay" id="user_brgy" class="form-select" required>
                                 <option value="" disabled selected>Select Barangay</option>
                                 <option value="Alua">Alua</option>
@@ -247,7 +259,6 @@ if ($user_role != 0) {
                                 <option value="San Roque">San Roque</option>
                                 <option value="Sto. Cristo">Sto. Cristo</option>
                                 <option value="Tabon">Tabon</option>
-                                <option value="N/A">N/A</option>
                             </select>
                             <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
                         </div>
@@ -336,6 +347,41 @@ if ($user_role != 0) {
     <script src="civilianMaterials/script.c.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const barangayOptions = [
+                "Alua", "Calaba", "Malapit", "Mangga", "Poblacion",
+                "Pulo", "San Roque", "Sto. Cristo", "Tabon"
+            ];
+
+            const $barangaySelect = $('#user_brgy');
+            const $fromSanIsidroSelect = $('#fromSanIsidroYN');
+
+            // Function to update the barangay select options
+            function updateBarangayOptions() {
+                const selectedValue = $fromSanIsidroSelect.val();
+                $barangaySelect.empty(); // Clear existing options
+
+                if (selectedValue === "Yes") {
+                    $barangaySelect.append('<option value="" disabled selected>Select Barangay</option>');
+                    barangayOptions.forEach(option => {
+                        $barangaySelect.append(`<option value="${option}">${option}</option>`);
+                    });
+                } else if (selectedValue === "No") {
+                    $barangaySelect.append('<option value="N/A" selected>N/A</option>');
+                }
+            }
+
+            // Update options when selection changes
+            $fromSanIsidroSelect.change(function() {
+                updateBarangayOptions();
+            });
+
+            // Initial load
+            updateBarangayOptions();
+        });
+    </script>
 </body>
 
 <?php

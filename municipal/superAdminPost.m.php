@@ -182,7 +182,7 @@ if ($user_role != 2) {
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <!-- Post Content Form -->
                     <form id="createPostForm" action="municipal_includes/createPost.m.php" method="POST" enctype="multipart/form-data">
                         <div class="d-flex align-items-center mb-3">

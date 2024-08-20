@@ -75,7 +75,7 @@ session_start();
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <form action="signin.code.php" method="POST">
                         <h4 class="h4 fw-bold mb-3">Account Information</h4>
                         <div class="form-floating mb-3">
@@ -121,7 +121,7 @@ session_start();
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <form method="POST" action="includes/forgot-password.php">
                         <div class="form-floating mb-3">
                             <input type="email" name="fpEmail" class="form-control" id="floatingInput" required placeholder="name@example.com">
@@ -153,7 +153,7 @@ session_start();
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="container p-5 modal-body">
                     <form action="signup.code.php" method="POST">
                         <div id="group1" class="form-step">
                             <h4 class="h4 fw-bold mb-3">Personal Information</h4>
@@ -178,7 +178,6 @@ session_start();
                                     <option value="San Roque">San Roque</option>
                                     <option value="Sto. Cristo">Sto. Cristo</option>
                                     <option value="Tabon">Tabon</option>
-                                    <option value="N/A">N/A</option>
                                 </select>
                                 <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
                             </div>
