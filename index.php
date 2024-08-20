@@ -620,6 +620,18 @@ if (isset($_SESSION['fpMessage'])) {
     unset($_SESSION['fpMessage']);
 }
 
+// forgot password error message
+if (isset($_SESSION['errorFPMessage'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Invalid",
+                text: "' . $_SESSION['errorFPMessage'] . '",
+                icon: "warning",
+            });
+        </script>';
+    unset($_SESSION['errorFPMessage']);
+}
+
 // reset password message
 if (isset($_SESSION['npMessage'])) {
     echo '<script>

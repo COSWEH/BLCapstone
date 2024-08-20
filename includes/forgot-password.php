@@ -12,8 +12,14 @@ $config = include('../config/config.php');
 session_start();
 
 if (isset($_POST['btnForgotPassword']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fpEmail = $_POST['fpEmail'];
+    $fpEmail = isset($_POST['fpEmail']) ? trim($_POST['fpEmail']) : '';
     $fpEmail = htmlspecialchars($fpEmail);
+
+    if (empty($fpEmail)) {
+        $_SESSION['errorFPMessage'] = "Please enter your email address.";
+        header('location: ../index.php');
+        exit;
+    }
 
     $token = bin2hex(random_bytes(16));
 
@@ -50,11 +56,10 @@ if (isset($_POST['btnForgotPassword']) && $_SERVER['REQUEST_METHOD'] == 'POST') 
         $mail->send();
 
         $_SESSION['fpMessage'] = "We have sent a password reset link to $fpEmail.";
-        header('location: ../index.php');
-        exit;
     } else {
         // say message anyway
         $_SESSION['fpMessage'] = "We have sent a password reset link to $fpEmail.";
-        header('location: ../index.php');
     }
+    header('location: ../index.php');
+    exit;
 }
