@@ -11,7 +11,7 @@ $civilian_brgy = $_SESSION['user_brgy'];
 
 $query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_typeOfDoc, req_password, req_status
           FROM tbl_requests
-          WHERE req_brgy = '$civilian_brgy'
+          WHERE req_brgy = '$civilian_brgy' && req_status = 'Processing'
           ORDER BY req_date DESC";
 
 
@@ -146,7 +146,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </small>
                         </h6>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mb-3">
                         <?php
                         if ($status == "Approved") {
                             $percentage = 100;
@@ -198,6 +198,39 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </div>
                         </div>
                     </div>
+
+                    <button class="btn btn-sm border btnCancelRequest" data-post-id="<?php echo $reqId; ?>" data-bs-toggle="modal" data-bs-target="#cancelRequestModal">Cancel Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- cancel request modal -->
+    <div class="modal fade" id="cancelRequestModal" tabindex="-1" aria-labelledby="cancelRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="cancelRequestModalLabel">
+                            Cancel Request
+                        </h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form action="civilian_includes/cancel_document_request.php" method="POST">
+                        <div class="text-center mb-3">
+                            <div class="mb-3">
+                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                            </div>
+                            <h1 class="mb-3">Are you sure?</h1>
+                            <h6 class="lead">Once canceled, you will not be able to recover it.</h6>
+                        </div>
+                        <div class="text-center">
+                            <input type="hidden" id="getReqID" name="getReqID">
+                            <button type="submit" name="cBtnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
+                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -206,3 +239,15 @@ while ($data = mysqli_fetch_assoc($result)) {
 <?php
 }
 ?>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.btnCancelRequest', function() {
+            let p_id = $(this).data('post-id'); // Retrieve post ID from update button
+            $('#getReqID').val(p_id);
+
+            console.log(p_id);
+
+        });
+    });
+</script>

@@ -112,15 +112,27 @@ if ($rowCount == 0) {
                             </td>
                             <td class="p-2 text-center"><?php echo htmlspecialchars($status); ?></td>
                             <td class="p-2">
-                                <div class="dropdown-center">
-                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php
+                                if ($status != 'Cancelled') {
+                                ?>
+                                    <div class="dropdown-center">
+                                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Options
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal">Process</a></li>
+                                            <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal">Approve</a></li>
+                                        </ul>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle disabled" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
                                     </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal">Process</a></li>
-                                        <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal">Approve</a></li>
-                                    </ul>
-                                </div>
+                                <?php
+                                }
+                                ?>
                             </td>
                         </tr>
                     <?php
@@ -230,5 +242,6 @@ if ($rowCount == 0) {
             var modalImage = $(this).find('#modalImage');
             modalImage.attr('src', imageSrc);
         });
+
     });
 </script>

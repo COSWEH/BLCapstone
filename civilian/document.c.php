@@ -143,10 +143,45 @@ if ($user_role != 0) {
                     </div>
                 </div>
 
-                <!-- List of Document Requests -->
-                <div id="show_brgy_reqDoc" class="row">
+                <nav>
+                    <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
+                        <button class="nav-link active flex-fill fw-bold" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Pending</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">Processing</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">Approved</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Cancelled</button>
+                    </div>
+                </nav>
 
+                <div class="tab-content mt-2 p-1" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab" tabindex="0">
+                        <!-- show all pending document requests -->
+                        <div id="show_pending_reqDoc" class="row">
+                            <!-- Content for pending requests -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-processing" role="tabpanel" aria-labelledby="nav-processing-tab" tabindex="0">
+                        <!-- show all processing document requests -->
+                        <div id="show_processing_reqDoc" class="row">
+                            <!-- Content for processing requests -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-approved" role="tabpanel" aria-labelledby="nav-approved-tab" tabindex="0">
+                        <!-- show all approved document requests -->
+                        <div id="show_approved_reqDoc" class="row">
+                            <!-- Content for approved requests -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-cancelled" role="tabpanel" aria-labelledby="nav-cancelled-tab" tabindex="0">
+                        <!-- show all cancelled document requests -->
+                        <div id="show_cancelled_reqDoc" class="row">
+                            <!-- Content for cancelled requests -->
+                        </div>
+                    </div>
                 </div>
+
 
             </main>
         </div>
@@ -382,7 +417,7 @@ if ($user_role != 0) {
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" name="btnReqDocument" class="btn btn-success fw-bold w-100">
+                                    <button type="submit" name="btnReqDocument" id="btnReqDocument" class="btn btn-success fw-bold w-100">
                                         Submit <i class="bi bi-check-square"></i>
                                     </button>
                                 </div>
@@ -398,25 +433,44 @@ if ($user_role != 0) {
 
     <script>
         $(document).ready(function() {
-            $.post('civilian_includes/show_brgy_reqDoc.php', {}, function(data) {
-                $("#show_brgy_reqDoc").html(data);
+
+            $('#nav-pending-tab').on('click', function() {
+                loadRequestDocs('pending');
+            });
+            $('#nav-processing-tab').on('click', function() {
+                loadRequestDocs('processing');
+            });
+            $('#nav-approved-tab').on('click', function() {
+                loadRequestDocs('approved');
+            });
+            $('#nav-cancelled-tab').on('click', function() {
+                loadRequestDocs('cancelled');
             });
 
-            function updateReqDoc() {
-                $.post('civilian_includes/show_brgy_reqDoc.php', {}, function(data) {
-                    $("#show_brgy_reqDoc").html(data);
-                    setTimeout(updateReqDoc, 30000);
+            function loadRequestDocs(status) {
+                $.post(`civilian_includes/show_${status}_reqDoc.php`, {}, function(data) {
+                    $(`#show_${status}_reqDoc`).html(data);
                 });
             }
 
-            updateReqDoc();
+            function updateReqDocs() {
+                const statuses = ['pending', 'processing', 'approved', 'cancelled'];
+
+                statuses.forEach(status => {
+                    loadRequestDocs(status);
+                });
+
+                setTimeout(updateReqDocs, 30000);
+            }
+
+            // Initial load
+            updateReqDocs();
 
             // others selected
             function updateFields() {
                 if ($('#forOthers').is(':checked')) {
                     // Clear the fields if "Others" is selected
                     $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #barangay').prop('disabled', false).val('');
-
                 } else if ($('#forYourself').is(':checked')) {
                     // Restore values and disable fields if "Yourself" is selected
                     $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
@@ -428,8 +482,10 @@ if ($user_role != 0) {
                 }
 
                 $('#btnReqDocument').on('click', function() {
-                    $('#firstName, #lastName, #middlename, #contactNumber, #barangay').prop('disabled', false);
+                    console.log('clicked');
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #barangay').prop('disabled', false);
                 });
+
             }
 
             updateFields();
@@ -538,6 +594,18 @@ if (isset($_SESSION['reqDoc_invalid_password'])) {
             });
         </script>';
     unset($_SESSION['reqDoc_invalid_password']);
+}
+
+// cancel doc request
+if (isset($_SESSION['cancelReq_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['cancelReq_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['cancelReq_message']);
 }
 ?>
 

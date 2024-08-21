@@ -4,25 +4,23 @@ session_start();
 
 if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_POST['getUserid'];
-    $req_fname = $_POST['fName'];
-    $req_mname = $_POST['mName'];
-    $req_lname = $_POST['lName'];
+    $req_fname = ucwords(strtolower($_POST['fName']));
+    $req_mname = ucwords(strtolower($_POST['mName']));
+    $req_lname = ucwords(strtolower($_POST['lName']));
     $req_contactNo = $_POST['contNumber'];
-    $req_gender = $_POST['user_gender'];
-    $req_brgy = $_POST['user_brgy'];
+    $req_gender = ucwords(strtolower($_POST['user_gender']));
+    $req_brgy = ucwords(strtolower($_POST['user_brgy']));
     $req_purok = $_POST['purok'];
     $req_age = $_POST['age'];
     $req_dateOfBirth = $_POST['dateOfBirth'];
-    $req_placeOfBirth = $_POST['placeOfBirth'];
-    $req_civilStatus = $_POST['civilStatus'];
+    $req_placeOfBirth = ucwords(strtolower($_POST['placeOfBirth']));
+    $req_civilStatus = ucwords(strtolower($_POST['civilStatus']));
     $req_typeOfDoc = $_POST['docType'];
     $req_password = $_POST['password'];
     $req_status = "Pending";
 
     // Handle the file upload
-    if (
-        isset($_FILES['userValidID']) && isset($_FILES['eSignature'])
-    ) {
+    if (isset($_FILES['userValidID']) && isset($_FILES['eSignature'])) {
         // Handling eSignature file
         $eSignatureFile = $_FILES['eSignature'];
         if ($eSignatureFile['error'] !== UPLOAD_ERR_OK) {
