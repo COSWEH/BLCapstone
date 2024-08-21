@@ -140,7 +140,7 @@ if ($user_role != 1) {
             function updateReqDoc() {
                 $.post('brgy_includes/show_user_reqDoc.php', {}, function(data) {
                     $("#show_user_reqDoc").html(data);
-                    setTimeout(updateReqDoc, 10000);
+                    setTimeout(updateReqDoc, 30000);
                 });
             }
 

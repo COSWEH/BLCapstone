@@ -403,7 +403,7 @@ if ($user_role != 0) {
             function updateReqDoc() {
                 $.post('civilian_includes/show_brgy_reqDoc.php', {}, function(data) {
                     $("#show_brgy_reqDoc").html(data);
-                    setTimeout(updateReqDoc, 10000);
+                    setTimeout(updateReqDoc, 30000);
                 });
             }
 

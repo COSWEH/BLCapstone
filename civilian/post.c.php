@@ -162,14 +162,14 @@ if ($user_role != 0) {
             function updateBrgyPost() {
                 $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
                     $("#brgyPost").html(data);
-                    setTimeout(updateBrgyPost, 500);
+                    setTimeout(updateBrgyPost, 30000);
                 });
             }
 
             function updateMunicipalPost() {
                 $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
                     $("#municipalPost").html(data);
-                    setTimeout(updateMunicipalPost, 500);
+                    setTimeout(updateMunicipalPost, 30000);
                 });
             }
 
