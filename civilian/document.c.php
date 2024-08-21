@@ -143,7 +143,7 @@ if ($user_role != 0) {
                     </div>
                 </div>
 
-                <div class="card mb-3 shadow">
+                <div class="card mb-3 shadow bg-body-secondary">
                     <div class="card-body d-flex mx-auto fw-medium font-monospace">
                         <i class="bi bi-exclamation-square-fill me-2" style="font-size: 2rem;"></i>
                         <p>
@@ -151,7 +151,6 @@ if ($user_role != 0) {
                                 Please note that documents containing sensitive information or those requiring the physical presence of a resident cannot be processed through this system.
                             </small>
                         </p>
-
                     </div>
                 </div>
 

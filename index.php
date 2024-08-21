@@ -484,7 +484,7 @@ session_start();
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
                                 <p>The verification of users for accessing certain features within the app will be managed by the system administrators. They will review user requests and validate their eligibility based on predefined criteria. This ensures that only authorized users gain access to specialized features.</p>
-                                <p>**System Adjustments:** The system should include an admin dashboard where administrators can review and manage user feature access. This dashboard should have functionalities for setting and updating access criteria and tracking user requests.</p>
+
                             </div>
                         </div>
                     </div>
@@ -498,7 +498,7 @@ session_start();
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
                                 <p>Requests for information gathering will be reviewed and accepted by designated information officers or administrators. They will assess the validity and relevance of each request before granting access to the requested information.</p>
-                                <p>**System Adjustments:** The system should provide a request management interface where information officers can review, approve, or deny information requests. Notifications and tracking features should also be integrated to keep users informed about the status of their requests.</p>
+
                             </div>
                         </div>
                     </div>
@@ -512,7 +512,7 @@ session_start();
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
                                 <p>Access to certain sensitive or restricted information will be managed by system administrators and security officers. They will configure access controls based on user roles, permissions, and security policies to ensure that only authorized individuals can view or manipulate sensitive data.</p>
-                                <p>**System Adjustments:** The system should feature robust access control mechanisms, including role-based permissions and user authentication. It should also allow administrators to set and manage access levels for different types of information and users.</p>
+
                             </div>
                         </div>
                     </div>
