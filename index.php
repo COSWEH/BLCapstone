@@ -97,7 +97,7 @@ session_start();
                             </div>
                             <div class="col text-end">
                                 <small>
-                                    <a type="button" class="link-offset-2" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
+                                    <a class="link-offset-2" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
                                 </small>
                             </div>
                         </div>
@@ -128,11 +128,11 @@ session_start();
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="text-center mb-3">
-                            <small>
-                                <p class="text-muted">
+                            <p class="text-muted">
+                                <small>
                                     Enter your email address to reset your password.
-                                </p>
-                            </small>
+                                </small>
+                            </p>
                         </div>
 
                         <button type="submit" name="btnForgotPassword" class="btn btn-primary fw-bold w-100">Submit</button>
@@ -572,77 +572,90 @@ session_start();
             });
         });
     </script>
+
 </body>
+
+</html>
 
 <?php
 if (isset($_SESSION['signin_error_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Error",
-                text: "' . $_SESSION['signin_error_message'] . '",
-                icon: "warning",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: "<?php echo $_SESSION['signin_error_message']; ?>",
+            icon: "warning",
+        });
+    </script>
+<?php
     unset($_SESSION['signin_error_message']);
 }
 
 if (isset($_SESSION['signup_error_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Error",
-                text: "' . $_SESSION['signup_error_message'] . '",
-                icon: "error",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: "<?php echo $_SESSION['signup_error_message']; ?>",
+            icon: "error",
+        });
+    </script>
+<?php
     unset($_SESSION['signup_error_message']);
 }
 
 if (isset($_SESSION['signup_success_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Done",
-                text: "' . $_SESSION['signup_success_message'] . '",
-                icon: "success",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Done",
+            text: "<?php echo $_SESSION['signup_success_message']; ?>",
+            icon: "success",
+        });
+    </script>
+<?php
     unset($_SESSION['signup_success_message']);
 }
 
 // forgot password message
 if (isset($_SESSION['fpMessage'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['fpMessage'] . '",
-                icon: "success",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Success",
+            text: "<?php echo $_SESSION['fpMessage']; ?>",
+            icon: "success",
+        });
+    </script>
+<?php
     unset($_SESSION['fpMessage']);
 }
 
 // forgot password error message
 if (isset($_SESSION['errorFPMessage'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Invalid",
-                text: "' . $_SESSION['errorFPMessage'] . '",
-                icon: "warning",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Invalid",
+            text: "<?php echo $_SESSION['errorFPMessage']; ?>",
+            icon: "warning",
+        });
+    </script>
+<?php
     unset($_SESSION['errorFPMessage']);
 }
 
 // reset password message
 if (isset($_SESSION['npMessage'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['npMessage'] . '",
-                icon: "success",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Success",
+            text: "<?php echo $_SESSION['npMessage']; ?>",
+            icon: "success",
+        });
+    </script>
+<?php
     unset($_SESSION['npMessage']);
 }
 ?>
-
-</html>
