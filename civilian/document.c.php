@@ -187,12 +187,9 @@ if ($user_role != 0) {
                             <div class="form-floating mb-3">
                                 <select id="documentType" name="docType" class="form-select" required>
                                     <option value="" disabled selected>Select Document</option>
-                                    <option value="Birth Certificate">Birth Certificate</option>
-                                    <option value="Marriage Certificate">Marriage Certificate</option>
-                                    <option value="Passport">Passport</option>
-                                    <option value="Drivers License">Driver's License</option>
-                                    <option value="ID Card">ID Card</option>
-                                    <!-- Add more options as needed -->
+                                    <option value="Barangay Clearance">Barangay Clearance</option>
+                                    <option value="Cedula">Cedula</option>
+                                    <option value="Job Seeker">Job Seeker</option>
                                 </select>
                                 <label for="documentType">Document Type</label>
                             </div>
