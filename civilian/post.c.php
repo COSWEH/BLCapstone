@@ -87,8 +87,8 @@ if ($user_role != 0) {
                         <li class="nav-item">
                             <a class="nav-link fw-bold" aria-current="page" href="document.c.php">Document</a>
                         </li>
-                        <hr>
                     </ul>
+                    <hr>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- delete modal -->
@@ -186,13 +186,15 @@ if ($user_role != 0) {
 
 <?php
 if (isset($_SESSION['success_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['success_message'] . '",
-                icon: "success",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Success",
+            text: "<?php echo $_SESSION['success_message']; ?>",
+            icon: "success",
+        });
+    </script>
+<?php
     unset($_SESSION['success_message']);
 }
 ?>

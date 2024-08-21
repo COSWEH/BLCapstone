@@ -52,13 +52,15 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                 $_SESSION['otp_error'] = "Invalid OTP";
 
                 if (isset($_SESSION['otp_error'])) {
-                    echo '<script>
-            Swal.fire({
-            title: "Error",
-            text: "' . $_SESSION['otp_error'] . '",
-            icon: "error",
-            });
-        </script>';
+        ?>
+                    <script>
+                        Swal.fire({
+                            title: "Error",
+                            text: "' . $_SESSION['otp_error'] . '",
+                            icon: "error",
+                        });
+                    </script>
+        <?php
                     unset($_SESSION['otp_error']);
                 }
             } else {

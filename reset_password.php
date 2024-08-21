@@ -78,7 +78,6 @@ if (isset($_GET['token'])) {
                                         <a href="index.php" class="btn btn-secondary w-100 fw-bold">Back to Login</a>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -91,13 +90,15 @@ if (isset($_GET['token'])) {
 
 <?php
 if (isset($_SESSION['reset_pass_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Error",
-                text: "' . $_SESSION['reset_pass_message'] . '",
-                icon: "error",
-            });
-        </script>';
+?>
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: "<?php echo $_SESSION['reset_pass_message']; ?>",
+            icon: "error",
+        });
+    </script>
+<?php
     unset($_SESSION['reset_pass_message']);
 }
 ?>
