@@ -339,7 +339,7 @@ session_start();
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <div class="col">
                 <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-4 fw-bold">Direct Access to Official Information</div>
+                    <div class="card-header p-2 fs-5 text-center fw-bold">Direct Access to Official Information</div>
                     <div class="card-body p-3">
                         <p class="card-text">Get direct access to the latest official information and updates.</p>
                     </div>
@@ -347,7 +347,7 @@ session_start();
             </div>
             <div class="col">
                 <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-4 fw-bold">Document Requesting and Tracking</div>
+                    <div class="card-header p-2 fs-5 text-center fw-bold">Document Requesting and Tracking</div>
                     <div class="card-body">
                         <p class="card-text">Easily request and track documents with our streamlined process.</p>
                     </div>
@@ -355,7 +355,7 @@ session_start();
             </div>
             <div class="col">
                 <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-4 fw-bold">Enhanced Civic Engagement</div>
+                    <div class="card-header p-2 fs-5 text-center fw-bold">Enhanced Civic Engagement</div>
                     <div class="card-body">
                         <p class="card-text">Engage with your community more effectively through our platform.</p>
                     </div>
@@ -363,7 +363,7 @@ session_start();
             </div>
             <div class="col">
                 <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-4 fw-bold">Communication Channels</div>
+                    <div class="card-header p-2 fs-5 text-center fw-bold">Communication Channels</div>
                     <div class="card-body">
                         <p class="card-text">Access various communication channels for better interaction.</p>
                     </div>
@@ -371,7 +371,7 @@ session_start();
             </div>
             <div class="col">
                 <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-4 fw-bold">Personalized User Experience</div>
+                    <div class="card-header p-2 fs-5 text-center fw-bold">Personalized User Experience</div>
                     <div class="card-body">
                         <p class="card-text">Enjoy a personalized experience tailored to your preferences.</p>
                     </div>
@@ -379,7 +379,7 @@ session_start();
             </div>
             <div class="col">
                 <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-4 fw-bold">Accessibility and Convenience</div>
+                    <div class="card-header p-2 fs-5 text-center fw-bold">Accessibility and Convenience</div>
                     <div class="card-body">
                         <p class="card-text">Experience enhanced accessibility and convenience across the platform.</p>
                     </div>
@@ -472,9 +472,54 @@ session_start();
         <div class="row mt-5">
             <div class="col">
                 <h1 class="text-center mb-3">Frequently Asked Questions</h1>
-                <p class="text-center">Content to be added.</p>
+                <p class="text-center">Find answers to common questions below:</p>
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Q1. Who will verify users that will be allowed with certain features within the app?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>The verification of users for accessing certain features within the app will be managed by the system administrators. They will review user requests and validate their eligibility based on predefined criteria. This ensures that only authorized users gain access to specialized features.</p>
+                                <p>**System Adjustments:** The system should include an admin dashboard where administrators can review and manage user feature access. This dashboard should have functionalities for setting and updating access criteria and tracking user requests.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Q2. Who will check and accept the requests made for information gathering?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>Requests for information gathering will be reviewed and accepted by designated information officers or administrators. They will assess the validity and relevance of each request before granting access to the requested information.</p>
+                                <p>**System Adjustments:** The system should provide a request management interface where information officers can review, approve, or deny information requests. Notifications and tracking features should also be integrated to keep users informed about the status of their requests.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Q3. Who will limit access to certain information?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>Access to certain sensitive or restricted information will be managed by system administrators and security officers. They will configure access controls based on user roles, permissions, and security policies to ensure that only authorized individuals can view or manipulate sensitive data.</p>
+                                <p>**System Adjustments:** The system should feature robust access control mechanisms, including role-based permissions and user authentication. It should also allow administrators to set and manage access levels for different types of information and users.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </section>
 
     <!-- Footer Section -->
