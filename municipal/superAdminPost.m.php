@@ -299,7 +299,7 @@ if ($user_role != 2) {
             function updateBrgyPost() {
                 $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
                     $("#brgyPost").html(data);
-                    setTimeout(updateBrgyPost, 300);
+                    setTimeout(updateBrgyPost, 30000);
                 });
             }
 
