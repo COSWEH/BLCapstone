@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2024 at 10:40 PM
+-- Generation Time: Aug 21, 2024 at 11:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_main`
+-- Table structure for table `tbl_logs`
 --
 
-CREATE TABLE `tbl_main` (
+CREATE TABLE `tbl_logs` (
   `log_id` int(22) NOT NULL,
   `log_desc` varchar(255) NOT NULL,
   `log_date` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -35,15 +35,6 @@ CREATE TABLE `tbl_main` (
   `post_id` int(22) NOT NULL,
   `req_id` int(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_main`
---
-
-INSERT INTO `tbl_main` (`log_id`, `log_desc`, `log_date`, `user_id`, `post_id`, `req_id`) VALUES
-(1, 'Barangay Admin Created a Post', '2024-08-10 11:27:35', 1, 1, 0),
-(2, 'Barangay Admin Updated the Post content', '2024-08-10 11:27:42', 1, 1, 0),
-(3, 'Barangay Admin Updated the Post content', '2024-08-10 11:56:30', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -88,32 +79,6 @@ CREATE TABLE `tbl_requests` (
   `req_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_requests`
---
-
-INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_password`, `req_status`) VALUES
-(1, 3, '2024-08-19 22:28:39', 'V', 'V', 'V', '09876543212', 'Male', 'Malapit', '2', 22, '2024-08-19', 'San Isidro, Nueva Ecija', 'Single', 'vs-[BayanLink-66c34431517b5].png', 'Birth Certificate', 'as-[BayanLink-66c34431517b8].png', '$2y$10$j1fQCRclAj9qDLbdPQCL4e2pb85uqryyNXcHnJTWexe3iMRePYP8i', 'Processing');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_role`
---
-
-CREATE TABLE `tbl_role` (
-  `role_id` int(22) NOT NULL,
-  `role_name` varchar(55) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_role`
---
-
-INSERT INTO `tbl_role` (`role_id`, `role_name`) VALUES
-(0, 'civilian'),
-(1, 'super admin');
-
 -- --------------------------------------------------------
 
 --
@@ -134,7 +99,7 @@ CREATE TABLE `tbl_useracc` (
   `username` varchar(55) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(55) NOT NULL,
-  `user_create_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `user_create_at` datetime DEFAULT current_timestamp(),
   `reset_token_hash` varchar(64) DEFAULT NULL,
   `reset_token_expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -145,7 +110,7 @@ CREATE TABLE `tbl_useracc` (
 
 INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_address`, `user_contactNum`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
 (1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', ' Purok 1 Brgy. Tagpos, Sta. Rosa Nueva Ecija', '09876543212', 'qwerty123@gmail.com', 'qwerty123', '$2y$10$lA2M6NwaMUWrQOxpellmYOVzp.VaNXBVVpWOu8ibIT9ZtChFglh62', 1, '2024-08-19 22:31:40', NULL, NULL),
-(3, 'Yes', 'Malapit', 'Vue', 'Vue', 'Vue', 'Male', 'Malapit, San Isidro Nueva Ecija', '09876543212', 'asd@gmail.com', 'asd', '$2y$10$cBtk0GdAqksqO0v3Qnucmu7Zg/ptzsCymedVO/Pg/rKYgkQOcMKUK', 0, '2024-08-19 22:31:40', NULL, NULL),
+(3, 'Yes', 'Malapit', 'V', 'V', 'V', 'Male', 'Malapit, San Isidro Nueva Ecija', '09876543212', 'asd@gmail.com', 'asd', '$2y$10$cBtk0GdAqksqO0v3Qnucmu7Zg/ptzsCymedVO/Pg/rKYgkQOcMKUK', 0, '2024-08-20 20:26:53', NULL, NULL),
 (4, 'Yes', 'Poblacion', 'P', 'P', 'P', 'Male', 'P', '09876543212', 'qweqwe@gmail.com', 'qweqwe', '$2y$10$BR5XaNBUQUHSw7IDKUYE7u3jWixypEf7tuHWfJGF9FdtgZgu4/w0G', 1, '2024-08-19 22:31:40', NULL, NULL),
 (5, 'Yes', 'Poblacion', 'W', 'W', 'W', 'Female', 'W', '09876543212', 'asdasd@gmail.com', 'asdasd', '$2y$10$6TEcv24imR6lpfWItJOok.n4MQebzxhE2FAi9OqPbZBzmzU63b2p6', 0, '2024-08-19 22:31:40', NULL, NULL),
 (6, 'Yes', 'Municipal', 'admin', 'admin', 'admin', 'Male', 'admin', '', 'admin@gmail.com', 'admin', '$2y$10$lA2M6NwaMUWrQOxpellmYOVzp.VaNXBVVpWOu8ibIT9ZtChFglh62', 2, '2024-08-19 22:31:40', NULL, NULL),
@@ -155,16 +120,16 @@ INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`
 (10, 'Yes', 'Poblacion', 'Dsa', 'Das', 'Dsa', 'Male', 'Das Dsa Das', '09987123456', 'dsa@gmail.com', 'dsa', '$2y$10$ZuMsDdllIoiXcZvuysfVV.R3BYISBAu7ZztCWLmbQ./Y.Fg1ycGrm', 0, '2024-08-19 22:31:40', NULL, NULL),
 (11, 'Yes', 'Malapit', 'Dsada', 'Dsadsa', 'Dsadsa', 'Female', 'Dsadadsadas Dsadsa', '09866535432', 'dsadas@gmail.com', 'dsadas', '$2y$10$KOl1emBzzZHxNsrIqzeW4Of3WbBiHuy2ttsvFwjovea7xzSiSKD3e', 0, '2024-08-19 22:31:40', NULL, NULL),
 (12, 'Yes', 'Malapit', 'Asdsaddsa', 'Asdaad', 'Asdasdsdds', 'Male', 'Asdadasdda', '09876543212', 'kjlklj@gmail.com', 'hjkhjk', '$2y$10$y7QyXlG9sdyhIBGZGLHiluE0InDBc4oJ25rM9OgKsJPkIqlBkLhY6', 0, '2024-08-19 22:31:40', NULL, NULL),
-(14, 'Yes', 'Malapit', 'Tiktalk', 'Tiktalk', 'Tiktalk', 'Male', 'Tiktalk Tiktalk Tiktalk 123', '09876543212', 'tiktalkcompany6969@gmail.com', 'Tiktalk', '$2y$10$Dqt0ViiYUxjf1Pu6wxqlQu1QBQKrbMeU3Amty9fXmmBYe385l4uKe', 0, '2024-08-19 22:31:40', NULL, NULL);
+(14, 'Yes', 'Malapit', 'Tiktalk', 'Tiktalk', 'Tiktalk', 'Male', 'Tiktalk Tiktalk Tiktalk 123', '09876543212', 'tiktalkcompany6969@gmail.com', 'Tiktalk', '$2y$10$H4B96lLKVOVmb/KN0cigtO3bRHCEX32YSuUIU4.30bGoovk.IuaSS', 0, '2024-08-20 22:23:31', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tbl_main`
+-- Indexes for table `tbl_logs`
 --
-ALTER TABLE `tbl_main`
+ALTER TABLE `tbl_logs`
   ADD PRIMARY KEY (`log_id`);
 
 --
@@ -180,12 +145,6 @@ ALTER TABLE `tbl_requests`
   ADD PRIMARY KEY (`req_id`);
 
 --
--- Indexes for table `tbl_role`
---
-ALTER TABLE `tbl_role`
-  ADD PRIMARY KEY (`role_id`);
-
---
 -- Indexes for table `tbl_useracc`
 --
 ALTER TABLE `tbl_useracc`
@@ -197,22 +156,22 @@ ALTER TABLE `tbl_useracc`
 --
 
 --
--- AUTO_INCREMENT for table `tbl_main`
+-- AUTO_INCREMENT for table `tbl_logs`
 --
-ALTER TABLE `tbl_main`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `tbl_logs`
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_posts`
 --
 ALTER TABLE `tbl_posts`
-  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_requests`
 --
 ALTER TABLE `tbl_requests`
-  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_useracc`
