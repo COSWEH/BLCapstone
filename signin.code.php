@@ -4,14 +4,12 @@ session_start();
 
 if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
-    $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    $email_result = preg_match($email_pattern, $email);
 
     $password = $_POST['signinPassword'];
     $password_pattern = "/.{8,}/";
     $password_result = preg_match($password_pattern, $password);
 
-    if ($email_result == 1 && $password_result == 1) {
+    if ($password_result == 1) {
         // Valid
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             // Valid email address

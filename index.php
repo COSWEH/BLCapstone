@@ -79,7 +79,7 @@ session_start();
                     <form action="signin.code.php" method="POST">
                         <h4 class="h4 fw-bold mb-3">Account Information</h4>
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email address" required>
                             <label for="email" class="form-label">Email address</label>
                         </div>
 
