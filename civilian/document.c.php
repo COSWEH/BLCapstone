@@ -188,8 +188,10 @@ if ($user_role != 0) {
                                 <select id="documentType" name="docType" class="form-select" required>
                                     <option value="" disabled selected>Select Document</option>
                                     <option value="Barangay Clearance">Barangay Clearance</option>
+                                    <option value="Barangay Indigency">Barangay Indigency</option>
                                     <option value="Cedula">Cedula</option>
                                     <option value="Job Seeker">Job Seeker</option>
+                                    <option value="Job Seeker">Business Permit</option>
                                 </select>
                                 <label for="documentType">Document Type</label>
                             </div>
@@ -410,30 +412,31 @@ if ($user_role != 0) {
             updateReqDoc();
 
             // others selected
-            // function updateFields() {
-            //     if ($('#forOthers').is(':checked')) {
-            //         // Clear the fields if "Others" is selected
-            //         $('#firstName, #lastName, #middleName, #contactNumber, #barangay').prop('disabled', false).val('');
+            function updateFields() {
+                if ($('#forOthers').is(':checked')) {
+                    // Clear the fields if "Others" is selected
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #barangay').prop('disabled', false).val('');
 
-            //     } else if ($('#forYourself').is(':checked')) {
-            //         // Restore values and disable fields if "Yourself" is selected
-            //         $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
-            //         $('#middleName').val('<?php echo $_SESSION['user_mname']; ?>').prop('disabled', true);
-            //         $('#lastName').val('<?php echo $_SESSION['user_lname']; ?>').prop('disabled', true);
-            //         $('#contactNumber').val('<?php echo $_SESSION['user_contactNum']; ?>').prop('disabled', true);
-            //         $('#barangay').val('<?php echo $_SESSION['user_brgy']; ?>').prop('disabled', true);
-            //     }
+                } else if ($('#forYourself').is(':checked')) {
+                    // Restore values and disable fields if "Yourself" is selected
+                    $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
+                    $('#middleName').val('<?php echo $_SESSION['user_mname']; ?>').prop('disabled', true);
+                    $('#lastName').val('<?php echo $_SESSION['user_lname']; ?>').prop('disabled', true);
+                    $('#contactNumber').val('<?php echo $_SESSION['user_contactNum']; ?>').prop('disabled', true);
+                    $('#user_gender').val('<?php echo $_SESSION['user_gender']; ?>').prop('disabled', true);
+                    $('#barangay').val('<?php echo $_SESSION['user_brgy']; ?>').prop('disabled', true);
+                }
 
-            //     $('#btnReqDocument').on('click', function() {
-            //         $('#firstName, #lastName, #middlename, #contactNumber, #barangay').prop('disabled', false);
-            //     });
-            // }
+                $('#btnReqDocument').on('click', function() {
+                    $('#firstName, #lastName, #middlename, #contactNumber, #barangay').prop('disabled', false);
+                });
+            }
 
-            // updateFields();
+            updateFields();
 
             // Event listeners for radio buttons
-            // $('#forOthers').on('change', updateFields);
-            // $('#forYourself').on('change', updateFields);
+            $('#forOthers').on('change', updateFields);
+            $('#forYourself').on('change', updateFields);
 
             // Get the buttons and steps
             const nextBtn1 = document.getElementById('nextBtn1');
