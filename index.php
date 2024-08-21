@@ -407,7 +407,7 @@ session_start();
                 <div class="contact-card">
                     <div>
                         <h5 class="mb-1">Our Email Address</h5>
-                        <p><i class="bi bi-envelope-fill"></i> bayanlink@gmail.com</p>
+                        <p><i class="bi bi-envelope-fill"></i> bayanlink.connects@gmail.com</p>
                         <p><i class="bi bi-envelope-fill"></i> sanisidro@gmail.com</p>
                     </div>
                 </div>
@@ -489,7 +489,7 @@ session_start();
                 <div class="col-md-4 mb-2 mb-md-0">
                     <h5>Contact Us</h5>
                     <p><i class="bi bi-telephone-fill"></i> +63 918 260 9219</p>
-                    <p><i class="bi bi-envelope-fill"></i> bayanlink@gmail.com</p>
+                    <p><i class="bi bi-envelope-fill"></i> bayanlink.connects@gmail.com</p>
                 </div>
                 <div class="col-md-4 mb-2 mb-md-0">
                     <h5>Follow Us</h5>
