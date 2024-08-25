@@ -45,7 +45,7 @@ if ($user_role != 1) {
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery ajax cdn -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -81,10 +81,10 @@ if ($user_role != 1) {
                             <a class="nav-link fw-bold" aria-current="page" href="adminPost.b.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-document" aria-current="page" href="adminDocument.b.php">Document</a>
+                            <a class="nav-link fw-bold" aria-current="page" href="adminDocument.b.php">Document</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="adminProfiling.b.php">Profiling</a>
+                            <a class="nav-link fw-bold active-document" aria-current="page" href="adminProfiling.b.php">Profiling</a>
                         </li>
                         <hr>
                     </ul>
@@ -99,48 +99,15 @@ if ($user_role != 1) {
                     <label for="search" class="form-label">
                         <small>
                             <i class="bi bi-search"></i>
-                            Search by name...
+                            Search residents...
                         </small>
                     </label>
                 </div>
+                <hr>
 
-                <nav>
-                    <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill fw-bold" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Pending</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">Processing</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">Approved</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Cancelled</button>
-                    </div>
-                </nav>
+                <h6 class="ms-1 mb-3">List of residents to you barangay</h6>
+                <div id="searchResult" class="fw-bold fs-5">
 
-                <div class="tab-content mt-2 p-1" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab" tabindex="0">
-                        <!-- show all pending document requests -->
-                        <div id="show_pending_reqDoc" class="row">
-                            <!-- Content for pending requests -->
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-processing" role="tabpanel" aria-labelledby="nav-processing-tab" tabindex="0">
-                        <!-- show all processing document requests -->
-                        <div id="show_processing_reqDoc" class="row">
-                            <!-- Content for processing requests -->
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-approved" role="tabpanel" aria-labelledby="nav-approved-tab" tabindex="0">
-                        <!-- show all approved document requests -->
-                        <div id="show_approved_reqDoc" class="row">
-                            <!-- Content for approved requests -->
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-cancelled" role="tabpanel" aria-labelledby="nav-cancelled-tab" tabindex="0">
-                        <!-- show all cancelled document requests -->
-                        <div id="show_cancelled_reqDoc" class="row">
-                            <!-- Content for cancelled requests -->
-                        </div>
-                    </div>
                 </div>
 
             </main>
@@ -178,63 +145,27 @@ if ($user_role != 1) {
 
     <script>
         $(document).ready(function() {
-            let activeTab = 'pending';
-
-            $('#nav-pending-tab').on('click', function() {
-                activeTab = 'pending';
-                loadRequestDocs(activeTab);
+            // show users list
+            $.post('brgy_includes/allResidents.php', {}, function(data) {
+                $("#searchResult").html(data);
             });
 
-            $('#nav-processing-tab').on('click', function() {
-                activeTab = 'processing';
-                loadRequestDocs(activeTab);
-            });
-
-            $('#nav-approved-tab').on('click', function() {
-                activeTab = 'approved';
-                loadRequestDocs(activeTab);
-            });
-
-            $('#nav-cancelled-tab').on('click', function() {
-                activeTab = 'cancelled';
-                loadRequestDocs(activeTab);
-            });
-
-            function loadRequestDocs(status) {
-                $.post(`brgy_includes/show_${status}_reqDoc.php`, {}, function(data) {
-                    $(`#show_${status}_reqDoc`).html(data);
-                });
-            }
-
-            function updateReqDocs() {
-                const statuses = ['pending', 'processing', 'approved', 'cancelled'];
-
-                statuses.forEach(status => {
-                    loadRequestDocs(status);
-                });
-
-                setTimeout(updateReqDocs, 30000);
-            }
-
+            //display user that is searched
             $('#searchByName').on('keyup', function() {
                 let searchQuery = $(this).val(); // Get the search query
 
-                console.log(searchQuery);
-
                 $.ajax({
-                    url: 'brgy_includes/search_user.php', // PHP script to handle search
+                    url: 'brgy_includes/searchResult.php', // PHP script to handle search
                     method: 'POST',
                     data: {
                         query: searchQuery
                     },
                     success: function(response) {
-                        $(`#show_${activeTab}_reqDoc`).html(response);
+                        $(`#searchResult`).html(response);
                     }
                 });
             });
 
-            // Initial load
-            updateReqDocs();
 
         });
     </script>
