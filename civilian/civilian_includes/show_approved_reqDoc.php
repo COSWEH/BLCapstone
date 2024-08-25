@@ -7,11 +7,12 @@ if (empty($_SESSION['user_id'])) {
     exit;
 }
 
+$user_id = $_SESSION['user_id'];
 $civilian_brgy = $_SESSION['user_brgy'];
 
 $query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_typeOfDoc, req_password, req_status
           FROM tbl_requests
-          WHERE req_brgy = '$civilian_brgy' && req_status = 'Approved'
+          WHERE user_id = '$user_id' && req_brgy = '$civilian_brgy' && req_status = 'Approved'
           ORDER BY req_date DESC";
 
 

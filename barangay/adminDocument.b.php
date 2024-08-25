@@ -87,64 +87,152 @@ if ($user_role != 1) {
                     </ul>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- signout modal -->
-                <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
-                                        Sign out
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <form action="../signout.php" method="POST">
-                                    <div class="text-center mb-3">
-                                        <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                                        </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </nav>
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <!-- <h4 class="fw-bold">Document</h4> -->
-                <!-- <hr> -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="searchByName" name="search" placeholder="Search" required>
+                    <label for="search" class="form-label">
+                        <small>
+                            <i class="bi bi-search"></i>
+                            Search by name...
+                        </small>
+                    </label>
+                </div>
 
-                <!-- List of Document Requests -->
-                <div id="show_user_reqDoc" class="row">
+                <nav>
+                    <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
+                        <button class="nav-link active flex-fill fw-bold" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Pending</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">Processing</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">Approved</button>
+                        <button class="nav-link flex-fill fw-bold" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Cancelled</button>
+                    </div>
+                </nav>
 
+                <div class="tab-content mt-2 p-1" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab" tabindex="0">
+                        <!-- show all pending document requests -->
+                        <div id="show_pending_reqDoc" class="row">
+                            <!-- Content for pending requests -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-processing" role="tabpanel" aria-labelledby="nav-processing-tab" tabindex="0">
+                        <!-- show all processing document requests -->
+                        <div id="show_processing_reqDoc" class="row">
+                            <!-- Content for processing requests -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-approved" role="tabpanel" aria-labelledby="nav-approved-tab" tabindex="0">
+                        <!-- show all approved document requests -->
+                        <div id="show_approved_reqDoc" class="row">
+                            <!-- Content for approved requests -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-cancelled" role="tabpanel" aria-labelledby="nav-cancelled-tab" tabindex="0">
+                        <!-- show all cancelled document requests -->
+                        <div id="show_cancelled_reqDoc" class="row">
+                            <!-- Content for cancelled requests -->
+                        </div>
+                    </div>
                 </div>
 
             </main>
         </div>
     </div>
 
+    <!-- signout modal -->
+    <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                            Sign out
+                        </h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form action="../signout.php" method="POST">
+                        <div class="text-center mb-3">
+                            <div class="mb-3">
+                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                            </div>
+                            <h3 class="mb-3">Confirm to sign out.</h3>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
+                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
-            $.post('brgy_includes/show_user_reqDoc.php', {}, function(data) {
-                $("#show_user_reqDoc").html(data);
+            let activeTab = 'pending';
+
+            $('#nav-pending-tab').on('click', function() {
+                activeTab = 'pending';
+                loadRequestDocs(activeTab);
             });
 
-            function updateReqDoc() {
-                $.post('brgy_includes/show_user_reqDoc.php', {}, function(data) {
-                    $("#show_user_reqDoc").html(data);
-                    setTimeout(updateReqDoc, 30000);
+            $('#nav-processing-tab').on('click', function() {
+                activeTab = 'processing';
+                loadRequestDocs(activeTab);
+            });
+
+            $('#nav-approved-tab').on('click', function() {
+                activeTab = 'approved';
+                loadRequestDocs(activeTab);
+            });
+
+            $('#nav-cancelled-tab').on('click', function() {
+                activeTab = 'cancelled';
+                loadRequestDocs(activeTab);
+            });
+
+            function loadRequestDocs(status) {
+                $.post(`brgy_includes/show_${status}_reqDoc.php`, {}, function(data) {
+                    $(`#show_${status}_reqDoc`).html(data);
                 });
             }
 
-            updateReqDoc();
+            function updateReqDocs() {
+                const statuses = ['pending', 'processing', 'approved', 'cancelled'];
+
+                statuses.forEach(status => {
+                    loadRequestDocs(status);
+                });
+
+                setTimeout(updateReqDocs, 30000);
+            }
+
+            $('#searchByName').on('keyup', function() {
+                let searchQuery = $(this).val(); // Get the search query
+
+                console.log(searchQuery);
+
+                $.ajax({
+                    url: 'brgy_includes/search_user.php', // PHP script to handle search
+                    method: 'POST',
+                    data: {
+                        query: searchQuery
+                    },
+                    success: function(response) {
+                        $(`#show_${activeTab}_reqDoc`).html(response);
+                    }
+                });
+            });
+
+            // Initial load
+            updateReqDocs();
+
         });
     </script>
     <script src="brgyMaterials/script.b.js"></script>
@@ -173,6 +261,17 @@ if (isset($_SESSION['approved_message'])) {
             });
         </script>';
     unset($_SESSION['approved_message']);
+}
+
+if (isset($_SESSION['cancelled_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Cancelled",
+                text: "' . $_SESSION['cancelled_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['cancelled_message']);
 }
 ?>
 

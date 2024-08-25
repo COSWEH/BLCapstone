@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id'])) {
 echo ".";
 $getUserid = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
+$user_brgy = $_SESSION['user_brgy'];
 
 // Validate the user against the database
 $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
@@ -27,6 +28,7 @@ if ($user_role != 0) {
     header('Location: ../unauthorized.php');
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +57,37 @@ if ($user_role != 0) {
             <!-- left -->
             <nav class="col-12 col-md-3 sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
-                    <button id="theme-toggle" class="btn btn-sm shadow mb-3">
-                        <i class="bi bi-moon-fill" id="moon-icon"></i>
-                        <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
-                    </button>
-                    <div class="text-center">
+                    <div class="d-flex justify-content-between mb-3">
+                        <button id="theme-toggle" class="btn shadow">
+                            <i class="bi bi-moon-fill" id="moon-icon"></i>
+                            <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
+                                <i class="bi bi-bell-fill"></i>
+                                <div id="count-notification">
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <div class="card border border-0" style="width: 300px;">
+                                    <!-- Notification Header -->
+                                    <div class="card-header bg-info text-light">
+                                        <h6 class="fw-bold mb-0">
+                                            Notifications
+                                        </h6>
+                                    </div>
+                                    <li>
+                                        <div id="notification-content" class="p-3">
+                                            <!-- Your notification content here -->
+                                        </div>
+
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class=" text-center">
                         <?php
                         $getGender = $_SESSION['user_gender'];
                         if ($getGender == "Male") {
@@ -75,6 +103,7 @@ if ($user_role != 0) {
                             ?>
                         </h6>
                     </div>
+
                     <hr>
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
@@ -91,34 +120,6 @@ if ($user_role != 0) {
                     <hr>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- delete modal -->
-                <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
-                                        Sign out
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <form action="../signout.php" method="POST">
-                                    <div class="text-center mb-3">
-                                        <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                                        </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </nav>
 
             <!-- main content -->
@@ -149,7 +150,60 @@ if ($user_role != 0) {
         </div>
     </div>
 
+    <!-- signout modal -->
+    <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                            Sign out
+                        </h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form action="../signout.php" method="POST">
+                        <div class="text-center mb-3">
+                            <div class="mb-3">
+                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                            </div>
+                            <h3 class="mb-3">Confirm to sign out.</h3>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
+                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // update status to read
+        document.getElementById("notificationButton").addEventListener("click", function() {
+            // Get the notification count element
+            var notificationCountElement = document.querySelector("#count-notification .badge");
+
+            // Check if the notification count is not empty
+            if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
+                // AJAX request to update notifications status to "read"
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "civilian_includes/update_notifications.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log("All notifications updated to read");
+                        // Clear the notification count badge
+                        document.getElementById("count-notification").innerHTML = '';
+                    }
+                };
+                xhr.send();
+            } else {
+                console.log("No unread notifications to update.");
+            }
+        });
+
         //load brgy post and municipal post from database
         $(document).ready(function() {
             $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
@@ -157,6 +211,14 @@ if ($user_role != 0) {
             });
             $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
                 $("#municipalPost").html(data);
+            });
+
+            $.post('civilian_includes/show_notification.php', {}, function(data) {
+                $("#notification-content").html(data);
+            });
+
+            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
+                $("#count-notification").html(data);
             });
 
             function updateBrgyPost() {
@@ -173,9 +235,26 @@ if ($user_role != 0) {
                 });
             }
 
+            function updateNotification() {
+                $.post('civilian_includes/show_notification.php', {}, function(data) {
+                    $("#notification-content").html(data);
+                    setTimeout(updateNotification, 500);
+                });
+            }
+
+            function showNotificationCount() {
+                $.post('civilian_includes/show_notification_count.php', {}, function(data) {
+                    $("#count-notification").html(data);
+                    setTimeout(showNotificationCount, 500);
+                });
+            }
+
+
             // Initial call to load messages
             updateBrgyPost();
             updateMunicipalPost();
+            updateNotification();
+            showNotificationCount()
         });
     </script>
 

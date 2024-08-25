@@ -55,10 +55,37 @@ if ($user_role != 0) {
             <!-- left -->
             <nav class="col-12 col-md-3 sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
-                    <button id="theme-toggle" class="btn btn-sm shadow mb-3">
-                        <i class="bi bi-moon-fill" id="moon-icon"></i>
-                        <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
-                    </button>
+                    <div class="d-flex justify-content-between mb-3">
+                        <button id="theme-toggle" class="btn shadow">
+                            <i class="bi bi-moon-fill" id="moon-icon"></i>
+                            <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
+                                <i class="bi bi-bell-fill"></i>
+                                <div id="count-notification">
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <div class="card border border-0" style="width: 300px;">
+                                    <!-- Notification Header -->
+                                    <div class="card-header bg-info text-light">
+                                        <h6 class="fw-bold mb-0">
+                                            Notifications
+                                        </h6>
+                                    </div>
+                                    <li>
+                                        <div id="notification-content" class="p-3">
+                                            <!-- Your notification content here -->
+                                        </div>
+
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+
+
                     <div class="text-center">
                         <?php
                         $getGender = $_SESSION['user_gender'];
@@ -349,7 +376,57 @@ if ($user_role != 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // update status to read
+        document.getElementById("notificationButton").addEventListener("click", function() {
+            // Get the notification count element
+            var notificationCountElement = document.querySelector("#count-notification .badge");
+
+            // Check if the notification count is not empty
+            if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
+                // AJAX request to update notifications status to "read"
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "civilian_includes/update_notifications.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log("All notifications updated to read");
+                        // Clear the notification count badge
+                        document.getElementById("count-notification").innerHTML = '';
+                    }
+                };
+                xhr.send();
+            } else {
+                console.log("No unread notifications to update.");
+            }
+        });
+
         $(document).ready(function() {
+            $.post('civilian_includes/show_notification.php', {}, function(data) {
+                $("#notification-content").html(data);
+            });
+
+            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
+                $("#count-notification").html(data);
+            });
+
+            function updateNotification() {
+                $.post('civilian_includes/show_notification.php', {}, function(data) {
+                    $("#notification-content").html(data);
+                    setTimeout(updateNotification, 500);
+                });
+            }
+
+            function showNotificationCount() {
+                $.post('civilian_includes/show_notification_count.php', {}, function(data) {
+                    $("#count-notification").html(data);
+                    setTimeout(showNotificationCount, 500);
+                });
+            }
+
+            updateNotification();
+            showNotificationCount()
+
+
             const barangayOptions = [
                 "Alua", "Calaba", "Malapit", "Mangga", "Poblacion",
                 "Pulo", "San Roque", "Sto. Cristo", "Tabon"

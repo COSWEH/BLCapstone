@@ -7,11 +7,12 @@ if (empty($_SESSION['user_id'])) {
     exit;
 }
 
+$user_id = $_SESSION['user_id'];
 $civilian_brgy = $_SESSION['user_brgy'];
 
-$query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_typeOfDoc, req_password, req_status
+$query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_typeOfDoc, req_password, req_status, req_reasons
           FROM tbl_requests
-          WHERE req_brgy = '$civilian_brgy' && req_status = 'Cancelled'
+          WHERE user_id = '$user_id' && req_brgy = '$civilian_brgy' && req_status = 'Cancelled'
           ORDER BY req_date DESC";
 
 
@@ -44,6 +45,7 @@ while ($data = mysqli_fetch_assoc($result)) {
     $req_civilStatus = $data['req_civilStatus'];
     $docType = $data['req_typeOfDoc'];
     $status = $data['req_status'];
+    $reasons = $data['req_reasons'];
 
     $get_Time_And_Day = new DateTime($reqDate);
     $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
@@ -146,7 +148,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </small>
                         </h6>
                     </div>
-                    <div class="d-flex justify-content-between mb-3">
+                    <div class="d-flex justify-content-between">
                         <h6 class="font-weight-bold">
                             <i class="bi bi-exclamation-triangle-fill">
                                 <span class="ms-2">Status:</span>
@@ -156,6 +158,25 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </small>
                         </h6>
                     </div>
+                    <?php
+                    $reasons = trim($reasons);
+                    $reasons = rtrim($reasons, ', ');
+
+                    if (!empty($reasons)) {
+                        $reasonsArray = array_map('trim', explode(", ", $reasons));
+                        $reasonsArray = array_filter($reasonsArray);
+
+                        echo "<hr>";
+                        echo "<h6>Cancellation Reasons:</h6>";
+                        echo '<ul>';
+                        foreach ($reasonsArray as $reason) {
+                            // Escape each reason for safe HTML output
+                            $escapedReason = htmlspecialchars($reason, ENT_QUOTES, 'UTF-8');
+                            echo "<li><small>$escapedReason</small></li>";
+                        }
+                        echo '</ul>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

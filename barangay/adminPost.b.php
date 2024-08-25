@@ -89,34 +89,6 @@ if ($user_role != 1) {
                     </ul>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- delete modal -->
-                <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
-                                        Sign out
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <form action="../signout.php" method="POST">
-                                    <div class="text-center mb-3">
-                                        <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                                        </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </nav>
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
@@ -146,6 +118,36 @@ if ($user_role != 1) {
             </main>
         </div>
     </div>
+
+    <!-- Sign out modal -->
+    <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                            Sign out
+                        </h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form action="../signout.php" method="POST">
+                        <div class="text-center mb-3">
+                            <div class="mb-3">
+                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                            </div>
+                            <h3 class="mb-3">Confirm to sign out.</h3>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
+                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- create post modal -->
     <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

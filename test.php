@@ -18,45 +18,67 @@
 </head>
 
 <body>
+    <h1 class="text-center text-white p2 bg-dark bg-gradient text-uppercase">Responsove BOOTSTRAP Table</h1>
 
-    <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-10 col-lg-8">
-                <div class="card p-0 shadow">
-                    <div class="row no-gutters">
-                        <!-- Left side: Shield icon and text -->
-                        <div class="col d-none d-md-flex flex-column align-items-center justify-content-center text-center left-side bg-info p-5">
-                            <i class="bi bi-shield-lock-fill text-light" style="font-size: 8rem;"></i>
-                            <p class="text-light mt-3">Create a new password to secure your account. Make sure it's strong and unique for better protection.</p>
-                        </div>
-                        <!-- Right side: Form -->
-                        <div class="col p-5">
-                            <form action="includes/process-password-reset.php" method="POST">
-                                <h4 class="mb-3 fw-bold">Enter New Password</h4>
-                                <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password" required pattern=".{8,}">
-                                    <label for="new_password" class="form-label">New Password</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm New Password" required pattern=".{8,}">
-                                    <label for="confirm_password" class="form-label">Confirm New Password</label>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col mb-2">
-                                        <button type="submit" name="btnResetPassword" class="btn btn-info text-light w-100 fw-bold mb-2">Reset Password</button>
-                                        <a href="index.php" class="btn btn-secondary w-100 fw-bold">Back to Login</a>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container mt-5">
+        <table class="table table-responsive table-bordered border-dark table-hover text-center text-capitalized">
+            <tr class="table-dark table-active text-uppercase text-white">
+                <th>Sr:No</th>
+                <th>Employee Name</th>
+                <th>Email</th>
+                <th>City</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>john</td>
+                <td>john@gmail.com</td>
+                <td>New York</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>william</td>
+                <td>william@gmail.com</td>
+                <td>Paris</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>smith</td>
+                <td>smith@gmail.com</td>
+                <td>Lahore</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>william</td>
+                <td>william@gmail.com</td>
+                <td>Paris</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>smith</td>
+                <td>smith@gmail.com</td>
+                <td>Lahore</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>smith</td>
+                <td>smith@gmail.com</td>
+                <td>Lahore</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>william</td>
+                <td>william@gmail.com</td>
+                <td>Paris</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>smith</td>
+                <td>smith@gmail.com</td>
+                <td>Lahore</td>
+            </tr>
+        </table>
     </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
