@@ -90,17 +90,21 @@ if ($user_role != 2) {
                         </li>
                     </ul>
                     <button class="btn btn-outline-primary w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
-                    <!-- faqs modal -->
+
+                    <!-- add faqs modal -->
                     <div class="modal fade" id="faqsModal" tabindex="-1" aria-labelledby="faqsModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
+
                                 <div class="modal-header text-center">
                                     <div class="w-100 text-center">
                                         <h4 class="modal-title fw-bold" id="faqsModalLabel">
                                             Frequently Asked Questions
                                         </h4>
                                     </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+
                                 <div class="modal-body">
                                     <form action="municipal_includes/addFaqs.m.php" method="POST">
                                         <div class="form-floating mb-3">
@@ -112,19 +116,50 @@ if ($user_role != 2) {
                                             <label for="answer" class="form-label">Answers</label>
                                         </div>
 
-                                        <div class="d-grid gap-2">
-                                            <button type="submit" name="btnFaqs" class="btn btn-outline-primary fw-bold">Add</button>
-                                            <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                        <div class="row">
+                                            <div class="col-12 col-md-4 mb-2">
+                                                <button type="submit" name="btnFaqs" class="btn btn-outline-primary fw-bold w-100">Add</button>
+                                            </div>
+                                            <div class="col-12 col-md-4 mb-2">
+                                                <button type="button" class="btn btn-outline-warning fw-bold w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <button type="button" class="btn btn-outline-danger fw-bold w-100" data-bs-dismiss="modal">Cancel</button>
+                                            </div>
                                         </div>
+
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- edit faqs modal -->
+                    <div class="modal fade" id="editFaqsModal" tabindex="-1" aria-labelledby="editFaqsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <div class="w-100 text-center">
+                                        <h4 class="modal-title fw-bold" id="editFaqsModalLabel">
+                                            <small>
+                                                Edit Frequently Asked Questions
+                                            </small>
+                                        </h4>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div id="showFaqs" class="modal-body">
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr>
                 </div>
+
+
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- delete modal -->
+                <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -257,6 +292,30 @@ if ($user_role != 2) {
     </div>
 
     <script>
+        document.getElementById('editButton').addEventListener('click', function() {
+            var faqsModal = new bootstrap.Modal(document.getElementById('faqsModal'));
+            var editFaqsModal = new bootstrap.Modal(document.getElementById('editFaqsModal'));
+
+            // Close the current modal
+            faqsModal.hide();
+
+            // Open the new modal after a slight delay to ensure proper closing
+            setTimeout(function() {
+                editFaqsModal.show();
+            }, 300); // Adjust the delay as needed
+        });
+
+
+        function showFaqs() {
+            $.post("municipal_includes/edit_faqs.php", {}, function(data) {
+                $("#showFaqs").html(data);
+            });
+
+            setTimeout(showFaqs, 30000);
+        }
+
+        showFaqs();
+
         let selectedFiles = [];
 
         document.getElementById("mAddPhotos").addEventListener("change", function(event) {
@@ -365,6 +424,18 @@ if (isset($_SESSION['faq_message'])) {
             });
         </script>';
     unset($_SESSION['faq_message']);
+}
+
+// delete faqs
+if (isset($_SESSION['delete_faq_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['delete_faq_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['delete_faq_message']);
 }
 
 // success login

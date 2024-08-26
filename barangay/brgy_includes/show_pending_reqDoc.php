@@ -302,6 +302,7 @@ if ($rowCount == 0) {
             let p_id = $(this).data('post-id');
             $('#getProcessReqDocId').val(p_id);
         });
+
         $(document).on('click', '.aApprove', function() {
             let p_id = $(this).data('post-id');
             $('#getApproveReqDocId').val(p_id);
