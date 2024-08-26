@@ -16,6 +16,14 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    if (
+        empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) ||
+        empty($address) || empty($contactNum) || empty($email) || empty($username) || empty($password)
+    ) {
+        header('location: ../profile.c.php');
+        exit;
+    }
+
     $query = "
     UPDATE tbl_useracc 
     SET 

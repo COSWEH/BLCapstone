@@ -84,12 +84,44 @@ if ($user_role != 2) {
                     </div>
                     <hr>
                     <h3 class="mb-3">Menu</h3>
-                    <ul class="navbar-nav flex-column">
+                    <ul class="navbar-nav flex-column mb-3">
                         <li class="nav-item">
                             <a class="nav-link fw-bold active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
-                        <hr>
                     </ul>
+                    <button class="btn btn-outline-primary w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
+                    <!-- faqs modal -->
+                    <div class="modal fade" id="faqsModal" tabindex="-1" aria-labelledby="faqsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <div class="w-100 text-center">
+                                        <h4 class="modal-title fw-bold" id="faqsModalLabel">
+                                            Frequently Asked Questions
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="municipal_includes/addFaqs.m.php" method="POST">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="question" class="form-control" id="question" placeholder="Question" required>
+                                            <label for="question" class="form-label">Question</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <textarea name="answer" class="form-control" id="answer" placeholder="Answers" style="height: 100px" required></textarea>
+                                            <label for="answer" class="form-label">Answers</label>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <button type="submit" name="btnFaqs" class="btn btn-outline-primary fw-bold">Add</button>
+                                            <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- delete modal -->
@@ -322,6 +354,19 @@ if ($user_role != 2) {
 </body>
 
 <?php
+
+// add faqs
+if (isset($_SESSION['faq_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['faq_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['faq_message']);
+}
+
 // success login
 if (isset($_SESSION['success_message'])) {
     echo '<script>

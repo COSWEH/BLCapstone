@@ -19,6 +19,15 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $req_password = $_POST['password'];
     $req_status = "Pending";
 
+    if (
+        empty($user_id) || empty($req_fname) || empty($req_lname) || empty($req_contactNo) || empty($req_gender) ||
+        empty($req_brgy) || empty($req_purok) || empty($req_age) || empty($req_dateOfBirth) || empty($req_placeOfBirth) ||
+        empty($req_civilStatus) || empty($req_typeOfDoc) || empty($req_password)
+    ) {
+        header('location: ../document.c.php');
+        exit;
+    }
+
     // Handle the file upload
     if (isset($_FILES['userValidID']) && isset($_FILES['eSignature'])) {
         // Handling eSignature file
