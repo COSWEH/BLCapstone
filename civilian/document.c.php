@@ -340,11 +340,23 @@ if ($user_role != 0) {
                                         </select>
                                         <label for="user_gender" class="form-label">Gender</label>
                                     </div>
-
+                                    <?php $user_brgy = $_SESSION['user_brgy']; ?>
                                     <div class="form-floating mb-3">
-                                        <input id="barangay" class="form-control" type="text" name="user_brgy" placeholder="Barangay" value="<?php echo $_SESSION['user_brgy']; ?>" required>
-                                        <label for="barangay">Barangay</label>
+                                        <select name="user_brgy" id="user_brgy" class="form-select" required>
+                                            <option value="" disabled <?php echo $user_brgy === 'N/a' ? 'selected' : ''; ?>>Select Barangay</option>
+                                            <option value="Alua" <?php echo $user_brgy === 'Alua' ? 'selected' : ''; ?>>Alua</option>
+                                            <option value="Calaba" <?php echo $user_brgy === 'Calaba' ? 'selected' : ''; ?>>Calaba</option>
+                                            <option value="Malapit" <?php echo $user_brgy === 'Malapit' ? 'selected' : ''; ?>>Malapit</option>
+                                            <option value="Mangga" <?php echo $user_brgy === 'Mangga' ? 'selected' : ''; ?>>Mangga</option>
+                                            <option value="Poblacion" <?php echo $user_brgy === 'Poblacion' ? 'selected' : ''; ?>>Poblacion</option>
+                                            <option value="Pulo" <?php echo $user_brgy === 'Pulo' ? 'selected' : ''; ?>>Pulo</option>
+                                            <option value="San Roque" <?php echo $user_brgy === 'San Roque' ? 'selected' : ''; ?>>San Roque</option>
+                                            <option value="Sto. Cristo" <?php echo $user_brgy === 'Sto. Cristo' ? 'selected' : ''; ?>>Sto. Cristo</option>
+                                            <option value="Tabon" <?php echo $user_brgy === 'Tabon' ? 'selected' : ''; ?>>Tabon</option>
+                                        </select>
+                                        <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -557,7 +569,7 @@ if ($user_role != 0) {
             function updateFields() {
                 if ($('#forOthers').is(':checked')) {
                     // Clear the fields if "Others" is selected
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #barangay').prop('disabled', false).val('');
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender').prop('disabled', false).val('');
                 } else if ($('#forYourself').is(':checked')) {
                     // Restore values and disable fields if "Yourself" is selected
                     $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
@@ -565,12 +577,11 @@ if ($user_role != 0) {
                     $('#lastName').val('<?php echo $_SESSION['user_lname']; ?>').prop('disabled', true);
                     $('#contactNumber').val('<?php echo $_SESSION['user_contactNum']; ?>').prop('disabled', true);
                     $('#user_gender').val('<?php echo $_SESSION['user_gender']; ?>').prop('disabled', true);
-                    $('#barangay').val('<?php echo $_SESSION['user_brgy']; ?>').prop('disabled', true);
                 }
 
                 $('#btnReqDocument').on('click', function() {
                     console.log('clicked');
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #barangay').prop('disabled', false);
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender').prop('disabled', false);
                 });
 
             }
