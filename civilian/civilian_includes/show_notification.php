@@ -12,13 +12,12 @@
 
     $getUserid = $_SESSION['user_id'];
     $user_role = $_SESSION['role_id'];
-    $user_brgy = $_SESSION['user_brgy'];
 
     // Validate the user against the database
     $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
     $countUser = mysqli_num_rows($checkUser);
 
-    $getReqID = "SELECT r.req_id, r.user_id
+    $getReqID = "SELECT r.req_id, r.user_id, r.req_brgy
             FROM tbl_requests AS r 
             INNER JOIN tbl_useracc AS u ON r.user_id = u.user_id
             WHERE r.user_id = '$getUserid'";
@@ -42,6 +41,7 @@
     if ($reqIDResult && mysqli_num_rows($reqIDResult) > 0) {
         $getReqIDdata = mysqli_fetch_assoc($reqIDResult);
         $req_id = $getReqIDdata['req_id'];
+        $admin_brgy = $getReqIDdata['req_brgy'];
 
         // Only proceed if req_id is not null
         if ($req_id) {
@@ -65,7 +65,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <div class="fw-bold">
-                                        Admin of <?php echo htmlspecialchars($user_brgy); ?>
+                                        Admin of <?php echo htmlspecialchars($admin_brgy); ?>
                                     </div>
                                     <div class="mt-1">
                                         <small>

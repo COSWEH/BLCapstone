@@ -117,7 +117,7 @@ if ($user_role != 0) {
                     </ul>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- delete modal -->
+                <!-- sign modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -149,9 +149,6 @@ if ($user_role != 0) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <!-- <h4 class="fw-bold">Document</h4> -->
-                <!-- <hr> -->
-                <!-- create post section-->
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
                         <!-- Profile Image -->
@@ -224,7 +221,6 @@ if ($user_role != 0) {
             </main>
         </div>
     </div>
-
 
     <!-- Request Document Modal -->
     <div class="modal fade" id="reqDocModal" tabindex="-1" aria-labelledby="reqDocModalLabel" aria-hidden="true">
@@ -478,8 +474,6 @@ if ($user_role != 0) {
             </div>
         </div>
     </div>
-
-
 
     <script>
         document.getElementById("notificationButton").addEventListener("click", function() {
