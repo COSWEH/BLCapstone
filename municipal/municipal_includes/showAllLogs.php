@@ -7,7 +7,7 @@ if (empty($_SESSION['user_id'])) {
     exit;
 }
 
-$query = "SELECT * FROM `tbl_logs`";
+$query = "SELECT * FROM `tbl_logs` ORDER BY `log_date` DESC";
 $result = mysqli_query($con, $query);
 
 if (!$result) {
