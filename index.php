@@ -26,7 +26,7 @@ session_start();
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#home">
-                <img src="img/logo.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top"> BAYANLINK</a>
+                <img src="img/BayanLinkLogoBlack.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top"> BAYANLINK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -430,14 +430,18 @@ session_start();
         <div class="row mb-4">
             <div class="col">
                 <h1 class="text-center mb-3">About Us</h1>
-                <p class="lead text-center">BayanLink is Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio eius fugit quasi sint dolorum, est nulla, similique soluta omnis cumque laborum aut quam ab assumenda?</p>
+                <p class="lead text-center">
+                    BayanLink is a comprehensive SaaS platform designed to connect communities and enhance local engagement. Our goal is to simplify communication and collaboration between residents, local businesses, and community leaders. By offering intuitive tools and a user-friendly interface, we empower users to stay informed, share updates, and participate actively in their neighborhoods. Join us in creating a more connected and vibrant community.
+                </p>
             </div>
         </div>
 
         <div class="row mb-4">
             <div class="col">
                 <h1 class="text-center mb-3">Our Mission</h1>
-                <p class="lead text-center">BayanLink is Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio eius fugit quasi sint dolorum, est nulla, similique soluta omnis cumque laborum aut quam ab assumenda?</p>
+                <p class="lead text-center">
+                    At BayanLink, our mission is to bridge gaps in community communication and foster stronger local ties. We strive to provide innovative solutions that facilitate seamless interaction among residents and stakeholders. Our platform is built with the vision of enhancing civic engagement and supporting community growth through accessible technology and collaborative features. We are dedicated to making every neighborhood a thriving, connected place where everyone has a voice.
+                </p>
             </div>
         </div>
 
