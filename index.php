@@ -26,7 +26,7 @@ session_start();
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#home">
-                <img src="img/ourLogo.png" alt="Logo"> BAYANLINK</a>
+                <img src="img/logo.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top"> BAYANLINK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -79,19 +79,21 @@ session_start();
                     <form action="signin.code.php" method="POST">
                         <h4 class="h4 fw-bold mb-3">Account Information</h4>
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Email address" required>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email address" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>" required>
                             <label for="email" class="form-label">Email address</label>
                         </div>
 
-                        <div class="form-floating mb-3">
-                            <input type="password" name="signinPassword" class="form-control" id="signinPassword" placeholder="Password" required pattern=".{8,}">
-                            <label for="signinPassword" class="form-label">Password</label>
+                        <div style="position: relative;">
+                            <div class="form-floating mb-3">
+                                <input type="password" name="signinPassword" class="form-control" id="signinPassword" placeholder="Password" value="<?php echo isset($_COOKIE['password']) ? $_COOKIE['password'] : ''; ?>" required pattern=".{8,}"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="showPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
+                                <label for="signinPassword" class="form-label">Password</label>
+                            </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col d-flex align-items-center">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <input type="checkbox" name="rememberMe" class="form-check-input" id="rememberMe">
                                     <label class="form-check-label" for="rememberMe">Remember me</label>
                                 </div>
                             </div>
@@ -585,6 +587,21 @@ session_start();
             $('#prevBtn3').click(function() {
                 $('#group4').addClass('d-none');
                 $('#group3').removeClass('d-none');
+            });
+
+
+            // show password
+            const passwordInput = document.getElementById("signinPassword");
+            const showPasswordIcon = document.getElementById("showPasswordIcon");
+
+            showPasswordIcon.addEventListener("click", function() {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    showPasswordIcon.innerHTML = '<i class="bi bi-eye-fill"></i>';
+                } else {
+                    passwordInput.type = "password";
+                    showPasswordIcon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+                }
             });
         });
     </script>

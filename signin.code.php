@@ -8,6 +8,7 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['signinPassword'];
     $password_pattern = "/.{8,}/";
     $password_result = preg_match($password_pattern, $password);
+    $rememberMe = isset($_POST['rememberMe']);
 
     if ($password_result == 1) {
         // Valid
@@ -23,6 +24,16 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Password verification
                 if (password_verify($password, $dbPassword)) {
+                    // set koki
+                    if ($rememberMe) {
+                        setcookie('email', $email, time() + 86400, "/"); //1 day expiration
+                        setcookie('password', $password, time() + 86400, "/");
+                    } else {
+                        // clear koki if 
+                        setcookie('email', '', time() - 3600, "/");
+                        setcookie('password', '', time() - 3600, "/");
+                    }
+
                     // Correct password input
                     $_SESSION['status_code'] = 200;
                     $_SESSION['user_id'] = $row['user_id'];
