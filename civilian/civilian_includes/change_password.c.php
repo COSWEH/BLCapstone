@@ -13,6 +13,8 @@ if (isset($_POST['btnChangePass']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $row = mysqli_fetch_assoc($result);
     $storedHash = $row['password'];
 
+    $username = $_SESSION['username'];
+
     // Verify the current password
     if (password_verify($currentPassword, $storedHash)) {
         if ($newPassword === $confirmNewPassword) {
@@ -21,6 +23,9 @@ if (isset($_POST['btnChangePass']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Update the password in the database
             mysqli_query($con, "UPDATE tbl_useracc SET password = '$newHash' WHERE user_id = '$userId'");
+
+            // add logs
+            mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username changed his/her password', CURRENT_TIMESTAMP,'$userId')");
 
             $_SESSION['password_message'] = "Password updated successfully!";
             $_SESSION['password_message_code'] = "Success";

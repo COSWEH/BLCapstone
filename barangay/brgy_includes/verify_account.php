@@ -16,6 +16,9 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
     $password = $_SESSION['admin_password'];
     $role_id = $_SESSION['role_id'];
 
+    $user_id = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+
     echo $userOtp = $_SESSION['verification_code'];
 } else {
     header('location: ../adminPost.b.php');
@@ -66,6 +69,9 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_address, user_contactNum, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$address', '$contactNum', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
+
+                // add logs
+                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username added another admin account', CURRENT_TIMESTAMP,'$user_id')");
 
                 if ($insert) {
                     $_SESSION['addAdmin_success_message'] = "Register successfully!";

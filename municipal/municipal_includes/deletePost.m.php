@@ -19,6 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['baBtnDeletePost'])) {
 
     $query = mysqli_query($con, "DELETE FROM `tbl_posts` WHERE `post_id` = '$post_id'");
 
+    // add logs
+    $userid = $_SESSION['user_id'];
+    $user_name = $_SESSION['username'];
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name deleted a posts', CURRENT_TIMESTAMP,'$userid')");
+
     if ($query) {
         $_SESSION['delete_message'] = "Post successfully deleted";
         header('Location: ../superAdminPost.m.php');

@@ -36,6 +36,10 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES ('', '$process_req_id', 'Processed', 'unread', CURRENT_TIMESTAMP)");
 
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'];
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username proccessed a document', CURRENT_TIMESTAMP,'$user_id')");
+
         $message = "<h3>Admin of $admin_brgy</h3>
                 <p>Processed your Document.</p>
                 <p>$formattedDate</p>
@@ -88,6 +92,11 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = mysqli_query($con, "UPDATE `tbl_requests` SET `req_status` = '$approve_status' WHERE `req_id` = '$approve_req_id'");
 
         $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES ('', '$approve_req_id', 'Approved', 'unread', CURRENT_TIMESTAMP)");
+
+        // add logs
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'];
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username approved a document', CURRENT_TIMESTAMP,'$user_id')");
 
         $message = "<h3>Admin of $admin_brgy</h3>
                 <p>Approved your Document.</p>
@@ -142,6 +151,10 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = mysqli_query($con, "UPDATE `tbl_requests` SET `req_status` = '$cancel_status', `req_reasons` = '$cancellationReason' WHERE `req_id` = '$cancel_req_id'");
 
         $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES ('', '$cancel_req_id', 'Cancelled', 'unread', CURRENT_TIMESTAMP)");
+
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'];
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username cancelled a document', CURRENT_TIMESTAMP,'$user_id')");
 
         $cancellationReason = trim($cancellationReason);
         $cancellationReason = rtrim($cancellationReason, ', ');

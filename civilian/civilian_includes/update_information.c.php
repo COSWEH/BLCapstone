@@ -16,6 +16,8 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    $username = $_SESSION['username'];
+
     if (
         empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) ||
         empty($address) || empty($contactNum) || empty($email) || empty($username) || empty($password)
@@ -53,6 +55,9 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_contactNum'] = $contactNum;
         $_SESSION['user_email'] = $email;
         $_SESSION['username'] = $username;
+
+        // add logs
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username updated his/her information', CURRENT_TIMESTAMP,'$userid')");
 
         $_SESSION['update_message'] = "Updated successfully!";
         $_SESSION['update_message_code'] = "Success";

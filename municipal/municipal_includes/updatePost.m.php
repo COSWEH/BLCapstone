@@ -76,6 +76,10 @@ if (isset($_POST['mBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     `post_date` = CURRENT_TIMESTAMP 
     WHERE `post_id` = '$post_id'");
 
+    // add logs
+    $user_name = $_SESSION['username'];
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name updated a post', CURRENT_TIMESTAMP,'$userid')");
+
     //Check for success
     if ($query) {
         $_SESSION['post_message'] = "Post successfully updated";

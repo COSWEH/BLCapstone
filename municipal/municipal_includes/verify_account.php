@@ -67,6 +67,11 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_address, user_contactNum, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$address', '$contactNum', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
 
+                // add logs
+                $userid = $_SESSION['user_id'];
+                $user_name = $_SESSION['username'];
+                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name added another super admin', CURRENT_TIMESTAMP,'$userid')");
+
                 if ($insert) {
                     $_SESSION['addAdmin_success_message'] = "Register successfully!";
                     header('Location: ../superAdminPost.m.php');

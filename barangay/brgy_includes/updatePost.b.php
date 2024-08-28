@@ -9,6 +9,8 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $post_brgy = $_SESSION['getAdminBrgy'];
     $content = $_POST['baTextContent'];
 
+    $username = $_SESSION['username'];
+
     $dbImgArray = [];
     $selectedImgArray = [];
 
@@ -76,6 +78,9 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     `post_img` = '$combinedImgArrayJson', 
     `post_date` = CURRENT_TIMESTAMP 
     WHERE `post_id` = '$post_id'");
+
+    // add logs
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username updated a post', CURRENT_TIMESTAMP,'$userid')");
 
     // Check for success
     if ($query) {

@@ -16,6 +16,11 @@ if (isset($_POST['btnFaqs']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = mysqli_query($con, "INSERT INTO `tbl_faqs`(`faq_id`, `faq_question`, `faq_answer`, `faq_created_at`) VALUES ('', '$question', '$answer', CURRENT_TIMESTAMP)");
 
+    // add logs
+    $userid = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username added a FAQs', CURRENT_TIMESTAMP,'$userid')");
+
     if ($query) {
         $_SESSION['faq_message'] = "FAQs successfully addedd";
         header('Location: ../superAdminPost.m.php');
