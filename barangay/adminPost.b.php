@@ -271,14 +271,14 @@ if ($user_role != 1) {
                 $("#brgyPost").html(data);
             });
 
-            function updateMessages() {
+            function updateBrgyPost() {
                 $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
                     $("#brgyPost").html(data);
 
                 });
             }
             // Initial call to load messages
-            updateMessages();
+            updateBrgyPost();
         });
     </script>
 
