@@ -142,7 +142,6 @@ session_start();
         </div>
     </div>
 
-
     <!-- Sign up Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog">

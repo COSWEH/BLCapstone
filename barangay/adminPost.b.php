@@ -88,6 +88,7 @@ if ($user_role != 1) {
                         <li class="nav-item">
                             <a class="nav-link fw-bold" aria-current="page" href="adminProfiling.b.php">Profiling</a>
                         </li>
+                        <?php include('addAdmin.b.php') ?>
                         <hr>
                     </ul>
                 </div>
@@ -321,6 +322,32 @@ if (isset($_SESSION['delete_message'])) {
             });
         </script>';
     unset($_SESSION['delete_message']);
+}
+
+if (isset($_SESSION['addAdmin_error_message'])) {
+?>
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: "<?php echo $_SESSION['addAdmin_error_message']; ?>",
+            icon: "error",
+        });
+    </script>
+<?php
+    unset($_SESSION['addAdmin_error_message']);
+}
+
+if (isset($_SESSION['addAdmin_success_message'])) {
+?>
+    <script>
+        Swal.fire({
+            title: "Done",
+            text: "<?php echo $_SESSION['addAdmin_success_message']; ?>",
+            icon: "success",
+        });
+    </script>
+<?php
+    unset($_SESSION['addAdmin_success_message']);
 }
 ?>
 

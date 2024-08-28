@@ -86,6 +86,7 @@ if ($user_role != 1) {
                         <li class="nav-item">
                             <a class="nav-link fw-bold" aria-current="page" href="adminProfiling.b.php">Profiling</a>
                         </li>
+                        <?php include('addAdmin.b.php') ?>
                         <hr>
                     </ul>
                 </div>

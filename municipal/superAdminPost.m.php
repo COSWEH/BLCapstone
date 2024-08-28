@@ -88,6 +88,7 @@ if ($user_role != 2) {
                         <li class="nav-item">
                             <a class="nav-link fw-bold active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
+                        <?php include('addSuperAdmin.m.php') ?>
                     </ul>
                     <button class="btn btn-outline-primary w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
 
