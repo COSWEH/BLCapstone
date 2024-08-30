@@ -19,10 +19,10 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $mname = ucwords(strtolower($_POST['mname']));
     $lname = ucwords(strtolower($_POST['lname']));
     $gender = $_POST['sex'];
-    $purok = ucwords(strtolower($_POST['user_purok']));
+    $purok = $_POST['user_purok'];
     $contactNum = $_POST['contactNum'];
     $dateOfBirth = $_POST['dateOfBirth'];
-    $placeOfBirth = $_POST['placeOfBirth'];
+    $placeOfBirth = ucwords(strtolower($_POST['placeOfBirth']));
     $civilStatus = $_POST['civilStatus'];
     $email = $_POST['email'];
     $username = $_POST['username'];

@@ -18,8 +18,11 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $mname = ucwords(strtolower($_POST['mname']));
     $lname = ucwords(strtolower($_POST['lname']));
     $gender = $_POST['gender'];
-    $address = ucwords(strtolower($_POST['address']));
+    $purok = $_POST['user_purok'];
     $contactNum = $_POST['contactNum'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $placeOfBirth = ucwords(strtolower($_POST['placeOfBirth']));
+    $civilStatus = $_POST['civilStatus'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['signupPassword'];
@@ -30,8 +33,11 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['admin_mname'] = $mname;
     $_SESSION['admin_lname'] = $lname;
     $_SESSION['admin_gender'] = $gender;
-    $_SESSION['admin_address'] = $address;
+    $_SESSION['admin_purok'] = $purok;
     $_SESSION['admin_contactNum'] = $contactNum;
+    $_SESSION['dateOfBirth'] = $dateOfBirth;
+    $_SESSION['placeOfBirth'] = $placeOfBirth;
+    $_SESSION['civilStatus'] = $civilStatus;
     $_SESSION['admin_email'] = $email;
     $_SESSION['admin_username'] = $username;
     $_SESSION['admin_password'] = $password;
@@ -41,12 +47,6 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     {
         $pattern = "/^[a-zA-Z\s\-]+$/";
         return preg_match($pattern, $name) === 1;
-    }
-
-    function validateAddress($address)
-    {
-        $pattern = "/^[a-zA-Z0-9\s\-.,]+$/";
-        return preg_match($pattern, $address) === 1;
     }
 
     function validatePhoneNumber($phoneNumber)
@@ -68,13 +68,17 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     function validatePassword($password)
     {
-        return strlen($password) >= 8; // need at least 8 characters long
+        // Check if the password meets the length requirement and the complexity pattern
+        $lengthValid = strlen($password) >= 8;
+        $patternValid = preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password);
+
+        return $lengthValid && $patternValid;
     }
+
 
     $fname_result = validateName($fname);
     $mname_result = validateName($mname);
     $lname_result = validateName($lname);
-    $address_result = validateAddress($address);
     $contactNum_result = validatePhoneNumber($contactNum);
     $email_result = validateEmail($email);
     $username_result = validateUsername($username);
@@ -90,9 +94,6 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if (!$lname_result) {
         $errors[] = "Last Name is invalid.";
-    }
-    if (!$address_result) {
-        $errors[] = "Address is invalid.";
     }
     if (!$contactNum_result) {
         $errors[] = "Phone Number is invalid.";

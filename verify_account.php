@@ -48,9 +48,19 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap icon CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-dark">
     <div class="d-flex justify-content-center align-items-center mt-5">
         <?php
         if (isset($_POST['btnVerify'])) {
@@ -87,7 +97,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
 
     <div class="d-flex justify-content-center align-items-center mt-5 p-3">
         <div class="card shadow-lg" style="width: 24rem;">
-            <div class="card-body shadow-lg" style="font-family: Montserrat, Arial;">
+            <div class="card-body shadow-lg">
                 <h4 class=" card-title text-center fw-bold text-dark-emphasis">OTP verification</h4>
                 <h6 class="card-subtitle mb-2 text-body-secondary text-center"><small>Your OTP code sent to your email address * <?php echo $email; ?>.</small></h6>
 

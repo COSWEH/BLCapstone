@@ -35,7 +35,7 @@ if ($user_role != 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profiling</title>
     <link rel="stylesheet" href="brgyMaterials/style.b.css">
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -105,18 +105,63 @@ if ($user_role != 1) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3 shadow border border-3 rounded-3">
                     <input type="text" class="form-control" id="searchByName" name="search" placeholder="Search" required>
                     <label for="search" class="form-label">
                         <small>
                             <i class="bi bi-search"></i>
-                            Search residents...
+                            Search resident name...
                         </small>
                     </label>
                 </div>
                 <hr>
 
-                <h6 class="ms-1 mb-3">List of residents to you barangay</h6>
+                <div class="card shadow border border-3 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Filter Options</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sex Filter -->
+                            <div class="col">
+                                <label for="sexFilter" class="form-label">Sex</label>
+                                <select class="form-select" id="sexFilter" name="sex">
+                                    <option value="">All</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <!-- Purok Filter -->
+                            <div class="col">
+                                <label for="purokFilter" class="form-label">Purok</label>
+                                <select class="form-select" id="purokFilter" name="purok">
+                                    <option value="">All</option>
+                                    <!-- Add options dynamically from your database -->
+                                    <option value="Purok1">Purok 1</option>
+                                    <option value="Purok2">Purok 2</option>
+                                    <option value="Purok3">Purok 3</option>
+                                </select>
+                            </div>
+
+                            <!-- Age Filter -->
+                            <div class="col">
+                                <label for="ageFilter" class="form-label">Age</label>
+                                <select class="form-select" id="ageFilter" name="age">
+                                    <option value="">All</option>
+                                    <option value="18-25">18-25</option>
+                                    <option value="26-35">26-35</option>
+                                    <option value="36-45">36-45</option>
+                                    <option value="46-60">46-60</option>
+                                    <option value="60+">60+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <h6 class="ms-1 mb-3">List of residents in your barangay</h6>
                 <div id="showAllResidents" class="fw-bold fs-5">
 
                 </div>

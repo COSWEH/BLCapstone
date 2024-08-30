@@ -105,7 +105,7 @@ if ($user_role != 1) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3 shadow border border-3 rounded-3">
                     <input type="text" class="form-control" id="searchByName" name="search" placeholder="Search" required>
                     <label for="search" class="form-label">
                         <small>
