@@ -4,12 +4,13 @@ session_start();
 
 if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $fromSanIsidro = $_SESSION['fromSanIsidro'];
+    $user_city = $_SESSION['user_city'];
     $barangay = $_SESSION['barangay'];
     $fname = $_SESSION['fname'];
     $mname = $_SESSION['mname'];
     $lname = $_SESSION['lname'];
     $gender = $_SESSION['gender'];
-    $address = $_SESSION['address'];
+    $user_purok = $_SESSION['user_purok'];
     $contactNum = $_SESSION['contactNum'];
     $email = $_SESSION['email'];
     $username = $_SESSION['username'];
@@ -65,7 +66,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                 }
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_address, user_contactNum, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$address', '$contactNum', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
+                $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_contactNum, user_city, user_purok, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$contactNum', '$user_city', '$user_purok', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
 
                 if ($insert) {
                     $_SESSION['signup_success_message'] = "Register successfully!";

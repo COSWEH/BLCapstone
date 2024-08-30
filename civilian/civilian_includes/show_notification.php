@@ -40,13 +40,13 @@
     // Check if the query was successful and fetch the result
     if ($reqIDResult && mysqli_num_rows($reqIDResult) > 0) {
         $getReqIDdata = mysqli_fetch_assoc($reqIDResult);
-        $req_id = $getReqIDdata['req_id'];
+        // $req_id = $getReqIDdata['user_id'];
         $admin_brgy = $getReqIDdata['req_brgy'];
 
         // Only proceed if req_id is not null
-        if ($req_id) {
+        if ($getUserid) {
             // Query to get notifications for the given req_id
-            $ntfQuery = "SELECT * FROM `tbl_notification` WHERE `req_id` = '$req_id' ORDER BY `notify_date` DESC";
+            $ntfQuery = "SELECT * FROM `tbl_notification` WHERE `user_id` = '$getUserid' ORDER BY `notify_date` DESC";
             $result = mysqli_query($con, $ntfQuery);
 
             // Check if the query was successful

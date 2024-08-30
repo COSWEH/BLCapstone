@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 12:05 PM
+-- Generation Time: Aug 30, 2024 at 03:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,16 +61,30 @@ CREATE TABLE `tbl_logs` (
 --
 
 INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
-(1, 'User asd changed his/her password', '2024-08-28 11:56:34', 3),
-(2, 'User asd updated his/her information', '2024-08-28 11:57:18', 3),
-(3, 'User asd requested a Barangay Clearance', '2024-08-28 11:57:57', 3),
-(4, 'User qwerty123 created a post', '2024-08-28 11:58:36', 1),
-(5, 'User qwerty123 updated a post', '2024-08-28 11:58:53', 1),
-(6, 'User qwerty123 deleted a post', '2024-08-28 11:59:01', 1),
-(7, 'User qwerty123 proccessed a document', '2024-08-28 11:59:14', 1),
-(8, 'User qwerty123 approved a document', '2024-08-28 11:59:41', 1),
-(9, 'User qwerty123 added another admin account', '2024-08-28 12:01:21', 1),
-(10, 'User qwerty123 cancelled a document', '2024-08-28 12:02:07', 1);
+(1, 'User asd requested a Barangay Clearance', '2024-08-29 21:16:58', 1),
+(2, 'User asd requested a Cedula', '2024-08-29 21:42:59', 1),
+(3, 'User asd requested a Job Seeker', '2024-08-29 21:47:07', 1),
+(4, 'User qwerty123 proccessed a document', '2024-08-29 21:49:13', 2),
+(5, 'User qwerty123 proccessed a document', '2024-08-29 21:49:18', 2),
+(6, 'User qwerty123 proccessed a document', '2024-08-29 21:49:21', 2),
+(7, 'User qwerty123 proccessed a document', '2024-08-29 21:49:26', 2),
+(8, 'User qwerty123 proccessed a document', '2024-08-29 21:49:32', 2),
+(9, 'User qwerty123 proccessed a document', '2024-08-29 21:49:37', 2),
+(10, 'User qwerty123 proccessed a document', '2024-08-29 21:49:40', 2),
+(11, 'User qwerty123 approved a document', '2024-08-29 21:52:05', 2),
+(12, 'User qwerty123 proccessed a document', '2024-08-29 21:56:43', 2),
+(13, 'User qwerty123 cancelled a document', '2024-08-30 13:18:50', 2),
+(14, 'User asd requested a Barangay Clearance', '2024-08-30 13:21:23', 1),
+(15, 'User qwerty123 proccessed a document', '2024-08-30 13:21:48', 2),
+(16, 'User asd requested a Cedula', '2024-08-30 13:23:30', 1),
+(17, 'User qwerty123 proccessed a document', '2024-08-30 13:23:43', 2),
+(18, 'User qwerty123 approved a document', '2024-08-30 13:47:37', 2),
+(19, 'User qwerty123 approved a document', '2024-08-30 13:47:48', 2),
+(20, 'User qwerty123 proccessed a document', '2024-08-30 13:58:51', 2),
+(21, 'User qwerty123 approved a document', '2024-08-30 14:42:35', 2),
+(22, 'User asd requested a Job Seeker', '2024-08-30 14:45:51', 1),
+(23, 'User asd requested a Job Seeker', '2024-08-30 14:54:53', 1),
+(24, 'User qwerty123 cancelled a document', '2024-08-30 14:57:40', 2);
 
 -- --------------------------------------------------------
 
@@ -80,7 +94,7 @@ INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
 
 CREATE TABLE `tbl_notification` (
   `notify_id` int(22) NOT NULL,
-  `req_id` int(22) NOT NULL,
+  `user_id` int(22) NOT NULL,
   `description` text DEFAULT NULL,
   `status` varchar(55) DEFAULT NULL,
   `notify_date` datetime NOT NULL
@@ -90,11 +104,14 @@ CREATE TABLE `tbl_notification` (
 -- Dumping data for table `tbl_notification`
 --
 
-INSERT INTO `tbl_notification` (`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES
-(1, 4, 'Processed', 'read', '2024-08-26 13:43:24'),
-(2, 5, 'Processed', 'unread', '2024-08-28 11:59:14'),
-(3, 5, 'Approved', 'unread', '2024-08-28 11:59:41'),
-(4, 4, 'Cancelled', 'unread', '2024-08-28 12:02:07');
+INSERT INTO `tbl_notification` (`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES
+(1, 1, 'Processed', 'read', '2024-08-30 13:21:48'),
+(2, 1, 'Processed', 'read', '2024-08-30 13:23:43'),
+(3, 1, 'Approved', 'read', '2024-08-30 13:47:37'),
+(4, 1, 'Approved', 'read', '2024-08-30 13:47:48'),
+(5, 1, 'Processed', 'read', '2024-08-30 13:58:51'),
+(6, 1, 'Approved', 'unread', '2024-08-30 14:42:35'),
+(7, 1, 'Cancelled', 'unread', '2024-08-30 14:57:40');
 
 -- --------------------------------------------------------
 
@@ -110,14 +127,6 @@ CREATE TABLE `tbl_posts` (
   `post_img` text NOT NULL,
   `post_date` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_posts`
---
-
-INSERT INTO `tbl_posts` (`post_id`, `user_id`, `post_brgy`, `post_content`, `post_img`, `post_date`) VALUES
-(10, 1, 'Malapit', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Turpis ac nibh arcu magna purus magna cras turpis. Himenaeos felis enim pulvinar inceptos placerat, sem leo nam. Scelerisque rutrum ornare facilisis nunc eu nullam potenti lobortis. Maximus metus est sed vulputate nullam. Iaculis dictum dis ultrices sollicitudin dis! Id vehicula finibus tempus natoque in metus.', '[\"12-[BayanLink-66c5a1b0d2994].png\"]', '2024-08-21 16:13:36'),
-(11, 6, 'Municipal', 'Lorem ipsum odor amet, consectetuer adipiscing elit. Turpis ac nibh arcu magna purus magna cras turpis. Himenaeos felis enim pulvinar inceptos placerat, sem leo nam. Scelerisque rutrum ornare facilisis nunc eu nullam potenti lobortis. Maximus metus est sed vulputate nullam. Iaculis dictum dis ultrices sollicitudin dis! Id vehicula finibus tempus natoque in metus. Lorem ipsum odor amet, consectetuer adipiscing elit. Turpis ac nibh arcu magna purus magna cras turpis. Himenaeos felis enim pulvinar inceptos placerat, sem leo nam. Scelerisque rutrum ornare facilisis nunc eu nullam potenti lobortis. Maximus metus est sed vulputate nullam. Iaculis dictum dis ultrices sollicitudin dis! Id vehicula finibus tempus natoque in metus.', '[\"12-[BayanLink-66c5a62ba87de].png\"]', '2024-08-21 16:32:43');
 
 -- --------------------------------------------------------
 
@@ -143,7 +152,6 @@ CREATE TABLE `tbl_requests` (
   `req_eSignature` text NOT NULL,
   `req_typeOfDoc` varchar(75) NOT NULL,
   `req_valid_id` text NOT NULL,
-  `req_password` varchar(255) NOT NULL,
   `req_status` varchar(25) NOT NULL,
   `req_reasons` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -152,11 +160,11 @@ CREATE TABLE `tbl_requests` (
 -- Dumping data for table `tbl_requests`
 --
 
-INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_password`, `req_status`, `req_reasons`) VALUES
-(1, 3, '2024-08-25 14:34:08', 'V', 'V', 'V', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66caa9e9bd247].png', 'Barangay Indigency', 'id-[BayanLink-66caa9e9bd24b].png', '$2y$10$SmDqtN9iG5eEdNq7.ABA6e./HcglM1u5vCO8krFP5cFsVuR53FCP.', 'Cancelled', ''),
-(2, 14, '2024-08-25 14:34:11', 'Tiktalk', 'Tiktalk', 'Tiktalk', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66cabb6aa150a].png', 'Cedula', 'id-[BayanLink-66cabb6aa150e].png', '$2y$10$pWNU7wTQ1LI4vpQw82a1AeXK4ATGupQXoZ7iBf2cV3N4MQfRVQfU6', 'Cancelled', ''),
-(4, 9, '2024-08-28 12:02:07', 'Not', 'Not', 'Not', '09765681352', 'Male', 'Malapit', '2', 22, '2022-02-22', 'N/a', 'Single', 'ss-[BayanLink-66cc15d5c16ad].png', 'Barangay Clearance', 'id-[BayanLink-66cc15d5c16b0].png', '$2y$10$UZ30WhYQjKjPSPElxfl4FONJA2HKWhkJwFFrGWTnkyxByq5/dQwSG', 'Cancelled', 'Incomplete request details, Duplicate submission, Insufficient supporting documents, '),
-(5, 3, '2024-08-28 11:59:41', 'Vue', 'Vue', 'Vue', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'Malapit, San Isidro', 'Single', 'ss-[BayanLink-66cea045cb675].png', 'Barangay Clearance', 'id-[BayanLink-66cea045cb678].png', '$2y$10$TPY9S5nl3BFo3AlhgmatyO2Bk4KkPBNJBetEIn3r6npO3rcNOZfnq', 'Approved', NULL);
+INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_status`, `req_reasons`) VALUES
+(1, 1, '2024-08-30 14:42:35', 'Asd', 'Asd', 'Asd', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isidro', 'Single', 'ss-[BayanLink-66d156d3b0d8f].png', 'Barangay Clearance', 'id-[BayanLink-66d156d3b0d94].png', 'Approved', NULL),
+(2, 1, '2024-08-30 13:58:51', 'Asd', 'Asd', 'Asd', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isdro', 'Single', 'ss-[BayanLink-66d157520d4ae].png', 'Cedula', 'id-[BayanLink-66d157520d4b4].png', 'Processing', NULL),
+(3, 1, '2024-08-30 14:45:51', 'Asd', 'Asd', 'Asd', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isidro', 'Single', 'ss-[BayanLink-66d16a9f2c42e].png', 'Job Seeker', 'id-[BayanLink-66d16a9f2c431].png', 'Pending', NULL),
+(4, 1, '2024-08-30 14:57:40', 'Asd', 'Asd', 'Asd', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isidro', 'Single', 'ss-[BayanLink-66d16cbddfa49].png', 'Job Seeker', 'id-[BayanLink-66d16cbddfa4c].png', 'Cancelled', 'Duplicate submission, ');
 
 -- --------------------------------------------------------
 
@@ -172,8 +180,9 @@ CREATE TABLE `tbl_useracc` (
   `user_mname` varchar(55) NOT NULL,
   `user_lname` varchar(55) NOT NULL,
   `user_gender` varchar(55) NOT NULL,
-  `user_address` text NOT NULL,
   `user_contactNum` varchar(55) NOT NULL,
+  `user_city` varchar(55) NOT NULL,
+  `user_purok` varchar(55) NOT NULL,
   `user_email` varchar(55) NOT NULL,
   `username` varchar(55) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -187,22 +196,9 @@ CREATE TABLE `tbl_useracc` (
 -- Dumping data for table `tbl_useracc`
 --
 
-INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_address`, `user_contactNum`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
-(1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', ' Purok 1 Brgy. Tagpos, Sta. Rosa Nueva Ecija', '09876543212', 'qwerty123@gmail.com', 'qwerty123', '$2y$10$lA2M6NwaMUWrQOxpellmYOVzp.VaNXBVVpWOu8ibIT9ZtChFglh62', 1, '2024-08-19 22:31:40', NULL, NULL),
-(3, 'Yes', 'Malapit', 'Vue', 'Vue', 'Vue', 'Male', 'Malapit, San Isidro Nueva Ecija', '09876543212', 'asd@gmail.com', 'asd', '$2y$10$cBtk0GdAqksqO0v3Qnucmu7Zg/ptzsCymedVO/Pg/rKYgkQOcMKUK', 0, '2024-08-20 20:26:53', NULL, NULL),
-(4, 'Yes', 'Poblacion', 'P', 'P', 'P', 'Male', 'P', '09876543212', 'qweqwe@gmail.com', 'qweqwe', '$2y$10$BR5XaNBUQUHSw7IDKUYE7u3jWixypEf7tuHWfJGF9FdtgZgu4/w0G', 1, '2024-08-19 22:31:40', NULL, NULL),
-(5, 'Yes', 'Poblacion', 'W', 'W', 'W', 'Female', 'W', '09876543212', 'asdasd@gmail.com', 'asdasd', '$2y$10$6TEcv24imR6lpfWItJOok.n4MQebzxhE2FAi9OqPbZBzmzU63b2p6', 0, '2024-08-19 22:31:40', NULL, NULL),
-(6, 'Yes', 'Municipal', 'admin', 'admin', 'admin', 'Male', 'admin', '', 'admin@gmail.com', 'admin', '$2y$10$lA2M6NwaMUWrQOxpellmYOVzp.VaNXBVVpWOu8ibIT9ZtChFglh62', 2, '2024-08-19 22:31:40', NULL, NULL),
-(7, 'Yes', 'Alua', 'P', '', 'P', 'Male', 'P City P Street', '639876543212', 'p@gmail.com', 'ppp', '$2y$10$R6gFN/rbrsfEiuBcTkm0t.xMME7DRbWLMYPQ.sdIvVACoR9SZ/nk6', 0, '2024-08-19 22:31:40', NULL, NULL),
-(8, 'Yes', 'Malapit', 'Asd', 'Asd', 'Asd', 'Male', 'Asd 123', '09876543214', 'asd123@gmail.com', 'asd123', '$2y$10$ULYVmECtoOkbgDaM2WwHs.aJDcq4fjIlbFBLr4eY2oGBqaNyfQQ2u', 0, '2024-08-19 22:31:40', NULL, NULL),
-(9, 'No', 'N/a', 'Not', 'Not', 'Not', 'Male', 'Not Not Not St.', '09765681352', 'not@gmail.com', 'not', '$2y$10$r1NvgyJEYxiZWkwpWiyR8OO7frgWV7J9E6bYvZ2Sgk2jdk8WWQXeK', 0, '2024-08-19 22:31:40', NULL, NULL),
-(10, 'Yes', 'Poblacion', 'Dsa', 'Das', 'Dsa', 'Male', 'Das Dsa Das', '09987123456', 'dsa@gmail.com', 'dsa', '$2y$10$ZuMsDdllIoiXcZvuysfVV.R3BYISBAu7ZztCWLmbQ./Y.Fg1ycGrm', 0, '2024-08-19 22:31:40', NULL, NULL),
-(11, 'Yes', 'Malapit', 'Dsada', 'Dsadsa', 'Dsadsa', 'Female', 'Dsadadsadas Dsadsa', '09866535432', 'dsadas@gmail.com', 'dsadas', '$2y$10$KOl1emBzzZHxNsrIqzeW4Of3WbBiHuy2ttsvFwjovea7xzSiSKD3e', 0, '2024-08-19 22:31:40', NULL, NULL),
-(12, 'Yes', 'Malapit', 'Asdsaddsa', 'Asdaad', 'Asdasdsdds', 'Male', 'Asdadasdda', '09876543212', 'kjlklj@gmail.com', 'hjkhjk', '$2y$10$y7QyXlG9sdyhIBGZGLHiluE0InDBc4oJ25rM9OgKsJPkIqlBkLhY6', 0, '2024-08-19 22:31:40', NULL, NULL),
-(14, 'Yes', 'Malapit', 'Tiktalk', 'Tiktalk', 'Tiktalk', 'Male', 'Tiktalk Tiktalk Tiktalk 123', '09876543212', 'tiktalkcompany6969@gmail.com', 'Tiktalk', '$2y$10$H4B96lLKVOVmb/KN0cigtO3bRHCEX32YSuUIU4.30bGoovk.IuaSS', 0, '2024-08-20 22:23:31', NULL, NULL),
-(18, 'Yes', 'Malapit', 'Ewq', 'Ewq', 'Ewq', 'Female', 'Ewq Qwe Ewq', '09876543212', 'brgyadmin@gmail.com', 'admin144', '$2y$10$GOkF21OAdCOsPN/dILoLm.UN09GxPrMSWrzLorhFJBjbNH6WdrInK', 1, '2024-08-28 10:52:05', NULL, NULL),
-(19, 'Yes', 'Municipal', 'Super', 'Super', 'Super', 'Male', 'San Isidro, Nueva Ecija', '09876543212', 'superadmin@gmail.com', 'superAdmin', '$2y$10$ZrIPAnlinkPigWY8Zrk4suO5nGqFTT0XmGYEHSOsqlYEWUGo9AlNO', 2, '2024-08-28 11:04:23', NULL, NULL),
-(20, 'Yes', 'Malapit', 'New', 'New', 'New', 'Male', 'San Isidro Nueva Ecija', '09876543212', 'newadmin@gmail.com', 'qwerty123', '$2y$10$inv6D54J5XjZW3N8r6LZq.4WJpeUxRP9OPQ.lQEVc9FN7AaMzRB5e', 1, '2024-08-28 12:01:21', NULL, NULL);
+INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_contactNum`, `user_city`, `user_purok`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
+(1, 'Yes', 'Malapit', 'Asd', 'Asd', 'Asd', 'Male', '09876543212', 'San Isidro', '2', 'asd@gmail.com', 'asd', '$2y$10$ILlCaCyA4y97P8FNR4dNbeos9222TB9d3if.iNYvy3N2GbJbapX86', 0, '2024-08-29 21:15:05', NULL, NULL),
+(2, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', 'San Isidro', '2', 'qwerty123@gmail.com', 'qwerty123', '$2y$10$VLeSQfBqUjOTAwTPZuW//OFrFwSUIMD5.DkeXV6osInvgSXlj9/TS', 1, '2024-08-29 21:15:46', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -253,37 +249,37 @@ ALTER TABLE `tbl_useracc`
 -- AUTO_INCREMENT for table `tbl_faqs`
 --
 ALTER TABLE `tbl_faqs`
-  MODIFY `faq_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `faq_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `notify_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `notify_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_posts`
 --
 ALTER TABLE `tbl_posts`
-  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_requests`
 --
 ALTER TABLE `tbl_requests`
-  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_useracc`
 --
 ALTER TABLE `tbl_useracc`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

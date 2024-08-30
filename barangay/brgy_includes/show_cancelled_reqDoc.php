@@ -9,7 +9,7 @@ if (empty($_SESSION['user_id'])) {
 
 $civilian_brgy = $_SESSION['user_brgy'];
 
-$query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_eSignature, req_typeOfDoc, req_valid_id, req_password, req_status
+$query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_eSignature, req_typeOfDoc, req_valid_id, req_status
           FROM tbl_requests
           WHERE req_brgy = '$civilian_brgy' && req_status = 'Cancelled'
           ORDER BY req_date DESC";
@@ -88,7 +88,7 @@ if ($rowCount == 0) {
                             <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
                             <td>
                                 <?php if (!empty($req_eSignature)) { ?>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#esModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
                                         <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
                                     </a>
                                 <?php } else { ?>
@@ -97,7 +97,7 @@ if ($rowCount == 0) {
                             </td>
                             <td>
                                 <?php if (!empty($req_valid_id)) { ?>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>">
                                         <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
                                     </a>
                                 <?php } else { ?>
@@ -114,9 +114,9 @@ if ($rowCount == 0) {
                                             Options
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item aCancel" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#cancelModal"><small>Cancel</small></a></li>
-                                            <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal"><small>Process</small></a></li>
-                                            <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal"><small>Approve</small></a></li>
+                                            <li><a class="dropdown-item aCancel" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#cancelModal<?php echo $status; ?>"><small>Cancel</small></a></li>
+                                            <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal<?php echo $status; ?>"><small>Process</small></a></li>
+                                            <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal<?php echo $status; ?>"><small>Approve</small></a></li>
 
                                         </ul>
                                     </div>
@@ -140,28 +140,43 @@ if ($rowCount == 0) {
     </div>
 
 
-    <!-- Image Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <!-- es Modal -->
+    <div class="modal fade" id="esModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="esModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">View Image</h5>
+                    <h5 class="modal-title" id="esModal<?php echo $status; ?>Label">View Image</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img id="modalImage" class="img-fluid" style="max-width: 100%; height: auto;">
+                    <img id="esModalImage<?php echo $status; ?>" class="img-fluid" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- vid Modal -->
+    <div class="modal fade" id="vidModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="vidModal<?php echo $status; ?>Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vidModal<?php echo $status; ?>Label">View Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="vidModalImage<?php echo $status; ?>" class="img-fluid" style="max-width: 100%; height: auto;">
                 </div>
             </div>
         </div>
     </div>
 
     <!-- cancel modal -->
-    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="cancelModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="cancelModalLabel">
+                        <h4 class="modal-title fw-bold" id="cancelModal<?php echo $status; ?>Label">
                             Cancellation Reason
                         </h4>
                     </div>
@@ -232,12 +247,12 @@ if ($rowCount == 0) {
     </div>
 
     <!-- process modal -->
-    <div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true">
+    <div class="modal fade" id="processModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="processModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="processModalLabel">
+                        <h4 class="modal-title fw-bold" id="processModal<?php echo $status; ?>Label">
                             Process
                         </h4>
                     </div>
@@ -263,12 +278,12 @@ if ($rowCount == 0) {
     </div>
 
     <!-- approve modal -->
-    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+    <div class="modal fade" id="approveModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="approveModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="approveModalLabel">
+                        <h4 class="modal-title fw-bold" id="approveModal<?php echo $status; ?>Label">
                             Approve
                         </h4>
                     </div>
@@ -312,10 +327,17 @@ if ($rowCount == 0) {
             $('#getCancelReqDocId').val(p_id);
         });
 
-        $('#imageModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var imageSrc = button.data('image-src');
-            var modalImage = $(this).find('#modalImage');
+        $('#esModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
+            let button = $(event.relatedTarget);
+            let imageSrc = button.data('image-src');
+            let modalImage = $(this).find('#esModalImage<?php echo $status; ?>');
+            modalImage.attr('src', imageSrc);
+        });
+
+        $('#vidModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
+            let button = $(event.relatedTarget);
+            let imageSrc = button.data('image-src');
+            let modalImage = $(this).find('#vidModalImage<?php echo $status; ?>');
             modalImage.attr('src', imageSrc);
         });
 

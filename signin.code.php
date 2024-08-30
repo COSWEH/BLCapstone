@@ -35,15 +35,15 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
 
                     // Correct password input
-                    $_SESSION['status_code'] = 200;
                     $_SESSION['user_id'] = $row['user_id'];
                     $_SESSION['fromSanIsidro'] = $row['fromSanIsidro'];
+                    $_SESSION['user_city'] = $row['user_city'];
                     $_SESSION['user_brgy'] = $row['user_brgy'];
                     $_SESSION['user_fname'] = $row['user_fname'];
                     $_SESSION['user_mname'] = $row['user_mname'];
                     $_SESSION['user_lname'] = $row['user_lname'];
                     $_SESSION['user_gender'] = $row['user_gender'];
-                    $_SESSION['user_address'] = $row['user_address'];
+                    $_SESSION['user_purok'] = $row['user_purok'];
                     $_SESSION['user_contactNum'] = $row['user_contactNum'];
                     $_SESSION['user_email'] = $row['user_email'];
                     $_SESSION['username'] = $row['username'];

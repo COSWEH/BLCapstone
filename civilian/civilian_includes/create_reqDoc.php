@@ -16,7 +16,6 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $req_placeOfBirth = ucwords(strtolower($_POST['placeOfBirth']));
     $req_civilStatus = ucwords(strtolower($_POST['civilStatus']));
     $req_typeOfDoc = $_POST['docType'];
-    $req_password = $_POST['password'];
     $req_status = "Pending";
 
     $username = $_SESSION['username'];
@@ -24,7 +23,7 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     if (
         empty($user_id) || empty($req_fname) || empty($req_lname) || empty($req_contactNo) || empty($req_gender) ||
         empty($req_brgy) || empty($req_purok) || empty($req_age) || empty($req_dateOfBirth) || empty($req_placeOfBirth) ||
-        empty($req_civilStatus) || empty($req_typeOfDoc) || empty($req_password)
+        empty($req_civilStatus) || empty($req_typeOfDoc)
     ) {
         header('location: ../document.c.php');
         exit;
@@ -89,31 +88,20 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $countUser = mysqli_num_rows($checkUser);
 
     if ($countUser > 0) {
-        $row = mysqli_fetch_assoc($checkUser);
-        $dbPassword = $row['password'];
 
-        if (password_verify($req_password, $dbPassword)) {
+        // $query = mysqli_query($con, "INSERT INTO `tbl_requests`(`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_brgy`, `req_typeOfDoc`, `req_valid_id`, `req_password`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_lname', '$req_contactNo', '$req_brgy', '$req_typeOfDoc', '$newValidIDName', '$req_password', '$req_status')");
 
-            $req_password = password_hash($req_password, PASSWORD_DEFAULT);
+        $query = mysqli_query($con, "INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_mname', '$req_lname', '$req_contactNo', '$req_gender', '$req_brgy', '$req_purok', '$req_age', '$req_dateOfBirth', '$req_placeOfBirth', '$req_civilStatus', '$newESignatureName', '$req_typeOfDoc', '$newValidIDName', '$req_status')");
 
-            // $query = mysqli_query($con, "INSERT INTO `tbl_requests`(`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_brgy`, `req_typeOfDoc`, `req_valid_id`, `req_password`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_lname', '$req_contactNo', '$req_brgy', '$req_typeOfDoc', '$newValidIDName', '$req_password', '$req_status')");
+        // add logs
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username requested a $req_typeOfDoc', CURRENT_TIMESTAMP,'$user_id')");
 
-            $query = mysqli_query($con, "INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_password`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_mname', '$req_lname', '$req_contactNo', '$req_gender', '$req_brgy', '$req_purok', '$req_age', '$req_dateOfBirth', '$req_placeOfBirth', '$req_civilStatus', '$newESignatureName', '$req_typeOfDoc', '$newValidIDName', '$req_password', '$req_status')");
-
-            // add logs
-            mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username requested a $req_typeOfDoc', CURRENT_TIMESTAMP,'$user_id')");
-
-            if ($query) {
-                $_SESSION['reqDoc_message'] = "Document submitted";
-                header('location: ../document.c.php');
-                exit;
-            } else {
-                die('Error: ' . mysqli_error($con));
-            }
-        } else {
-            $_SESSION['reqDoc_invalid_password'] = "Invalid password!";
+        if ($query) {
+            $_SESSION['reqDoc_message'] = "Document submitted";
             header('location: ../document.c.php');
             exit;
+        } else {
+            die('Error: ' . mysqli_error($con));
         }
     }
 } else {

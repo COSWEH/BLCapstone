@@ -13,12 +13,13 @@ session_start();
 
 if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $fromSanIsidro = ucwords(strtolower($_POST['fromSanIsidro']));
+    $user_city = ucwords((strtolower($_POST['user_city'])));
     $barangay = ucwords(strtolower($_POST['barangay']));
     $fname = ucwords(strtolower($_POST['fname']));
     $mname = ucwords(strtolower($_POST['mname']));
     $lname = ucwords(strtolower($_POST['lname']));
-    $gender = $_POST['gender'];
-    $address = ucwords(strtolower($_POST['address']));
+    $gender = $_POST['sex'];
+    $purok = ucwords(strtolower($_POST['user_purok']));
     $contactNum = $_POST['contactNum'];
     $email = $_POST['email'];
     $username = $_POST['username'];
@@ -27,12 +28,13 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $role_id = 0;
 
     $_SESSION['fromSanIsidro'] = $fromSanIsidro;
+    $_SESSION['user_city'] = $user_city;
     $_SESSION['barangay'] = $barangay;
     $_SESSION['fname'] = $fname;
     $_SESSION['mname'] = $mname;
     $_SESSION['lname'] = $lname;
     $_SESSION['gender'] = $gender;
-    $_SESSION['address'] = $address;
+    $_SESSION['user_purok'] = $purok;
     $_SESSION['contactNum'] = $contactNum;
     $_SESSION['email'] = $email;
     $_SESSION['username'] = $username;
@@ -43,12 +45,6 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     {
         $pattern = "/^[a-zA-Z\s\-]+$/";
         return preg_match($pattern, $name) === 1;
-    }
-
-    function validateAddress($address)
-    {
-        $pattern = "/^[a-zA-Z0-9\s\-.,]+$/";
-        return preg_match($pattern, $address) === 1;
     }
 
     function validatePhoneNumber($phoneNumber)
@@ -76,7 +72,6 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname_result = validateName($fname);
     $mname_result = validateName($mname);
     $lname_result = validateName($lname);
-    $address_result = validateAddress($address);
     $contactNum_result = validatePhoneNumber($contactNum);
     $email_result = validateEmail($email);
     $username_result = validateUsername($username);
@@ -92,9 +87,6 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if (!$lname_result) {
         $errors[] = "Last Name is invalid.";
-    }
-    if (!$address_result) {
-        $errors[] = "Address is invalid.";
     }
     if (!$contactNum_result) {
         $errors[] = "Phone Number is invalid.";

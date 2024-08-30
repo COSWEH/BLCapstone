@@ -34,7 +34,7 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $query = mysqli_query($con, "UPDATE `tbl_requests` SET `req_status` = '$process_status' WHERE `req_id` = '$process_req_id'");
 
-        $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES ('', '$process_req_id', 'Processed', 'unread', CURRENT_TIMESTAMP)");
+        $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES ('', '$civilianID', 'Processed', 'unread', CURRENT_TIMESTAMP)");
 
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
@@ -91,7 +91,7 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $query = mysqli_query($con, "UPDATE `tbl_requests` SET `req_status` = '$approve_status' WHERE `req_id` = '$approve_req_id'");
 
-        $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES ('', '$approve_req_id', 'Approved', 'unread', CURRENT_TIMESTAMP)");
+        $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES ('', '$civilianID', 'Approved', 'unread', CURRENT_TIMESTAMP)");
 
         // add logs
         $user_id = $_SESSION['user_id'];
@@ -150,7 +150,7 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $query = mysqli_query($con, "UPDATE `tbl_requests` SET `req_status` = '$cancel_status', `req_reasons` = '$cancellationReason' WHERE `req_id` = '$cancel_req_id'");
 
-        $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `req_id`, `description`, `status`, `notify_date`) VALUES ('', '$cancel_req_id', 'Cancelled', 'unread', CURRENT_TIMESTAMP)");
+        $notify_query = mysqli_query($con, "INSERT INTO `tbl_notification`(`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES ('', '$civilianID', 'Cancelled', 'unread', CURRENT_TIMESTAMP)");
 
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];

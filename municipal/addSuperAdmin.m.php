@@ -1,5 +1,5 @@
  <li class="nav-item">
-     <button class="btn nav-link fw-bold" aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdmin">Add admin account</button>
+     <button class="btn nav-link fw-bold" aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdmin">Add super admin account</button>
  </li>
 
  <!-- add admin account modal -->
@@ -8,7 +8,7 @@
          <div class="modal-content">
              <div class="modal-header">
                  <div class="w-100 text-center">
-                     <h4 class="modal-title fw-bold" id="addAdminLabel">Add Admin Account</h4>
+                     <h4 class="modal-title fw-bold" id="addAdminLabel">Add Super Admin Account</h4>
                  </div>
                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>

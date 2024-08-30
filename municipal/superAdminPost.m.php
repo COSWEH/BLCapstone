@@ -414,8 +414,6 @@ if ($user_role != 2) {
     </script>
 
     <script src="municipalMaterials/script.m.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 <?php

@@ -168,17 +168,15 @@ session_start();
                             </div>
 
                             <div class="form-floating mb-3">
+                                <select name="user_city" id="user_city" class="form-select" required>
+
+                                </select>
+                                <label for="user_city" class="form-label">Municipality</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
                                 <select name="barangay" id="user_brgy" class="form-select" required>
-                                    <option value="" disabled selected>Select Barangay</option>
-                                    <option value="Alua">Alua</option>
-                                    <option value="Calaba">Calaba</option>
-                                    <option value="Malapit">Malapit</option>
-                                    <option value="Mangga">Mangga</option>
-                                    <option value="Poblacion">Poblacion</option>
-                                    <option value="Pulo">Pulo</option>
-                                    <option value="San Roque">San Roque</option>
-                                    <option value="Sto. Cristo">Sto. Cristo</option>
-                                    <option value="Tabon">Tabon</option>
+
                                 </select>
                                 <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
                             </div>
@@ -230,21 +228,21 @@ session_start();
                             <h4 class="h4 fw-bold mb-3">Personal Information</h4>
                             <!-- Address and Contact Number -->
                             <div class="form-floating mb-3">
-                                <select id="user_gender" name="gender" class="form-select" required>
+                                <select id="user_sex" name="sex" class="form-select" required>
                                     <option value="" disabled selected>Select Male or Female</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
-                                <label for="user_gender" class="form-label">Gender</label>
+                                <label for="user_sex" class="form-label">Sex</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" name="address" class="form-control" id="user_address" placeholder="Address" required pattern="^[a-zA-Z0-9\s\-.,]+$">
-                                <label for="user_address" class="form-label">Address</label>
+                                <input type="number" name="user_purok" class="form-control" id="user_purok" placeholder="Purok" required>
+                                <label for="user_purok" class="form-label">Purok</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+                                <input type="number" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
                                 <label for="contactNum" class="form-label">Contact Number</label>
                             </div>
 
@@ -532,26 +530,42 @@ session_start();
 
             showFaqs();
 
+            const municipalityOptions = [
+                "Aliaga", "Cabanatuan City", "Cabiao", "Carranglan", "Cuyapo",
+                "Gabaldon", "Gapan City", "General Tinio", "General Mariano Alvarez",
+                "Guimba", "Jaen", "Llanera", "Licab", "Laur",
+                "Nampicuan", "Pantabangan", "Peñaranda", "Quezon", "Rizal",
+                "San Antonio", "San Jose City", "San Leonardo", "San Luis",
+                "San Manuel", "San Nicolas", "San Rafael", "Santa Rosa", "Santo Domingo",
+                "Santo Niño", "Santo Tomas", "Talavera", "Talugtug", "Zaragoza"
+            ];
+
             const barangayOptions = [
                 "Alua", "Calaba", "Malapit", "Mangga", "Poblacion",
                 "Pulo", "San Roque", "Sto. Cristo", "Tabon"
             ];
 
-            const $barangaySelect = $('#user_brgy');
             const $fromSanIsidroSelect = $('#fromSanIsidro');
+            const $user_city = $('#user_city');
+            const $barangaySelect = $('#user_brgy');
 
             // Function to update the barangay select options
             function updateBarangayOptions() {
                 const selectedValue = $fromSanIsidroSelect.val();
                 $barangaySelect.empty(); // Clear existing options
+                $user_city.empty();
 
                 if (selectedValue === "Yes") {
                     $barangaySelect.append('<option value="" disabled selected>Select Barangay</option>');
                     barangayOptions.forEach(option => {
                         $barangaySelect.append(`<option value="${option}">${option}</option>`);
                     });
+                    $user_city.append('<option value="San Isidro">San Isidro</option>');
                 } else if (selectedValue === "No") {
                     $barangaySelect.append('<option value="N/A" selected>N/A</option>');
+                    municipalityOptions.forEach(option => {
+                        $user_city.append(`<option value="${option}">${option}</option>`);
+                    });
                 }
             }
 

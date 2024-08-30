@@ -117,7 +117,7 @@ if ($user_role != 0) {
                     </ul>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- sign modal -->
+                <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -260,7 +260,7 @@ if ($user_role != 0) {
                                     <option value="Barangay Indigency">Barangay Indigency</option>
                                     <option value="Cedula">Cedula</option>
                                     <option value="Job Seeker">Job Seeker</option>
-                                    <option value="Job Seeker">Business Permit</option>
+                                    <option value="Business Permit">Business Permit</option>
                                 </select>
                                 <label for="documentType">Document Type</label>
                             </div>
@@ -334,7 +334,7 @@ if ($user_role != 0) {
                                             }
                                             ?>
                                         </select>
-                                        <label for="user_gender" class="form-label">Gender</label>
+                                        <label for="user_gender" class="form-label">Sex</label>
                                     </div>
                                     <?php $user_brgy = $_SESSION['user_brgy']; ?>
                                     <div class="form-floating mb-3">
@@ -374,10 +374,12 @@ if ($user_role != 0) {
                             <h4 class="h4 fw-bold mb-3">Additional Information</h4>
                             <div class="row">
                                 <div class="col">
+                                    <?php $user_purok = $_SESSION['user_purok']; ?>
                                     <div class="form-floating mb-3">
-                                        <input id="purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php ?>" required>
+                                        <input id="purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php echo $user_purok; ?>" required>
                                         <label for="purok">Purok</label>
                                     </div>
+
                                     <div class="form-floating mb-3">
                                         <input id="age" class="form-control" type="text" name="age" placeholder="Age" value="<?php ?>" required>
                                         <label for="age">Age</label>
@@ -421,10 +423,7 @@ if ($user_role != 0) {
                                         </select>
                                         <label for="civilStatus">Civil Status</label>
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        <input id="eSignature" class="form-control" type="file" name="eSignature" accept=".jpg, jpeg, .png" required>
-                                        <label for="eSignature" class="form-label">E-Signature</label>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -447,12 +446,12 @@ if ($user_role != 0) {
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input id="userValidID" class="form-control" type="file" name="userValidID" accept=".jpg, jpeg, .png" required>
-                                        <label for="userValidID" class="form-label">Valid ID</label>
+                                        <input id="eSignature" class="form-control" type="file" name="eSignature" accept=".jpg, jpeg, .png" required>
+                                        <label for="eSignature" class="form-label">E-Signature</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input id="userPassword" class="form-control" type="password" name="password" placeholder="Password" required>
-                                        <label for="userPassword" class="form-label">Password</label>
+                                        <input id="userValidID" class="form-control" type="file" name="userValidID" accept=".jpg, jpeg, .png" required>
+                                        <label for="userValidID" class="form-label">Valid ID</label>
                                     </div>
                                 </div>
                             </div>
