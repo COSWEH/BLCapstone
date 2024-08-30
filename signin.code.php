@@ -45,6 +45,10 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['user_gender'] = $row['user_gender'];
                     $_SESSION['user_purok'] = $row['user_purok'];
                     $_SESSION['user_contactNum'] = $row['user_contactNum'];
+                    $_SESSION['dateOfBirth'] = $row['dateOfBirth'];
+                    $_SESSION['user_age'] = $row['user_age'];
+                    $_SESSION['placeOfBirth'] = $row['placeOfBirth'];
+                    $_SESSION['civilStatus'] = $row['civilStatus'];
                     $_SESSION['user_email'] = $row['user_email'];
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['password'] = $row['password'];

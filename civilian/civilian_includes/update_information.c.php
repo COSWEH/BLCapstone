@@ -10,7 +10,7 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
     $gender = $_POST['gender'];
-    $address = $_POST['address'];
+    $user_purok = $_POST['user_purok'];
     $contactNum = $_POST['contactNum'];
     $email = $_POST['email'];
     $username = $_POST['username'];
@@ -19,8 +19,7 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_SESSION['username'];
 
     if (
-        empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) ||
-        empty($address) || empty($contactNum) || empty($email) || empty($username) || empty($password)
+        empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) || empty($user_purok) || empty($contactNum) || empty($email) || empty($username) || empty($password)
     ) {
         header('location: ../profile.c.php');
         exit;
@@ -35,7 +34,6 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         user_mname = '$mname',
         user_lname = '$lname',
         user_gender = '$gender',
-        user_address = '$address',
         user_contactNum = '$contactNum',
         user_email = '$email',
         username = '$username',
@@ -51,7 +49,6 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_mname'] = $mname;
         $_SESSION['user_lname'] = $lname;
         $_SESSION['user_gender'] = $gender;
-        $_SESSION['user_address'] = $address;
         $_SESSION['user_contactNum'] = $contactNum;
         $_SESSION['user_email'] = $email;
         $_SESSION['username'] = $username;

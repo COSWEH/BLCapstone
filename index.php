@@ -8,6 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/BayanLinkLogoBlack.png" type="image/svg+xml" />
     <title>BayanLink</title>
     <!-- local css -->
     <link rel="stylesheet" href="indexMaterials/style.im.css">
@@ -20,13 +21,23 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- jquery ajax cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#home">
-                <img src="img/BayanLinkLogoBlack.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top"> BAYANLINK</a>
+                <img src="img/BayanLinkLogoBlack.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top"> <small>BAYANLINK</small></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -169,14 +180,14 @@ session_start();
 
                             <div class="form-floating mb-3">
                                 <select name="user_city" id="user_city" class="form-select" required>
-
+                                    <!-- Options go here -->
                                 </select>
                                 <label for="user_city" class="form-label">Municipality</label>
                             </div>
 
                             <div class="form-floating mb-3">
                                 <select name="barangay" id="user_brgy" class="form-select" required>
-
+                                    <!-- Options go here -->
                                 </select>
                                 <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
                             </div>
@@ -209,7 +220,6 @@ session_start();
                             </div>
 
                             <div class="row">
-                                <!-- Use Bootstrap’s responsive grid system -->
                                 <div class="col-12 col-md-6 mb-2">
                                     <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn1">
                                         <i class="bi bi-arrow-left-square"></i>
@@ -225,7 +235,7 @@ session_start();
                         </div>
 
                         <div id="group3" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Personal Information</h4>
+                            <h4 class="h4 fw-bold mb-3">Additional Information</h4>
                             <!-- Address and Contact Number -->
                             <div class="form-floating mb-3">
                                 <select id="user_sex" name="sex" class="form-select" required>
@@ -254,42 +264,37 @@ session_start();
                                     </button>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn3">Next <i class="bi bi-arrow-right-square"></i></button>
+                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn3">
+                                        Next <i class="bi bi-arrow-right-square"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <div id="group4" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Account Information</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="email" name="email" class="form-control" id="user_email" placeholder="Email Address" required title="e.g., juandelacruz143@gmail.com">
-                                        <label for="user_email" class="form-label">Email Address</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" name="username" class="form-control" id="username" placeholder="Username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more">
-                                        <label for="username" class="form-label">Username</label>
-                                    </div>
-                                </div>
+                            <h4 class="h4 fw-bold mb-3">Additional Information</h4>
+                            <!-- Date of Birth and Place of Birth -->
+                            <div class="form-floating mb-3">
+                                <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required>
+                                <label for="dateOfBirth">Date of Birth</label>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" name="signupPassword" class="form-control mb-3" id="signupPassword" placeholder="Password" required pattern=".{8,}">
-                                        <label for="signupPassword" class="form-label">Password</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" name="confirmPassword" class="form-control mb-3" id="confirm-password" placeholder="Confirm Password" required pattern=".{8,}">
-                                        <label for="confirm-password" class="form-label">Confirm Password</label>
-                                    </div>
-                                </div>
+                            <div class="form-floating mb-3">
+                                <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required>
+                                <label for="placeOfBirth">Place of Birth</label>
                             </div>
+
+                            <div class="form-floating mb-3">
+                                <select id="civilStatus" name="civilStatus" class="form-select" required>
+                                    <option value="" disabled selected>Choose Status</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Divorced">Divorced</option>
+                                </select>
+                                <label for="civilStatus">Civil Status</label>
+                            </div>
+
                             <div class="row">
                                 <div class="col-12 col-md-6 mb-2">
                                     <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn3">
@@ -298,9 +303,58 @@ session_start();
                                     </button>
                                 </div>
                                 <div class="col-12 col-md-6">
+                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn4">
+                                        Next <i class="bi bi-arrow-right-square"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="group5" class="form-step d-none">
+                            <h4 class="h4 fw-bold mb-3">Account Information</h4>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" name="email" class="form-control" id="user_email" placeholder="Email Address" required title="e.g., juandelacruz143@gmail.com">
+                                        <label for="user_email" class="form-label">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="username" class="form-control" id="username" placeholder="Username" required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$">
+                                        <label for="username" class="form-label">Username</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div style="position: relative;">
+                                        <div class="form-floating mb-3">
+                                            <input type="password" name="signupPassword" class="form-control" id="signupPassword" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="signupShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
+                                            <label for="password" class="form-label">Password</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div style="position: relative;">
+                                        <div class="form-floating mb-3">
+                                            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="confirmShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
+                                            <label for="password" class="form-label">Confirm Password</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-6 mb-2">
+                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn4">
+                                        <i class="bi bi-arrow-left-square"></i>
+                                        Previous
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <button type="submit" name="btnSignup" class="btn btn-success fw-bold w-100">
-                                        Sign up
-                                        <i class="bi bi-hand-index-thumb"></i>
+                                        <i class="bi bi-check-square"></i>
+                                        Submit
                                     </button>
                                 </div>
                             </div>
@@ -311,21 +365,22 @@ session_start();
         </div>
     </div>
 
+
     <!-- Home Section -->
     <section id="home" class="container my-5">
         <div class="row align-items-center">
             <!-- Content Section -->
-            <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
-                <h1 class="display-3 fw-bold mb-3">Welcome to Bayanlink</h1>
-                <p class="lead mb-4">At Bayanlink, we connect communities and simplify access to essential services. Our platform provides direct access to official information, streamlines document requests, and enhances civic engagement.</p>
-                <p class="mb-4">Explore our features to see how we make your experience more efficient and engaging.</p>
+            <div class="col-md-6 text-center text-md-start mb-5 px-lg-5">
+                <h1 class="display-3 fw-bold mb-5">Welcome to Bayanlink</h1>
+                <p class="lead mb-5">At Bayanlink, we connect communities and simplify access to essential services. Our platform provides direct access to official information, streamlines document requests, and enhances civic engagement.</p>
+                <p class="mb-5">Explore our features to see how we make your experience more efficient and engaging.</p>
                 <button type="button" class="btn btn-success fw-bold" data-bs-toggle="modal" data-bs-target="#registerModal">
                     Get started
                 </button>
 
             </div>
             <!-- Image Section -->
-            <div class="col-md-6">
+            <div class="col-md-6 px-lg-5">
                 <img src="img/img1.png" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
             </div>
         </div>
@@ -607,20 +662,39 @@ session_start();
                 $('#group3').removeClass('d-none');
             });
 
-
-            // show password
-            const passwordInput = document.getElementById("signinPassword");
-            const showPasswordIcon = document.getElementById("showPasswordIcon");
-
-            showPasswordIcon.addEventListener("click", function() {
-                if (passwordInput.type === "password") {
-                    passwordInput.type = "text";
-                    showPasswordIcon.innerHTML = '<i class="bi bi-eye-fill"></i>';
-                } else {
-                    passwordInput.type = "password";
-                    showPasswordIcon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
-                }
+            $('#nextBtn4').click(function() {
+                $('#group4').addClass('d-none');
+                $('#group5').removeClass('d-none');
             });
+
+            $('#prevBtn4').click(function() {
+                $('#group5').addClass('d-none');
+                $('#group4').removeClass('d-none');
+            });
+
+
+
+            // Function to toggle password visibility
+            function togglePasswordVisibility(inputId, iconId) {
+                const passwordInput = document.getElementById(inputId);
+                const showPasswordIcon = document.getElementById(iconId);
+
+                showPasswordIcon.addEventListener("click", function() {
+                    if (passwordInput.type === "password") {
+                        passwordInput.type = "text";
+                        showPasswordIcon.innerHTML = '<i class="bi bi-eye-fill"></i>';
+                    } else {
+                        passwordInput.type = "password";
+                        showPasswordIcon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+                    }
+                });
+            }
+
+            // Initialize the toggle for each password field
+            togglePasswordVisibility("signinPassword", "showPasswordIcon");
+            togglePasswordVisibility("signupPassword", "signupShowPasswordIcon");
+            togglePasswordVisibility("confirmPassword", "confirmShowPasswordIcon");
+
         });
     </script>
 

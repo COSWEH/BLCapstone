@@ -46,6 +46,16 @@ if ($user_role != 1) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery ajax cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -107,7 +117,7 @@ if ($user_role != 1) {
                 <hr>
 
                 <h6 class="ms-1 mb-3">List of residents to you barangay</h6>
-                <div id="searchResult" class="fw-bold fs-5">
+                <div id="showAllResidents" class="fw-bold fs-5">
 
                 </div>
 
@@ -148,7 +158,7 @@ if ($user_role != 1) {
         $(document).ready(function() {
             // show users list
             $.post('brgy_includes/allResidents.php', {}, function(data) {
-                $("#searchResult").html(data);
+                $("#showAllResidents").html(data);
             });
 
             //display user that is searched
@@ -162,7 +172,7 @@ if ($user_role != 1) {
                         query: searchQuery
                     },
                     success: function(response) {
-                        $(`#searchResult`).html(response);
+                        $(`#showAllResidents`).html(response);
                     }
                 });
             });

@@ -21,6 +21,9 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $gender = $_POST['sex'];
     $purok = ucwords(strtolower($_POST['user_purok']));
     $contactNum = $_POST['contactNum'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $placeOfBirth = $_POST['placeOfBirth'];
+    $civilStatus = $_POST['civilStatus'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['signupPassword'];
@@ -36,6 +39,9 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['gender'] = $gender;
     $_SESSION['user_purok'] = $purok;
     $_SESSION['contactNum'] = $contactNum;
+    $_SESSION['dateOfBirth'] = $dateOfBirth;
+    $_SESSION['placeOfBirth'] = $placeOfBirth;
+    $_SESSION['civilStatus'] = $civilStatus;
     $_SESSION['email'] = $email;
     $_SESSION['username'] = $username;
     $_SESSION['password'] = $password;
@@ -66,7 +72,11 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     function validatePassword($password)
     {
-        return strlen($password) >= 8; // need at least 8 characters long
+        // Check if the password meets the length requirement and the complexity pattern
+        $lengthValid = strlen($password) >= 8;
+        $patternValid = preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password);
+
+        return $lengthValid && $patternValid;
     }
 
     $fname_result = validateName($fname);
