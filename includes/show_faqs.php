@@ -4,7 +4,7 @@
     $sql = "SELECT * FROM tbl_faqs ORDER BY faq_created_at DESC";
     $result = mysqli_query($con, $sql);
     ?>
- <div class="accordion" id="faqAccordion">
+ <div class="accordion accordion-flush shadow" id="faqAccordion">
      <!-- FAQs -->
      <?php if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) { ?>

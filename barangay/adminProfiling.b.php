@@ -138,9 +138,16 @@ if ($user_role != 1) {
                                 <select class="form-select" id="purokFilter" name="purok">
                                     <option value="">All</option>
                                     <!-- Add options dynamically from your database -->
-                                    <option value="Purok1">Purok 1</option>
-                                    <option value="Purok2">Purok 2</option>
-                                    <option value="Purok3">Purok 3</option>
+                                    <option value="1">Purok 1</option>
+                                    <option value="2">Purok 2</option>
+                                    <option value="3">Purok 3</option>
+                                    <option value="4">Purok 4</option>
+                                    <option value="5">Purok 5</option>
+                                    <option value="6">Purok 6</option>
+                                    <option value="7">Purok 7</option>
+                                    <option value="8">Purok 8</option>
+                                    <option value="9">Purok 9</option>
+                                    <option value="10">Purok 10</option>
                                 </select>
                             </div>
 
@@ -207,21 +214,36 @@ if ($user_role != 1) {
             });
 
             //display user that is searched
-            $('#searchByName').on('keyup', function() {
-                let searchQuery = $(this).val(); // Get the search query
+            function filterResidents() {
+                let searchQuery = $('#searchByName').val(); // Get the search query
+                let sexFilter = $('#sexFilter').val(); // Get the sex filter value
+                let purokFilter = $('#purokFilter').val(); // Get the purok filter value
+                let ageFilter = $('#ageFilter').val(); // Get the age filter value
 
                 $.ajax({
-                    url: 'brgy_includes/searchResult.php', // PHP script to handle search
+                    url: 'brgy_includes/searchResult.php', // PHP script to handle search and filtering
                     method: 'POST',
                     data: {
-                        query: searchQuery
+                        query: searchQuery,
+                        sex: sexFilter,
+                        purok: purokFilter,
+                        age: ageFilter
                     },
                     success: function(response) {
-                        $(`#showAllResidents`).html(response);
+                        $('#showAllResidents').html(response); // Update the residents list with the response
                     }
                 });
+            }
+
+            // Trigger the filterResidents function on keyup for the search input
+            $('#searchByName').on('keyup', function() {
+                filterResidents();
             });
 
+            // Trigger the filterResidents function when any of the select dropdowns change
+            $('#sexFilter, #purokFilter, #ageFilter').on('change', function() {
+                filterResidents();
+            });
 
         });
     </script>

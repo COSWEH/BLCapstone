@@ -14,9 +14,9 @@ session_start();
 $admin_brgy = $_SESSION['user_brgy'];
 $get_Time_And_Day = new DateTime();
 $formattedDate = $get_Time_And_Day->format('h:i A D, M j, Y');
+$getStatus = $_SESSION['getStatus'];
 
-
-if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ifProcessOrApprove = $_POST['ifProcessOrApprove'];
 
     if ($ifProcessOrApprove == "Process") {
@@ -78,12 +78,13 @@ if (isset($_POST['btnConfirm']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } elseif ($ifProcessOrApprove == "Approve") {
         //echo "approve";
-        $approve_req_id = $_POST['getApproveReqDocId'];
+        echo $approve_req_id = $_POST['getApproveReqDocId'];
         $approve_status = "Approved";
 
         $getRequesterID = mysqli_query($con, "SELECT `user_id` FROM `tbl_requests` WHERE `req_id` = $approve_req_id");
         $getResult = mysqli_fetch_assoc($getRequesterID);
         $civilianID = $getResult['user_id'];
+
 
         $getCivilianEmail = mysqli_query($con, "SELECT `user_email` FROM `tbl_useracc` WHERE `user_id` = $civilianID");
         $getCivilianResult = mysqli_fetch_assoc($getCivilianEmail);

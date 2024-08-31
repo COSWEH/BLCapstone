@@ -235,7 +235,7 @@ if ($rowCount == 0) {
                         </div>
 
                         <div>
-                            <input type="hidden" id="getCancelReqDocId" name="getCancelReqDocId">
+                            <input type="hidden" id="getCancelReqDocId<?php echo $status; ?>" name="getCancelReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Cancel">
                             <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
                             <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
@@ -266,7 +266,7 @@ if ($rowCount == 0) {
                             <h3 class="mb-3">Confirm to process.</h3>
                         </div>
                         <div class="text-center">
-                            <input type="hidden" id="getProcessReqDocId" name="getProcessReqDocId">
+                            <input type="hidden" id="getProcessReqDocId<?php echo $status; ?>" name="getProcessReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Process">
                             <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
                             <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
@@ -297,7 +297,7 @@ if ($rowCount == 0) {
                             <h3 class="mb-3">Confirm to approve.</h3>
                         </div>
                         <div class="text-center">
-                            <input type="hidden" id="getApproveReqDocId" name="getApproveReqDocId">
+                            <input type="hidden" id="getApproveReqDocId<?php echo $status; ?>" name="getApproveReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Approve">
                             <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
                             <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
@@ -315,16 +315,16 @@ if ($rowCount == 0) {
     $(document).ready(function() {
         $(document).on('click', '.aProcess', function() {
             let p_id = $(this).data('post-id');
-            $('#getProcessReqDocId').val(p_id);
+            $('#getProcessReqDocId<?php echo $status; ?>').val(p_id);
         });
         $(document).on('click', '.aApprove', function() {
             let p_id = $(this).data('post-id');
-            $('#getApproveReqDocId').val(p_id);
+            $('#getApproveReqDocId<?php echo $status; ?>').val(p_id);
         });
 
         $(document).on('click', '.aCancel', function() {
             let p_id = $(this).data('post-id');
-            $('#getCancelReqDocId').val(p_id);
+            $('#getCancelReqDocId<?php echo $status; ?>').val(p_id);
         });
 
         $('#esModal<?php echo $status; ?>').on('show.bs.modal', function(event) {

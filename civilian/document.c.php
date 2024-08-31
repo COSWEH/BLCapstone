@@ -177,11 +177,11 @@ if ($user_role != 0) {
                     </div>
                 </div>
 
-                <div class="card mb-3 shadow bg-body-secondary">
-                    <div class="card-body d-flex mx-auto fw-medium font-monospace">
-                        <i class="bi bi-exclamation-square-fill me-2" style="font-size: 2rem;"></i>
-                        <p>
-                            <small>
+                <div class="card mb-3 shadow bg-body-secondary border-0 rounded-3">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-exclamation-circle mx-3" style="font-size: 2rem;"></i>
+                        <p class="mb-0 fw-medium">
+                            <small class="text-muted">
                                 Please note that documents containing sensitive information or those requiring the physical presence of a resident cannot be processed through this system.
                             </small>
                         </p>
@@ -189,11 +189,23 @@ if ($user_role != 0) {
                 </div>
 
                 <nav>
-                    <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill fw-bold" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Pending</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">Processing</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">Approved</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Cancelled</button>
+                    <div class="nav nav-underline w-100 position-relative" id="nav-tab" role="tablist">
+                        <button class="nav-link active flex-fill fw-bold position-relative" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">
+                            Pending
+                            <div id="count-pending"></div>
+                        </button>
+                        <button class="nav-link flex-fill fw-bold position-relative" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">
+                            Processing
+                            <div id="count-processing"></div>
+                        </button>
+                        <button class="nav-link flex-fill fw-bold position-relative" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">
+                            Approved
+                            <div id="count-approved"></div>
+                        </button>
+                        <button class="nav-link flex-fill fw-bold position-relative" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">
+                            Cancelled
+                            <div id="count-cancelled"></div>
+                        </button>
                     </div>
                 </nav>
 
@@ -386,17 +398,22 @@ if ($user_role != 0) {
                                 <div class="col">
                                     <?php $user_purok = $_SESSION['user_purok']; ?>
                                     <div class="form-floating mb-3">
-                                        <input id="purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php echo $user_purok; ?>" required>
-                                        <label for="purok">Purok</label>
+                                        <input id="user_purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php echo $user_purok; ?>" required>
+                                        <label for="user_purok">Purok</label>
                                     </div>
 
+                                    <?php $dateOfBirth = $_SESSION['dateOfBirth']; ?>
                                     <div class="form-floating mb-3">
-                                        <input id="age" class="form-control" type="text" name="age" placeholder="Age" value="<?php ?>" required>
-                                        <label for="age">Age</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required>
+                                        <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" value="<?php echo $dateOfBirth; ?>" placeholder="Date of Birth" required>
                                         <label for="dateOfBirth">Date of Birth</label>
+                                    </div>
+                                    <?php $dob = new DateTime($dateOfBirth);
+                                    $now = new DateTime();
+                                    $interval = $now->diff($dob);
+                                    $age = $interval->y; ?>
+                                    <div class="form-floating mb-3">
+                                        <input id="user_age" class="form-control" type="number" name="age" placeholder="Age" value="<?php echo $age; ?>" required>
+                                        <label for="user_age">Age</label>
                                     </div>
                                 </div>
                             </div>
@@ -419,20 +436,25 @@ if ($user_role != 0) {
                             <h4 class="h4 fw-bold mb-3">Additional Information</h4>
                             <div class="row">
                                 <div class="col">
+                                    <?php $placeOfBirth = $_SESSION['placeOfBirth']; ?>
                                     <div class="form-floating mb-3">
-                                        <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required>
+                                        <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" value="<?php echo $placeOfBirth; ?>" required>
                                         <label for="placeOfBirth">Place of Birth</label>
                                     </div>
+                                    <?php
+                                    $civilStatus = isset($_SESSION['civilStatus']) ? $_SESSION['civilStatus'] : '';
+                                    ?>
                                     <div class="form-floating mb-3">
                                         <select id="civilStatus" name="civilStatus" class="form-select" required>
-                                            <option value="" disabled selected>Choose Status</option>
-                                            <option value="Single">Single</option>
-                                            <option value="Married">Married</option>
-                                            <option value="Widowed">Widowed</option>
-                                            <option value="Divorced">Divorced</option>
+                                            <option value="" disabled <?php echo empty($civilStatus) ? 'selected' : ''; ?>>Choose Status</option>
+                                            <option value="Single" <?php echo $civilStatus === 'Single' ? 'selected' : ''; ?>>Single</option>
+                                            <option value="Married" <?php echo $civilStatus === 'Married' ? 'selected' : ''; ?>>Married</option>
+                                            <option value="Widowed" <?php echo $civilStatus === 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
+                                            <option value="Divorced" <?php echo $civilStatus === 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
                                         </select>
                                         <label for="civilStatus">Civil Status</label>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -511,6 +533,52 @@ if ($user_role != 0) {
 
         $(document).ready(function() {
 
+            $.post('civilian_includes/get_pending_count.php', {}, function(data) {
+                $("#count-pending").html(data);
+            });
+            $.post('civilian_includes/get_processing_count.php', {}, function(data) {
+                $("#count-processing").html(data);
+            });
+            $.post('civilian_includes/get_approved_count.php', {}, function(data) {
+                $("#count-approved").html(data);
+            });
+            $.post('civilian_includes/get_cancelled_count.php', {}, function(data) {
+                $("#count-cancelled").html(data);
+            });
+
+            function showPendingCount() {
+                $.post('civilian_includes/get_pending_count.php', {}, function(data) {
+                    $("#count-pending").html(data);
+                    setTimeout(showPendingCount, 30000);
+                });
+            }
+
+            function showProcessingCount() {
+                $.post('civilian_includes/get_processing_count.php', {}, function(data) {
+                    $("#count-processing").html(data);
+                    setTimeout(showProcessingCount, 30000);
+                });
+            }
+
+            function showApprovedCount() {
+                $.post('civilian_includes/get_approved_count.php', {}, function(data) {
+                    $("#count-approved").html(data);
+                    setTimeout(showApprovedCount, 30000);
+                });
+            }
+
+            function showCancelledCount() {
+                $.post('civilian_includes/get_cancelled_count.php', {}, function(data) {
+                    $("#count-cancelled").html(data);
+                    setTimeout(showCancelledCount, 30000);
+                });
+            }
+
+            showPendingCount();
+            showProcessingCount();
+            showApprovedCount();
+            showCancelledCount();
+
             $.post('civilian_includes/show_notification.php', {}, function(data) {
                 $("#notification-content").html(data);
             });
@@ -572,7 +640,7 @@ if ($user_role != 0) {
             function updateFields() {
                 if ($('#forOthers').is(':checked')) {
                     // Clear the fields if "Others" is selected
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender').prop('disabled', false).val('');
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #placeOfBirth, #civilStatus').prop('disabled', false).val('');
                 } else if ($('#forYourself').is(':checked')) {
                     // Restore values and disable fields if "Yourself" is selected
                     $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
@@ -580,11 +648,19 @@ if ($user_role != 0) {
                     $('#lastName').val('<?php echo $_SESSION['user_lname']; ?>').prop('disabled', true);
                     $('#contactNumber').val('<?php echo $_SESSION['user_contactNum']; ?>').prop('disabled', true);
                     $('#user_gender').val('<?php echo $_SESSION['user_gender']; ?>').prop('disabled', true);
+
+                    $('#user_brgy').val('<?php echo $_SESSION['user_brgy']; ?>').prop('disabled', true);
+                    $('#user_purok').val('<?php echo $_SESSION['user_purok']; ?>').prop('disabled', true);
+                    $('#dateOfBirth').val('<?php echo $_SESSION['dateOfBirth']; ?>').prop('disabled', true);
+                    $('#user_age').val('<?php echo $_SESSION['user_age']; ?>').prop('disabled', true);
+                    $('#placeOfBirth').val('<?php echo $_SESSION['placeOfBirth']; ?>').prop('disabled', true);
+                    $('#civilStatus').val('<?php echo $_SESSION['civilStatus']; ?>').prop('disabled', true);
+
                 }
 
                 $('#btnReqDocument').on('click', function() {
                     console.log('clicked');
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender').prop('disabled', false);
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #placeOfBirth, #civilStatus').prop('disabled', false);
                 });
 
             }

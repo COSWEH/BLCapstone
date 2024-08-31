@@ -115,7 +115,6 @@ if ($rowCount == 0) {
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item aCancel" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#cancelModal<?php echo $status; ?>"><small>Cancel</small></a></li>
-                                            <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal<?php echo $status; ?>"><small>Process</small></a></li>
                                             <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal<?php echo $status; ?>"><small>Approve</small></a></li>
 
                                         </ul>
@@ -235,39 +234,8 @@ if ($rowCount == 0) {
                         </div>
 
                         <div>
-                            <input type="hidden" id="getCancelReqDocId" name="getCancelReqDocId">
+                            <input type="hidden" id="getCancelReqDocId<?php echo $status; ?>" name="getCancelReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Cancel">
-                            <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- process modal -->
-    <div class="modal fade" id="processModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="processModal<?php echo $status; ?>Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="processModal<?php echo $status; ?>Label">
-                            Process
-                        </h4>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <form action="brgy_includes/update_user_reqDoc.php" method="POST">
-                        <div class="text-center mb-3">
-                            <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                            </div>
-                            <h3 class="mb-3">Confirm to process.</h3>
-                        </div>
-                        <div class="text-center">
-                            <input type="hidden" id="getProcessReqDocId" name="getProcessReqDocId">
-                            <input type="hidden" name="ifProcessOrApprove" value="Process">
                             <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
                             <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
                         </div>
@@ -297,7 +265,7 @@ if ($rowCount == 0) {
                             <h3 class="mb-3">Confirm to approve.</h3>
                         </div>
                         <div class="text-center">
-                            <input type="hidden" id="getApproveReqDocId" name="getApproveReqDocId">
+                            <input type="hidden" id="getApproveReqDocId<?php echo $status; ?>" name="getApproveReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Approve">
                             <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
                             <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
@@ -313,18 +281,16 @@ if ($rowCount == 0) {
 
 <script>
     $(document).ready(function() {
-        $(document).on('click', '.aProcess', function() {
-            let p_id = $(this).data('post-id');
-            $('#getProcessReqDocId').val(p_id);
-        });
         $(document).on('click', '.aApprove', function() {
             let p_id = $(this).data('post-id');
-            $('#getApproveReqDocId').val(p_id);
+            console.log(p_id);
+            $('#getApproveReqDocId<?php echo $status; ?>').val(p_id);
         });
 
         $(document).on('click', '.aCancel', function() {
             let p_id = $(this).data('post-id');
-            $('#getCancelReqDocId').val(p_id);
+            console.log(p_id);
+            $('#getCancelReqDocId<?php echo $status; ?>').val(p_id);
         });
 
         $('#esModal<?php echo $status; ?>').on('show.bs.modal', function(event) {

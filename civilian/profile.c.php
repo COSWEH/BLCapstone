@@ -160,65 +160,100 @@ if ($user_role != 0) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <h2 class="mb-3 fw-bold">Personal Information</h2>
-                <div class="card mb-3 shadow-sm">
+                <!-- info -->
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="card-body">
-                        <p class="card-text"><strong>From San Isidro?:</strong> <span id="fromSanIsidro"><?php echo $_SESSION['fromSanIsidro']; ?></span></p>
+                        <h3 class="card-title mb-3 fw-bold">Personal Information</h3>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>From San Isidro:</strong></p>
+                                <p class="text-muted" id="fromSanIsidro"><?php echo $_SESSION['fromSanIsidro']; ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Barangay:</strong></p>
+                                <p class="text-muted" id="barangay"><?php echo $_SESSION['user_brgy']; ?></p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Full Name:</strong></p>
+                                <p class="text-muted" id="fullname">
+                                    <?php
+                                    $fullname = $_SESSION['user_fname'] . ' ' . $_SESSION['user_mname'] . ' ' . $_SESSION['user_lname'];
+                                    echo ucwords($fullname);
+                                    ?>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Sex:</strong></p>
+                                <p class="text-muted" id="gender">
+                                    <?php
+                                    $gender = $_SESSION['user_gender'];
+                                    echo ucwords($gender);
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-12">
+                                <p class="mb-2"><strong>Address:</strong></p>
+                                <p class="text-muted" id="address"><?php echo "Purok " . $_SESSION['user_purok'] . " Brgy. " . $_SESSION['user_brgy'] . ', ' . $_SESSION['user_city']; ?></p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Contact Number:</strong></p>
+                                <p class="text-muted" id="contactNum"><?php echo $_SESSION['user_contactNum']; ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Date of Birth:</strong></p>
+                                <p class="text-muted" id="dateOfBirth"><?php echo $_SESSION['dateOfBirth']; ?></p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Place of Birth:</strong></p>
+                                <p class="text-muted" id="placeOfBirth"><?php echo $_SESSION['placeOfBirth']; ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Civil Status:</strong></p>
+                                <p class="text-muted" id="civilStatus"><?php echo $_SESSION['civilStatus']; ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card mb-3 shadow-sm">
+
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="card-body">
-                        <p class="card-text"><strong>Barangay:</strong> <span id="barangay"><?php echo $_SESSION['user_brgy']; ?></span></p>
+                        <h3 class="card-title mb-4 fw-bold">Account Information</h3>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Email:</strong></p>
+                                <p class="text-muted" id="email"><?php echo $_SESSION['user_email']; ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Username:</strong></p>
+                                <p class="text-muted" id="username"><?php echo $_SESSION['username']; ?></p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-12">
+                                <p class="mb-2"><strong>Password:</strong></p>
+                                <p class="text-muted">********</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-outline-primary my-2" type="button" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                Change Password
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">Update Information</button>
+                        </div>
                     </div>
                 </div>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Fullname:</strong> <span id="fullname">
-                                <?php
-                                $fullname = $_SESSION['user_fname'] . ' ' . $_SESSION['user_mname'] . ' ' . $_SESSION['user_lname'];
-                                echo ucwords($fullname);
-                                ?></span></p>
-                    </div>
-                </div>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Sex:</strong> <span id="gender">
-                                <?php
-                                $gender = $_SESSION['user_gender'];
-                                echo ucwords($gender);
-                                ?></span></p>
-                    </div>
-                </div>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Address:</strong> <span id="address"><?php echo "Purok " . $_SESSION['user_purok'] . " Brgy. " . $_SESSION['user_brgy'] . ', ' . $_SESSION['user_city']; ?></span></p>
-                    </div>
-                </div>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Contact Number:</strong> <span id="contactNum"><?php echo $_SESSION['user_contactNum']; ?></span></p>
-                    </div>
-                </div>
-                <hr>
-                <h2 class="mb-3 fw-bold">Account Information</h2>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Email:</strong> <span id="email"><?php echo $_SESSION['user_email']; ?></span></p>
-                    </div>
-                </div>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Username:</strong> <span id="username"><?php echo $_SESSION['username']; ?></span></p>
-                    </div>
-                </div>
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                        <p class="card-text mb-0"><strong>Password:</strong> ********</p>
-                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
-                    </div>
-                </div>
-                <hr>
-                <button type="button" class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#updateModal">Update Information</button>
+
             </main>
         </div>
     </div>
@@ -362,11 +397,42 @@ if ($user_role != 0) {
 
                         </div>
                         <div>
-                            <div class="form-floating">
+                            <div class="form-floating mb-3">
                                 <input type="tel" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
                                 <label for="user_contactNum" class="form-label">Contact Number</label>
                             </div>
                         </div>
+
+                        <div>
+                            <div class="form-floating mb-3">
+                                <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required
+                                    value="<?php echo isset($_SESSION['dateOfBirth']) ? htmlspecialchars($_SESSION['dateOfBirth']) : ''; ?>">
+                                <label for="dateOfBirth">Date of Birth</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-floating mb-3">
+                                <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required
+                                    value="<?php echo isset($_SESSION['placeOfBirth']) ? htmlspecialchars($_SESSION['placeOfBirth']) : ''; ?>">
+                                <label for="placeOfBirth">Place of Birth</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-floating mb-3">
+                                <select id="civilStatus" name="civilStatus" class="form-select" required>
+                                    <option value="" disabled <?php echo !isset($_SESSION['civilStatus']) ? 'selected' : ''; ?>>Choose Status</option>
+                                    <option value="Single" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Single' ? 'selected' : ''; ?>>Single</option>
+                                    <option value="Married" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Married' ? 'selected' : ''; ?>>Married</option>
+                                    <option value="Widowed" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
+                                    <option value="Divorced" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
+                                </select>
+                                <label for="civilStatus">Civil Status</label>
+                            </div>
+                        </div>
+
+
                         <hr>
                         <h4 class="h4 fw-bold">Account Information</h4>
                         <!-- Email and Username -->
@@ -385,7 +451,7 @@ if ($user_role != 0) {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" name="btnUpdate" class="btn btn-warning fw-bold w-100">Update</button>
+                        <button type="submit" name="btnUpdate" class="btn btn-primary w-100">Update</button>
                     </form>
                 </div>
             </div>

@@ -110,7 +110,7 @@ session_start();
                             </div>
                             <div class="col text-end">
                                 <small>
-                                    <a class="link-offset-2" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
+                                    <a class="link-offset-2" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
                                 </small>
                             </div>
                         </div>

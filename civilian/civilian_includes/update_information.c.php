@@ -12,6 +12,15 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $gender = $_POST['gender'];
     $user_purok = $_POST['user_purok'];
     $contactNum = $_POST['contactNum'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+
+    $dob = new DateTime($dateOfBirth);
+    $now = new DateTime();
+    $interval = $now->diff($dob);
+    $age = $interval->y;
+
+    $placeOfBirth = $_POST['placeOfBirth'];
+    $civilStatus = $_POST['civilStatus'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -19,7 +28,10 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_SESSION['username'];
 
     if (
-        empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) || empty($user_purok) || empty($contactNum) || empty($email) || empty($username) || empty($password)
+        empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) || empty($user_purok) || empty($contactNum)
+        || empty($dateOfBirth)
+        || empty($placeOfBirth)
+        || empty($civilStatus) || empty($email) || empty($username) || empty($password)
     ) {
         header('location: ../profile.c.php');
         exit;
@@ -35,6 +47,11 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         user_lname = '$lname',
         user_gender = '$gender',
         user_contactNum = '$contactNum',
+        dateOfBirth = '$dateOfBirth',
+        user_age = '$age',
+        placeOfBirth = '$placeOfBirth',
+        civilStatus = '$civilStatus',
+        user_purok = '$user_purok',
         user_email = '$email',
         username = '$username',
         password = '$password'
@@ -50,6 +67,10 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_lname'] = $lname;
         $_SESSION['user_gender'] = $gender;
         $_SESSION['user_contactNum'] = $contactNum;
+        $_SESSION['dateOfBirth'] = $dateOfBirth;
+        $_SESSION['placeOfBirth'] = $placeOfBirth;
+        $_SESSION['civilStatus'] = $civilStatus;
+        $_SESSION['user_purok'] = $user_purok;
         $_SESSION['user_email'] = $email;
         $_SESSION['username'] = $username;
 
