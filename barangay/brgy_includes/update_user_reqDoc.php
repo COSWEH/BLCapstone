@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "
             <h2 style='color: #2c3e50;'>Document Request Processed</h2>
             <p>Dear Citizen,</p>
-            <p>We are pleased to inform you that your document request is now being processed by the <strong>Brgy. $admin_brgy</strong>.</p>
+            <p>We are pleased to inform you that your document request is now being processed by <strong>Brgy. $admin_brgy</strong>.</p>
             <p><strong>Processing Date:</strong> $formattedDate</p>
             <p>Thank you for using BayanLink for your document needs. You will receive further instructions if necessary.</p>
             <br>
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "
             <h2 style='color: #2c3e50;'>Document Request Approved</h2>
             <p>Dear Citizen,</p>
-            <p>We are pleased to inform you that your document request has been approved by the <strong>$admin_brgy Barangay Administration</strong>.</p>
+            <p>We are pleased to inform you that your document request has been approved by <strong>$admin_brgy Barangay Administration</strong>.</p>
             <p><strong>Approval Date:</strong> $formattedDate</p>
             <p>Thank you for choosing BayanLink. Your approved document is now ready for the next steps.</p>
             <br>
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "
             <h2 style='color: #c0392b;'>Document Request Cancelled</h2>
             <p>Dear Citizen,</p>
-            <p>We regret to inform you that your document request has been cancelled by the <strong>$admin_brgy Barangay Administration</strong>.</p>
+            <p>We regret to inform you that your document request has been cancelled by <strong>$admin_brgy Barangay Administration</strong>.</p>
             <p><strong>Cancellation Date:</strong> $formattedDate</p>
             $reasonList
             <p>If you have any questions or need further assistance, please feel free to contact your barangay office.</p>
