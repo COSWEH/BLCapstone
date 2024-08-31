@@ -80,7 +80,7 @@ if ($user_role != 0) {
                                 <div class="card border border-0" style="width: 300px;">
                                     <!-- Notification Header -->
                                     <div class="card-header bg-info text-light">
-                                        <h6 class="fw-bold mb-0">
+                                        <h6 class=" mb-0">
                                             Notifications
                                         </h6>
                                     </div>
@@ -116,25 +116,25 @@ if ($user_role != 0) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="post.c.php">Post</a>
+                            <a class="nav-link " aria-current="page" href="post.c.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-profile" aria-current="page" href="profile.c.php">Profile</a>
+                            <a class="nav-link  active-profile" aria-current="page" href="profile.c.php">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="document.c.php">Document</a>
+                            <a class="nav-link " aria-current="page" href="document.c.php">Document</a>
                         </li>
                         <hr>
                     </ul>
                 </div>
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header text-center">
                                 <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                                    <h4 class="modal-title " id="signoutModalLabel">
                                         Sign out
                                     </h4>
                                 </div>
@@ -148,8 +148,8 @@ if ($user_role != 0) {
                                         <h3 class="mb-3">Confirm to sign out.</h3>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
+                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -163,7 +163,7 @@ if ($user_role != 0) {
                 <!-- info -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="card-body">
-                        <h3 class="card-title mb-3 fw-bold">Personal Information</h3>
+                        <h3 class="card-title mb-3 ">Personal Information</h3>
                         <div class="row mb-3">
                             <div class="col-sm-6">
                                 <p class="mb-2"><strong>From San Isidro:</strong></p>
@@ -225,7 +225,7 @@ if ($user_role != 0) {
 
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="card-body">
-                        <h3 class="card-title mb-4 fw-bold">Account Information</h3>
+                        <h3 class="card-title mb-4 ">Account Information</h3>
 
                         <div class="row mb-3">
                             <div class="col-sm-6">
@@ -263,7 +263,7 @@ if ($user_role != 0) {
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="changePasswordModalLabel">Change Password</h4>
+                        <h4 class="modal-title " id="changePasswordModalLabel">Change Password</h4>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -304,13 +304,13 @@ if ($user_role != 0) {
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="updateModalLabel">Update information</h4>
+                        <h4 class="modal-title " id="updateModalLabel">Update information</h4>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="container p-5 modal-body">
                     <form action="civilian_includes/update_information.c.php" method="POST">
-                        <h4 class="h4 fw-bold">Personal Information</h4>
+                        <h4 class="h4 ">Personal Information</h4>
                         <!-- Dropdown for San Isidro -->
                         <div class="form-floating mb-3">
                             <?php
@@ -434,7 +434,7 @@ if ($user_role != 0) {
 
 
                         <hr>
-                        <h4 class="h4 fw-bold">Account Information</h4>
+                        <h4 class="h4 ">Account Information</h4>
                         <!-- Email and Username -->
                         <div class="row mb-3">
                             <div class="col-md-6">

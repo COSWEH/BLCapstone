@@ -39,7 +39,7 @@ while ($data = mysqli_fetch_assoc($result)) {
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
                 <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
-                <?php echo "<h6 class='fw-bold'>$brgy</h6>"; ?>
+                <?php echo "<h6>$brgy</h6>"; ?>
                 <div class="btn-group dropup ms-auto">
                     <button type="button" class="btn btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-three-dots-vertical"></i>
@@ -59,7 +59,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                 </div>
             </div>
             <p>
-                <small class="fw-bold">
+                <small>
                     <?php echo $get_Time_And_Day->format('h:i A D, M j, Y'); ?>
                 </small>
             </p>
@@ -101,7 +101,7 @@ while ($data = mysqli_fetch_assoc($result)) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="editPostModalLabel">
+                        <h4 class="modal-title " id="editPostModalLabel">
                             Edit post
                         </h4>
                     </div>
@@ -115,7 +115,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                     <?php echo $fullname; ?>
                                 </h6>
                                 <h6 class="text-muted mb-0">
-                                    <?php echo "<small class='fw-bold'>From: </small>" . $brgy;
+                                    <?php echo "<small class=''>From: </small>" . $brgy;
                                     $_SESSION['getAdminBrgy'] = $brgy; ?>
                                 </h6>
                             </div>
@@ -126,7 +126,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         <div class="mb-3">
                             <div for="updatePhotos" class="rounded border bg-light-subtle text-center p-3 d-flex flex-column align-items-center justify-content-center" style="height: 150px; cursor: pointer;">
                                 <i class="bi bi-images mb-2"></i>
-                                <p class="m-0 fw-bold">Add Photos</p>
+                                <p class="m-0 ">Add Photos</p>
                                 <input type="file" name="updatePhotos[]" id="updatePhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>
                             <hr>
@@ -156,7 +156,7 @@ while ($data = mysqli_fetch_assoc($result)) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="deletePostModalLabel">
+                        <h4 class="modal-title " id="deletePostModalLabel">
                             Delete post
                         </h4>
                     </div>
@@ -173,8 +173,8 @@ while ($data = mysqli_fetch_assoc($result)) {
                         <div class="text-center">
                             <?php $_SESSION['getImg'] = $img; ?>
                             <input type="hidden" id="getPostIdToDelete" name="getPostIdToDelete">
-                            <button type="submit" name="baBtnDeletePost" class="btn btn-success me-2 fw-bold">Delete</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="baBtnDeletePost" class="btn btn-success me-2 ">Delete</button>
+                            <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>

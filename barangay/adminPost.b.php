@@ -90,19 +90,19 @@ if ($user_role != 1) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-post" aria-current="page" href="adminPost.b.php">Post</a>
+                            <a class="nav-link active-post" aria-current="page" href="adminPost.b.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="adminDocument.b.php">Document</a>
+                            <a class="nav-link" aria-current="page" href="adminDocument.b.php">Document</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="adminProfiling.b.php">Profiling</a>
+                            <a class="nav-link" aria-current="page" href="adminProfiling.b.php">Profiling</a>
                         </li>
                         <?php include('addAdmin.b.php') ?>
                         <hr>
                     </ul>
                 </div>
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5 mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
             </nav>
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
@@ -118,7 +118,7 @@ if ($user_role != 1) {
                             echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                         }
                         ?>
-                        <button type="button" class="btn btn-lg ms-3 fw-bold rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
+                        <button type="button" class="btn btn-lg ms-3 rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
                             <i class="bi bi-images me-2"></i>
                             Create post
                         </button>
@@ -137,9 +137,9 @@ if ($user_role != 1) {
     <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header text-center border border-0">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                        <h4 class="modal-title" id="signoutModalLabel">
                             Sign out
                         </h4>
                     </div>
@@ -148,13 +148,13 @@ if ($user_role != 1) {
                     <form action="../signout.php" method="POST">
                         <div class="text-center mb-3">
                             <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                                <i class="bi bi-exclamation-circle" style="font-size: 75px;"></i>
                             </div>
-                            <h3 class="mb-3">Confirm to sign out.</h3>
+                            <h4 class="mb-3">Confirm to sign out.</h4>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnSignout" class="btn btn-primary me-2">Confirm</button>
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -166,9 +166,9 @@ if ($user_role != 1) {
     <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header text-center border border-0">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="postModalLabel">
+                        <h4 class="modal-title" id="postModalLabel">
                             Create post
                         </h4>
                     </div>
@@ -187,7 +187,7 @@ if ($user_role != 1) {
                                 </h6>
                                 <h6 class="text-muted mb-0">
                                     <?php
-                                    echo "<small class='fw-bold'>From: Brgy. </small>" . $brgy;
+                                    echo "<small>From: Brgy. </small>" . $brgy;
                                     ?>
                                 </h6>
                             </div>
@@ -198,7 +198,7 @@ if ($user_role != 1) {
                         <div class="mb-3">
                             <div for="bgAddPhotos" class="rounded border bg-light-subtle text-center p-3 d-flex flex-column align-items-center justify-content-center" style="height: 150px; cursor: pointer;">
                                 <i class="bi bi-images mb-2"></i>
-                                <p class="m-0 fw-bold">Add Photos</p>
+                                <p class="m-0 ">Add Photos</p>
                                 <!-- change to file -->
                                 <input type="file" name="bgAddPhotos[]" id="bgAddPhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>

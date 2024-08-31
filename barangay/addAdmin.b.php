@@ -1,5 +1,5 @@
  <li class="nav-item">
-     <button class="btn nav-link fw-bold" aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdmin">Add admin account</button>
+     <button class="btn nav-link " aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdmin">Add admin account</button>
  </li>
 
  <!-- add admin account modal -->
@@ -8,7 +8,7 @@
          <div class="modal-content">
              <div class="modal-header">
                  <div class="w-100 text-center">
-                     <h4 class="modal-title fw-bold" id="addAdminLabel">Add Admin Account</h4>
+                     <h4 class="modal-title " id="addAdminLabel">Add Admin Account</h4>
                  </div>
                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>
@@ -17,7 +17,7 @@
 
                      <!-- Group 1: Full Name -->
                      <div id="group1" class="form-step">
-                         <h4 class="h4 fw-bold mb-3">Personal Information</h4>
+                         <h4 class="h4  mb-3">Personal Information</h4>
                          <div class="form-floating mb-3">
                              <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First Name" required pattern="^[a-zA-Z\s\-]+$">
                              <label for="user_fname" class="form-label">First Name</label>
@@ -34,7 +34,7 @@
 
                          <div class="row">
                              <div class="col-12">
-                                 <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn1">
+                                 <button type="button" class="btn btn-primary  w-100" id="nextBtn1">
                                      Next <i class="bi bi-arrow-right-square"></i>
                                  </button>
                              </div>
@@ -43,7 +43,7 @@
 
                      <!-- Group 2: Sex and Address -->
                      <div id="group2" class="form-step d-none">
-                         <h4 class="h4 fw-bold mb-3">Personal Information</h4>
+                         <h4 class="h4  mb-3">Personal Information</h4>
                          <div class="form-floating mb-3">
                              <select id="user_gender" name="gender" class="form-select" required>
                                  <option value="" disabled selected>Select Male or Female</option>
@@ -65,13 +65,13 @@
 
                          <div class="row">
                              <div class="col-12 col-md-6 mb-2">
-                                 <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn2">
+                                 <button type="button" class="btn btn-secondary  w-100" id="prevBtn2">
                                      <i class="bi bi-arrow-left-square"></i>
                                      Previous
                                  </button>
                              </div>
                              <div class="col-12 col-md-6">
-                                 <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn2">
+                                 <button type="button" class="btn btn-primary  w-100" id="nextBtn2">
                                      Next <i class="bi bi-arrow-right-square"></i>
                                  </button>
                              </div>
@@ -80,7 +80,7 @@
 
                      <!-- Group 3: Additional Information -->
                      <div id="group3" class="form-step d-none">
-                         <h4 class="h4 fw-bold mb-3">Additional Information</h4>
+                         <h4 class="h4  mb-3">Additional Information</h4>
                          <!-- Date of Birth and Place of Birth -->
                          <div class="form-floating mb-3">
                              <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required>
@@ -105,13 +105,13 @@
 
                          <div class="row">
                              <div class="col-12 col-md-6 mb-2">
-                                 <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn3">
+                                 <button type="button" class="btn btn-secondary  w-100" id="prevBtn3">
                                      <i class="bi bi-arrow-left-square"></i>
                                      Previous
                                  </button>
                              </div>
                              <div class="col-12 col-md-6">
-                                 <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn4">
+                                 <button type="button" class="btn btn-primary  w-100" id="nextBtn4">
                                      Next <i class="bi bi-arrow-right-square"></i>
                                  </button>
                              </div>
@@ -120,7 +120,7 @@
 
                      <!-- Group 4: Account Information -->
                      <div id="group4" class="form-step d-none">
-                         <h4 class="h4 fw-bold mb-3">Account Information</h4>
+                         <h4 class="h4  mb-3">Account Information</h4>
                          <div class="row">
                              <div class="col-12">
                                  <div class="form-floating mb-3">
@@ -154,13 +154,13 @@
                          </div>
                          <div class="row">
                              <div class="col-12 col-md-6 mb-2">
-                                 <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn4">
+                                 <button type="button" class="btn btn-secondary  w-100" id="prevBtn4">
                                      <i class="bi bi-arrow-left-square"></i>
                                      Previous
                                  </button>
                              </div>
                              <div class="col-12 col-md-6">
-                                 <button type="submit" name="btnSignup" class="btn btn-success fw-bold w-100">
+                                 <button type="submit" name="btnSignup" class="btn btn-success  w-100">
                                      Save <i class="bi bi-save"></i>
                                  </button>
                              </div>

@@ -96,14 +96,14 @@ if ($user_role != 2) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column mb-3">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="superAdminPost.m.php">Post</a>
+                            <a class="nav-link" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-post" aria-current="page" href="logs.php">Logs</a>
+                            <a class="nav-link active-post" aria-current="page" href="logs.php">Logs</a>
                         </li>
                         <?php include('addSuperAdmin.m.php') ?>
                         <li class="nav-item">
-                            <button class="btn nav-link fw-bold" aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
+                            <button class="btn nav-link" aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
                         </li>
                     </ul>
 
@@ -114,7 +114,7 @@ if ($user_role != 2) {
 
                                 <div class="modal-header text-center">
                                     <div class="w-100 text-center">
-                                        <h4 class="modal-title fw-bold" id="faqsModalLabel">
+                                        <h4 class="modal-title" id="faqsModalLabel">
                                             Frequently Asked Questions
                                         </h4>
                                     </div>
@@ -134,13 +134,13 @@ if ($user_role != 2) {
 
                                         <div class="row">
                                             <div class="col-12 col-md-4 mb-2">
-                                                <button type="submit" name="btnFaqs" class="btn btn-outline-primary fw-bold w-100">Add</button>
+                                                <button type="submit" name="btnFaqs" class="btn btn-outline-primary w-100">Add</button>
                                             </div>
                                             <div class="col-12 col-md-4 mb-2">
-                                                <button type="button" class="btn btn-outline-warning fw-bold w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
+                                                <button type="button" class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
                                             </div>
                                             <div class="col-12 col-md-4">
-                                                <button type="button" class="btn btn-outline-danger fw-bold w-100" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-outline-danger w-100" data-bs-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
 
@@ -156,7 +156,7 @@ if ($user_role != 2) {
                             <div class="modal-content">
                                 <div class="modal-header text-center">
                                     <div class="w-100 text-center">
-                                        <h4 class="modal-title fw-bold" id="editFaqsModalLabel">
+                                        <h4 class="modal-title" id="editFaqsModalLabel">
                                             <small>
                                                 Edit Frequently Asked Questions
                                             </small>
@@ -173,14 +173,14 @@ if ($user_role != 2) {
                     <hr>
                 </div>
 
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5 mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header text-center">
                                 <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                                    <h4 class="modal-title" id="signoutModalLabel">
                                         Sign out
                                     </h4>
                                 </div>
@@ -194,8 +194,8 @@ if ($user_role != 2) {
                                         <h3 class="mb-3">Confirm to sign out.</h3>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2">Confirm</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>

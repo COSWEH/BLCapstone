@@ -37,10 +37,10 @@ while ($data = mysqli_fetch_assoc($result)) {
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
                 <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
-                <?php echo "<h6 class='fw-bold'>$brgy</h6>"; ?>
+                <?php echo "<h6>$brgy</h6>"; ?>
             </div>
             <p>
-                <small class="fw-bold">
+                <small>
                     <?php echo $get_Time_And_Day->format('h:i A D, M j, Y'); ?>
                 </small>
             </p>

@@ -88,19 +88,19 @@ if ($user_role != 1) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="adminPost.b.php">Post</a>
+                            <a class="nav-link " aria-current="page" href="adminPost.b.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="adminDocument.b.php">Document</a>
+                            <a class="nav-link " aria-current="page" href="adminDocument.b.php">Document</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-document" aria-current="page" href="adminProfiling.b.php">Profiling</a>
+                            <a class="nav-link  active-document" aria-current="page" href="adminProfiling.b.php">Profiling</a>
                         </li>
                         <?php include('addAdmin.b.php') ?>
                         <hr>
                     </ul>
                 </div>
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
             </nav>
 
             <!-- main content -->
@@ -169,7 +169,7 @@ if ($user_role != 1) {
                 <hr>
 
                 <h6 class="ms-1 mb-3">List of residents in your barangay</h6>
-                <div id="showAllResidents" class="fw-bold fs-5">
+                <div id="showAllResidents" class=" fs-5">
 
                 </div>
 
@@ -183,7 +183,7 @@ if ($user_role != 1) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                        <h4 class="modal-title " id="signoutModalLabel">
                             Sign out
                         </h4>
                     </div>
@@ -197,8 +197,8 @@ if ($user_role != 1) {
                             <h3 class="mb-3">Confirm to sign out.</h3>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
+                            <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>

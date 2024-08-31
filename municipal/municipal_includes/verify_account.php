@@ -85,7 +85,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
     <div class="d-flex justify-content-center align-items-center mt-5 p-3">
         <div class="card shadow-lg" style="width: 24rem;">
             <div class="card-body shadow-lg" style="font-family: Montserrat, Arial;">
-                <h4 class=" card-title text-center fw-bold text-dark-emphasis">OTP verification</h4>
+                <h4 class=" card-title text-center text-dark-emphasis">OTP verification</h4>
                 <h6 class="card-subtitle mb-2 text-body-secondary text-center"><small>Your OTP code sent to your email address * <?php echo $email; ?>.</small></h6>
 
                 <form method="POST" class="form-group">

@@ -55,11 +55,11 @@ while ($data = mysqli_fetch_assoc($result)) {
     <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-3">
         <div class="card shadow border border-2">
             <div class="card-body">
-                <h5 class="card-title mb-3 text-center fw-bold"><?php echo $docType; ?></h5>
+                <h5 class="card-title mb-3 text-center"><?php echo $docType; ?></h5>
                 <hr>
                 <div class="d-flex flex-column mb-3">
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-person-fill me-2">
                                 <span class="ms-2">Name:</span>
                             </i>
@@ -69,7 +69,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-phone-fill me-2">
                                 <span class="ms-2">Contact No:</span>
                             </i>
@@ -79,7 +79,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-gender-ambiguous me-2">
                                 <span class="ms-2">Gender:</span>
                             </i>
@@ -89,7 +89,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-house-door-fill me-2">
                                 <span class="ms-2">Barangay:</span>
                             </i>
@@ -99,7 +99,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-calendar-fill me-2">
                                 <span class="ms-2">Date of Birth:</span>
                             </i>
@@ -109,7 +109,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-geo-alt-fill me-2">
                                 <span class="ms-2">Purok:</span>
                             </i>
@@ -119,7 +119,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-geo-alt-fill me-2">
                                 <span class="ms-2">Place of Birth:</span>
                             </i>
@@ -129,7 +129,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-person-hearts me-2">
                                 <span class="ms-2">Civil Status:</span>
                             </i>
@@ -139,7 +139,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <h6 class="font-weight-bold">
+                        <h6>
                             <i class="bi bi-calendar3 me-2">
                                 <span class="ms-2">Age:</span>
                             </i>

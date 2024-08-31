@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "
             <h2 style='color: #2c3e50;'>Document Request Processed</h2>
             <p>Dear Citizen,</p>
-            <p>We are pleased to inform you that your document request has been processed by the <strong>$admin_brgy Barangay Administration</strong>.</p>
+            <p>We are pleased to inform you that your document request is now being processed by the <strong>Brgy. $admin_brgy</strong>.</p>
             <p><strong>Processing Date:</strong> $formattedDate</p>
             <p>Thank you for using BayanLink for your document needs. You will receive further instructions if necessary.</p>
             <br>

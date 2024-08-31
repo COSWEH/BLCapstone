@@ -96,14 +96,14 @@ if ($user_role != 2) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column mb-3">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
+                            <a class="nav-link  active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="logs.php">Logs</a>
+                            <a class="nav-link " aria-current="page" href="logs.php">Logs</a>
                         </li>
                         <?php include('addSuperAdmin.m.php') ?>
                         <li class="nav-item">
-                            <button class="btn nav-link fw-bold" aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
+                            <button class="btn nav-link " aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
                         </li>
                     </ul>
 
@@ -114,7 +114,7 @@ if ($user_role != 2) {
 
                                 <div class="modal-header text-center">
                                     <div class="w-100 text-center">
-                                        <h4 class="modal-title fw-bold" id="faqsModalLabel">
+                                        <h4 class="modal-title " id="faqsModalLabel">
                                             Frequently Asked Questions
                                         </h4>
                                     </div>
@@ -134,13 +134,13 @@ if ($user_role != 2) {
 
                                         <div class="row">
                                             <div class="col-12 col-md-4 mb-2">
-                                                <button type="submit" name="btnFaqs" class="btn btn-outline-primary fw-bold w-100">Add</button>
+                                                <button type="submit" name="btnFaqs" class="btn btn-outline-primary  w-100">Add</button>
                                             </div>
                                             <div class="col-12 col-md-4 mb-2">
-                                                <button type="button" class="btn btn-outline-warning fw-bold w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
+                                                <button type="button" class="btn btn-outline-warning  w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
                                             </div>
                                             <div class="col-12 col-md-4">
-                                                <button type="button" class="btn btn-outline-danger fw-bold w-100" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-outline-danger  w-100" data-bs-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
 
@@ -156,7 +156,7 @@ if ($user_role != 2) {
                             <div class="modal-content">
                                 <div class="modal-header text-center">
                                     <div class="w-100 text-center">
-                                        <h4 class="modal-title fw-bold" id="editFaqsModalLabel">
+                                        <h4 class="modal-title " id="editFaqsModalLabel">
                                             <small>
                                                 Edit Frequently Asked Questions
                                             </small>
@@ -174,14 +174,14 @@ if ($user_role != 2) {
                 </div>
 
 
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header text-center">
                                 <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                                    <h4 class="modal-title " id="signoutModalLabel">
                                         Sign out
                                     </h4>
                                 </div>
@@ -195,8 +195,8 @@ if ($user_role != 2) {
                                         <h3 class="mb-3">Confirm to sign out.</h3>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
+                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -209,8 +209,8 @@ if ($user_role != 2) {
             <main class="col-12 col-md-9 content border rounded p-3">
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill fw-bold" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">Municipal</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="false">Barangay</button>
+                        <button class="nav-link active flex-fill " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">Municipal</button>
+                        <button class="nav-link flex-fill " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="false">Barangay</button>
                     </div>
                 </nav>
                 <div class="tab-content mt-2 p-1" id="nav-tabContent">
@@ -228,7 +228,7 @@ if ($user_role != 2) {
                                     echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                                 }
                                 ?>
-                                <button type="button" class="btn btn-lg ms-3 fw-bold rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
+                                <button type="button" class="btn btn-lg ms-3  rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
                                     <i class="bi bi-images me-2"></i>
                                     Create post
                                 </button>
@@ -259,7 +259,7 @@ if ($user_role != 2) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="postModalLabel">
+                        <h4 class="modal-title " id="postModalLabel">
                             Create post
                         </h4>
                     </div>
@@ -279,7 +279,7 @@ if ($user_role != 2) {
                                 </h6>
                                 <h6 class="text-muted mb-0">
                                     <?php
-                                    echo "<small class='fw-bold'>From: </small>" . $brgy;
+                                    echo "<small class=''>From: </small>" . $brgy;
                                     ?>
                                 </h6>
                             </div>
@@ -290,7 +290,7 @@ if ($user_role != 2) {
                         <div class="mb-3">
                             <div for="mAddPhotos" class="rounded border bg-light-subtle text-center p-3 d-flex flex-column align-items-center justify-content-center" style="height: 150px; cursor: pointer;">
                                 <i class="bi bi-images mb-2"></i>
-                                <p class="m-0 fw-bold">Add Photos</p>
+                                <p class="m-0 ">Add Photos</p>
                                 <!-- change to file -->
                                 <input type="file" name="mAddPhotos[]" id="mAddPhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>

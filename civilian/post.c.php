@@ -82,7 +82,7 @@ if ($user_role != 0) {
                                 <div class="card border border-0" style="width: 300px;">
                                     <!-- Notification Header -->
                                     <div class="card-header bg-info text-light">
-                                        <h6 class="fw-bold mb-0">
+                                        <h6 class=" mb-0">
                                             Notifications
                                         </h6>
                                     </div>
@@ -118,26 +118,26 @@ if ($user_role != 0) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-post" aria-current="page" href="post.c.php">Post</a>
+                            <a class="nav-link  active-post" aria-current="page" href="post.c.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="profile.c.php">Profile</a>
+                            <a class="nav-link " aria-current="page" href="profile.c.php">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="document.c.php">Document</a>
+                            <a class="nav-link " aria-current="page" href="document.c.php">Document</a>
                         </li>
                     </ul>
                     <hr>
                 </div>
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
             </nav>
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill fw-bold" id="nav-brgy-tab" data-bs-toggle="tab" data-bs-target="#nav-brgy" type="button" role="tab" aria-controls="nav-brgy" aria-selected="true">Barangay</button>
-                        <button class="nav-link flex-fill fw-bold" id="nav-municipal-tab" data-bs-toggle="tab" data-bs-target="#nav-municipal" type="button" role="tab" aria-controls="nav-municipal" aria-selected="false">Municipal</button>
+                        <button class="nav-link active flex-fill " id="nav-brgy-tab" data-bs-toggle="tab" data-bs-target="#nav-brgy" type="button" role="tab" aria-controls="nav-brgy" aria-selected="true">Barangay</button>
+                        <button class="nav-link flex-fill " id="nav-municipal-tab" data-bs-toggle="tab" data-bs-target="#nav-municipal" type="button" role="tab" aria-controls="nav-municipal" aria-selected="false">Municipal</button>
                     </div>
                 </nav>
                 <div class="tab-content mt-2 p-1" id="nav-tabContent">
@@ -166,7 +166,7 @@ if ($user_role != 0) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                        <h4 class="modal-title " id="signoutModalLabel">
                             Sign out
                         </h4>
                     </div>
@@ -180,8 +180,8 @@ if ($user_role != 0) {
                             <h3 class="mb-3">Confirm to sign out.</h3>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
+                            <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>

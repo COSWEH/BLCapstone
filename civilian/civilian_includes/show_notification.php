@@ -64,7 +64,7 @@
                         <div class="card-body p-2 bg-body-secondary rounded">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold">
+                                    <div>
                                         Admin of <?php echo htmlspecialchars($admin_brgy); ?>
                                     </div>
                                     <div class="mt-1">

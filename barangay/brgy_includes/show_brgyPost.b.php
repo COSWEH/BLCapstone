@@ -100,9 +100,9 @@ while ($data = mysqli_fetch_assoc($result)) {
     <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header text-center borde border-0">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="editPostModalLabel">
+                        <h4 class="modal-title " id="editPostModalLabel">
                             Edit post
                         </h4>
                     </div>
@@ -116,7 +116,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                     <?php echo $fullname; ?>
                                 </h6>
                                 <h6 class="text-muted mb-0">
-                                    <?php echo "<small class='fw-bold'>From: Brgy. </small>" . $brgy;
+                                    <?php echo "<small>From: Brgy. </small>" . $brgy;
                                     $_SESSION['getAdminBrgy'] = $brgy; ?>
                                 </h6>
                             </div>
@@ -127,7 +127,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         <div class="mb-3">
                             <div for="bgUpdatePhotos" class="rounded border bg-light-subtle text-center p-3 d-flex flex-column align-items-center justify-content-center" style="height: 150px; cursor: pointer;">
                                 <i class="bi bi-images mb-2"></i>
-                                <p class="m-0 fw-bold">Add Photos</p>
+                                <p class="m-0 ">Add Photos</p>
                                 <input type="file" name="bgUpdatePhotos[]" id="bgUpdatePhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>
                             <hr>
@@ -144,7 +144,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </div>
                         <input type="hidden" id="getPostIdToUpdate" name="getPostIdToUpdate">
                         <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary me-2">Update post</button>
-                        <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -155,9 +155,9 @@ while ($data = mysqli_fetch_assoc($result)) {
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header text-center borde border-0">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="deletePostModalLabel">
+                        <h4 class="modal-title" id="deletePostModalLabel">
                             Delete post
                         </h4>
                     </div>
@@ -168,14 +168,14 @@ while ($data = mysqli_fetch_assoc($result)) {
                             <div class="mb-3">
                                 <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
                             </div>
-                            <h1 class="mb-3">Are you sure?</h1>
-                            <h6 class="lead">Once deleted, you will not be able to recover it.</h6>
+                            <h4 class="mb-3">Are you sure?</h4>
+                            <p>Once deleted, you will not be able to recover it.</p>
                         </div>
                         <div class="text-center">
                             <?php $_SESSION['getImg'] = $img; ?>
                             <input type="hidden" id="getPostIdToDelete" name="getPostIdToDelete">
-                            <button type="submit" name="baBtnDeletePost" class="btn btn-success me-2 fw-bold">Delete</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="baBtnDeletePost" class="btn btn-primary me-2">Delete</button>
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>

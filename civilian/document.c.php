@@ -79,7 +79,7 @@ if ($user_role != 0) {
                                 <div class="card border border-0" style="width: 300px;">
                                     <!-- Notification Header -->
                                     <div class="card-header bg-info text-light">
-                                        <h6 class="fw-bold mb-0">
+                                        <h6 class=" mb-0">
                                             Notifications
                                         </h6>
                                     </div>
@@ -115,25 +115,25 @@ if ($user_role != 0) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="post.c.php">Post</a>
+                            <a class="nav-link " aria-current="page" href="post.c.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="profile.c.php">Profile</a>
+                            <a class="nav-link " aria-current="page" href="profile.c.php">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold active-document" aria-current="page" href="document.c.php">Document</a>
+                            <a class="nav-link  active-document" aria-current="page" href="document.c.php">Document</a>
                         </li>
                         <hr>
                     </ul>
                 </div>
-                <button type="button" class="btn mt-3 w-100 rounded-5 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header text-center">
                                 <div class="w-100 text-center">
-                                    <h4 class="modal-title fw-bold" id="signoutModalLabel">
+                                    <h4 class="modal-title " id="signoutModalLabel">
                                         Sign out
                                     </h4>
                                 </div>
@@ -147,8 +147,8 @@ if ($user_role != 0) {
                                         <h3 class="mb-3">Confirm to sign out.</h3>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 fw-bold">Confirm</button>
-                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
+                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -170,7 +170,7 @@ if ($user_role != 0) {
                             echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                         }
                         ?>
-                        <button type="button" class="btn btn-lg ms-3 fw-bold rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#reqDocModal">
+                        <button type="button" class="btn btn-lg ms-3  rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#reqDocModal">
                             <i class="bi bi-file-earmark-text-fill me-2"></i>
                             Request document
                         </button>
@@ -190,19 +190,19 @@ if ($user_role != 0) {
 
                 <nav>
                     <div class="nav nav-underline w-100 position-relative" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill fw-bold position-relative" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">
+                        <button class="nav-link active flex-fill  position-relative" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">
                             Pending
                             <div id="count-pending"></div>
                         </button>
-                        <button class="nav-link flex-fill fw-bold position-relative" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">
+                        <button class="nav-link flex-fill  position-relative" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">
                             Processing
                             <div id="count-processing"></div>
                         </button>
-                        <button class="nav-link flex-fill fw-bold position-relative" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">
+                        <button class="nav-link flex-fill  position-relative" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">
                             Approved
                             <div id="count-approved"></div>
                         </button>
-                        <button class="nav-link flex-fill fw-bold position-relative" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">
+                        <button class="nav-link flex-fill  position-relative" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">
                             Cancelled
                             <div id="count-cancelled"></div>
                         </button>
@@ -250,7 +250,7 @@ if ($user_role != 0) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="reqDocModalLabel">Request Document</h4>
+                        <h4 class="modal-title " id="reqDocModalLabel">Request Document</h4>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -264,13 +264,13 @@ if ($user_role != 0) {
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <input id="forYourself" class="form-check-input" type="radio" name="requestType" value="yourself" checked>
-                                        <label class="form-check-label fw-bold" for="forYourself">Yourself</label>
+                                        <label class="form-check-label " for="forYourself">Yourself</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <input id="forOthers" class="form-check-input" type="radio" name="requestType" value="others">
-                                        <label class="form-check-label fw-bold" for="forOthers">Others</label>
+                                        <label class="form-check-label " for="forOthers">Others</label>
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +289,7 @@ if ($user_role != 0) {
 
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn1">Next
+                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn1">Next
                                         <i class="bi bi-arrow-right-square"></i>
                                     </button>
                                 </div>
@@ -298,7 +298,7 @@ if ($user_role != 0) {
 
                         <!-- Step 2: First, Middle, and Last Name -->
                         <div id="step2" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Full Name</h4>
+                            <h4 class="h4  mb-3">Full Name</h4>
                             <input type="hidden" name="getUserid" value="<?php echo $getUserid; ?>">
                             <div class="row">
                                 <div class="col">
@@ -321,12 +321,12 @@ if ($user_role != 0) {
 
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn1">
+                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn1">
                                         <i class="bi bi-arrow-left-square"></i> Previous
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn2">
+                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn2">
                                         Next <i class="bi bi-arrow-right-square"></i>
                                     </button>
                                 </div>
@@ -335,7 +335,7 @@ if ($user_role != 0) {
 
                         <!-- Step 3: Contact No, Gender, and Barangay -->
                         <div id="step3" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Contact Information</h4>
+                            <h4 class="h4  mb-3">Contact Information</h4>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating mb-3">
@@ -379,12 +379,12 @@ if ($user_role != 0) {
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn2">
+                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn2">
                                         <i class="bi bi-arrow-left-square"></i> Previous
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn3">
+                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn3">
                                         Next <i class="bi bi-arrow-right-square"></i>
                                     </button>
                                 </div>
@@ -393,7 +393,7 @@ if ($user_role != 0) {
 
                         <!-- Step 4: Purok, Age, and Date of Birth -->
                         <div id="step4" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Additional Information</h4>
+                            <h4 class="h4  mb-3">Additional Information</h4>
                             <div class="row">
                                 <div class="col">
                                     <?php $user_purok = $_SESSION['user_purok']; ?>
@@ -419,12 +419,12 @@ if ($user_role != 0) {
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn3">
+                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn3">
                                         <i class="bi bi-arrow-left-square"></i> Previous
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn4">
+                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn4">
                                         Next <i class="bi bi-arrow-right-square"></i>
                                     </button>
                                 </div>
@@ -433,7 +433,7 @@ if ($user_role != 0) {
 
                         <!-- Step 5: Place of Birth, Civil Status, and e-Signature -->
                         <div id="step5" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Additional Information</h4>
+                            <h4 class="h4  mb-3">Additional Information</h4>
                             <div class="row">
                                 <div class="col">
                                     <?php $placeOfBirth = $_SESSION['placeOfBirth']; ?>
@@ -460,12 +460,12 @@ if ($user_role != 0) {
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn4">
+                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn4">
                                         <i class="bi bi-arrow-left-square"></i> Previous
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary fw-bold w-100" id="nextBtn5">
+                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn5">
                                         Next <i class="bi bi-arrow-right-square"></i>
                                     </button>
                                 </div>
@@ -474,7 +474,7 @@ if ($user_role != 0) {
 
                         <!-- Step 6: Valid ID, Password -->
                         <div id="step6" class="form-step d-none">
-                            <h4 class="h4 fw-bold mb-3">Final Information</h4>
+                            <h4 class="h4  mb-3">Final Information</h4>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating mb-3">
@@ -489,12 +489,12 @@ if ($user_role != 0) {
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary fw-bold w-100" id="prevBtn5">
+                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn5">
                                         <i class="bi bi-arrow-left-square"></i> Previous
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" name="btnReqDocument" id="btnReqDocument" class="btn btn-success fw-bold w-100">
+                                    <button type="submit" name="btnReqDocument" id="btnReqDocument" class="btn btn-success  w-100">
                                         Submit <i class="bi bi-check-square"></i>
                                     </button>
                                 </div>
