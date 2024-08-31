@@ -131,12 +131,17 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $verification_code = mt_rand(100000, 999999);
 
-                $message = "<h3>Your OTP number is <span class='fw-bold' style='font-size: 20px'>$verification_code</span></h3>
-                <p>Use this code to register your account.</p>
-                <br>
-                <br>
-                <p>With regards,</p>
-                <p>BayanLink Team</p>";
+                $message = "
+                    <h2 style='color: #2980b9;'>Your One-Time Password (OTP)</h2>
+                    <p>Dear User,</p>
+                    <p>Your OTP for completing your registration on BayanLink is:</p>
+                    <h1 style='font-size: 24px; color: #e74c3c;'>$verification_code</h1>
+                    <p>Please use this code to verify your account. If you did not request this code, please ignore this message.</p>
+                    <br>
+                    <p>With regards,</p>
+                    <p><strong>The BayanLink Team</strong></p>
+                    <p style='font-size: 12px; color: #7f8c8d;'>This is an automated message, please do not reply.</p>
+                ";
 
                 $mail = new PHPMailer(true);
 
@@ -154,7 +159,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $mail->isHTML(true);
 
-                $mail->Subject = "BayanLink Verification Code";
+                $mail->Subject = "BayanLink OTP for Account Verification";
                 $mail->Body = $message;
 
                 $mail->send();

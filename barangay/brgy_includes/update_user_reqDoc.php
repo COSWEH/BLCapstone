@@ -40,13 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_SESSION['username'];
         mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username proccessed a document', CURRENT_TIMESTAMP,'$user_id')");
 
-        $message = "<h3>Admin of $admin_brgy</h3>
-                <p>Processed your Document.</p>
-                <p>$formattedDate</p>
-                <br>
-                <br>
-                <p>With regards,</p>
-                <p>BayanLink Team</p>";
+        $message = "
+            <h2 style='color: #2c3e50;'>Document Request Processed</h2>
+            <p>Dear Citizen,</p>
+            <p>We are pleased to inform you that your document request has been processed by the <strong>$admin_brgy Barangay Administration</strong>.</p>
+            <p><strong>Processing Date:</strong> $formattedDate</p>
+            <p>Thank you for using BayanLink for your document needs. You will receive further instructions if necessary.</p>
+            <br>
+            <p>Best regards,</p>
+            <p><strong>The BayanLink Team</strong></p>
+            <p style='font-size: 12px; color: #7f8c8d;'>This is an automated message, please do not reply.</p>
+        ";
 
         $mail = new PHPMailer(true);
 
@@ -64,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mail->isHTML(true);
 
-        $mail->Subject = "BayanLink Document Request";
+        $mail->Subject = "Document Request Processed by $admin_brgy Barangay Administration";
         $mail->Body = $message;
 
         $mail->send();
@@ -99,13 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_SESSION['username'];
         mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username approved a document', CURRENT_TIMESTAMP,'$user_id')");
 
-        $message = "<h3>Admin of $admin_brgy</h3>
-                <p>Approved your Document.</p>
-                <p>$formattedDate</p>
-                <br>
-                <br>
-                <p>With regards,</p>
-                <p>BayanLink Team</p>";
+        $message = "
+            <h2 style='color: #2c3e50;'>Document Request Approved</h2>
+            <p>Dear Citizen,</p>
+            <p>We are pleased to inform you that your document request has been approved by the <strong>$admin_brgy Barangay Administration</strong>.</p>
+            <p><strong>Approval Date:</strong> $formattedDate</p>
+            <p>Thank you for choosing BayanLink. Your approved document is now ready for the next steps.</p>
+            <br>
+            <p>Best regards,</p>
+            <p><strong>The BayanLink Team</strong></p>
+            <p style='font-size: 12px; color: #7f8c8d;'>This is an automated message, please do not reply.</p>
+        ";
 
         $mail = new PHPMailer(true);
 
@@ -123,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mail->isHTML(true);
 
-        $mail->Subject = "BayanLink Document Request";
+        $mail->Subject = "Document Request Approved by $admin_brgy Barangay Administration";
         $mail->Body = $message;
 
         $mail->send();
@@ -180,14 +188,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Create the message with cancellation reasons included
-        $message = "<h3>Admin of $admin_brgy</h3>
-            <p>Cancelled your Document.</p>
-            <p>$formattedDate</p>
+        $message = "
+            <h2 style='color: #c0392b;'>Document Request Cancelled</h2>
+            <p>Dear Citizen,</p>
+            <p>We regret to inform you that your document request has been cancelled by the <strong>$admin_brgy Barangay Administration</strong>.</p>
+            <p><strong>Cancellation Date:</strong> $formattedDate</p>
             $reasonList
-            <br>
+            <p>If you have any questions or need further assistance, please feel free to contact your barangay office.</p>
             <br>
             <p>With regards,</p>
-            <p>BayanLink Team</p>";
+            <p><strong>The BayanLink Team</strong></p>
+            <p style='font-size: 12px; color: #7f8c8d;'>This is an automated message, please do not reply.</p>
+        ";
 
         $mail = new PHPMailer(true);
 
@@ -205,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mail->isHTML(true);
 
-        $mail->Subject = "BayanLink Document Request";
+        $mail->Subject = "Document Request Cancelled by $admin_brgy Barangay Administration";
         $mail->Body = $message;
 
         $mail->send();
