@@ -102,12 +102,9 @@ if ($user_role != 2) {
                             <a class="nav-link active-post" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="logs.php">Logs</a>
+                            <a class="nav-link" aria-current="page" href="superAdminDashboard.php">Dashboard</a>
                         </li>
-                        <?php include('addSuperAdmin.m.php') ?>
-                        <li class="nav-item">
-                            <button class="btn nav-link " aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
-                        </li>
+
                     </ul>
                     <hr>
                 </div>

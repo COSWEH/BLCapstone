@@ -29,7 +29,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
 
     echo $userOtp = $_SESSION['verification_code'];
 } else {
-    header('location: ../adminPost.b.php');
+    header('location: ../adminDashboard.php');
     exit;
 }
 
@@ -89,11 +89,11 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                 $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_contactNum, dateOfBirth, user_age, placeOfBirth, civilStatus, user_city, user_purok, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$contactNum', '$dateOfBirth', '$age', '$placeOfBirth', '$civilStatus', '$user_city', '$purok', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
 
                 // add logs
-                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username added another admin account', CURRENT_TIMESTAMP,'$user_id')");
+                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Admin account registered by $username.', CURRENT_TIMESTAMP,'$user_id')");
 
                 if ($insert) {
-                    $_SESSION['addAdmin_success_message'] = "Register successfully!";
-                    header('Location: ../adminPost.b.php');
+                    $_SESSION['addAdmin_success_message'] = "Admin registered successfully!";
+                    header('Location: ../adminDashboard.php');
                     exit;
                 }
             }
@@ -118,7 +118,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                     </div>
                     <hr>
                     <div class="text-center mt-3">
-                        <a href="../adminPost.b.php" class="text-dark-emphasis"><small>Cancel</small></a>
+                        <a href="../adminDashboard.php" class="text-dark-emphasis"><small>Cancel</small></a>
                     </div>
                 </form>
             </div>

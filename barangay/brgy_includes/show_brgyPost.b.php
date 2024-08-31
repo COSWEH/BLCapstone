@@ -143,8 +143,12 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </div>
                         </div>
                         <input type="hidden" id="getPostIdToUpdate" name="getPostIdToUpdate">
-                        <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary me-2">Update post</button>
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary">Update post</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -155,27 +159,21 @@ while ($data = mysqli_fetch_assoc($result)) {
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center borde border-0">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title" id="deletePostModalLabel">
-                            Delete post
-                        </h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-danger-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-exclamation-triangle text-danger" style="font-size: 25px;"></i>
                     </div>
-                </div>
-                <div class="modal-body">
+                    <h6 class="my-3 fw-semibold">Are you sure?</h6>
+                    <p class="text-muted">This action cannot be undone. Please confirm your decision.</p>
                     <form action="brgy_includes/deletePost.b.php" method="POST">
-                        <div class="text-center mb-3">
-                            <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                            </div>
-                            <h4 class="mb-3">Are you sure?</h4>
-                            <p>Once deleted, you will not be able to recover it.</p>
-                        </div>
-                        <div class="text-center">
+
+                        <div class="d-grid gap-3 mx-4">
                             <?php $_SESSION['getImg'] = $img; ?>
                             <input type="hidden" id="getPostIdToDelete" name="getPostIdToDelete">
-                            <button type="submit" name="baBtnDeletePost" class="btn btn-primary me-2">Delete</button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="baBtnDeletePost" class="btn btn-danger">Delete post</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 </div>

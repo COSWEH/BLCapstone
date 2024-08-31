@@ -98,7 +98,10 @@ if ($user_role != 1) {
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="adminProfiling.b.php">Profiling</a>
                         </li>
-                        <?php include('addAdmin.b.php') ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="adminDashboard.php">Dashboard</a>
+                        </li>
+
                         <hr>
                     </ul>
                 </div>
@@ -133,28 +136,25 @@ if ($user_role != 1) {
         </div>
     </div>
 
-    <!-- Sign out modal -->
+    <!-- signout modal -->
     <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center border border-0">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title" id="signoutModalLabel">
-                            Sign out
-                        </h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-warning-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-box-arrow-left text-warning" style="font-size: 25px;"></i>
                     </div>
-                </div>
-                <div class="modal-body">
+
+                    <h6 class="my-3 fw-semibold">Are you sure you want to sign out?</h6>
+                    <p class="text-muted">Please confirm if you wish to end your session.</p>
                     <form action="../signout.php" method="POST">
-                        <div class="text-center mb-3">
-                            <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 75px;"></i>
-                            </div>
-                            <h4 class="mb-3">Confirm to sign out.</h4>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" name="btnSignout" class="btn btn-primary me-2">Confirm</button>
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+                        <div class="d-grid gap-3 mx-4">
+                            <button type="submit" name="btnSignout" class="btn btn-primary">
+                                Sign out
+                            </button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 </div>

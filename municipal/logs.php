@@ -93,7 +93,7 @@ if ($user_role != 2) {
                             <a class="nav-link" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link post" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
+                            <a class="nav-link" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active-post" aria-current="page" href="logs.php">Logs</a>

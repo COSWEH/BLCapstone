@@ -9,7 +9,7 @@ if (empty($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] != 'POST') {
 
 $superAdminLoc = $_SESSION['user_city'];
 
-$getUserQuery = "SELECT * FROM `tbl_useracc` WHERE `user_city` = '$superAdminLoc'";
+$getUserQuery = "SELECT * FROM `tbl_useracc` WHERE `user_city` = '$superAdminLoc' AND `role_id` != 2";
 $result = mysqli_query($con, $getUserQuery);
 
 if (!$result) {

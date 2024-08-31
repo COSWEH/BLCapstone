@@ -18,7 +18,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
     $placeOfBirth = $_SESSION['placeOfBirth'];
     $civilStatus = $_SESSION['civilStatus'];
     $user_city = $_SESSION['user_city'];
-    $purok = $_SESSION['admin_purok'];
+    $purok = $_SESSION['superAdmin_purok'];
     $email = $_SESSION['superAdmin_email'];
     $username = $_SESSION['superAdmin_username'];
     $password = $_SESSION['superAdmin_password'];
@@ -29,7 +29,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
 
     echo $userOtp = $_SESSION['verification_code'];
 } else {
-    header('location: ../superAdminPost.m.php');
+    header('location: ../superAdminDashboard.php');
     exit;
 }
 
@@ -88,12 +88,12 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_contactNum, dateOfBirth, user_age, placeOfBirth, civilStatus, user_city, user_purok, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$contactNum', '$dateOfBirth', '$age', '$placeOfBirth', '$civilStatus', '$user_city', '$purok', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
 
-                // add logs
-                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username added another super admin account', CURRENT_TIMESTAMP,'$user_id')");
+                // add logs Super Admin account deleted by user admin123.
+                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('',' Super Admin account registered by $username.', CURRENT_TIMESTAMP,'$user_id')");
 
                 if ($insert) {
-                    $_SESSION['addAdmin_success_message'] = "Register successfully!";
-                    header('Location: ../superAdminPost.m.php');
+                    $_SESSION['addSuperAdmin_success_message'] = "Super Admin registered successfully!";
+                    header('Location: ../superAdminDashboard.php');
                     exit;
                 }
             }
@@ -118,7 +118,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                     </div>
                     <hr>
                     <div class="text-center mt-3">
-                        <a href="../superAdminPost.m.php" class="text-dark-emphasis"><small>Cancel</small></a>
+                        <a href="../superAdminDashboard.php" class="text-dark-emphasis"><small>Cancel</small></a>
                     </div>
                 </form>
             </div>

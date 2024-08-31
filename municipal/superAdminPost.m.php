@@ -91,18 +91,15 @@ if ($user_role != 2) {
                     <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column mb-3">
                         <li class="nav-item">
-                            <a class="nav-link  active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
+                            <a class="nav-link active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link post" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
+                            <a class="nav-link" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="logs.php">Logs</a>
+                            <a class="nav-link" aria-current="page" href="superAdminDashboard.php">Dashboard</a>
                         </li>
-                        <?php include('addSuperAdmin.m.php') ?>
-                        <li class="nav-item">
-                            <button class="btn nav-link " aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
-                        </li>
+
                     </ul>
 
                     <!-- add faqs modal -->

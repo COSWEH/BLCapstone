@@ -14,7 +14,7 @@ $purok = $_POST['purok'] ?? '';
 $age = $_POST['age'] ?? '';
 
 // Start building the SQL query
-$getUserQuery = "SELECT * FROM `tbl_useracc` WHERE `user_brgy` = '$adminBrgy'";
+$getUserQuery = "SELECT * FROM `tbl_useracc` WHERE `user_brgy` = '$adminBrgy' AND `role_id` != 1 AND `role_id` != 2";
 
 // Apply search filter
 if (!empty($query)) {

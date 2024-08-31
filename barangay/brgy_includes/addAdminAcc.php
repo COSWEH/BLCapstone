@@ -121,13 +121,13 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($countUsername == 1) {
                 $_SESSION['addAdmin_error_message'] = "Username already exists!";
-                header('location: ../adminPost.b.php');
+                header('location: ../adminDashboard.php');
             } elseif ($countEmail == 1) {
                 $_SESSION['addAdmin_error_message'] = "Email address already exists!";
-                header('location: ../adminPost.b.php');
+                header('location: ../adminDashboard.php');
             } elseif ($password != $confirmPassword) {
                 $_SESSION['addAdmin_error_message'] = "Password did not match!";
-                header('location: ../adminPost.b.php');
+                header('location: ../adminDashboard.php');
             } else {
                 $verification_code = mt_rand(100000, 999999);
 

@@ -24,118 +24,116 @@ if ($rowCount == 0) {
     echo "<p>No document requests found.</p>";
 } else {
 ?>
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
-                <thead class="table-active text-uppercase text-white">
+    <div class="table-responsive">
+        <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
+            <thead class="table-active text-uppercase text-white">
+                <tr>
+                    <th><small>Document Type</small></th>
+                    <th><small>Requester</small></th>
+                    <th><small>Purok</small></th>
+                    <th><small>Age</small></th>
+                    <th><small>Date of Birth</small></th>
+                    <th><small>Place of Birth</small></th>
+                    <th><small>Gender</small></th>
+                    <th><small>Civil Status</small></th>
+                    <th><small>Contact Number</small></th>
+                    <th><small>Barangay</small></th>
+                    <th><small>Date Requested</small></th>
+                    <th><small>e-Signature</small></th>
+                    <th><small>Valid ID</small></th>
+                    <th><small>Status</small></th>
+                    <th><small>Action</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($data = mysqli_fetch_assoc($result)) {
+                    // Fetch data from tbl_requests
+                    $reqId = $data['req_id'];
+                    $userId = $data['user_id'];
+                    $reqDate = $data['req_date'];
+                    $fname = $data['req_fname'];
+                    $mname = $data['req_mname'];
+                    $lname = $data['req_lname'];
+                    $contactNo = $data['req_contactNo'];
+                    $gender = $data['req_gender'];
+                    $brgy = $data['req_brgy'];
+                    $purok = $data['req_purok'];
+                    $age = $data['req_age'];
+                    $dateOfBirth = $data['req_dateOfBirth'];
+                    $req_placeOfBirth = $data['req_placeOfBirth'];
+                    $req_civilStatus = $data['req_civilStatus'];
+                    $req_eSignature = $data['req_eSignature'];
+                    $docType = $data['req_typeOfDoc'];
+                    $status = $data['req_status'];
+                    $req_valid_id = $data['req_valid_id'];
+                    $get_Time_And_Day = new DateTime($reqDate);
+                    $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
+
+
+                    $_SESSION['getRequesterID'] = $userId;
+                ?>
                     <tr>
-                        <th><small>Document Type</small></th>
-                        <th><small>Requester</small></th>
-                        <th><small>Purok</small></th>
-                        <th><small>Age</small></th>
-                        <th><small>Date of Birth</small></th>
-                        <th><small>Place of Birth</small></th>
-                        <th><small>Gender</small></th>
-                        <th><small>Civil Status</small></th>
-                        <th><small>Contact Number</small></th>
-                        <th><small>Barangay</small></th>
-                        <th><small>Date Requested</small></th>
-                        <th><small>e-Signature</small></th>
-                        <th><small>Valid ID</small></th>
-                        <th><small>Status</small></th>
-                        <th><small>Action</small></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($data = mysqli_fetch_assoc($result)) {
-                        // Fetch data from tbl_requests
-                        $reqId = $data['req_id'];
-                        $userId = $data['user_id'];
-                        $reqDate = $data['req_date'];
-                        $fname = $data['req_fname'];
-                        $mname = $data['req_mname'];
-                        $lname = $data['req_lname'];
-                        $contactNo = $data['req_contactNo'];
-                        $gender = $data['req_gender'];
-                        $brgy = $data['req_brgy'];
-                        $purok = $data['req_purok'];
-                        $age = $data['req_age'];
-                        $dateOfBirth = $data['req_dateOfBirth'];
-                        $req_placeOfBirth = $data['req_placeOfBirth'];
-                        $req_civilStatus = $data['req_civilStatus'];
-                        $req_eSignature = $data['req_eSignature'];
-                        $docType = $data['req_typeOfDoc'];
-                        $status = $data['req_status'];
-                        $req_valid_id = $data['req_valid_id'];
-                        $get_Time_And_Day = new DateTime($reqDate);
-                        $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
-
-
-                        $_SESSION['getRequesterID'] = $userId;
-                    ?>
-                        <tr>
-                            <td><small><?php echo htmlspecialchars($docType); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($fname . " " . $mname . " " . $lname); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($purok); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($age); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($dateOfBirth); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($req_placeOfBirth); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($gender); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($req_civilStatus); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($contactNo); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($brgy); ?></small></td>
-                            <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
-                            <td>
-                                <?php if (!empty($req_eSignature)) { ?>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#esModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
-                                        <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                    </a>
-                                <?php } else { ?>
-                                    <span>No E-Signature</span>
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($req_valid_id)) { ?>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>">
-                                        <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                    </a>
-                                <?php } else { ?>
-                                    <span>No Valid ID</span>
-                                <?php } ?>
-                            </td>
-                            <td><small><?php echo htmlspecialchars($status); ?></small></td>
-                            <td>
-                                <?php
-                                if ($status != 'Cancelled') {
-                                ?>
-                                    <div class="dropdown-bottom">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Options
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item aCancel" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#cancelModal<?php echo $status; ?>"><small>Cancel</small></a></li>
-                                            <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal<?php echo $status; ?>"><small>Approve</small></a></li>
-
-                                        </ul>
-                                    </div>
-                                <?php
-                                } else {
-                                ?>
-                                    <button class="btn btn-sm btn-secondary dropdown-toggle disabled" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <td><small><?php echo htmlspecialchars($docType); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($fname . " " . $mname . " " . $lname); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($purok); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($age); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($dateOfBirth); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($req_placeOfBirth); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($gender); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($req_civilStatus); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($contactNo); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($brgy); ?></small></td>
+                        <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
+                        <td>
+                            <?php if (!empty($req_eSignature)) { ?>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#esModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
+                                    <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                </a>
+                            <?php } else { ?>
+                                <span>No E-Signature</span>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if (!empty($req_valid_id)) { ?>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>">
+                                    <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_id); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                </a>
+                            <?php } else { ?>
+                                <span>No Valid ID</span>
+                            <?php } ?>
+                        </td>
+                        <td><small><?php echo htmlspecialchars($status); ?></small></td>
+                        <td>
+                            <?php
+                            if ($status != 'Cancelled') {
+                            ?>
+                                <div class="dropdown-bottom">
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
                                     </button>
-                                <?php
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item aCancel" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#cancelModal<?php echo $status; ?>"><small>Cancel</small></a></li>
+                                        <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal<?php echo $status; ?>"><small>Approve</small></a></li>
+
+                                    </ul>
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <button class="btn btn-sm btn-secondary dropdown-toggle disabled" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Options
+                                </button>
+                            <?php
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 
 
@@ -173,9 +171,9 @@ if ($rowCount == 0) {
     <div class="modal fade" id="cancelModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="cancelModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header text-center text-center border border-0">
                     <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="cancelModal<?php echo $status; ?>Label">
+                        <h4 class="modal-title" id="cancelModal<?php echo $status; ?>Label">
                             Cancellation Reason
                         </h4>
                     </div>
@@ -233,11 +231,13 @@ if ($rowCount == 0) {
                             <label for="floatingTextarea2">Reason to decline:</label>
                         </div>
 
-                        <div>
+                        <div class="d-grid gap-3">
                             <input type="hidden" id="getCancelReqDocId<?php echo $status; ?>" name="getCancelReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Cancel">
-                            <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnConfirm" class="btn btn-success">Confirm</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -249,26 +249,21 @@ if ($rowCount == 0) {
     <div class="modal fade" id="approveModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="approveModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title fw-bold" id="approveModal<?php echo $status; ?>Label">
-                            Approve
-                        </h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-check-circle text-success" style="font-size: 25px;"></i>
                     </div>
-                </div>
-                <div class="modal-body">
+
+                    <h6 class="my-3 fw-semibold">Confirm Approval</h6>
+                    <p class="text-muted">Please confirm if you wish to approve this document.</p>
                     <form action="brgy_includes/update_user_reqDoc.php" method="POST">
-                        <div class="text-center mb-3">
-                            <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                            </div>
-                            <h3 class="mb-3">Confirm to approve.</h3>
-                        </div>
-                        <div class="text-center">
+                        <div class="d-grid gap-3 mx-4">
                             <input type="hidden" id="getApproveReqDocId<?php echo $status; ?>" name="getApproveReqDocId">
                             <input type="hidden" name="ifProcessOrApprove" value="Approve">
-                            <button type="submit" name="btnConfirm" class="btn btn-success me-2 fw-bold">Confirm</button>
-                            <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnConfirm" class="btn btn-success">Confirm</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 </div>

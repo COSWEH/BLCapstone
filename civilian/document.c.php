@@ -75,22 +75,19 @@ if ($user_role != 0) {
                                 <div id="count-notification">
                                 </div>
                             </button>
-                            <ul class="dropdown-menu">
+                            <div class="dropdown-menu">
                                 <div class="card border border-0" style="width: 300px;">
                                     <!-- Notification Header -->
-                                    <div class="card-header bg-info text-light">
-                                        <h6 class=" mb-0">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">
                                             Notifications
                                         </h6>
                                     </div>
-                                    <li>
-                                        <div id="notification-content" class="p-3">
-                                            <!-- Your notification content here -->
-                                        </div>
-
-                                    </li>
+                                    <div id="notification-content" class="p-3" style="height: 200px; overflow-y: auto;">
+                                        <!-- Your notification content here -->
+                                    </div>
                                 </div>
-                            </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -127,34 +124,6 @@ if ($user_role != 0) {
                     </ul>
                 </div>
                 <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
-                <!-- signout modal -->
-                <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <div class="w-100 text-center">
-                                    <h4 class="modal-title " id="signoutModalLabel">
-                                        Sign out
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <form action="../signout.php" method="POST">
-                                    <div class="text-center mb-3">
-                                        <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                                        </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
-                                        <button type="button" class="btn btn-outline-danger " data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </nav>
 
             <!-- main content -->
@@ -499,6 +468,32 @@ if ($user_role != 0) {
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- signout modal -->
+    <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-warning-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-box-arrow-left text-warning" style="font-size: 25px;"></i>
+                    </div>
+
+                    <h6 class="my-3 fw-semibold">Are you sure you want to sign out?</h6>
+                    <p class="text-muted">Please confirm if you wish to end your session.</p>
+                    <form action="../signout.php" method="POST">
+                        <div class="d-grid gap-3 mx-4">
+                            <button type="submit" name="btnSignout" class="btn btn-primary">
+                                Sign out
+                            </button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
