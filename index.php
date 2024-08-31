@@ -80,7 +80,7 @@ session_start();
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border border-0">
                     <div class="w-100 text-center">
                         <h4 class="modal-title " id="loginModalLabel">Sign In</h4>
                     </div>
@@ -128,7 +128,7 @@ session_start();
     <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header border border-0">
                     <div class="w-100 text-center">
                         <h4 class="modal-title " id="forgotPasswordLabel">Forgot Password</h4>
                     </div>
@@ -159,7 +159,7 @@ session_start();
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border border-0">
                     <div class="w-100 text-center">
                         <h4 class="modal-title " id="registerModalLabel">Sign Up</h4>
                     </div>
