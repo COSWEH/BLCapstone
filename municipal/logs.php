@@ -58,15 +58,9 @@ if ($user_role != 2) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
 </head>
 
-<body>
+<body style="font-family: 'Poppins', sans-serif">
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
@@ -192,13 +186,13 @@ if ($user_role != 2) {
                                 <form action="../signout.php" method="POST">
                                     <div class="text-center mb-3">
                                         <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                                            <i class="bi bi-exclamation-circle" style="font-size: 75px;"></i>
                                         </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
+                                        <h4 class="mb-3">Confirm to sign out.</h4>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" name="btnSignout" class="btn btn-primary me-2">Confirm</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-outline-danger " data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>

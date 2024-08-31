@@ -154,7 +154,7 @@ if ($user_role != 1) {
                         </div>
                         <div class="text-center">
                             <button type="submit" name="btnSignout" class="btn btn-primary me-2">Confirm</button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>

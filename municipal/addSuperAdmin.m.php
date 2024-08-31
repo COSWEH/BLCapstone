@@ -6,7 +6,7 @@
  <div class="modal fade" id="addAdmin" tabindex="-1" aria-labelledby="addAdminLabel" aria-hidden="true">
      <div class="modal-dialog">
          <div class="modal-content">
-             <div class="modal-header">
+             <div class="modal-header border border-0">
                  <div class="w-100 text-center">
                      <h4 class="modal-title " id="addAdminLabel">Add Admin Account</h4>
                  </div>

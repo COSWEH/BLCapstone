@@ -42,7 +42,7 @@ if ($user_role != 2) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Municipal</title>
+    <title>Profiling</title>
     <!-- local css -->
     <link rel="stylesheet" href="municipalMaterials/style.m.css">
     <!-- SweetAlert -->
@@ -113,7 +113,7 @@ if ($user_role != 2) {
                 </div>
 
 
-                <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <button type="button" class="btn mt-3 w-100 rounded-5 mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
                 <!-- signout modal -->
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -129,13 +129,13 @@ if ($user_role != 2) {
                                 <form action="../signout.php" method="POST">
                                     <div class="text-center mb-3">
                                         <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                                            <i class="bi bi-exclamation-circle" style="font-size: 75px;"></i>
                                         </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
+                                        <h4 class="mb-3">Confirm to sign out.</h4>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
-                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-outline-danger " data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -297,6 +297,7 @@ if ($user_role != 2) {
     </script>
 
     <script src="municipalMaterials/script.m.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -59,14 +59,9 @@ if ($user_role != 2) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
 </head>
 
-<body>
+<body style="font-family: 'Poppins', sans-serif">
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
@@ -115,9 +110,9 @@ if ($user_role != 2) {
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
 
-                                <div class="modal-header text-center">
+                                <div class="modal-header text-center border border-0">
                                     <div class="w-100 text-center">
-                                        <h4 class="modal-title " id="faqsModalLabel">
+                                        <h4 class="modal-title" id="faqsModalLabel">
                                             Frequently Asked Questions
                                         </h4>
                                     </div>
@@ -137,13 +132,13 @@ if ($user_role != 2) {
 
                                         <div class="row">
                                             <div class="col-12 col-md-4 mb-2">
-                                                <button type="submit" name="btnFaqs" class="btn btn-outline-primary  w-100">Add</button>
+                                                <button type="submit" name="btnFaqs" class="btn btn-primary  w-100">Add</button>
                                             </div>
                                             <div class="col-12 col-md-4 mb-2">
-                                                <button type="button" class="btn btn-outline-warning  w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
+                                                <button type="button" class="btn btn-outline-primary  w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
                                             </div>
                                             <div class="col-12 col-md-4">
-                                                <button type="button" class="btn btn-outline-danger  w-100" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-outline-secondary  w-100" data-bs-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
 
@@ -157,7 +152,7 @@ if ($user_role != 2) {
                     <div class="modal fade" id="editFaqsModal" tabindex="-1" aria-labelledby="editFaqsModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
-                                <div class="modal-header text-center">
+                                <div class="modal-header text-center border border-0">
                                     <div class="w-100 text-center">
                                         <h4 class="modal-title " id="editFaqsModalLabel">
                                             <small>
@@ -182,7 +177,7 @@ if ($user_role != 2) {
                 <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header text-center">
+                            <div class="modal-header text-center border border-0">
                                 <div class="w-100 text-center">
                                     <h4 class="modal-title " id="signoutModalLabel">
                                         Sign out
@@ -193,13 +188,13 @@ if ($user_role != 2) {
                                 <form action="../signout.php" method="POST">
                                     <div class="text-center mb-3">
                                         <div class="mb-3">
-                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                                            <i class="bi bi-exclamation-circle" style="font-size: 75px;"></i>
                                         </div>
-                                        <h3 class="mb-3">Confirm to sign out.</h3>
+                                        <h4 class="mb-3">Confirm to sign out.</h4>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
-                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-outline-danger " data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -427,6 +422,7 @@ if ($user_role != 2) {
     </script>
 
     <script src="municipalMaterials/script.m.js"></script>
+
 </body>
 
 <?php
