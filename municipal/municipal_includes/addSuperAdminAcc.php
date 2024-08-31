@@ -18,8 +18,11 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $mname = ucwords(strtolower($_POST['mname']));
     $lname = ucwords(strtolower($_POST['lname']));
     $gender = $_POST['gender'];
-    $address = ucwords(strtolower($_POST['address']));
+    $purok = $_POST['user_purok'];
     $contactNum = $_POST['contactNum'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $placeOfBirth = ucwords(strtolower($_POST['placeOfBirth']));
+    $civilStatus = $_POST['civilStatus'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['signupPassword'];
@@ -30,8 +33,11 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['superAdmin_mname'] = $mname;
     $_SESSION['superAdmin_lname'] = $lname;
     $_SESSION['superAdmin_gender'] = $gender;
-    $_SESSION['superAdmin_address'] = $address;
+    $_SESSION['superAdmin_purok'] = $purok;
     $_SESSION['superAdmin_contactNum'] = $contactNum;
+    $_SESSION['dateOfBirth'] = $dateOfBirth;
+    $_SESSION['placeOfBirth'] = $placeOfBirth;
+    $_SESSION['civilStatus'] = $civilStatus;
     $_SESSION['superAdmin_email'] = $email;
     $_SESSION['superAdmin_username'] = $username;
     $_SESSION['superAdmin_password'] = $password;
@@ -68,13 +74,16 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     function validatePassword($password)
     {
-        return strlen($password) >= 8; // need at least 8 characters long
+        // Check if the password meets the length requirement and the complexity pattern
+        $lengthValid = strlen($password) >= 8;
+        $patternValid = preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password);
+
+        return $lengthValid && $patternValid;
     }
 
     $fname_result = validateName($fname);
     $mname_result = validateName($mname);
     $lname_result = validateName($lname);
-    $address_result = validateAddress($address);
     $contactNum_result = validatePhoneNumber($contactNum);
     $email_result = validateEmail($email);
     $username_result = validateUsername($username);
@@ -90,9 +99,6 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if (!$lname_result) {
         $errors[] = "Last Name is invalid.";
-    }
-    if (!$address_result) {
-        $errors[] = "Address is invalid.";
     }
     if (!$contactNum_result) {
         $errors[] = "Phone Number is invalid.";
@@ -130,12 +136,17 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $verification_code = mt_rand(100000, 999999);
 
-                $message = "<h3>Your OTP number is <span class='fw-bold' style='font-size: 20px'>$verification_code</span></h3>
-                <p>Use this code to register your account.</p>
-                <br>
-                <br>
-                <p>With regards,</p>
-                <p>BayanLink Team</p>";
+                $message = "
+                    <h2 style='color: #2980b9;'>Your One-Time Password (OTP)</h2>
+                    <p>Dear User,</p>
+                    <p>Your OTP for completing your registration on BayanLink is:</p>
+                    <h1 style='font-size: 24px; color: #e74c3c;'>$verification_code</h1>
+                    <p>Please use this code to verify your account. If you did not request this code, please ignore this message.</p>
+                    <br>
+                    <p>With regards,</p>
+                    <p><strong>The BayanLink Team</strong></p>
+                    <p style='font-size: 12px; color: #7f8c8d;'>This is an automated message, please do not reply.</p>
+                ";
 
                 $mail = new PHPMailer(true);
 
@@ -153,7 +164,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $mail->isHTML(true);
 
-                $mail->Subject = "BayanLink Verification Code";
+                $mail->Subject = "BayanLink OTP for Account Verification";
                 $mail->Body = $message;
 
                 $mail->send();

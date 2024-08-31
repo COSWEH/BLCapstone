@@ -11,7 +11,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id'])) {
 echo ".";
 $getUserid = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
-
 // Validate the user against the database
 $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
 $countUser = mysqli_num_rows($checkUser);
@@ -20,10 +19,18 @@ $countUser = mysqli_num_rows($checkUser);
 if ($countUser < 1) {
     header('Location: ../signout.php');
     exit;
+} else {
+    while ($row = mysqli_fetch_assoc($checkUser)) {
+        $brgy = $row['user_brgy'];
+        $fname = $row['user_fname'];
+        $mname = $row['user_mname'];
+        $lname = $row['user_lname'];
+        $gender = $row['user_gender'];
+    }
 }
 
-// If user role is not brgy admin
-if ($user_role != 1) {
+// If user role is not super admin
+if ($user_role != 2) {
     header('Location: ../unauthorized.php');
     exit;
 }
@@ -35,15 +42,16 @@ if ($user_role != 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profiling</title>
-    <link rel="stylesheet" href="brgyMaterials/style.b.css">
+    <title>Municipal</title>
+    <!-- local css -->
+    <link rel="stylesheet" href="municipalMaterials/style.m.css">
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap icon CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- jquery ajax cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -79,28 +87,61 @@ if ($user_role != 1) {
                         ?>
                         <h6 class="mb-3">
                             <?php
-                            $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
-                            echo ucwords($fullname);
+                            $fullname = $fname . " " . $mname . " " . $lname;
+                            echo ucwords(strtolower($fullname));
                             ?>
                         </h6>
                     </div>
                     <hr>
                     <h3 class="mb-3">Menu</h3>
-                    <ul class="navbar-nav flex-column">
+                    <ul class="navbar-nav flex-column mb-3">
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="adminPost.b.php">Post</a>
+                            <a class="nav-link" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="adminDocument.b.php">Document</a>
+                            <a class="nav-link active-post" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  active-document" aria-current="page" href="adminProfiling.b.php">Profiling</a>
+                            <a class="nav-link" aria-current="page" href="logs.php">Logs</a>
                         </li>
-                        <?php include('addAdmin.b.php') ?>
-                        <hr>
+                        <?php include('addSuperAdmin.m.php') ?>
+                        <li class="nav-item">
+                            <button class="btn nav-link " aria-current="page" data-bs-toggle="modal" data-bs-target="#faqsModal">FAQ</button>
+                        </li>
                     </ul>
+                    <hr>
                 </div>
+
+
                 <button type="button" class="btn mt-3 w-100 rounded-5  mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+                <!-- signout modal -->
+                <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <div class="w-100 text-center">
+                                    <h4 class="modal-title " id="signoutModalLabel">
+                                        Sign out
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <form action="../signout.php" method="POST">
+                                    <div class="text-center mb-3">
+                                        <div class="mb-3">
+                                            <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
+                                        </div>
+                                        <h3 class="mb-3">Confirm to sign out.</h3>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
+                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
 
             <!-- main content -->
@@ -129,6 +170,23 @@ if ($user_role != 1) {
                                     <option value="">All</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <!-- brgy filter -->
+                            <div class="col">
+                                <label for="brgyFilter" class="form-label">Barangay</label>
+                                <select class="form-select" id="brgyFilter" name="brgy">
+                                    <option value="">All</option>
+                                    <!-- Add options for barangays -->
+                                    <option value="Alua">Alua</option>
+                                    <option value="Calaba">Calaba</option>
+                                    <option value="Malapit">Malapit</option>
+                                    <option value="Mangga">Mangga</option>
+                                    <option value="Poblacion">Poblacion</option>
+                                    <option value="Pulo">Pulo</option>
+                                    <option value="San Roque">San Roque</option>
+                                    <option value="Sto Cristo">Sto. Cristo</option>
+                                    <option value="Tabon">Tabon</option>
                                 </select>
                             </div>
 
@@ -172,7 +230,7 @@ if ($user_role != 1) {
                 </div>
                 <hr>
 
-                <h6 class="ms-1 mb-3">List of residents in your barangay</h6>
+                <h6 class="ms-1 mb-3">List of residents in your city</h6>
                 <div id="showAllResidents" class=" fs-5">
 
                 </div>
@@ -181,39 +239,10 @@ if ($user_role != 1) {
         </div>
     </div>
 
-    <!-- signout modal -->
-    <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title " id="signoutModalLabel">
-                            Sign out
-                        </h4>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <form action="../signout.php" method="POST">
-                        <div class="text-center mb-3">
-                            <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                            </div>
-                            <h3 class="mb-3">Confirm to sign out.</h3>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" name="btnSignout" class="btn btn-primary me-2 ">Confirm</button>
-                            <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         $(document).ready(function() {
             // show users list
-            $.post('brgy_includes/allResidents.php', {}, function(data) {
+            $.post('municipal_includes/allResidents.php', {}, function(data) {
                 $("#showAllResidents").html(data);
             });
 
@@ -221,15 +250,17 @@ if ($user_role != 1) {
             function filterResidents() {
                 let searchQuery = $('#searchByName').val(); // Get the search query
                 let sexFilter = $('#sexFilter').val(); // Get the sex filter value
+                let brgyFilter = $('#brgyFilter').val();
                 let purokFilter = $('#purokFilter').val(); // Get the purok filter value
                 let ageFilter = $('#ageFilter').val(); // Get the age filter value
 
                 $.ajax({
-                    url: 'brgy_includes/searchResult.php', // PHP script to handle search and filtering
+                    url: 'municipal_includes/searchResult.php', // PHP script to handle search and filtering
                     method: 'POST',
                     data: {
                         query: searchQuery,
                         sex: sexFilter,
+                        brgy: brgyFilter,
                         purok: purokFilter,
                         age: ageFilter
                     },
@@ -245,14 +276,16 @@ if ($user_role != 1) {
             });
 
             // Trigger the filterResidents function when any of the select dropdowns change
-            $('#sexFilter, #purokFilter, #ageFilter').on('change', function() {
+            $('#sexFilter, #brgyFilter, #purokFilter, #ageFilter').on('change', function() {
                 filterResidents();
             });
 
+            // Clear the filters when the "Clear filter" button is clicked
             $('#clearFilter').on('click', function() {
                 // Reset the values of the filters
                 $('#searchByName').val('');
                 $('#sexFilter').val('');
+                $('#brgyFilter').val('');
                 $('#purokFilter').val('');
                 $('#ageFilter').val('');
 
@@ -262,9 +295,8 @@ if ($user_role != 1) {
 
         });
     </script>
-    <script src="brgyMaterials/script.b.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="municipalMaterials/script.m.js"></script>
 </body>
 
 </html>

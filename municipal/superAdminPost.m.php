@@ -99,6 +99,9 @@ if ($user_role != 2) {
                             <a class="nav-link  active-post" aria-current="page" href="superAdminPost.m.php">Post</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link post" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="logs.php">Logs</a>
                         </li>
                         <?php include('addSuperAdmin.m.php') ?>
@@ -427,6 +430,18 @@ if ($user_role != 2) {
 </body>
 
 <?php
+
+// add super admin acc
+if (isset($_SESSION['addAdmin_success_message'])) {
+    echo '<script>
+            Swal.fire({
+                title: "Success",
+                text: "' . $_SESSION['addAdmin_success_message'] . '",
+                icon: "success",
+            });
+        </script>';
+    unset($_SESSION['addAdmin_success_message']);
+}
 
 // add faqs
 if (isset($_SESSION['faq_message'])) {
