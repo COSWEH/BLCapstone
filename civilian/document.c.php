@@ -251,12 +251,7 @@ if ($user_role != 0) {
 
                                 <div class="form-floating mb-3">
                                     <select id="documentType" name="docType" class="form-select" required>
-                                        <option value="" disabled selected>Select Document</option>
-                                        <option value="Barangay Clearance">Barangay Clearance</option>
-                                        <option value="Barangay Indigency">Barangay Indigency</option>
-                                        <option value="Cedula">Cedula</option>
-                                        <option value="Job Seeker">Job Seeker</option>
-                                        <option value="Business Permit">Business Permit</option>
+                                        <!-- show all document type from database -->
                                     </select>
                                     <label for="documentType">Document Type</label>
                                 </div>
@@ -550,6 +545,20 @@ if ($user_role != 0) {
             updateCount('civilian_includes/get_processing_count.php', '#count-processing');
             updateCount('civilian_includes/get_approved_count.php', '#count-approved');
             updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
+
+
+            $.ajax({
+                url: '../includes/getDocTypes.php',
+                type: 'POST',
+                dataType: 'html',
+                success: function(data) {
+                    $("#documentType").html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: " + status + error);
+                }
+            });
+
 
             $.post('civilian_includes/show_notification.php', {}, function(data) {
                 $("#notification-content").html(data);

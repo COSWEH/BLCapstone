@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mail->send();
 
         if ($query) {
-            $_SESSION['processing_message'] = "Processing!";
+            $_SESSION['processing_message'] = "Success!";
             header('Location: ../adminDocument.b.php');
             exit;
         } else {

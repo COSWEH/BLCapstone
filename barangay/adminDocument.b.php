@@ -295,9 +295,9 @@ function displayAlert($type, $message, $title)
 
 // Success messages handling
 $alerts = [
-    'processing_message' => ['type' => 'success', 'title' => 'Processing'],
-    'approved_message' => ['type' => 'success', 'title' => 'Approved'],
-    'cancelled_message' => ['type' => 'success', 'title' => 'Cancelled'],
+    'processing_message' => ['type' => 'success', 'title' => 'Processing the Document'],
+    'approved_message' => ['type' => 'success', 'title' => 'Approved the Document'],
+    'cancelled_message' => ['type' => 'success', 'title' => 'Cancelled the Document'],
 ];
 
 foreach ($alerts as $sessionKey => $alertConfig) {

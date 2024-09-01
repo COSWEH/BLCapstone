@@ -1,7 +1,10 @@
 <?php
 include('conn.inc.php');
-session_start();
 
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    header('Location: ../index.php');
+    exit;
+}
 // Fetch the latest 5 FAQs for initial display
 $sql = "SELECT * FROM tbl_faqs ORDER BY faq_created_at DESC LIMIT 5";
 $initial_result = mysqli_query($con, $sql);

@@ -107,7 +107,6 @@ if ($user_role != 1) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <h1>Dashboard</h1>
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Admin account</h6>
@@ -116,6 +115,19 @@ if ($user_role != 1) {
                     <div class="card-body">
 
                         <div id="showAllAdmin" class="overflow-auto" style="height: 300px;">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Types of documents</h6>
+                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addDocumentModal">Add document</button>
+                    </div>
+                    <div class="card-body">
+
+                        <div id="showAllDocuments" class="overflow-auto" style="height: 300px;">
 
                         </div>
                     </div>
@@ -291,6 +303,42 @@ if ($user_role != 1) {
         </div>
     </div>
 
+    <!-- add doc modal -->
+    <div class="modal fade" id="addDocumentModal" tabindex="-1" aria-labelledby="addDocumentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-file-earmark-text text-success" style="font-size: 25px;"></i>
+                    </div>
+
+                    <h6 class="my-3 fw-semibold">Add Document</h6>
+                    <p class="text-muted">Fill out the form below to add a new document.</p>
+
+                    <div class="container">
+                        <form action="brgy_includes/addDocument.php" method="POST">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="documentType" name="documentType" placeholder="Document Type">
+                                <label for="documentType">Document Type</label>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" name="btnAddDocument" class="btn btn-primary">
+                                    Add Document
+                                </button>
+                                <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal Close Button -->
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
 
     <!-- signout modal -->
     <div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="signoutModalLabel" aria-hidden="true">
@@ -323,6 +371,10 @@ if ($user_role != 1) {
 
             $.post('brgy_includes/AllAdmin.php', {}, function(data) {
                 $("#showAllAdmin").html(data);
+            });
+
+            $.post('brgy_includes/showAllDocuments.php', {}, function(data) {
+                $("#showAllDocuments").html(data);
             });
 
             // get admin info
@@ -400,6 +452,8 @@ function displayAlert($type, $message, $title)
 $alerts = [
     'delete_message' => ['type' => 'success', 'title' => 'Success'],
     'addAdmin_success_message' => ['type' => 'success', 'title' => 'Success'],
+    'delete_docType_message' => ['type' => 'success', 'title' => 'Success'],
+    'add_doc_message' => ['type' => 'success', 'title' => 'Success']
 ];
 
 // Iterate over each session key and display the alert if set

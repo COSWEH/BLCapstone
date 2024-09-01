@@ -211,26 +211,23 @@ while ($data = mysqli_fetch_assoc($result)) {
     <div class="modal fade" id="cancelRequestModal" tabindex="-1" aria-labelledby="cancelRequestModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title" id="cancelRequestModalLabel">
-                            Cancel Request
-                        </h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-danger-subtle mx-auto mb-3" style="height: 50px; width: 50px;">
+                        <i class="bi bi-x-circle text-danger" style="font-size: 25px;"></i>
                     </div>
-                </div>
-                <div class="modal-body">
+
+                    <h5 class="fw-semibold">Cancel Request</h5>
+                    <p class="text-muted mb-4">Are you sure you want to cancel this request? Once canceled, you will not be able to recover it.</p>
+
                     <form action="civilian_includes/cancel_document_request.php" method="POST">
-                        <div class="text-center mb-3">
-                            <div class="mb-3">
-                                <i class="bi bi-exclamation-circle" style="font-size: 100px;"></i>
-                            </div>
-                            <h1 class="mb-3">Are you sure?</h1>
-                            <h6 class="lead">Once canceled, you will not be able to recover it.</h6>
-                        </div>
-                        <div class="text-center">
-                            <input type="hidden" id="getReqID" name="getReqID">
-                            <button type="submit" name="cBtnConfirm" class="btn btn-success me-2">Confirm</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <input type="hidden" id="getReqID" name="getReqID">
+                        <div class="d-grid gap-3 mx-4">
+                            <button type="submit" name="cBtnConfirm" class="btn btn-danger">
+                                Confirm
+                            </button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">
+                                Abort
+                            </button>
                         </div>
                     </form>
                 </div>

@@ -750,16 +750,20 @@ session_start();
                 const passwordInput = document.getElementById(inputId);
                 const showPasswordIcon = document.getElementById(iconId);
 
-                showPasswordIcon.addEventListener("click", function() {
-                    if (passwordInput.type === "password") {
-                        passwordInput.type = "text";
-                        showPasswordIcon.innerHTML = '<i class="bi bi-eye-fill"></i>';
-                    } else {
-                        passwordInput.type = "password";
-                        showPasswordIcon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
-                    }
-                });
+                // Check if elements exist
+                if (passwordInput && showPasswordIcon) {
+                    showPasswordIcon.addEventListener("click", function() {
+                        if (passwordInput.type === "password") {
+                            passwordInput.type = "text";
+                            showPasswordIcon.innerHTML = '<i class="bi bi-eye-fill"></i>';
+                        } else {
+                            passwordInput.type = "password";
+                            showPasswordIcon.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+                        }
+                    });
+                }
             }
+
 
             // Initialize the toggle for each password field
             togglePasswordVisibility("signinPassword", "showPasswordIcon");
@@ -791,11 +795,11 @@ function displayAlert($sessionKey, $title, $icon)
 }
 
 // Display notifications
-displayAlert('signin_error_message', 'Error', 'warning');
-displayAlert('signup_error_message', 'Error', 'error');
-displayAlert('signup_success_message', 'Done', 'success');
-displayAlert('fpMessage', 'Success', 'success');
-displayAlert('errorFPMessage', 'Invalid', 'warning');
-displayAlert('npMessage', 'Success', 'success');
+displayAlert('signin_error_message', 'Sign In Error', 'warning');
+displayAlert('signup_error_message', 'Sign Up Error', 'error');
+displayAlert('signup_success_message', 'Sign Up Successful', 'success');
+displayAlert('fpMessage', 'Password Reset Successful', 'success');
+displayAlert('errorFPMessage', 'Password Reset Error', 'warning');
+displayAlert('passUpdatedMessage', 'Password Updated Successfully', 'success');
 
 ?>

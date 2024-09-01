@@ -53,7 +53,7 @@
              WHERE `user_id` = '$userid'");
 
         if ($query) {
-            $_SESSION['npMessage'] = "Password updated. You can now login.";
+            $_SESSION['passUpdatedMessage'] = "Password updated. You can now login.";
             header('Location: ../index.php');
             exit;
         }
