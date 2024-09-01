@@ -128,7 +128,7 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Super admin account</h6>
-                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdminModal">Add account</button>
+                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
                     </div>
                     <div class="card-body">
 
@@ -155,8 +155,8 @@ if ($user_role != 2) {
         </div>
     </div>
 
-    <!-- add admin account modal -->
-    <div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <!-- add super admin account modal -->
+    <div class="modal fade" id="addSuperAdminModal" tabindex="-1" aria-labelledby="addSuperAdminModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center">
@@ -188,7 +188,7 @@ if ($user_role != 2) {
                                     <label for="user_lname" class="form-label">Last Name</label>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-12 mb-2">
                                         <button type="button" class="btn btn-primary w-100" id="nextBtn1">
                                             Next <i class="bi bi-arrow-right-square"></i>
                                         </button>

@@ -1,87 +1,63 @@
+<?php
+include('includes/conn.inc.php');
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $section = $_POST['section'];
+    $content = $_POST['content'];
+
+    // Escape user inputs for security
+    $section = mysqli_real_escape_string($con, $section);
+    $content = mysqli_real_escape_string($con, $content);
+
+    // Use REPLACE INTO to update or insert content
+    $query = "REPLACE INTO landing_page_content (section, content) VALUES ('$section', '$content')";
+    if (!mysqli_query($con, $query)) {
+        die("Error executing query: " . mysqli_error($con));
+    }
+}
+
+// Fetch existing content
+$sections = ['home', 'services', 'contact', 'about'];
+$contents = [];
+foreach ($sections as $section) {
+    $section = mysqli_real_escape_string($con, $section);
+    $query = "SELECT content FROM landing_page_content WHERE section = '$section'";
+    $result = mysqli_query($con, $query);
+
+    if (!$result) {
+        die("Error executing query: " . mysqli_error($con));
+    }
+
+    $row = mysqli_fetch_assoc($result);
+    $contents[$section] = $row['content'] ?? '';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Bootstrap icon CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- jquery ajax cdn -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h1 class="text-center text-white p2 bg-dark bg-gradient text-uppercase">Responsove BOOTSTRAP Table</h1>
-
-    <div class="container mt-5">
-        <table class="table table-responsive table-bordered border-dark table-hover text-center text-capitalized">
-            <tr class="table-dark table-active text-uppercase text-white">
-                <th>Sr:No</th>
-                <th>Employee Name</th>
-                <th>Email</th>
-                <th>City</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>john</td>
-                <td>john@gmail.com</td>
-                <td>New York</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>william</td>
-                <td>william@gmail.com</td>
-                <td>Paris</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>smith</td>
-                <td>smith@gmail.com</td>
-                <td>Lahore</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>william</td>
-                <td>william@gmail.com</td>
-                <td>Paris</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>smith</td>
-                <td>smith@gmail.com</td>
-                <td>Lahore</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>smith</td>
-                <td>smith@gmail.com</td>
-                <td>Lahore</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>william</td>
-                <td>william@gmail.com</td>
-                <td>Paris</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>smith</td>
-                <td>smith@gmail.com</td>
-                <td>Lahore</td>
-            </tr>
-        </table>
+    <div class="container">
+        <h1 class="my-4">Admin Panel</h1>
+        <form method="post">
+            <?php foreach ($sections as $section): ?>
+                <div class="form-group">
+                    <label for="content-<?php echo $section; ?>">Edit <?php echo ucfirst($section); ?> Section:</label>
+                    <textarea id="content-<?php echo $section; ?>" name="content" class="form-control" rows="5"><?php echo htmlspecialchars($contents[$section]); ?></textarea>
+                    <input type="hidden" name="section" value="<?php echo $section; ?>">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            <?php endforeach; ?>
+        </form>
     </div>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
