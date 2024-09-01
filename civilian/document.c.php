@@ -217,260 +217,269 @@ if ($user_role != 0) {
     <div class="modal fade" id="reqDocModal" tabindex="-1" aria-labelledby="reqDocModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title " id="reqDocModalLabel">Request Document</h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-info-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-file-earmark-text text-info" style="font-size: 25px;"></i>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <!-- Modal Title -->
+                    <h6 class="my-3 fw-semibold">Request a Document</h6>
+                    <p class="text-muted">Please fill in the necessary information to request a document.</p>
+
+                    <div class="container">
+                        <!-- Request Document Form -->
+                        <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST" enctype="multipart/form-data">
+                            <!-- Step 1: Request For and Document Type -->
+                            <div id="step1" class="form-step">
+                                <div class="text-start">
+                                    <label class="form-label">Request For :</label>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input id="forYourself" class="form-check-input" type="radio" name="requestType" value="yourself" checked>
+                                                <label class="form-check-label " for="forYourself">Yourself</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input id="forOthers" class="form-check-input" type="radio" name="requestType" value="others">
+                                                <label class="form-check-label " for="forOthers">Others</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select id="documentType" name="docType" class="form-select" required>
+                                        <option value="" disabled selected>Select Document</option>
+                                        <option value="Barangay Clearance">Barangay Clearance</option>
+                                        <option value="Barangay Indigency">Barangay Indigency</option>
+                                        <option value="Cedula">Cedula</option>
+                                        <option value="Job Seeker">Job Seeker</option>
+                                        <option value="Business Permit">Business Permit</option>
+                                    </select>
+                                    <label for="documentType">Document Type</label>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary  w-100" id="nextBtn1">Next
+                                            <i class="bi bi-arrow-right-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: First, Middle, and Last Name -->
+                            <div id="step2" class="form-step d-none">
+                                <h4 class="h4  mb-3">Full Name</h4>
+                                <input type="hidden" name="getUserid" value="<?php echo $getUserid; ?>">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-floating mb-3">
+                                            <input id="firstName" class="form-control" type="text" name="fName" placeholder="First Name" value="<?php echo $_SESSION['user_fname']; ?>" required>
+                                            <label for="firstName">First Name</label>
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <input id="middleName" class="form-control" type="text" name="mName" placeholder="Middle Name" value="<?php echo $_SESSION['user_mname']; ?>" required>
+                                            <label for="middleName">Middle Name</label>
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <input id="lastName" class="form-control" type="text" name="lName" placeholder="Last Name" value="<?php echo $_SESSION['user_lname']; ?>" required>
+                                            <label for="lastName">Last Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button type="button" class="btn btn-secondary  w-100" id="prevBtn1">
+                                            <i class="bi bi-arrow-left-square"></i> Previous
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary  w-100" id="nextBtn2">
+                                            Next <i class="bi bi-arrow-right-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Contact No, Gender, and Barangay -->
+                            <div id="step3" class="form-step d-none">
+                                <h4 class="h4  mb-3">Contact Information</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-floating mb-3">
+                                            <input id="contactNumber" class="form-control" type="text" name="contNumber" placeholder="Contact Number" value="<?php echo $_SESSION['user_contactNum']; ?>" required>
+                                            <label for="contactNumber">Contact Number</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select id="user_gender" name="user_gender" class="form-select" required>
+                                                <option value="" disabled selected>Select Male or Female</option>
+                                                <?php
+                                                if (isset($_SESSION['user_gender'])) {
+                                                    $getGender = $_SESSION['user_gender'];
+                                                    echo '<option value="Male"' . ($getGender == "Male" ? ' selected' : '') . '>Male</option>';
+                                                    echo '<option value="Female"' . ($getGender == "Female" ? ' selected' : '') . '>Female</option>';
+                                                } else {
+                                                    echo '<option value="Male">Male</option>';
+                                                    echo '<option value="Female">Female</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                            <label for="user_gender" class="form-label">Sex</label>
+                                        </div>
+                                        <?php $user_brgy = $_SESSION['user_brgy']; ?>
+                                        <div class="form-floating mb-3">
+                                            <select name="user_brgy" id="user_brgy" class="form-select" required>
+                                                <option value="" disabled <?php echo $user_brgy === 'N/a' ? 'selected' : ''; ?>>Select Barangay</option>
+                                                <option value="Alua" <?php echo $user_brgy === 'Alua' ? 'selected' : ''; ?>>Alua</option>
+                                                <option value="Calaba" <?php echo $user_brgy === 'Calaba' ? 'selected' : ''; ?>>Calaba</option>
+                                                <option value="Malapit" <?php echo $user_brgy === 'Malapit' ? 'selected' : ''; ?>>Malapit</option>
+                                                <option value="Mangga" <?php echo $user_brgy === 'Mangga' ? 'selected' : ''; ?>>Mangga</option>
+                                                <option value="Poblacion" <?php echo $user_brgy === 'Poblacion' ? 'selected' : ''; ?>>Poblacion</option>
+                                                <option value="Pulo" <?php echo $user_brgy === 'Pulo' ? 'selected' : ''; ?>>Pulo</option>
+                                                <option value="San Roque" <?php echo $user_brgy === 'San Roque' ? 'selected' : ''; ?>>San Roque</option>
+                                                <option value="Sto. Cristo" <?php echo $user_brgy === 'Sto. Cristo' ? 'selected' : ''; ?>>Sto. Cristo</option>
+                                                <option value="Tabon" <?php echo $user_brgy === 'Tabon' ? 'selected' : ''; ?>>Tabon</option>
+                                            </select>
+                                            <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button type="button" class="btn btn-secondary  w-100" id="prevBtn2">
+                                            <i class="bi bi-arrow-left-square"></i> Previous
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary  w-100" id="nextBtn3">
+                                            Next <i class="bi bi-arrow-right-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Purok, Age, and Date of Birth -->
+                            <div id="step4" class="form-step d-none">
+                                <h4 class="h4  mb-3">Additional Information</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <?php $user_purok = $_SESSION['user_purok']; ?>
+                                        <div class="form-floating mb-3">
+                                            <input id="user_purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php echo $user_purok; ?>" required>
+                                            <label for="user_purok">Purok</label>
+                                        </div>
+
+                                        <?php $dateOfBirth = $_SESSION['dateOfBirth']; ?>
+                                        <div class="form-floating mb-3">
+                                            <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" value="<?php echo $dateOfBirth; ?>" placeholder="Date of Birth" required>
+                                            <label for="dateOfBirth">Date of Birth</label>
+                                        </div>
+                                        <?php $dob = new DateTime($dateOfBirth);
+                                        $now = new DateTime();
+                                        $interval = $now->diff($dob);
+                                        $age = $interval->y; ?>
+                                        <div class="form-floating mb-3">
+                                            <input id="user_age" class="form-control" type="number" name="age" placeholder="Age" value="<?php echo $age; ?>" required>
+                                            <label for="user_age">Age</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button type="button" class="btn btn-secondary  w-100" id="prevBtn3">
+                                            <i class="bi bi-arrow-left-square"></i> Previous
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary  w-100" id="nextBtn4">
+                                            Next <i class="bi bi-arrow-right-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 5: Place of Birth, Civil Status, and e-Signature -->
+                            <div id="step5" class="form-step d-none">
+                                <h4 class="h4  mb-3">Additional Information</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <?php $placeOfBirth = $_SESSION['placeOfBirth']; ?>
+                                        <div class="form-floating mb-3">
+                                            <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" value="<?php echo $placeOfBirth; ?>" required>
+                                            <label for="placeOfBirth">Place of Birth</label>
+                                        </div>
+                                        <?php
+                                        $civilStatus = isset($_SESSION['civilStatus']) ? $_SESSION['civilStatus'] : '';
+                                        ?>
+                                        <div class="form-floating mb-3">
+                                            <select id="civilStatus" name="civilStatus" class="form-select" required>
+                                                <option value="" disabled <?php echo empty($civilStatus) ? 'selected' : ''; ?>>Choose Status</option>
+                                                <option value="Single" <?php echo $civilStatus === 'Single' ? 'selected' : ''; ?>>Single</option>
+                                                <option value="Married" <?php echo $civilStatus === 'Married' ? 'selected' : ''; ?>>Married</option>
+                                                <option value="Widowed" <?php echo $civilStatus === 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
+                                                <option value="Divorced" <?php echo $civilStatus === 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
+                                            </select>
+                                            <label for="civilStatus">Civil Status</label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button type="button" class="btn btn-secondary  w-100" id="prevBtn4">
+                                            <i class="bi bi-arrow-left-square"></i> Previous
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary  w-100" id="nextBtn5">
+                                            Next <i class="bi bi-arrow-right-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 6: Valid ID, Password -->
+                            <div id="step6" class="form-step d-none">
+                                <h4 class="h4  mb-3">Final Information</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-floating mb-3">
+                                            <input id="eSignature" class="form-control" type="file" name="eSignature" accept=".jpg, jpeg, .png" required>
+                                            <label for="eSignature" class="form-label">E-Signature</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input id="userValidID" class="form-control" type="file" name="userValidID" accept=".jpg, jpeg, .png" required>
+                                            <label for="userValidID" class="form-label">Valid ID</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button type="button" class="btn btn-secondary  w-100" id="prevBtn5">
+                                            <i class="bi bi-arrow-left-square"></i> Previous
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" name="btnReqDocument" id="btnReqDocument" class="btn btn-success  w-100">
+                                            Submit <i class="bi bi-check-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="container p-5 modal-body">
-                    <!-- Request Document Form -->
-                    <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST" enctype="multipart/form-data">
-                        <!-- Step 1: Request For and Document Type -->
-                        <div id="step1" class="form-step">
-                            <label class="form-label">Request For</label>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input id="forYourself" class="form-check-input" type="radio" name="requestType" value="yourself" checked>
-                                        <label class="form-check-label " for="forYourself">Yourself</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input id="forOthers" class="form-check-input" type="radio" name="requestType" value="others">
-                                        <label class="form-check-label " for="forOthers">Others</label>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="form-floating mb-3">
-                                <select id="documentType" name="docType" class="form-select" required>
-                                    <option value="" disabled selected>Select Document</option>
-                                    <option value="Barangay Clearance">Barangay Clearance</option>
-                                    <option value="Barangay Indigency">Barangay Indigency</option>
-                                    <option value="Cedula">Cedula</option>
-                                    <option value="Job Seeker">Job Seeker</option>
-                                    <option value="Business Permit">Business Permit</option>
-                                </select>
-                                <label for="documentType">Document Type</label>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn1">Next
-                                        <i class="bi bi-arrow-right-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 2: First, Middle, and Last Name -->
-                        <div id="step2" class="form-step d-none">
-                            <h4 class="h4  mb-3">Full Name</h4>
-                            <input type="hidden" name="getUserid" value="<?php echo $getUserid; ?>">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input id="firstName" class="form-control" type="text" name="fName" placeholder="First Name" value="<?php echo $_SESSION['user_fname']; ?>" required>
-                                        <label for="firstName">First Name</label>
-                                    </div>
-
-                                    <div class="form-floating mb-3">
-                                        <input id="middleName" class="form-control" type="text" name="mName" placeholder="Middle Name" value="<?php echo $_SESSION['user_mname']; ?>" required>
-                                        <label for="middleName">Middle Name</label>
-                                    </div>
-
-                                    <div class="form-floating mb-3">
-                                        <input id="lastName" class="form-control" type="text" name="lName" placeholder="Last Name" value="<?php echo $_SESSION['user_lname']; ?>" required>
-                                        <label for="lastName">Last Name</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn1">
-                                        <i class="bi bi-arrow-left-square"></i> Previous
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn2">
-                                        Next <i class="bi bi-arrow-right-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 3: Contact No, Gender, and Barangay -->
-                        <div id="step3" class="form-step d-none">
-                            <h4 class="h4  mb-3">Contact Information</h4>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input id="contactNumber" class="form-control" type="text" name="contNumber" placeholder="Contact Number" value="<?php echo $_SESSION['user_contactNum']; ?>" required>
-                                        <label for="contactNumber">Contact Number</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <select id="user_gender" name="user_gender" class="form-select" required>
-                                            <option value="" disabled selected>Select Male or Female</option>
-                                            <?php
-                                            if (isset($_SESSION['user_gender'])) {
-                                                $getGender = $_SESSION['user_gender'];
-                                                echo '<option value="Male"' . ($getGender == "Male" ? ' selected' : '') . '>Male</option>';
-                                                echo '<option value="Female"' . ($getGender == "Female" ? ' selected' : '') . '>Female</option>';
-                                            } else {
-                                                echo '<option value="Male">Male</option>';
-                                                echo '<option value="Female">Female</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                        <label for="user_gender" class="form-label">Sex</label>
-                                    </div>
-                                    <?php $user_brgy = $_SESSION['user_brgy']; ?>
-                                    <div class="form-floating mb-3">
-                                        <select name="user_brgy" id="user_brgy" class="form-select" required>
-                                            <option value="" disabled <?php echo $user_brgy === 'N/a' ? 'selected' : ''; ?>>Select Barangay</option>
-                                            <option value="Alua" <?php echo $user_brgy === 'Alua' ? 'selected' : ''; ?>>Alua</option>
-                                            <option value="Calaba" <?php echo $user_brgy === 'Calaba' ? 'selected' : ''; ?>>Calaba</option>
-                                            <option value="Malapit" <?php echo $user_brgy === 'Malapit' ? 'selected' : ''; ?>>Malapit</option>
-                                            <option value="Mangga" <?php echo $user_brgy === 'Mangga' ? 'selected' : ''; ?>>Mangga</option>
-                                            <option value="Poblacion" <?php echo $user_brgy === 'Poblacion' ? 'selected' : ''; ?>>Poblacion</option>
-                                            <option value="Pulo" <?php echo $user_brgy === 'Pulo' ? 'selected' : ''; ?>>Pulo</option>
-                                            <option value="San Roque" <?php echo $user_brgy === 'San Roque' ? 'selected' : ''; ?>>San Roque</option>
-                                            <option value="Sto. Cristo" <?php echo $user_brgy === 'Sto. Cristo' ? 'selected' : ''; ?>>Sto. Cristo</option>
-                                            <option value="Tabon" <?php echo $user_brgy === 'Tabon' ? 'selected' : ''; ?>>Tabon</option>
-                                        </select>
-                                        <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn2">
-                                        <i class="bi bi-arrow-left-square"></i> Previous
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn3">
-                                        Next <i class="bi bi-arrow-right-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 4: Purok, Age, and Date of Birth -->
-                        <div id="step4" class="form-step d-none">
-                            <h4 class="h4  mb-3">Additional Information</h4>
-                            <div class="row">
-                                <div class="col">
-                                    <?php $user_purok = $_SESSION['user_purok']; ?>
-                                    <div class="form-floating mb-3">
-                                        <input id="user_purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php echo $user_purok; ?>" required>
-                                        <label for="user_purok">Purok</label>
-                                    </div>
-
-                                    <?php $dateOfBirth = $_SESSION['dateOfBirth']; ?>
-                                    <div class="form-floating mb-3">
-                                        <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" value="<?php echo $dateOfBirth; ?>" placeholder="Date of Birth" required>
-                                        <label for="dateOfBirth">Date of Birth</label>
-                                    </div>
-                                    <?php $dob = new DateTime($dateOfBirth);
-                                    $now = new DateTime();
-                                    $interval = $now->diff($dob);
-                                    $age = $interval->y; ?>
-                                    <div class="form-floating mb-3">
-                                        <input id="user_age" class="form-control" type="number" name="age" placeholder="Age" value="<?php echo $age; ?>" required>
-                                        <label for="user_age">Age</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn3">
-                                        <i class="bi bi-arrow-left-square"></i> Previous
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn4">
-                                        Next <i class="bi bi-arrow-right-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 5: Place of Birth, Civil Status, and e-Signature -->
-                        <div id="step5" class="form-step d-none">
-                            <h4 class="h4  mb-3">Additional Information</h4>
-                            <div class="row">
-                                <div class="col">
-                                    <?php $placeOfBirth = $_SESSION['placeOfBirth']; ?>
-                                    <div class="form-floating mb-3">
-                                        <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" value="<?php echo $placeOfBirth; ?>" required>
-                                        <label for="placeOfBirth">Place of Birth</label>
-                                    </div>
-                                    <?php
-                                    $civilStatus = isset($_SESSION['civilStatus']) ? $_SESSION['civilStatus'] : '';
-                                    ?>
-                                    <div class="form-floating mb-3">
-                                        <select id="civilStatus" name="civilStatus" class="form-select" required>
-                                            <option value="" disabled <?php echo empty($civilStatus) ? 'selected' : ''; ?>>Choose Status</option>
-                                            <option value="Single" <?php echo $civilStatus === 'Single' ? 'selected' : ''; ?>>Single</option>
-                                            <option value="Married" <?php echo $civilStatus === 'Married' ? 'selected' : ''; ?>>Married</option>
-                                            <option value="Widowed" <?php echo $civilStatus === 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
-                                            <option value="Divorced" <?php echo $civilStatus === 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
-                                        </select>
-                                        <label for="civilStatus">Civil Status</label>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn4">
-                                        <i class="bi bi-arrow-left-square"></i> Previous
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary  w-100" id="nextBtn5">
-                                        Next <i class="bi bi-arrow-right-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 6: Valid ID, Password -->
-                        <div id="step6" class="form-step d-none">
-                            <h4 class="h4  mb-3">Final Information</h4>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input id="eSignature" class="form-control" type="file" name="eSignature" accept=".jpg, jpeg, .png" required>
-                                        <label for="eSignature" class="form-label">E-Signature</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input id="userValidID" class="form-control" type="file" name="userValidID" accept=".jpg, jpeg, .png" required>
-                                        <label for="userValidID" class="form-label">Valid ID</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <button type="button" class="btn btn-secondary  w-100" id="prevBtn5">
-                                        <i class="bi bi-arrow-left-square"></i> Previous
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="submit" name="btnReqDocument" id="btnReqDocument" class="btn btn-success  w-100">
-                                        Submit <i class="bi bi-check-square"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <!-- Modal Close Button -->
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>

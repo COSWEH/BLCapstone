@@ -227,203 +227,216 @@ if ($user_role != 0) {
             </main>
         </div>
     </div>
+
     <!-- change password modal -->
     <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header border border-0">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title " id="changePasswordModalLabel">Change Password</h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-warning-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-lock text-warning" style="font-size: 25px;"></i>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <!-- Modal Title -->
+                    <h6 class="my-3 fw-semibold">Change Password</h6>
+                    <p class="text-muted">Please enter your current password and the new password you wish to set.</p>
+
+
+                    <div class="container">
+                        <!-- Password Change Form -->
+                        <form action="civilian_includes/change_password.c.php" method="POST">
+                            <div style="position: relative;">
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Current Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="currentShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
+                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                </div>
+                            </div>
+
+                            <div style="position: relative;">
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="newShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                </div>
+                            </div>
+
+                            <div style="position: relative;">
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="confirmShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
+                                    <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" name="btnChangePass" class="btn btn-primary w-100">Change Password</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="container p-5 modal-body">
-                    <!-- Password Change Form -->
-                    <form action="civilian_includes/change_password.c.php" method="POST">
-                        <div style="position: relative;">
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Current Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="currentShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
-                                <label for="currentPassword" class="form-label">Current Password</label>
-                            </div>
-                        </div>
 
-                        <div style="position: relative;">
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="newShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
-                                <label for="newPassword" class="form-label">New Password</label>
-                            </div>
-                        </div>
-
-                        <div style="position: relative;">
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"><span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="confirmShowPasswordIcon"><i class=" bi bi-eye-slash-fill"></i></span>
-                                <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
-                            </div>
-                        </div>
-
-                        <button type="submit" name="btnChangePass" class="btn btn-primary w-100">Change Password</button>
-                    </form>
-                </div>
+                <!-- Modal Close Button -->
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>
 
     <!-- Update Information Modal -->
     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header border border-0">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title " id="updateModalLabel">Update information</h4>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil text-primary" style="font-size: 25px;"></i>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="container p-5 modal-body">
-                    <form action="civilian_includes/update_information.c.php" method="POST">
-                        <h4 class="h4 ">Personal Information</h4>
-                        <!-- Dropdown for San Isidro -->
-                        <div class="form-floating mb-3">
-                            <?php
-                            $selectedValue = isset($_SESSION['fromSanIsidro']) ? $_SESSION['fromSanIsidro'] : '';
-                            ?>
-                            <select id="fromSanIsidroYN" name="fromSanIsidro" class="form-select" required>
-                                <option value="" disabled <?php echo $selectedValue === '' ? 'selected' : ''; ?>>Select Yes or No</option>
-                                <option value="Yes" <?php echo $selectedValue === 'Yes' ? 'selected' : ''; ?>>Yes</option>
-                                <option value="No" <?php echo $selectedValue === 'No' ? 'selected' : ''; ?>>No</option>
-                            </select>
-                            <label for="fromSanIsidroYN" class="form-label">Are you from San Isidro?</label>
-                        </div>
 
-                        <!-- Barangay -->
-                        <div class="form-floating mb-3">
-                            <?php
-                            $selectedBarangay = isset($_SESSION['user_brgy']) ? $_SESSION['user_brgy'] : '';
-                            ?>
-                            <select name="barangay" id="user_brgy" class="form-select" required>
-                                <option value="" disabled selected>Select Barangay</option>
-                                <option value="Alua">Alua</option>
-                                <option value="Calaba">Calaba</option>
-                                <option value="Malapit">Malapit</option>
-                                <option value="Mangga">Mangga</option>
-                                <option value="Poblacion">Poblacion</option>
-                                <option value="Pulo">Pulo</option>
-                                <option value="San Roque">San Roque</option>
-                                <option value="Sto. Cristo">Sto. Cristo</option>
-                                <option value="Tabon">Tabon</option>
-                            </select>
-                            <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
-                        </div>
-                        <hr>
+                    <!-- Modal Title -->
+                    <h6 class="my-3 fw-semibold">Update Information</h6>
+                    <p class="text-muted">Update your personal information as needed.</p>
 
-                        <!-- Full Name -->
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <div class="form-floating mb-2">
-                                    <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First Name" required pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_fname']; ?>">
-                                    <label for="user_fname" class="form-label">First Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-2">
-                                    <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Middle Name" pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_mname']; ?>">
-                                    <label for="user_mname" class="form-label">Middle Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-2">
-                                    <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Last Name" pattern="^[a-zA-Z\s\-]+$" required value="<?php echo $_SESSION['user_lname']; ?>">
-                                    <label for="user_lname" class="form-label">Last Name</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- gender -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select name="gender" id="user_gender" class="form-select" required>
-                                        <option value="" disabled>Select Male or Female</option>
-                                        <?php
-                                        if (isset($_SESSION['user_gender'])) {
-                                            $getGender = $_SESSION['user_gender'];
-                                            echo '<option value="Male"' . ($getGender == "Male" ? ' selected' : '') . '>Male</option>';
-                                            echo '<option value="Female"' . ($getGender == "Female" ? ' selected' : '') . '>Female</option>';
-                                        } else {
-                                            echo '<option value="Male">Male</option>';
-                                            echo '<option value="Female">Female</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <label for="user_gender" class="form-label">Sex</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" name="user_purok" class="form-control" id="user_purok" placeholder="Purok" value="<?php echo $_SESSION['user_purok']; ?>" required>
-                                    <label for="user_purok" class="form-label">Purok</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div>
+                    <div class="container">
+                        <form action="civilian_includes/update_information.c.php" method="POST">
+                            <h4 class="h4 ">Personal Information</h4>
+                            <!-- Dropdown for San Isidro -->
                             <div class="form-floating mb-3">
-                                <input type="tel" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
-                                <label for="user_contactNum" class="form-label">Contact Number</label>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="form-floating mb-3">
-                                <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required
-                                    value="<?php echo isset($_SESSION['dateOfBirth']) ? htmlspecialchars($_SESSION['dateOfBirth']) : ''; ?>">
-                                <label for="dateOfBirth">Date of Birth</label>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="form-floating mb-3">
-                                <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required
-                                    value="<?php echo isset($_SESSION['placeOfBirth']) ? htmlspecialchars($_SESSION['placeOfBirth']) : ''; ?>">
-                                <label for="placeOfBirth">Place of Birth</label>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="form-floating mb-3">
-                                <select id="civilStatus" name="civilStatus" class="form-select" required>
-                                    <option value="" disabled <?php echo !isset($_SESSION['civilStatus']) ? 'selected' : ''; ?>>Choose Status</option>
-                                    <option value="Single" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Single' ? 'selected' : ''; ?>>Single</option>
-                                    <option value="Married" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Married' ? 'selected' : ''; ?>>Married</option>
-                                    <option value="Widowed" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
-                                    <option value="Divorced" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
+                                <?php
+                                $selectedValue = isset($_SESSION['fromSanIsidro']) ? $_SESSION['fromSanIsidro'] : '';
+                                ?>
+                                <select id="fromSanIsidroYN" name="fromSanIsidro" class="form-select" required>
+                                    <option value="" disabled <?php echo $selectedValue === '' ? 'selected' : ''; ?>>Select Yes or No</option>
+                                    <option value="Yes" <?php echo $selectedValue === 'Yes' ? 'selected' : ''; ?>>Yes</option>
+                                    <option value="No" <?php echo $selectedValue === 'No' ? 'selected' : ''; ?>>No</option>
                                 </select>
-                                <label for="civilStatus">Civil Status</label>
+                                <label for="fromSanIsidroYN" class="form-label">Are you from San Isidro?</label>
                             </div>
-                        </div>
 
+                            <!-- Barangay -->
+                            <div class="form-floating mb-3">
+                                <?php
+                                $selectedBarangay = isset($_SESSION['user_brgy']) ? $_SESSION['user_brgy'] : '';
+                                ?>
+                                <select name="barangay" id="user_brgy" class="form-select" required>
+                                    <option value="" disabled selected>Select Barangay</option>
+                                    <option value="Alua">Alua</option>
+                                    <option value="Calaba">Calaba</option>
+                                    <option value="Malapit">Malapit</option>
+                                    <option value="Mangga">Mangga</option>
+                                    <option value="Poblacion">Poblacion</option>
+                                    <option value="Pulo">Pulo</option>
+                                    <option value="San Roque">San Roque</option>
+                                    <option value="Sto. Cristo">Sto. Cristo</option>
+                                    <option value="Tabon">Tabon</option>
+                                </select>
+                                <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
+                            </div>
+                            <hr>
 
-                        <hr>
-                        <h4 class="h4 ">Account Information</h4>
-                        <!-- Email and Username -->
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-2">
-                                    <input type="email" name="email" class="form-control" id="user_email" placeholder="Email Address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com" value="<?php echo $_SESSION['user_email']; ?>">
-                                    <label for="user_email" class="form-label">Email Address</label>
+                            <!-- Full Name -->
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-2">
+                                        <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First Name" required pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_fname']; ?>">
+                                        <label for="user_fname" class="form-label">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-2">
+                                        <input type="text" name="mname" class="form-control" id="user_mname" placeholder="Middle Name" pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_mname']; ?>">
+                                        <label for="user_mname" class="form-label">Middle Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-2">
+                                        <input type="text" name="lname" class="form-control" id="user_lname" placeholder="Last Name" pattern="^[a-zA-Z\s\-]+$" required value="<?php echo $_SESSION['user_lname']; ?>">
+                                        <label for="user_lname" class="form-label">Last Name</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" required required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more" value="<?php echo $_SESSION['username']; ?>">
-                                    <input type="hidden" name="password" value="<?php echo $_SESSION['password']; ?>">
-                                    <label for="username" class="form-label">Username</label>
+
+                            <!-- gender -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <select name="gender" id="user_gender" class="form-select" required>
+                                            <option value="" disabled>Select Male or Female</option>
+                                            <?php
+                                            if (isset($_SESSION['user_gender'])) {
+                                                $getGender = $_SESSION['user_gender'];
+                                                echo '<option value="Male"' . ($getGender == "Male" ? ' selected' : '') . '>Male</option>';
+                                                echo '<option value="Female"' . ($getGender == "Female" ? ' selected' : '') . '>Female</option>';
+                                            } else {
+                                                echo '<option value="Male">Male</option>';
+                                                echo '<option value="Female">Female</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                        <label for="user_gender" class="form-label">Sex</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" name="user_purok" class="form-control" id="user_purok" placeholder="Purok" value="<?php echo $_SESSION['user_purok']; ?>" required>
+                                        <label for="user_purok" class="form-label">Purok</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="form-floating mb-3">
+                                    <input type="tel" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
+                                    <label for="user_contactNum" class="form-label">Contact Number</label>
                                 </div>
                             </div>
-                        </div>
-                        <button type="submit" name="btnUpdate" class="btn btn-primary w-100">Update</button>
-                    </form>
+
+                            <div>
+                                <div class="form-floating mb-3">
+                                    <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required
+                                        value="<?php echo isset($_SESSION['dateOfBirth']) ? htmlspecialchars($_SESSION['dateOfBirth']) : ''; ?>">
+                                    <label for="dateOfBirth">Date of Birth</label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="form-floating mb-3">
+                                    <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required
+                                        value="<?php echo isset($_SESSION['placeOfBirth']) ? htmlspecialchars($_SESSION['placeOfBirth']) : ''; ?>">
+                                    <label for="placeOfBirth">Place of Birth</label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="form-floating mb-3">
+                                    <select id="civilStatus" name="civilStatus" class="form-select" required>
+                                        <option value="" disabled <?php echo !isset($_SESSION['civilStatus']) ? 'selected' : ''; ?>>Choose Status</option>
+                                        <option value="Single" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Single' ? 'selected' : ''; ?>>Single</option>
+                                        <option value="Married" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Married' ? 'selected' : ''; ?>>Married</option>
+                                        <option value="Widowed" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
+                                        <option value="Divorced" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
+                                    </select>
+                                    <label for="civilStatus">Civil Status</label>
+                                </div>
+                            </div>
+
+                            <h4 class="h4 ">Account Information</h4>
+                            <!-- Email and Username -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-2">
+                                        <input type="email" name="email" class="form-control" id="user_email" placeholder="Email Address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com" value="<?php echo $_SESSION['user_email']; ?>">
+                                        <label for="user_email" class="form-label">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" name="username" class="form-control" id="username" placeholder="Username" required required pattern="^[a-zA-Z]{2}[a-zA-Z0-9.@_\\-\\s]+$" title="At least three characters and more" value="<?php echo $_SESSION['username']; ?>">
+                                        <input type="hidden" name="password" value="<?php echo $_SESSION['password']; ?>">
+                                        <label for="username" class="form-label">Username</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" name="btnUpdate" class="btn btn-primary w-100">Update</button>
+                        </form>
+                    </div>
                 </div>
+
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>
