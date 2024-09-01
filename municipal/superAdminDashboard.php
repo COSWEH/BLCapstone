@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id'])) {
     exit;
 }
 
-echo ".";
+// echo ".";
 $getUserid = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
 // Validate the user against the database
@@ -67,15 +67,63 @@ if ($user_role != 2) {
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top d-lg-none d-md-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../img/BayanLinkLogoBlack.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="mx-3 mb-3">
+                <div class="d-flex align-items-center mt-2">
+                    <?php
+                    $getGender = $_SESSION['user_gender'];
+                    if ($getGender == "Male") {
+                        echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;">';
+                    } else {
+                        echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;">';
+                    }
+                    ?>
+                    <p class="mb-0">
+                        <?php
+                        $fullname = $fname . " " . $mname . " " . $lname;
+                        echo ucwords(strtolower($fullname));
+                        ?>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mx-3">
+                <h5 class="mb-3">Menu</h5>
+                <ul class="navbar-nav flex-column mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="superAdminPost.m.php">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="superAdminProfiling.m.php">Profiling</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active-post" aria-current="page" href="superAdminDashboard.php">Dashboard</a>
+                    </li>
+                </ul>
+                <hr>
+                <button type="button" class="btn w-100 rounded-5 mb-3" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+            </div>
+        </div>
+    </nav>
+
     <div class="container-fluid p-3">
         <div class="row g-3">
-            <!-- left -->
-            <nav class="col-12 col-md-3 sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
-                    <button id="theme-toggle" class="btn btn-sm shadow mb-3">
-                        <i class="bi bi-moon-fill" id="moon-icon"></i>
-                        <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
+                    <button id="theme-toggle" class="btn btn-sm shadow mb-3 theme-toggle">
+                        <i class="bi bi-moon-fill moon-icon" id="moon-icon"></i>
+                        <i class="bi bi-brightness-high-fill sun-icon" id="sun-icon" style="display:none;"></i>
                     </button>
+
                     <div class="text-center">
                         <?php
                         $getGender = $_SESSION['user_gender'];
@@ -108,11 +156,10 @@ if ($user_role != 2) {
                     <hr>
                 </div>
 
-
                 <button type="button" class="btn mt-3 w-100 rounded-5 mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
             </nav>
 
-            <!-- main content -->
+            <!-- Main Content -->
             <main class="col-12 col-md-9 content border rounded p-3">
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
@@ -120,7 +167,7 @@ if ($user_role != 2) {
                     </div>
                     <div class="card-body">
                         <div id="showLogs" class="overflow-auto" style="height: 300px;">
-
+                            <!-- Logs content -->
                         </div>
                     </div>
                 </div>
@@ -128,12 +175,11 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Super admin account</h6>
-                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
+                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
                     </div>
                     <div class="card-body">
-
                         <div id="showAllSuperAdmin" class="overflow-auto" style="height: 300px;">
-
+                            <!-- Super admin accounts content -->
                         </div>
                     </div>
                 </div>
@@ -141,19 +187,19 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>FAQs</h6>
-                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
+                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
                     </div>
                     <div class="card-body">
-
                         <div id="showAllFaqs" class="overflow-auto" style="height: 300px;">
-
+                            <!-- FAQs content -->
                         </div>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
+
+    <!-- --------------------------------- -->
 
     <!-- add super admin account modal -->
     <div class="modal fade" id="addSuperAdminModal" tabindex="-1" aria-labelledby="addSuperAdminModalLabel" aria-hidden="true">

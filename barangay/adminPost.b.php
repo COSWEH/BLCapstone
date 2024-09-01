@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id'])) {
     header('Location: ../signout.php');
     exit;
 }
-echo ".";
+// echo ".";
 $getUserid = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
 // Validate the user against the database
@@ -62,10 +62,60 @@ if ($user_role != 1) {
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top d-lg-none d-md-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../img/BayanLinkLogoBlack.png" alt="Logo" width="46" height="40" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="mx-3 mb-3">
+                <div class="d-flex align-items-center mt-2">
+                    <?php
+                    if ($gender == "Male") {
+                        echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
+                    } else {
+                        echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
+                    }
+                    ?>
+                    <p class="mb-0">
+                        <?php
+                        $fullname = $fname . " " . $mname . " " . $lname;
+                        echo ucwords(strtolower($fullname));
+                        ?>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mx-3">
+                <h5 class="mb-3">Menu</h5>
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active-post" aria-current="page" href="adminPost.b.php">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="adminDocument.b.php">Document</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="adminProfiling.b.php">Profiling</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="adminDashboard.php">Dashboard</a>
+                    </li>
+                </ul>
+                <hr>
+                <button type="button" class="btn w-100 rounded-5 mb-3" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
+            </div>
+        </div>
+    </nav>
+
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-12 col-md-3 sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
                     <button id="theme-toggle" class="btn btn-sm shadow mb-3">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
