@@ -23,11 +23,12 @@ if ($rowCount == 0) {
         <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
             <thead class="table-active text-uppercase text-white">
                 <tr>
-                    <th class="text-light" style="background-color: #ee7ea0;"><small>LOG ID</small></th>
-                    <th class="text-light" style="background-color: #ee7ea0;"><small>LOG DESCRIPTION</small></th>
-                    <th class="text-light" style="background-color: #ee7ea0;"><small>LOG DATE</small></th>
-                    <th class="text-light" style="background-color: #ee7ea0;"><small>USER ID</small></th>
+                    <th class="text-light" style="background-color: #ee7ea0; width: 25%;"><small>LOG ID</small></th>
+                    <th class="text-light" style="background-color: #ee7ea0; width: 25%;"><small>LOG DESCRIPTION</small></th>
+                    <th class="text-light" style="background-color: #ee7ea0; width: 25%;"><small>LOG DATE</small></th>
+                    <th class="text-light" style="background-color: #ee7ea0; width: 25%;"><small>USER ID</small></th>
                 </tr>
+
             </thead>
             <tbody>
                 <?php

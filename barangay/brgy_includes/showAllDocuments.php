@@ -31,10 +31,11 @@ if (!$result) {
                 $docType = $data['docType'];
             ?>
                 <tr>
-                    <td><small><?php echo htmlspecialchars($id); ?></small></td>
-                    <td><small><?php echo htmlspecialchars($docType); ?></small></td>
-                    <td><button type="button" class="btn btn-sm btn-outline-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
+                    <td style="width: 33.33%;"><small><?php echo htmlspecialchars($id); ?></small></td>
+                    <td style="width: 33.33%;"><small><?php echo htmlspecialchars($docType); ?></small></td>
+                    <td style="width: 33.33%;"><button type="button" class="btn btn-sm btn-outline-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal">Delete <i class="bi bi-trash ms-2"></i></button></td>
                 </tr>
+
             <?php
             }
             ?>

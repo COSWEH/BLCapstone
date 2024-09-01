@@ -116,7 +116,6 @@ if ($user_role != 2) {
         </div>
     </nav>
 
-
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->

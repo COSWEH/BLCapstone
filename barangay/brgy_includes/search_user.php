@@ -20,22 +20,22 @@ if (isset($_POST['query'])) {
             <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
                 <thead class="table-active text-uppercase text-white">
                     <tr>
-                        <th><small>Document Type</small></th>
-                        <th><small>Requester</small></th>
-                        <th><small>Purok</small></th>
-                        <th><small>Age</small></th>
-                        <th><small>Date of Birth</small></th>
-                        <th><small>Place of Birth</small></th>
-                        <th><small>Gender</small></th>
-                        <th><small>Civil Status</small></th>
-                        <th><small>Contact Number</small></th>
-                        <th><small>Barangay</small></th>
-                        <th><small>Date Requested</small></th>
-                        <th><small>e-Signature</small></th>
-                        <th><small>Valid ID</small></th>
-                        <th><small>Status</small></th>
-                        <th><small>Action</small></th>
+                        <th style="width: 7.14%;"><small>Document Type</small></th>
+                        <th style="width: 7.14%;"><small>Requester</small></th>
+                        <th style="width: 7.14%;"><small>Purok</small></th>
+                        <th style="width: 7.14%;"><small>Age</small></th>
+                        <th style="width: 7.14%;"><small>Date of Birth</small></th>
+                        <th style="width: 7.14%;"><small>Place of Birth</small></th>
+                        <th style="width: 7.14%;"><small>Gender</small></th>
+                        <th style="width: 7.14%;"><small>Civil Status</small></th>
+                        <th style="width: 7.14%;"><small>Contact Number</small></th>
+                        <th style="width: 7.14%;"><small>Barangay</small></th>
+                        <th style="width: 7.14%;"><small>Date Requested</small></th>
+                        <th style="width: 7.14%;"><small>e-Signature</small></th>
+                        <th style="width: 7.14%;"><small>Valid ID</small></th>
+                        <th style="width: 7.14%;"><small>Status</small></th>
                     </tr>
+
                 </thead>
                 <tbody>
                     <?php
@@ -90,24 +90,6 @@ if (isset($_POST['query'])) {
                                     <?php } ?>
                                 </td>
                                 <td><small><?php echo htmlspecialchars($status); ?></small></td>
-                                <td>
-                                    <?php if ($status != 'Cancelled') { ?>
-                                        <div class="dropdown-bottom">
-                                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Options
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item aCancel" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#cancelModal"><small>Cancel</small></a></li>
-                                                <li><a class="dropdown-item aProcess" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#processModal"><small>Process</small></a></li>
-                                                <li><a class="dropdown-item aApprove" data-post-id="<?php echo htmlspecialchars($reqId); ?>" data-bs-toggle="modal" data-bs-target="#approveModal"><small>Approve</small></a></li>
-                                            </ul>
-                                        </div>
-                                    <?php } else { ?>
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle disabled" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Options
-                                        </button>
-                                    <?php } ?>
-                                </td>
                             </tr>
                 <?php
                         }

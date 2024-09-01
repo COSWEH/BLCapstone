@@ -63,15 +63,16 @@ if (!$result) {
     <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalize">
         <thead class="table-active text-uppercase text-white">
             <tr>
-                <th class="text-light" style="background-color: #ee7ea0;"><small>Full Name</small></th>
-                <th class="text-light" style="background-color: #ffaf6e;"><small>Sex</small></th>
-                <th class="text-light" style="background-color: #7d8be0;"><small>Barangay</small></th>
-                <th class="text-light" style="background-color: #9a81b0;"><small>Purok</small></th>
-                <th class="text-light bg-dark"><small>Age</small></th>
-                <th class="text-light" style="background-color: #ffaf6e;"><small>Date of Birth</small></th>
-                <th class="text-light" style="background-color: #ffaf6e;"><small>Place of Birth</small></th>
-                <th class="text-light" style="background-color: #ffaf6e;"><small>Civil Status</small></th>
+                <th class="text-light" style="background-color: #ee7ea0; width: 12.5%;"><small>Full Name</small></th>
+                <th class="text-light" style="background-color: #ffaf6e; width: 12.5%;"><small>Sex</small></th>
+                <th class="text-light" style="background-color: #7d8be0; width: 12.5%;"><small>Barangay</small></th>
+                <th class="text-light" style="background-color: #9a81b0; width: 12.5%;"><small>Purok</small></th>
+                <th class="text-light bg-dark" style="width: 12.5%;"><small>Age</small></th>
+                <th class="text-light" style="background-color: #ffaf6e; width: 12.5%;"><small>Date of Birth</small></th>
+                <th class="text-light" style="background-color: #ffaf6e; width: 12.5%;"><small>Place of Birth</small></th>
+                <th class="text-light" style="background-color: #ffaf6e; width: 12.5%;"><small>Civil Status</small></th>
             </tr>
+
         </thead>
         <tbody>
             <?php
