@@ -456,6 +456,8 @@ if ($user_role != 0) {
                                         </div>
                                     </div>
                                 </div>
+                                <div id="esImgSizeError"></div>
+                                <div id="viImgSizeError"></div>
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <button type="button" class="btn btn-secondary  w-100" id="prevBtn5">
@@ -526,6 +528,92 @@ if ($user_role != 0) {
                 xhr.send();
             } else {
                 console.log("No unread notifications to update.");
+            }
+        });
+
+        // es img
+        document.getElementById("eSignature").addEventListener("change", function(event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+            const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+            const validFiles = [];
+
+            // Loop through each file in the FileList
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]; // Get the individual file
+                // Check if the file size exceeds 8MB
+                if (file.size > maxSize) {
+                    $('#esImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
+                    console.log("Skipped image (too large):", file.name);
+
+                    // Clear the error message after 3 seconds
+                    setTimeout(() => {
+                        $('#esImgSizeError').html('');
+                    }, 3000);
+
+                    // Skip this file
+                    continue;
+                }
+
+                // Log the file's name and size
+                console.log("File Name:", file.name);
+                console.log("File Size:", file.size); // Size in bytes
+
+                // Add valid files to the array
+                validFiles.push(file);
+            }
+
+            // Clear the input field and reassign valid files
+            if (validFiles.length === 0) {
+                fileInput.value = ''; // Clear the file input if no valid files
+            } else {
+                // Create a new DataTransfer object to assign the valid files
+                const dataTransfer = new DataTransfer();
+                validFiles.forEach(file => dataTransfer.items.add(file));
+                fileInput.files = dataTransfer.files; // Update the file input with valid files
+            }
+        });
+
+        // uv img
+        document.getElementById("userValidID").addEventListener("change", function(event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+            const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+            const validFiles = [];
+
+            // Loop through each file in the FileList
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]; // Get the individual file
+                // Check if the file size exceeds 8MB
+                if (file.size > maxSize) {
+                    $('#viImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
+                    console.log("Skipped image (too large):", file.name);
+
+                    // Clear the error message after 3 seconds
+                    setTimeout(() => {
+                        $('#viImgSizeError').html('');
+                    }, 3000);
+
+                    // Skip this file
+                    continue;
+                }
+
+                // Log the file's name and size
+                console.log("File Name:", file.name);
+                console.log("File Size:", file.size); // Size in bytes
+
+                // Add valid files to the array
+                validFiles.push(file);
+            }
+
+            // Clear the input field and reassign valid files
+            if (validFiles.length === 0) {
+                fileInput.value = ''; // Clear the file input if no valid files
+            } else {
+                // Create a new DataTransfer object to assign the valid files
+                const dataTransfer = new DataTransfer();
+                validFiles.forEach(file => dataTransfer.items.add(file));
+                fileInput.files = dataTransfer.files; // Update the file input with valid files
             }
         });
 

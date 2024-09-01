@@ -39,7 +39,7 @@ while ($data = mysqli_fetch_assoc($result)) {
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
                 <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
-                <?php echo "<h6>$brgy</h6>"; ?>
+                <?php echo "<h6>$municipal</h6>"; ?>
                 <div class="btn-group dropup ms-auto">
                     <button type="button" class="btn btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-three-dots-vertical"></i>
@@ -95,12 +95,13 @@ while ($data = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
+
     <!-- update modal -->
     <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
-                    <div class="w-100 text-center">
+                <div class="modal-header text-center borde border-0">
+                    <div class="w-100">
                         <h4 class="modal-title " id="editPostModalLabel">
                             Edit post
                         </h4>
@@ -115,8 +116,8 @@ while ($data = mysqli_fetch_assoc($result)) {
                                     <?php echo $fullname; ?>
                                 </h6>
                                 <h6 class="text-muted mb-0">
-                                    <?php echo "<small class=''>From: </small>" . $brgy;
-                                    $_SESSION['getAdminBrgy'] = $brgy; ?>
+                                    <?php echo "<small class=''>From: </small>" . $municipal;
+                                    $_SESSION['getAdminBrgy'] = $municipal; ?>
                                 </h6>
                             </div>
                         </div>
@@ -129,19 +130,18 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 <p class="m-0 ">Add Photos</p>
                                 <input type="file" name="updatePhotos[]" id="updatePhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>
-                            <hr>
                             <!-- show photos from db -->
                             <input type="hidden" name="mDbPhotos" id="mDbPhotos">
-                            <div id="dbPhotos" class="row g-2">
+                            <div id="dbPhotos" class="row g-2 mt-2">
 
                             </div>
-                            <hr>
                             <!-- show selected photos -->
                             <div id="selectedPhotosForUpdate" class="row g-2 mb-2">
 
                             </div>
                         </div>
                         <input type="hidden" id="getPostIdToUpdate" name="getPostIdToUpdate">
+                        <div id="edtPstImgSizeError"></div>
                         <div class="d-grid gap-3">
                             <button type="submit" name="mBtnEditPost" class="btn btn-sm btn-primary me-2">Update post</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">
@@ -191,8 +191,20 @@ while ($data = mysqli_fetch_assoc($result)) {
         $('#updatePhotos').on('change', function(event) {
             const imageFiles = event.target.files;
             const $photoContainer = $('#selectedPhotosForUpdate');
+            const maxSize = 8 * 1024 * 1024; // 8MB in bytes
 
             $.each(imageFiles, function(index, imageFile) {
+                if (imageFile.size > maxSize) {
+                    $('#edtPstImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
+                    console.log("Skipped image (too large):", imageFile.name);
+
+                    setTimeout(() => {
+                        $('#edtPstImgSizeError').html('');
+                    }, 3000);
+
+                    return true; // Continue to the next image
+                }
+
                 selectedImages.push(imageFile);
 
                 console.log("Added image:", imageFile.name); // Log when image is added

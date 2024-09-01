@@ -11,11 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 $admin_brgy = $_SESSION['user_brgy'];
+$admin_userId = $_SESSION['user_id'];
 
 $query = "SELECT p.post_id, p.user_id, p.post_brgy, p.post_content, p.post_img, p.post_date, u.user_brgy, u.user_fname, u.user_mname, u.user_lname
           FROM tbl_posts AS p 
           INNER JOIN tbl_useracc AS u ON p.user_id = u.user_id
-          WHERE p.post_brgy = '$admin_brgy'
+          WHERE p.user_id = '$admin_userId' AND p.post_brgy = '$admin_brgy'
           ORDER BY p.post_date DESC";
 
 $result = mysqli_query($con, $query);
@@ -96,12 +97,13 @@ while ($data = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
+
     <!-- update modal -->
     <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center borde border-0">
-                    <div class="w-100 text-center">
+                    <div class="w-100">
                         <h4 class="modal-title " id="editPostModalLabel">
                             Edit post
                         </h4>
@@ -130,19 +132,18 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 <p class="m-0 ">Add Photos</p>
                                 <input type="file" name="bgUpdatePhotos[]" id="bgUpdatePhotos" class="opacity-0 position-absolute" accept=".jpg, jpeg, .png" multiple>
                             </div>
-                            <hr>
                             <!-- show photos from db -->
                             <input type="hidden" name="bgDbPhotos" id="bgDbPhotos">
-                            <div id="dbPhotos" class="row g-2">
+                            <div id="dbPhotos" class="row g-2 mt-2">
 
                             </div>
-                            <hr>
                             <!-- show selected photos -->
                             <div id="selectedPhotosForUpdate" class="row g-2 mb-2">
 
                             </div>
                         </div>
                         <input type="hidden" id="getPostIdToUpdate" name="getPostIdToUpdate">
+                        <div id="edtPstImgSizeError"></div>
                         <div class="d-grid gap-3">
                             <button type="submit" name="baBtnEditPost" class="btn btn-sm btn-primary">Update post</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">
@@ -193,8 +194,20 @@ while ($data = mysqli_fetch_assoc($result)) {
         $('#bgUpdatePhotos').on('change', function(event) {
             const imageFiles = event.target.files;
             const $photoContainer = $('#selectedPhotosForUpdate');
+            const maxSize = 8 * 1024 * 1024; // 8MB in bytes
 
             $.each(imageFiles, function(index, imageFile) {
+                if (imageFile.size > maxSize) {
+                    $('#edtPstImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
+                    console.log("Skipped image (too large):", imageFile.name);
+
+                    setTimeout(() => {
+                        $('#edtPstImgSizeError').html('');
+                    }, 3000);
+
+                    return true; // Continue to the next image
+                }
+
                 selectedImages.push(imageFile);
 
                 console.log("Added image:", imageFile.name); // Log when image is added

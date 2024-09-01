@@ -208,6 +208,7 @@ if ($user_role != 1) {
                                 <!-- Selected photos will be added here -->
                             </div>
                         </div>
+                        <div id="crtPstImgSizeError"></div>
                         <button type="submit" name="baBtnCreatePost" class="btn btn-primary w-100">Post</button>
                     </form>
                 </div>
@@ -215,66 +216,6 @@ if ($user_role != 1) {
         </div>
     </div>
     <script>
-        // show selected photos to the create post modal
-        let selectedFiles = [];
-
-        document.getElementById("bgAddPhotos").addEventListener("change", function(event) {
-            const files = event.target.files;
-            const photoContainer = document.getElementById("selectedPhotosForCreate");
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                selectedFiles.push(file);
-
-                console.log("Added image:", file.name); // Log when image is added
-
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    // Create a new container for the image and remove button
-                    const photoWrapper = document.createElement("div");
-                    photoWrapper.classList.add("col-12", "col-md-4", "position-relative");
-
-                    const imgElement = document.createElement("img");
-                    imgElement.src = e.target.result;
-                    imgElement.classList.add("img-fluid", "rounded", "shadow-sm");
-
-                    // Create a remove button
-                    const removeButton = document.createElement("button");
-                    removeButton.classList.add(
-                        "btn",
-                        "bg-dark-subtle",
-                        "position-absolute",
-                        "top-0",
-                        "end-0",
-                        "m-2"
-                    );
-                    removeButton.innerHTML = '<i class="bi bi-x"></i>';
-                    // Append image and button to the wrapper
-                    photoWrapper.appendChild(imgElement);
-                    photoWrapper.appendChild(removeButton);
-                    // Append the wrapper to the container
-                    photoContainer.appendChild(photoWrapper);
-                    // Add event listener to the remove button
-                    removeButton.addEventListener("click", function() {
-                        photoContainer.removeChild(photoWrapper);
-                        selectedFiles = selectedFiles.filter(f => f !== file);
-                        console.log("Removed image:", file.name); // Log when image is removed
-                    });
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById("createPostForm").addEventListener("submit", function(event) {
-            const dataTransfer = new DataTransfer();
-            selectedFiles.forEach(file => dataTransfer.items.add(file));
-            document.getElementById("bgAddPhotos").files = dataTransfer.files;
-
-            console.log("Submitting form with images:", selectedFiles.map(f => f.name)); // Log images before submission
-        });
-
         //load all brgy post from database
         $(document).ready(function() {
             $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
@@ -289,11 +230,83 @@ if ($user_role != 1) {
             }
             // Initial call to load messages
             updateBrgyPost();
+
+            // show selected photos to the create post modal
+            let selectedFiles = [];
+            document.getElementById("bgAddPhotos").addEventListener("change", function(event) {
+                const files = event.target.files;
+                const photoContainer = document.getElementById("selectedPhotosForCreate");
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+
+                    // Check if the file size exceeds 8MB
+                    if (file.size > maxSize) {
+                        $('#crtPstImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
+                        console.log("Skipped image (too large):", file.name);
+
+                        setTimeout(() => {
+                            $('#crtPstImgSizeError').html('');
+                        }, 3000);
+
+                        continue;
+                    }
+
+                    selectedFiles.push(file);
+
+                    console.log("Added image:", file.name);
+
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        // Create a new container for the image and remove button
+                        const photoWrapper = document.createElement("div");
+                        photoWrapper.classList.add("col-12", "col-md-4", "position-relative");
+
+                        const imgElement = document.createElement("img");
+                        imgElement.src = e.target.result;
+                        imgElement.classList.add("img-fluid", "rounded", "shadow-sm");
+
+                        // Create a remove button
+                        const removeButton = document.createElement("button");
+                        removeButton.classList.add(
+                            "btn",
+                            "bg-dark-subtle",
+                            "position-absolute",
+                            "top-0",
+                            "end-0",
+                            "m-2"
+                        );
+                        removeButton.innerHTML = '<i class="bi bi-x"></i>';
+                        // Append image and button to the wrapper
+                        photoWrapper.appendChild(imgElement);
+                        photoWrapper.appendChild(removeButton);
+                        // Append the wrapper to the container
+                        photoContainer.appendChild(photoWrapper);
+                        // Add event listener to the remove button
+                        removeButton.addEventListener("click", function() {
+                            photoContainer.removeChild(photoWrapper);
+                            selectedFiles = selectedFiles.filter(f => f !== file);
+                            console.log("Removed image:", file.name); // Log when image is removed
+                        });
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById("createPostForm").addEventListener("submit", function(event) {
+                const dataTransfer = new DataTransfer();
+                selectedFiles.forEach(file => dataTransfer.items.add(file));
+                document.getElementById("bgAddPhotos").files = dataTransfer.files;
+
+                console.log("Submitting form with images:", selectedFiles.map(f => f.name)); // Log images before submission
+            });
         });
     </script>
 
     <script src="brgyMaterials/script.b.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

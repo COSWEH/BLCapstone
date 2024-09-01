@@ -203,6 +203,7 @@ if ($user_role != 2) {
                                 <!-- Selected photos will be added here -->
                             </div>
                         </div>
+                        <div id="crtPstImgSizeError"></div>
                         <button type="submit" name="maBtnCreatePost" class="btn btn-primary w-100">Post</button>
                     </form>
                 </div>
@@ -237,89 +238,6 @@ if ($user_role != 2) {
     </div>
 
     <script>
-        document.getElementById('editButton').addEventListener('click', function() {
-            var faqsModal = new bootstrap.Modal(document.getElementById('faqsModal'));
-            var editFaqsModal = new bootstrap.Modal(document.getElementById('editFaqsModal'));
-
-            // Close the current modal
-            faqsModal.hide();
-
-            // Open the new modal after a slight delay to ensure proper closing
-            setTimeout(function() {
-                editFaqsModal.show();
-            }, 300); // Adjust the delay as needed
-        });
-
-
-        function showFaqs() {
-            $.post("municipal_includes/edit_faqs.php", {}, function(data) {
-                $("#showFaqs").html(data);
-            });
-
-            setTimeout(showFaqs, 30000);
-        }
-
-        showFaqs();
-
-        let selectedFiles = [];
-
-        document.getElementById("mAddPhotos").addEventListener("change", function(event) {
-            const files = event.target.files;
-            const photoContainer = document.getElementById("selectedPhotosForCreate");
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                selectedFiles.push(file);
-
-                console.log("Added image:", file.name); // Log when image is added
-
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    // Create a new container for the image and remove button
-                    const photoWrapper = document.createElement("div");
-                    photoWrapper.classList.add("col-12", "col-md-4", "position-relative");
-
-                    const imgElement = document.createElement("img");
-                    imgElement.src = e.target.result;
-                    imgElement.classList.add("img-fluid", "rounded", "shadow-sm");
-
-                    // Create a remove button
-                    const removeButton = document.createElement("button");
-                    removeButton.classList.add(
-                        "btn",
-                        "bg-dark-subtle",
-                        "position-absolute",
-                        "top-0",
-                        "end-0",
-                        "m-2"
-                    );
-                    removeButton.innerHTML = '<i class="bi bi-x"></i>';
-                    // Append image and button to the wrapper
-                    photoWrapper.appendChild(imgElement);
-                    photoWrapper.appendChild(removeButton);
-                    // Append the wrapper to the container
-                    photoContainer.appendChild(photoWrapper);
-                    // Add event listener to the remove button
-                    removeButton.addEventListener("click", function() {
-                        photoContainer.removeChild(photoWrapper);
-                        selectedFiles = selectedFiles.filter(f => f !== file);
-                        console.log("Removed image:", file.name); // Log when image is removed
-                    });
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById("createPostForm").addEventListener("submit", function(event) {
-            const dataTransfer = new DataTransfer();
-            selectedFiles.forEach(file => dataTransfer.items.add(file));
-            document.getElementById("mAddPhotos").files = dataTransfer.files;
-
-            console.log("Submitting form with images:", selectedFiles.map(f => f.name)); // Log images before submission
-        });
-
         //load all brgy post from database
         $(document).ready(function() {
             function loadContent(url, elementId, interval = null) {
@@ -336,6 +254,78 @@ if ($user_role != 2) {
             // Initial data loading and periodic updates
             loadContent('municipal_includes/show_brgyPost.m.php', '#brgyPost', 30000);
             loadContent('municipal_includes/show_municipalPost.m.php', '#municipalPost');
+
+            let selectedFiles = [];
+            document.getElementById("mAddPhotos").addEventListener("change", function(event) {
+                const files = event.target.files;
+                const photoContainer = document.getElementById("selectedPhotosForCreate");
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+
+                    if (file.size > maxSize) {
+                        $('#crtPstImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
+                        console.log("Skipped image (too large):", file.name);
+
+                        setTimeout(() => {
+                            $('#crtPstImgSizeError').html('');
+                        }, 3000);
+
+                        continue;
+                    }
+
+                    selectedFiles.push(file);
+
+                    console.log("Added image:", file.name); // Log when image is added
+
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        // Create a new container for the image and remove button
+                        const photoWrapper = document.createElement("div");
+                        photoWrapper.classList.add("col-12", "col-md-4", "position-relative");
+
+                        const imgElement = document.createElement("img");
+                        imgElement.src = e.target.result;
+                        imgElement.classList.add("img-fluid", "rounded", "shadow-sm");
+
+                        // Create a remove button
+                        const removeButton = document.createElement("button");
+                        removeButton.classList.add(
+                            "btn",
+                            "bg-dark-subtle",
+                            "position-absolute",
+                            "top-0",
+                            "end-0",
+                            "m-2"
+                        );
+                        removeButton.innerHTML = '<i class="bi bi-x"></i>';
+                        // Append image and button to the wrapper
+                        photoWrapper.appendChild(imgElement);
+                        photoWrapper.appendChild(removeButton);
+                        // Append the wrapper to the container
+                        photoContainer.appendChild(photoWrapper);
+                        // Add event listener to the remove button
+                        removeButton.addEventListener("click", function() {
+                            photoContainer.removeChild(photoWrapper);
+                            selectedFiles = selectedFiles.filter(f => f !== file);
+                            console.log("Removed image:", file.name); // Log when image is removed
+                        });
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById("createPostForm").addEventListener("submit", function(event) {
+                const dataTransfer = new DataTransfer();
+                selectedFiles.forEach(file => dataTransfer.items.add(file));
+                document.getElementById("mAddPhotos").files = dataTransfer.files;
+
+                console.log("Submitting form with images:", selectedFiles.map(f => f.name)); // Log images before submission
+            });
+
         });
     </script>
 
