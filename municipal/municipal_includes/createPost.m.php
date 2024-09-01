@@ -8,10 +8,17 @@ if (isset($_POST['maBtnCreatePost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_FILES['mAddPhotos']['name'][0])) {
         $imgCount = count($_FILES['mAddPhotos']['name']);
         $imgArray = array();
+        $maxSize = 8 * 1024 * 1024; // 8MB in bytes
 
         for ($i = 0; $i < $imgCount; $i++) {
             $imgName = $_FILES['mAddPhotos']['name'][$i];
             $tmpName = $_FILES['mAddPhotos']['tmp_name'][$i];
+            $imgSize = $_FILES['mAddPhotos']['size'][$i];
+
+            // Check if the image size exceeds the maximum allowed size
+            if ($imgSize > $maxSize) {
+                die('Error: Each image must be 8MB or smaller.');
+            }
 
             $imgExtension = explode('.', $imgName);
             $imgExtension = strtolower(end($imgExtension));

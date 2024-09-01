@@ -10,6 +10,7 @@ if (isset($_POST['mBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $dbImgArray = [];
     $selectedImgArray = [];
+    $maxSize = 8 * 1024 * 1024; // 8MB in bytes
 
     if (isset($_POST['mDbPhotos'])) {
         $jsonString = $_POST['mDbPhotos'];
@@ -31,6 +32,12 @@ if (isset($_POST['mBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         for ($i = 0; $i < $imgCount; $i++) {
             $imgName = $_FILES['updatePhotos']['name'][$i];
             $tmpName = $_FILES['updatePhotos']['tmp_name'][$i];
+            $imgSize = $_FILES['updatePhotos']['size'][$i];
+
+            // Check if the image size exceeds the maximum allowed size
+            if ($imgSize > $maxSize) {
+                die('Error: Each image must be 8MB or smaller.');
+            }
 
             $imgExtension = explode('.', $imgName);
             $imgExtension = strtolower(end($imgExtension));

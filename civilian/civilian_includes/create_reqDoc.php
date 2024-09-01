@@ -29,12 +29,19 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
+    // File size limit (e.g., 2MB)
+    $maxFileSize = 8 * 1024 * 1024; // 8MB in bytes
+
     // Handle the file upload
     if (isset($_FILES['userValidID']) && isset($_FILES['eSignature'])) {
         // Handling eSignature file
         $eSignatureFile = $_FILES['eSignature'];
         if ($eSignatureFile['error'] !== UPLOAD_ERR_OK) {
             die('Error: E-Signature file upload error.');
+        }
+
+        if ($eSignatureFile['size'] > $maxFileSize) {
+            die('Error: E-Signature file size exceeds the limit of 2MB.');
         }
 
         $eSignatureName = $eSignatureFile['name'];
@@ -50,6 +57,11 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             $validIDFile['error'] !== UPLOAD_ERR_OK
         ) {
             die('Error: Valid ID file upload error.');
+        }
+
+        // Check file size
+        if ($validIDFile['size'] > $maxFileSize) {
+            die('Error: Valid ID file size exceeds the limit of 2MB.');
         }
 
         $validIDName = $validIDFile['name'];
