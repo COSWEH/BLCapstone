@@ -210,55 +210,29 @@ if ($user_role != 0) {
 
         //load brgy post and municipal post from database
         $(document).ready(function() {
-            $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
-                $("#brgyPost").html(data);
-            });
-            $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
-                $("#municipalPost").html(data);
-            });
-
-            $.post('civilian_includes/show_notification.php', {}, function(data) {
-                $("#notification-content").html(data);
-            });
-
-            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                $("#count-notification").html(data);
-            });
-
-            function updateBrgyPost() {
-                $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
-                    $("#brgyPost").html(data);
-                    setTimeout(updateBrgyPost, 30000);
+            function loadContent(url, elementId, interval = null) {
+                $.post(url, {}, function(data) {
+                    $(elementId).html(data);
+                    if (interval) {
+                        setTimeout(function() {
+                            loadContent(url, elementId, interval);
+                        }, interval);
+                    }
                 });
             }
 
-            function updateMunicipalPost() {
-                $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
-                    $("#municipalPost").html(data);
-                    setTimeout(updateMunicipalPost, 30000);
-                });
-            }
+            // Initial data loading
+            loadContent('civilian_includes/show_brgyPost.c.php', '#brgyPost');
+            loadContent('civilian_includes/show_municipalPost.c.php', '#municipalPost');
+            loadContent('civilian_includes/show_notification.php', '#notification-content');
+            loadContent('civilian_includes/show_notification_count.php', '#count-notification');
 
-            function updateNotification() {
-                $.post('civilian_includes/show_notification.php', {}, function(data) {
-                    $("#notification-content").html(data);
-                    setTimeout(updateNotification, 500);
-                });
-            }
+            // Periodic updates
+            loadContent('civilian_includes/show_brgyPost.c.php', '#brgyPost', 30000);
+            loadContent('civilian_includes/show_municipalPost.c.php', '#municipalPost', 30000);
+            loadContent('civilian_includes/show_notification.php', '#notification-content', 500);
+            loadContent('civilian_includes/show_notification_count.php', '#count-notification', 500);
 
-            function showNotificationCount() {
-                $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                    $("#count-notification").html(data);
-                    setTimeout(showNotificationCount, 500);
-                });
-            }
-
-
-            // Initial call to load messages
-            updateBrgyPost();
-            updateMunicipalPost();
-            updateNotification();
-            showNotificationCount()
         });
     </script>
 

@@ -359,36 +359,36 @@ if ($user_role != 2) {
             // Initial call to load messages
             updateLogs();
 
-            // get admin info
+            // get super admin info
+            function navigateGroups(currentGroup, nextGroup) {
+                $(currentGroup).addClass('d-none');
+                $(nextGroup).removeClass('d-none');
+            }
+
             $('#nextBtn1').click(function() {
-                $('#group1').addClass('d-none');
-                $('#group2').removeClass('d-none');
+                navigateGroups('#group1', '#group2');
             });
 
             $('#prevBtn2').click(function() {
-                $('#group2').addClass('d-none');
-                $('#group1').removeClass('d-none');
+                navigateGroups('#group2', '#group1');
             });
 
             $('#nextBtn2').click(function() {
-                $('#group2').addClass('d-none');
-                $('#group3').removeClass('d-none');
+                navigateGroups('#group2', '#group3');
             });
 
             $('#prevBtn3').click(function() {
-                $('#group3').addClass('d-none');
-                $('#group2').removeClass('d-none');
+                navigateGroups('#group3', '#group2');
             });
 
             $('#nextBtn4').click(function() {
-                $('#group3').addClass('d-none');
-                $('#group4').removeClass('d-none');
+                navigateGroups('#group3', '#group4');
             });
 
             $('#prevBtn4').click(function() {
-                $('#group4').addClass('d-none');
-                $('#group3').removeClass('d-none');
+                navigateGroups('#group4', '#group3');
             });
+
 
 
             // Function to toggle password visibility

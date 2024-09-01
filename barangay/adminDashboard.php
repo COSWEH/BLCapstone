@@ -329,34 +329,33 @@ if ($user_role != 1) {
             });
 
             // get admin info
+            function navigateGroups(currentGroup, nextGroup) {
+                $(currentGroup).addClass('d-none');
+                $(nextGroup).removeClass('d-none');
+            }
+
             $('#nextBtn1').click(function() {
-                $('#group1').addClass('d-none');
-                $('#group2').removeClass('d-none');
+                navigateGroups('#group1', '#group2');
             });
 
             $('#prevBtn2').click(function() {
-                $('#group2').addClass('d-none');
-                $('#group1').removeClass('d-none');
+                navigateGroups('#group2', '#group1');
             });
 
             $('#nextBtn2').click(function() {
-                $('#group2').addClass('d-none');
-                $('#group3').removeClass('d-none');
+                navigateGroups('#group2', '#group3');
             });
 
             $('#prevBtn3').click(function() {
-                $('#group3').addClass('d-none');
-                $('#group2').removeClass('d-none');
+                navigateGroups('#group3', '#group2');
             });
 
             $('#nextBtn4').click(function() {
-                $('#group3').addClass('d-none');
-                $('#group4').removeClass('d-none');
+                navigateGroups('#group3', '#group4');
             });
 
             $('#prevBtn4').click(function() {
-                $('#group4').addClass('d-none');
-                $('#group3').removeClass('d-none');
+                navigateGroups('#group4', '#group3');
             });
 
 
@@ -388,31 +387,29 @@ if ($user_role != 1) {
 
 </html>
 <?php
-// a. deleted
-if (isset($_SESSION['delete_message'])) {
-?>
-    <script>
-        Swal.fire({
-            title: "Success",
-            text: "<?php echo $_SESSION['delete_message']; ?>",
-            icon: "success",
-        });
-    </script>
-<?php
-    unset($_SESSION['delete_message']);
+// Function to display SweetAlert messages
+function displayAlert($type, $message, $title)
+{
+    echo '<script>
+            Swal.fire({
+                title: "' . $title . '",
+                text: "' . $message . '",
+                icon: "' . $type . '",
+            });
+        </script>';
 }
 
-// a. registered
-if (isset($_SESSION['addAdmin_success_message'])) {
-?>
-    <script>
-        Swal.fire({
-            title: "Success",
-            text: "<?php echo $_SESSION['addAdmin_success_message']; ?>",
-            icon: "success",
-        });
-    </script>
-<?php
-    unset($_SESSION['addAdmin_success_message']);
+// Define session messages and their configurations
+$alerts = [
+    'delete_message' => ['type' => 'success', 'title' => 'Success'],
+    'addAdmin_success_message' => ['type' => 'success', 'title' => 'Success'],
+];
+
+// Iterate over each session key and display the alert if set
+foreach ($alerts as $sessionKey => $alertConfig) {
+    if (isset($_SESSION[$sessionKey])) {
+        displayAlert($alertConfig['type'], $_SESSION[$sessionKey], $alertConfig['title']);
+        unset($_SESSION[$sessionKey]);
+    }
 }
 ?>

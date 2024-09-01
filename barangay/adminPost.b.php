@@ -298,66 +298,32 @@ if ($user_role != 1) {
 </body>
 
 <?php
-// success login
-if (isset($_SESSION['success_message'])) {
+// Function to display SweetAlert messages
+function displayAlert($type, $message, $title = "Success")
+{
     echo '<script>
             Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['success_message'] . '",
-                icon: "success",
+                title: "' . $title . '",
+                text: "' . $message . '",
+                icon: "' . $type . '",
             });
         </script>';
-    unset($_SESSION['success_message']);
 }
 
-// success post
-if (isset($_SESSION['post_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['post_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['post_message']);
-}
+// Success and error messages handling
+$alerts = [
+    'success_message' => ['type' => 'success', 'title' => 'Success'],
+    'post_message' => ['type' => 'success', 'title' => 'Success'],
+    'delete_message' => ['type' => 'success', 'title' => 'Success'],
+    'addAdmin_error_message' => ['type' => 'error', 'title' => 'Error'],
+    'addAdmin_success_message' => ['type' => 'success', 'title' => 'Done'],
+];
 
-//delete post
-if (isset($_SESSION['delete_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['delete_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['delete_message']);
-}
-
-if (isset($_SESSION['addAdmin_error_message'])) {
-?>
-    <script>
-        Swal.fire({
-            title: "Error",
-            text: "<?php echo $_SESSION['addAdmin_error_message']; ?>",
-            icon: "error",
-        });
-    </script>
-<?php
-    unset($_SESSION['addAdmin_error_message']);
-}
-
-if (isset($_SESSION['addAdmin_success_message'])) {
-?>
-    <script>
-        Swal.fire({
-            title: "Done",
-            text: "<?php echo $_SESSION['addAdmin_success_message']; ?>",
-            icon: "success",
-        });
-    </script>
-<?php
-    unset($_SESSION['addAdmin_success_message']);
+foreach ($alerts as $sessionKey => $alertConfig) {
+    if (isset($_SESSION[$sessionKey])) {
+        displayAlert($alertConfig['type'], $_SESSION[$sessionKey], $alertConfig['title']);
+        unset($_SESSION[$sessionKey]);
+    }
 }
 ?>
 

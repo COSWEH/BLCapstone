@@ -118,11 +118,23 @@ if ($user_role != 1) {
                 </div>
 
                 <nav>
-                    <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill " id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Pending</button>
-                        <button class="nav-link flex-fill " id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">Processing</button>
-                        <button class="nav-link flex-fill " id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">Approved</button>
-                        <button class="nav-link flex-fill " id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Cancelled</button>
+                    <div class="nav nav-underline w-100" id="nav-tab" role="tablist">
+                        <button class="nav-link active flex-fill position-relative" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">
+                            Pending
+                            <div id="count-pending"></div>
+                        </button>
+                        <button class="nav-link flex-fill position-relative" id="nav-processing-tab" data-bs-toggle="tab" data-bs-target="#nav-processing" type="button" role="tab" aria-controls="nav-processing" aria-selected="false">
+                            Processing
+                            <div id="count-processing"></div>
+                        </button>
+                        <button class="nav-link flex-fill position-relative" id="nav-approved-tab" data-bs-toggle="tab" data-bs-target="#nav-approved" type="button" role="tab" aria-controls="nav-approved" aria-selected="false">
+                            Approved
+                            <div id="count-approved"></div>
+                        </button>
+                        <button class="nav-link flex-fill position-relative" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">
+                            Cancelled
+                            <div id="count-cancelled"></div>
+                        </button>
                     </div>
                 </nav>
 
@@ -188,6 +200,21 @@ if ($user_role != 1) {
 
     <script>
         $(document).ready(function() {
+            function updateCount(endpoint, selector) {
+                $.post(endpoint, {}, function(data) {
+                    $(selector).html(data);
+                    setTimeout(function() {
+                        updateCount(endpoint, selector);
+                    }, 30000);
+                });
+            }
+
+            updateCount('brgy_includes/get_pending_count.php', '#count-pending');
+            updateCount('brgy_includes/get_processing_count.php', '#count-processing');
+            updateCount('brgy_includes/get_approved_count.php', '#count-approved');
+            updateCount('brgy_includes/get_cancelled_count.php', '#count-cancelled');
+
+
             let activeTab = 'pending';
 
             $('#nav-pending-tab').on('click', function() {
@@ -254,37 +281,30 @@ if ($user_role != 1) {
 </body>
 
 <?php
-if (isset($_SESSION['processing_message'])) {
+// Function to display SweetAlert messages
+function displayAlert($type, $message, $title)
+{
     echo '<script>
             Swal.fire({
-                title: "Processing",
-                text: "' . $_SESSION['processing_message'] . '",
-                icon: "success",
+                title: "' . $title . '",
+                text: "' . $message . '",
+                icon: "' . $type . '",
             });
         </script>';
-    unset($_SESSION['processing_message']);
 }
 
-if (isset($_SESSION['approved_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Approved",
-                text: "' . $_SESSION['approved_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['approved_message']);
-}
+// Success messages handling
+$alerts = [
+    'processing_message' => ['type' => 'success', 'title' => 'Processing'],
+    'approved_message' => ['type' => 'success', 'title' => 'Approved'],
+    'cancelled_message' => ['type' => 'success', 'title' => 'Cancelled'],
+];
 
-if (isset($_SESSION['cancelled_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Cancelled",
-                text: "' . $_SESSION['cancelled_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['cancelled_message']);
+foreach ($alerts as $sessionKey => $alertConfig) {
+    if (isset($_SESSION[$sessionKey])) {
+        displayAlert($alertConfig['type'], $_SESSION[$sessionKey], $alertConfig['title']);
+        unset($_SESSION[$sessionKey]);
+    }
 }
 ?>
 

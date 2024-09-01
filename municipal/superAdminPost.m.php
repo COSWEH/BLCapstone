@@ -386,33 +386,20 @@ if ($user_role != 2) {
 
         //load all brgy post from database
         $(document).ready(function() {
-            // brgy post
-            $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
-                $("#brgyPost").html(data);
-            });
-
-            // municipalPost
-            $.post('municipal_includes/show_municipalPost.m.php', {}, function(data) {
-                $("#municipalPost").html(data);
-            });
-
-            function updateBrgyPost() {
-                $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
-                    $("#brgyPost").html(data);
-                    setTimeout(updateBrgyPost, 30000);
+            function loadContent(url, elementId, interval = null) {
+                $.post(url, {}, function(data) {
+                    $(elementId).html(data);
+                    if (interval) {
+                        setTimeout(function() {
+                            loadContent(url, elementId, interval);
+                        }, interval);
+                    }
                 });
             }
 
-            function updateMunicpalPost() {
-                $.post('municipal_includes/show_municipalPost.m.php', {}, function(data) {
-                    $("#municipalPost").html(data);
-                });
-            }
-
-            // Initial call to load brgy post
-            updateBrgyPost();
-            updateMunicpalPost();
-
+            // Initial data loading and periodic updates
+            loadContent('municipal_includes/show_brgyPost.m.php', '#brgyPost', 30000);
+            loadContent('municipal_includes/show_municipalPost.m.php', '#municipalPost');
         });
     </script>
 
@@ -421,78 +408,28 @@ if ($user_role != 2) {
 </body>
 
 <?php
-
-// add super admin acc
-if (isset($_SESSION['addAdmin_success_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['addAdmin_success_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['addAdmin_success_message']);
+// Function to display SweetAlert success messages
+function displaySuccessMessage($sessionKey)
+{
+    if (isset($_SESSION[$sessionKey])) {
+        echo '<script>
+                Swal.fire({
+                    title: "Success",
+                    text: "' . $_SESSION[$sessionKey] . '",
+                    icon: "success",
+                });
+            </script>';
+        unset($_SESSION[$sessionKey]);
+    }
 }
 
-// add faqs
-if (isset($_SESSION['faq_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['faq_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['faq_message']);
-}
-
-// delete faqs
-if (isset($_SESSION['delete_faq_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['delete_faq_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['delete_faq_message']);
-}
-
-// success login
-if (isset($_SESSION['success_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['success_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['success_message']);
-}
-
-// success post
-if (isset($_SESSION['post_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['post_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['post_message']);
-}
-
-//delete post
-if (isset($_SESSION['delete_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['delete_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['delete_message']);
-}
+// Call the function for each success message type
+displaySuccessMessage('addAdmin_success_message');
+displaySuccessMessage('faq_message');
+displaySuccessMessage('delete_faq_message');
+displaySuccessMessage('success_message');
+displaySuccessMessage('post_message');
+displaySuccessMessage('delete_message');
 ?>
 
 </html>

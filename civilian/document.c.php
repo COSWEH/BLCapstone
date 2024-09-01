@@ -528,51 +528,19 @@ if ($user_role != 0) {
 
         $(document).ready(function() {
 
-            $.post('civilian_includes/get_pending_count.php', {}, function(data) {
-                $("#count-pending").html(data);
-            });
-            $.post('civilian_includes/get_processing_count.php', {}, function(data) {
-                $("#count-processing").html(data);
-            });
-            $.post('civilian_includes/get_approved_count.php', {}, function(data) {
-                $("#count-approved").html(data);
-            });
-            $.post('civilian_includes/get_cancelled_count.php', {}, function(data) {
-                $("#count-cancelled").html(data);
-            });
-
-            function showPendingCount() {
-                $.post('civilian_includes/get_pending_count.php', {}, function(data) {
-                    $("#count-pending").html(data);
-                    setTimeout(showPendingCount, 30000);
+            function updateCount(endpoint, selector) {
+                $.post(endpoint, {}, function(data) {
+                    $(selector).html(data);
+                    setTimeout(function() {
+                        updateCount(endpoint, selector);
+                    }, 30000);
                 });
             }
 
-            function showProcessingCount() {
-                $.post('civilian_includes/get_processing_count.php', {}, function(data) {
-                    $("#count-processing").html(data);
-                    setTimeout(showProcessingCount, 30000);
-                });
-            }
-
-            function showApprovedCount() {
-                $.post('civilian_includes/get_approved_count.php', {}, function(data) {
-                    $("#count-approved").html(data);
-                    setTimeout(showApprovedCount, 30000);
-                });
-            }
-
-            function showCancelledCount() {
-                $.post('civilian_includes/get_cancelled_count.php', {}, function(data) {
-                    $("#count-cancelled").html(data);
-                    setTimeout(showCancelledCount, 30000);
-                });
-            }
-
-            showPendingCount();
-            showProcessingCount();
-            showApprovedCount();
-            showCancelledCount();
+            updateCount('civilian_includes/get_pending_count.php', '#count-pending');
+            updateCount('civilian_includes/get_processing_count.php', '#count-processing');
+            updateCount('civilian_includes/get_approved_count.php', '#count-approved');
+            updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
 
             $.post('civilian_includes/show_notification.php', {}, function(data) {
                 $("#notification-content").html(data);
@@ -667,75 +635,62 @@ if ($user_role != 0) {
             $('#forYourself').on('change', updateFields);
 
             // Get the buttons and steps
-            const nextBtn1 = document.getElementById('nextBtn1');
-            const prevBtn1 = document.getElementById('prevBtn1');
-            const nextBtn2 = document.getElementById('nextBtn2');
-            const prevBtn2 = document.getElementById('prevBtn2');
-            const nextBtn3 = document.getElementById('nextBtn3');
-            const prevBtn3 = document.getElementById('prevBtn3');
-            const nextBtn4 = document.getElementById('nextBtn4');
-            const prevBtn4 = document.getElementById('prevBtn4');
-            const nextBtn5 = document.getElementById('nextBtn5'); // Added
-            const prevBtn5 = document.getElementById('prevBtn5'); // Added
+            const steps = [
+                document.getElementById('step1'),
+                document.getElementById('step2'),
+                document.getElementById('step3'),
+                document.getElementById('step4'),
+                document.getElementById('step5'),
+                document.getElementById('step6')
+            ];
 
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-            const step3 = document.getElementById('step3');
-            const step4 = document.getElementById('step4');
-            const step5 = document.getElementById('step5');
-            const step6 = document.getElementById('step6'); // Added
+            const nextButtons = [
+                document.getElementById('nextBtn1'),
+                document.getElementById('nextBtn2'),
+                document.getElementById('nextBtn3'),
+                document.getElementById('nextBtn4'),
+                document.getElementById('nextBtn5')
+            ];
+
+            const prevButtons = [
+                document.getElementById('prevBtn1'),
+                document.getElementById('prevBtn2'),
+                document.getElementById('prevBtn3'),
+                document.getElementById('prevBtn4'),
+                document.getElementById('prevBtn5')
+            ];
 
             // Function to show a specific step
-            function showStep(stepToShow) {
-                [step1, step2, step3, step4, step5, step6].forEach(step => {
-                    step.classList.add('d-none');
-                });
-                stepToShow.classList.remove('d-none');
+            function showStep(stepIndex) {
+                steps.forEach(step => step.classList.add('d-none'));
+                steps[stepIndex].classList.remove('d-none');
             }
 
-            // Event listeners for navigation buttons
-            nextBtn1.addEventListener('click', function() {
-                showStep(step2);
-            });
+            // Function to add event listeners to navigation buttons
+            function addNavigationListeners(nextBtns, prevBtns) {
+                nextBtns.forEach((btn, index) => {
+                    if (btn) {
+                        btn.addEventListener('click', function() {
+                            showStep(index + 1);
+                        });
+                    }
+                });
 
-            prevBtn1.addEventListener('click', function() {
-                showStep(step1);
-            });
-
-            nextBtn2.addEventListener('click', function() {
-                showStep(step3);
-            });
-
-            prevBtn2.addEventListener('click', function() {
-                showStep(step2);
-            });
-
-            nextBtn3.addEventListener('click', function() {
-                showStep(step4);
-            });
-
-            prevBtn3.addEventListener('click', function() {
-                showStep(step3);
-            });
-
-            nextBtn4.addEventListener('click', function() {
-                showStep(step5);
-            });
-
-            prevBtn4.addEventListener('click', function() {
-                showStep(step4);
-            });
-
-            nextBtn5.addEventListener('click', function() {
-                showStep(step6);
-            });
-
-            prevBtn5.addEventListener('click', function() {
-                showStep(step5);
-            });
+                prevBtns.forEach((btn, index) => {
+                    if (btn) {
+                        btn.addEventListener('click', function() {
+                            showStep(index);
+                        });
+                    }
+                });
+            }
 
             // Initialize with the first step
-            showStep(step1);
+            showStep(0);
+
+            // Add event listeners to navigation buttons
+            addNavigationListeners(nextButtons, prevButtons);
+
 
         });
     </script>
@@ -745,39 +700,30 @@ if ($user_role != 0) {
 </body>
 
 <?php
-// success post
-if (isset($_SESSION['reqDoc_message'])) {
+// Function to display SweetAlert messages
+function displayAlert($type, $message, $title = "Success")
+{
     echo '<script>
             Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['reqDoc_message'] . '",
-                icon: "success",
+                title: "' . $title . '",
+                text: "' . $message . '",
+                icon: "' . $type . '",
             });
         </script>';
-    unset($_SESSION['reqDoc_message']);
-}
-// reqDoc_invalid_password
-if (isset($_SESSION['reqDoc_invalid_password'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Error",
-                text: "' . $_SESSION['reqDoc_invalid_password'] . '",
-                icon: "error",
-            });
-        </script>';
-    unset($_SESSION['reqDoc_invalid_password']);
 }
 
-// cancel doc request
-if (isset($_SESSION['cancelReq_message'])) {
-    echo '<script>
-            Swal.fire({
-                title: "Success",
-                text: "' . $_SESSION['cancelReq_message'] . '",
-                icon: "success",
-            });
-        </script>';
-    unset($_SESSION['cancelReq_message']);
+// Success and error messages handling
+$alerts = [
+    'reqDoc_message' => ['type' => 'success', 'title' => 'Success'],
+    'reqDoc_invalid_password' => ['type' => 'error', 'title' => 'Error'],
+    'cancelReq_message' => ['type' => 'success', 'title' => 'Success'],
+];
+
+foreach ($alerts as $sessionKey => $alertConfig) {
+    if (isset($_SESSION[$sessionKey])) {
+        displayAlert($alertConfig['type'], $_SESSION[$sessionKey], $alertConfig['title']);
+        unset($_SESSION[$sessionKey]);
+    }
 }
 ?>
 
