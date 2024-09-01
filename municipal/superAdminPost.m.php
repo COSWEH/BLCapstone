@@ -21,7 +21,7 @@ if ($countUser < 1) {
     exit;
 } else {
     while ($row = mysqli_fetch_assoc($checkUser)) {
-        $brgy = $row['user_brgy'];
+        $city = $row['user_city'];
         $fname = $row['user_fname'];
         $mname = $row['user_mname'];
         $lname = $row['user_lname'];
@@ -101,70 +101,6 @@ if ($user_role != 2) {
                         </li>
 
                     </ul>
-
-                    <!-- add faqs modal -->
-                    <div class="modal fade" id="faqsModal" tabindex="-1" aria-labelledby="faqsModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-
-                                <div class="modal-header text-center border border-0">
-                                    <div class="w-100 text-center">
-                                        <h4 class="modal-title" id="faqsModalLabel">
-                                            Frequently Asked Questions
-                                        </h4>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <div class="modal-body">
-                                    <form action="municipal_includes/addFaqs.m.php" method="POST">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" name="question" class="form-control" id="question" placeholder="Question" required>
-                                            <label for="question" class="form-label">Question</label>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <textarea name="answer" class="form-control" id="answer" placeholder="Answers" style="height: 100px" required></textarea>
-                                            <label for="answer" class="form-label">Answers</label>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-12 col-md-4 mb-2">
-                                                <button type="submit" name="btnFaqs" class="btn btn-primary  w-100">Add</button>
-                                            </div>
-                                            <div class="col-12 col-md-4 mb-2">
-                                                <button type="button" class="btn btn-outline-primary  w-100" data-bs-toggle="modal" data-bs-dismiss="modal" id="editButton">Edit</button>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <button type="button" class="btn btn-outline-secondary  w-100" data-bs-dismiss="modal">Cancel</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- edit faqs modal -->
-                    <div class="modal fade" id="editFaqsModal" tabindex="-1" aria-labelledby="editFaqsModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header text-center border border-0">
-                                    <div class="w-100 text-center">
-                                        <h4 class="modal-title " id="editFaqsModalLabel">
-                                            <small>
-                                                Edit Frequently Asked Questions
-                                            </small>
-                                        </h4>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div id="showFaqs" class="modal-body">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <hr>
                 </div>
 
@@ -224,7 +160,7 @@ if ($user_role != 2) {
     <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header text-center">
+                <div class="modal-header text-center border border-0">
                     <div class="w-100 text-center">
                         <h4 class="modal-title " id="postModalLabel">
                             Create post
@@ -246,7 +182,7 @@ if ($user_role != 2) {
                                 </h6>
                                 <h6 class="text-muted mb-0">
                                     <?php
-                                    echo "<small class=''>From: </small>" . $brgy;
+                                    echo "<small class=''>From: </small>" . $city;
                                     ?>
                                 </h6>
                             </div>
@@ -404,7 +340,7 @@ if ($user_role != 2) {
     </script>
 
     <script src="municipalMaterials/script.m.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 <?php
@@ -425,8 +361,6 @@ function displaySuccessMessage($sessionKey)
 
 // Call the function for each success message type
 displaySuccessMessage('addAdmin_success_message');
-displaySuccessMessage('faq_message');
-displaySuccessMessage('delete_faq_message');
 displaySuccessMessage('success_message');
 displaySuccessMessage('post_message');
 displaySuccessMessage('delete_message');

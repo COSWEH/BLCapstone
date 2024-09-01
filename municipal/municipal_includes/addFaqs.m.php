@@ -7,7 +7,7 @@ if (isset($_POST['btnFaqs']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $answer = $_POST['answer'];
 
     if (empty($question) || empty($answer)) {
-        header('Location: ../superAdminPost.m.php');
+        header('Location: ../superAdminDashboard.php');
         exit;
     }
 
@@ -23,7 +23,7 @@ if (isset($_POST['btnFaqs']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($query) {
         $_SESSION['faq_message'] = "FAQs successfully addedd";
-        header('Location: ../superAdminPost.m.php');
+        header('Location: ../superAdminDashboard.php');
         exit;
     } else {
         die('Error: ' . mysqli_error($con));

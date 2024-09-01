@@ -61,7 +61,7 @@ if (!$result) {
                     <td><small><?php echo htmlspecialchars($dateOfBirth); ?></small></td>
                     <td><small><?php echo htmlspecialchars($placeOfBirth); ?></small></td>
                     <td><small><?php echo htmlspecialchars($civilStatus); ?></small></td>
-                    <td><button type="button" class="btn btn-sm btn-outline-danger aDelete" data-post-id="<?php echo $superAdminID; ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-danger saDelete" data-post-id="<?php echo $superAdminID; ?>" data-bs-toggle="modal" data-bs-target="#deleteSAModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
                 </tr>
             <?php
             }
@@ -71,7 +71,7 @@ if (!$result) {
 </div>
 
 <!-- Delete Super Admin Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteSAModal" tabindex="-1" aria-labelledby="deleteSAModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
@@ -99,7 +99,7 @@ if (!$result) {
 
 <script>
     $(document).ready(function() {
-        $(document).on('click', '.aDelete', function() {
+        $(document).on('click', '.saDelete', function() {
             let sa_id = $(this).data('post-id');
             console.log(sa_id);
             $('#getSuperAdminID').val(sa_id);
