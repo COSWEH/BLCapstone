@@ -173,34 +173,31 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
-                <!-- home -->
+                <!-- home content-->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Home</h6>
+                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit content</button>
                         <div class="row align-items-center mb-4">
                             <!-- Content Section -->
                             <div class="col-md-6 text-center text-md-start px-lg-5">
                                 <!-- Title with Edit Button -->
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h1 id="home-title" class="display-6 mb-0">Loading...</h1>
-                                    <button class="btn btn-sm btn-success shadow ms-2" data-bs-toggle="modal" data-bs-target="#home_titleModal">Edit</button>
+                                    <h1 id="homeTitle" class="display-6 mb-0">Loading...</h1>
                                 </div>
                                 <!-- Subtitle1 with Edit Button -->
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p id="home-subtitle1" class="small mb-0">Loading...</p>
-                                    <button class="btn btn-sm btn-success shadow ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle1Modal">Edit</button>
+                                    <p id="homeSubtitle1" class="small mb-0">Loading...</p>
                                 </div>
                                 <!-- Subtitle2 with Edit Button -->
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <p id="home-subtitle2" class="small mb-0">Loading...</p>
-                                    <button class="btn btn-sm btn-success shadow ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle2Modal">Edit</button>
+                                    <p id="homeSubtitle2" class="small mb-0">Loading...</p>
                                 </div>
                             </div>
                             <!-- Image Section with Edit Button -->
                             <div class="col-md-6 px-lg-5 text-center">
                                 <div class="position-relative">
-                                    <img id="home-img" src="" width="300" height="200" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
-                                    <button class="btn btn-sm btn-success shadow position-absolute bottom-0 end-0 m-2" data-bs-toggle="modal" data-bs-target="#home_imgModal">Edit</button>
+                                    <img id="homeImg" src="" width="300" height="200" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
                                 </div>
                             </div>
                         </div>
@@ -412,34 +409,54 @@ if ($user_role != 2) {
         </div>
     </div>
 
-    <!-- update home title modal -->
-    <div class="modal fade" id="home_titleModal" tabindex="-1" aria-labelledby="home_titleModalLabel" aria-hidden="true">
+    <!-- update home content modal -->
+    <div class="modal fade" id="editHomeContent" tabindex="-1" aria-labelledby="editHomeContentLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body text-center">
+                <div class="modal-body">
                     <!-- Icon and Title -->
                     <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
                         <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal Title -->
-                    <h4 class="my-3 fw-semibold" id="home_titleModalLabel">Update Home Title</h4>
-                    <p class="text-muted">Update the home title below.</p>
+                    <div class="text-center">
+                        <h4 class="my-3 fw-semibold" id="editHomeContentLabel">Update Home Content</h4>
+                        <p class="text-muted">Update home content below.</p>
+                    </div>
 
                     <!-- Form for Updating Home Title -->
-                    <form action="municipal_maintainability/update_home.php" method="POST">
-                        <input type="hidden" id="home_title_id" value="" name="home_title_id">
+                    <form action="municipal_maintainability/update_home.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="home_content_id" name="home_content_id">
+
                         <div class="form-floating mb-3">
-                            <input type="text" name="home_title" class="form-control" id="hometitle" placeholder="Home title" required>
-                            <label for="hometitle" class="form-label">Home title</label>
+                            <input type="text" name="home_content_title" class="form-control" id="home_content_title" placeholder="Home title">
+                            <label for="home_content_title" class="form-label">Home title</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea name="home_content_subtitle1" class="form-control" id="home_content_subtitle1" placeholder="Home subtitle 1" style="height: 100px"></textarea>
+                            <label for="home_content_subtitle1" class="form-label">Home subtitle 1</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea name="home_content_subtitle2" class="form-control" id="home_content_subtitle2" placeholder="Home subtitle 2" style="height: 100px"></textarea>
+                            <label for="home_content_subtitle2" class="form-label">Home subtitle 2</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="file" name="home_content_img" class="form-control" id="home_content_img" accept=".jpg, .jpeg, .png">
+                            <div class="badge text-bg-success text-wrap" style="width: 6rem;">
+                                <small>Home image.</small>
+                            </div>
                         </div>
 
                         <!-- Error Display Area -->
-                        <div id="showHomeTitleError"></div>
+                        <div id="showHomeContentError"></div>
 
                         <!-- Action Buttons -->
                         <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeTitle" id="btnHomeTitle" class="btn btn-primary">Update</button>
+                            <button type="submit" name="btnHomeContent" id="btnHomeContent" class="btn btn-primary">Update</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
@@ -448,111 +465,6 @@ if ($user_role != 2) {
         </div>
     </div>
 
-    <!-- update home subtitle 1 modal -->
-    <div class="modal fade" id="home_subtitle1Modal" tabindex="-1" aria-labelledby="home_subtitle1ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <!-- Icon and subTitle -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
-                    </div>
-
-                    <!-- Modal Title -->
-                    <h4 class="my-3 fw-semibold" id="home_subtitle1ModalLabel">Update Subtitle 1</h4>
-                    <p class="text-muted">Update the home subtitle 1 below.</p>
-
-                    <!-- Home title form -->
-                    <form action="municipal_maintainability/update_home.php" method="POST">
-                        <input type="hidden" id="home_subtitle1_id" value="" name="home_subtitle1_id">
-                        <div class="form-floating mb-3">
-                            <textarea type="text" name="home_subtitle1" class="form-control" id="home_subtitle1" placeholder="Home subtitle 1" style="height: 250px" required></textarea>
-                            <label for="home_subtitle1" class="form-label">Home subtitle 1</label>
-                        </div>
-
-                        <div id="showHomeSubtitle1Error"></div>
-
-                        <!-- Action Buttons -->
-                        <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeSubtitle1" id="btnHomeSubtitle1" class="btn btn-primary">Update</button>
-                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- update home subtitle 2 modal -->
-    <div class="modal fade" id="home_subtitle2Modal" tabindex="-1" aria-labelledby="home_subtitle2ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <!-- Icon and subTitle -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
-                    </div>
-
-                    <!-- Modal subTitle 2 -->
-                    <h4 class="my-3 fw-semibold" id="home_subtitle2ModalLabel">Update Subtitle 2</h4>
-                    <p class="text-muted">Update the home subtitle 2 below.</p>
-
-                    <!-- Home title form -->
-                    <form action="municipal_maintainability/update_home.php" method="POST">
-                        <input type="hidden" id="home_subtitle2_id" value="" name="home_subtitle2_id">
-                        <div class="form-floating mb-3">
-                            <textarea type="text" name="home_subtitle2" class="form-control" id="home_subtitle2" placeholder="Home subtitle 2" style="height: 250px" required></textarea>
-                            <label for="home_subtitle2" class="form-label">Home subtitle 2</label>
-                        </div>
-
-                        <div id="showHomeSubtitle2Error"></div>
-
-                        <!-- Action Buttons -->
-                        <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeSubtitle2" id="btnHomeSubtitle2" class="btn btn-primary">Update</button>
-                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit home img modal -->
-    <div class="modal fade" id="home_imgModal" tabindex="-1" aria-labelledby="home_imgModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <!-- Icon and Image -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-image text-primary" style="font-size: 25px;"></i>
-                    </div>
-
-                    <!-- Modal Title -->
-                    <h4 class="my-3 fw-semibold" id="home_imgModalLabel">Edit Home Img</h4>
-                    <p class="text-muted">Update the home image below.</p>
-
-                    <!-- Home Image Form -->
-                    <form action="municipal_maintainability/update_home.php" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" id="home_img_id" name="home_img_id" value="">
-
-                        <div class="mb-3">
-                            <label for="homeImg" class="form-label">Home Image</label>
-                            <input type="file" name="home_img" class="form-control" id="homeImg" accept=".jpg, jpeg, .png" required>
-                        </div>
-
-                        <div id="showHomeImgError"></div>
-
-                        <!-- Action Buttons -->
-                        <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeImg" class="btn btn-primary">Update</button>
-                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- add services modal -->
     <div class="modal fade" id="addServicesModal" tabindex="-1" aria-labelledby="addServicesModalLabel" aria-hidden="true">
@@ -752,6 +664,7 @@ if ($user_role != 2) {
             // Initial call to load messages
             updateLogs();
 
+            // fetch home 
             $.ajax({
                 url: '../includes/show_home.php',
                 type: 'GET',
@@ -760,18 +673,49 @@ if ($user_role != 2) {
                     if (response.error) {
                         alert(response.error);
                     } else {
-                        $('#home_title_id').val(response.home_id);
-                        $('#home_subtitle1_id').val(response.home_id);
-                        $('#home_subtitle2_id').val(response.home_id);
-                        $('#home_img_id').val(response.home_id);
-                        $('#home-title').text(response.home_title);
-                        $('#home-subtitle1').text(response.home_subtitleOne);
-                        $('#home-subtitle2').text(response.home_subtitleTwo);
-                        $('#home-img').attr('src', '../index_dbImg/' + response.home_img);
+                        $('#home_content_id').val(response.home_id);
+                        $('#homeTitle').text(response.home_title);
+                        $('#homeSubtitle1').text(response.home_subtitleOne);
+                        $('#homeSubtitle2').text(response.home_subtitleTwo);
+                        $('#homeImg').attr('src', '../index_dbImg/' + response.home_img);
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error:', status, error);
+                }
+            });
+
+            document.getElementById("home_content_img").addEventListener("change", function(event) {
+                const fileInput = event.target;
+                const file = fileInput.files[0]; // Get the first (and only) file
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+
+                // Clear previous error messages
+                const errorContainer = document.getElementById('showHomeContentError');
+                errorContainer.innerHTML = '';
+
+                if (file) {
+                    // Check if the file size exceeds 8MB
+                    if (file.size > maxSize) {
+                        // Show an error message if the file is too large
+                        errorContainer.innerHTML = `
+                <div class="alert alert-danger text-center" role="alert">
+                    Image is too large. Maximum size is 8MB.
+                </div>`;
+                        console.log("Skipped image (too large):", file.name);
+
+                        // Clear the file input
+                        fileInput.value = '';
+
+                        // Clear the error message after 3 seconds
+                        setTimeout(() => {
+                            errorContainer.innerHTML = '';
+                        }, 3000);
+                    } else {
+                        // Log the file's name and size
+                        console.log("File Name:", file.name);
+                        console.log("File Size:", file.size); // Size in bytes
+                    }
                 }
             });
 
@@ -799,7 +743,7 @@ if ($user_role != 2) {
                 $('#deleteServicesModal').modal('show');
             }
 
-
+            // fetch services
             $.ajax({
                 url: '../includes/show_services.php',
                 type: 'GET',
@@ -813,21 +757,21 @@ if ($user_role != 2) {
                         response.forEach(function(service) {
                             var serviceCard = `
                     <div class="col">
-    <div class="card border shadow rounded mb-3">
-        <div class="card-header p-3 fs-6 text-center d-flex justify-content-between align-items-center">
-            <span>${service.services_title}</span>
-            <div class="d-flex">
-                <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
-                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Delete</button>
-            </div>
-        </div>
-        <div class="card-body p-3">
-            <p class="card-text small">${service.services_desc}</p>
-        </div>
-    </div>
-</div>
+                    <div class="card border shadow rounded mb-3">
+                        <div class="card-header p-3 fs-6 text-center d-flex justify-content-between align-items-center">
+                            <span>${service.services_title}</span>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
+                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Delete</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="card-text small">${service.services_desc}</p>
+                        </div>
+                    </div>
+                </div>
 
-                `;
+                                `;
                             $('#services_container').append(serviceCard);
                         });
 
@@ -869,8 +813,7 @@ if ($user_role != 2) {
                     var alertHtml = `
             <div class="alert alert-warning" role="alert">
                 Both the title and description must be filled out.
-            </div>
-        `;
+            </div>`;
 
                     // Insert the alert into the #showAddServicesError div
                     $('#showAddServicesError').html(alertHtml);
@@ -895,8 +838,7 @@ if ($user_role != 2) {
                     var alertHtml = `
             <div class="alert alert-warning" role="alert">
                 Both the title and description must be filled out.
-            </div>
-        `;
+            </div>`;
 
                     // Insert the alert into the #showUpdateServicesError div
                     $('#showUpdateServicesError').html(alertHtml);
@@ -906,67 +848,6 @@ if ($user_role != 2) {
                     }, 3000);
                 }
             });
-
-            function validateInput(buttonId, inputId, errorContainerId, errorMessage) {
-                document.getElementById(buttonId).addEventListener('click', function(event) {
-                    var input = document.getElementById(inputId).value.trim();
-                    var errorContainer = document.getElementById(errorContainerId);
-
-                    errorContainer.innerHTML = ''; // Clear any previous errors
-
-                    if (input === '') {
-                        var alertDiv = document.createElement('div');
-                        alertDiv.className = 'alert alert-warning';
-                        alertDiv.role = 'alert';
-                        alertDiv.innerText = errorMessage;
-
-                        errorContainer.appendChild(alertDiv);
-
-                        // Remove the alert after 3 seconds
-                        setTimeout(function() {
-                            alertDiv.remove();
-                        }, 3000);
-
-                        // Prevent the form from submitting
-                        event.preventDefault();
-                    }
-                });
-            }
-
-            document.getElementById('homeImg').addEventListener('change', function(event) {
-                const MAX_SIZE = 8 * 1024 * 1024;
-                const fileInput = event.target;
-                const file = fileInput.files[0]; // Get the selected file
-
-                // Clear previous error messages
-                const errorContainer = document.getElementById('showHomeImgError');
-                errorContainer.innerHTML = '';
-
-                if (file) {
-                    if (file.size > MAX_SIZE) {
-                        // Create and display the error alert
-                        const alertDiv = document.createElement('div');
-                        alertDiv.className = 'alert alert-warning text-center';
-                        alertDiv.role = 'alert';
-                        alertDiv.innerText = 'Image is too large. Maximum allowed size is 8MB.';
-
-                        errorContainer.appendChild(alertDiv);
-
-                        // Clear the error message after 3 seconds
-                        setTimeout(() => {
-                            alertDiv.remove();
-                        }, 3000);
-
-                        // Clear the file input
-                        fileInput.value = '';
-                    }
-                }
-            });
-
-            // Initialize validations for different buttons and inputs
-            validateInput('btnHomeTitle', 'hometitle', 'showHomeTitleError', 'The home title cannot be empty. Please enter a title.');
-            validateInput('btnHomeSubtitle1', 'home_subtitle1', 'showHomeSubtitle1Error', 'The home subtitle 1 cannot be empty. Please enter a subtitle 1.');
-            validateInput('btnHomeSubtitle2', 'home_subtitle2', 'showHomeSubtitle2Error', 'The home subtitle 2 cannot be empty. Please enter a subtitle 2.');
 
             // get super admin info
             function navigateGroups(currentGroup, nextGroup) {
@@ -1028,14 +909,14 @@ if ($user_role != 2) {
 
 </html>
 <?php
-function displaySuccessMessage($sessionKey, $title = "Success")
+function displaySuccessMessage($sessionKey, $title = "Success", $icon = "success")
 {
     if (isset($_SESSION[$sessionKey])) {
         echo '<script>
                 Swal.fire({
                     title: "' . $title . '",
                     text: "' . $_SESSION[$sessionKey] . '",
-                    icon: "success",
+                    icon: "' . $icon . '",
                 });
             </script>';
         unset($_SESSION[$sessionKey]);
@@ -1043,10 +924,15 @@ function displaySuccessMessage($sessionKey, $title = "Success")
 }
 
 displaySuccessMessage('addSuperAdmin_success_message');
-displaySuccessMessage('update_home_message');
+displaySuccessMessage('update_content_message');
+
+displaySuccessMessage('no_fileds_update_message', 'Oops!', 'warning');
+displaySuccessMessage('update_content_img_error', 'Invalid Image Size', 'error');
+
 displaySuccessMessage('add_services_message');
 displaySuccessMessage('update_services_message');
 displaySuccessMessage('delete_services_message');
+
 displaySuccessMessage('faq_message');
 displaySuccessMessage('delete_faq_message');
 ?>
