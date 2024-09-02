@@ -21,7 +21,7 @@ if (!$result) {
     <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
         <thead class="table-active text-uppercase text-white">
             <tr>
-                <th style="background-color: #323D42; color: #CBDCED; width: 12.5%;"><small>Full Name</small></th>
+                <th style="background-color: #323D42; color: #CBDCED; width: 12.5%; "><small>Full Name</small></th>
                 <th style="background-color: #323D42; color: #8FA985; width: 12.5%;"><small>Sex</small></th>
                 <th style="background-color: #323D42; color: #85937D; width: 12.5%;"><small>Barangay</small></th>
                 <th style="background-color: #323D42; color: #708C69; width: 12.5%;"><small>Purok</small></th>

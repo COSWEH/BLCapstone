@@ -163,17 +163,6 @@ if ($user_role != 2) {
             <main class="col-12 col-md-9 content border rounded p-3">
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
-                        <h6>Logs</h6>
-                    </div>
-                    <div class="card-body">
-                        <div id="showLogs" class="overflow-auto" style="height: 300px;">
-                            <!-- Logs content -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3 shadow border-0 rounded-3">
-                    <div class="ms-3 mt-3">
                         <h6>Super admin account</h6>
                         <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
                     </div>
@@ -192,6 +181,17 @@ if ($user_role != 2) {
                     <div class="card-body">
                         <div id="showAllFaqs" class="overflow-auto" style="height: 300px;">
                             <!-- FAQs content -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Logs</h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="showLogs" class="overflow-auto" style="height: 300px;">
+                            <!-- Logs content -->
                         </div>
                     </div>
                 </div>

@@ -19,9 +19,9 @@ if (!$result) {
     <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
         <thead class="table-active text-uppercase text-white">
             <tr>
-                <th class="text-light" style="background-color: #ee7ea0;"><small>Document ID</small></th>
-                <th class="text-light" style="background-color: #ffaf6e;"><small>Document Type</small></th>
-                <th class="text-light" style="background-color: #ffaf6e;"><small>Action</small></th>
+                <th style="width: 33.33%;"><small>Document ID</small></th>
+                <th style="width: 33.33%;"><small>Document Type</small></th>
+                <th style="width: 33.33%;"><small>Action</small></th>
             </tr>
         </thead>
         <tbody>
@@ -31,9 +31,9 @@ if (!$result) {
                 $docType = $data['docType'];
             ?>
                 <tr>
-                    <td style="width: 33.33%;"><small><?php echo htmlspecialchars($id); ?></small></td>
-                    <td style="width: 33.33%;"><small><?php echo htmlspecialchars($docType); ?></small></td>
-                    <td style="width: 33.33%;"><button type="button" class="btn btn-sm btn-outline-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal">Delete <i class="bi bi-trash ms-2"></i></button></td>
+                    <td><small><?php echo htmlspecialchars($id); ?></small></td>
+                    <td><small><?php echo htmlspecialchars($docType); ?></small></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal">Delete <i class="bi bi-trash ms-2"></i></button></td>
                 </tr>
 
             <?php
