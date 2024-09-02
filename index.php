@@ -419,55 +419,7 @@ session_start();
     <!-- Services Section -->
     <section id="services" class="container my-5">
         <h1 class="text-center mb-4">Our Services</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col">
-                <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-5 text-center ">Direct Access to Official Information</div>
-                    <div class="card-body p-3">
-                        <p class="card-text">Get direct access to the latest official information and updates.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-5 text-center ">Document Requesting and Tracking</div>
-                    <div class="card-body">
-                        <p class="card-text">Easily request and track documents with our streamlined process.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-5 text-center ">Enhanced Civic Engagement</div>
-                    <div class="card-body">
-                        <p class="card-text">Engage with your community more effectively through our platform.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-5 text-center ">Communication Channels</div>
-                    <div class="card-body">
-                        <p class="card-text">Access various communication channels for better interaction.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-5 text-center ">Personalized User Experience</div>
-                    <div class="card-body">
-                        <p class="card-text">Enjoy a personalized experience tailored to your preferences.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-custom border shadow rounded">
-                    <div class="card-header p-2 fs-5 text-center ">Accessibility and Convenience</div>
-                    <div class="card-body">
-                        <p class="card-text">Experience enhanced accessibility and convenience across the platform.</p>
-                    </div>
-                </div>
-            </div>
+        <div id="services_container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         </div>
         <hr>
     </section>
@@ -612,7 +564,7 @@ session_start();
                 setTimeout(showFaqs, 30000);
             }
 
-            function fetchContent() {
+            function fetchHomeContent() {
                 $.ajax({
                     url: 'includes/show_home.php',
                     type: 'GET',
@@ -633,9 +585,43 @@ session_start();
                 });
             }
 
+            function fetchServicesContent() {
+                $.ajax({
+                    url: 'includes/show_services.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#services_container').empty(); // Clear existing content
 
-            fetchContent();
-            setInterval(fetchContent, 1000);
+                            response.forEach(function(service) {
+                                var serviceCard = `
+                        <div class="col">
+                            <div class="card card-custom border shadow rounded">
+                                <div class="card-header p-3 fs-5 text-center">${service.services_title}</div>
+                                <div class="card-body p-3">
+                                    <p class="card-text">${service.services_desc}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                                $('#services_container').append(serviceCard);
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+            fetchHomeContent();
+            fetchServicesContent();
+
+            setInterval(fetchHomeContent, 1000);
+            setInterval(fetchServicesContent, 1000);
             showFaqs();
 
             // JavaScript to handle the steps in the multi-step form

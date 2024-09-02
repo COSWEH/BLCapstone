@@ -42,7 +42,7 @@ if (!$result) {
                     <td><small><?php echo htmlspecialchars($faq_question); ?></small></td>
                     <td><small><?php echo htmlspecialchars($faq_answer); ?></small></td>
                     <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
-                    <td><button type="button" class="btn btn-sm btn-outline-danger faqsDelete" data-post-id="<?php echo $faq_id; ?>" data-bs-toggle="modal" data-bs-target="#deleteFaqsModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
+                    <td><button type="button" class="btn btn-sm btn-danger faqsDelete" data-post-id="<?php echo $faq_id; ?>" data-bs-toggle="modal" data-bs-target="#deleteFaqsModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
                 </tr>
             <?php
             }
@@ -51,7 +51,7 @@ if (!$result) {
     </table>
 </div>
 
-<!-- Delete Super Admin Modal -->
+<!-- Delete faqs Modal -->
 <div class="modal fade" id="deleteFaqsModal" tabindex="-1" aria-labelledby="deleteFaqsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -62,7 +62,7 @@ if (!$result) {
 
                 <h6 class="my-3 fw-semibold">Are you sure?</h6>
                 <p class="text-muted">This action cannot be undone. Please confirm your decision.</p>
-                <form action="municipal_includes/deleteFaqs.php" method="POST">
+                <form action="municipal_maintainability/deleteFaqs.php" method="POST">
                     <input type="hidden" id="getFaqID" name="getFaqID">
                     <div class="d-grid gap-3 mx-4">
                         <button type="submit" name="btnDeleteFaq" class="btn btn-danger">

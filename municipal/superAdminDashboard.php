@@ -164,7 +164,7 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Super admin account</h6>
-                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
                     </div>
                     <div class="card-body">
                         <div id="showAllSuperAdmin" class="overflow-auto" style="height: 300px;">
@@ -173,10 +173,6 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
-                <!------maintainability(ewan kung tama spelling)  $('#home-title').text(response.home_title);
-                        $('#home-subtitle1').text(response.home_subtitleOne);
-                        $('#home-subtitle2').text(response.home_subtitleTwo);
-                        $('#home-img').attr('src', 'index_dbImg/' + response.home_img);------>
                 <!-- home -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
@@ -187,26 +183,38 @@ if ($user_role != 2) {
                                 <!-- Title with Edit Button -->
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h1 id="home-title" class="display-6 mb-0">Loading...</h1>
-                                    <button class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#home_titleModal">Edit</button>
+                                    <button class="btn btn-sm btn-success shadow ms-2" data-bs-toggle="modal" data-bs-target="#home_titleModal">Edit</button>
                                 </div>
                                 <!-- Subtitle1 with Edit Button -->
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <p id="home-subtitle1" class="small mb-0">Loading...</p>
-                                    <button class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle1Modal">Edit</button>
+                                    <button class="btn btn-sm btn-success shadow ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle1Modal">Edit</button>
                                 </div>
                                 <!-- Subtitle2 with Edit Button -->
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p id="home-subtitle2" class="small mb-0">Loading...</p>
-                                    <button class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle2Modal">Edit</button>
+                                    <button class="btn btn-sm btn-success shadow ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle2Modal">Edit</button>
                                 </div>
                             </div>
                             <!-- Image Section with Edit Button -->
                             <div class="col-md-6 px-lg-5 text-center">
                                 <div class="position-relative">
                                     <img id="home-img" src="" width="300" height="200" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
-                                    <button class="btn btn-sm btn-info position-absolute bottom-0 end-0 m-2" data-bs-toggle="modal" data-bs-target="#home_imgModal">Edit</button>
+                                    <button class="btn btn-sm btn-success shadow position-absolute bottom-0 end-0 m-2" data-bs-toggle="modal" data-bs-target="#home_imgModal">Edit</button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- services -->
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Services</h6>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addServicesModal">Add servicess</button>
+                    </div>
+                    <div class="card-body">
+                        <div id="services_container" class="row row-cols-2 row-cols-lg-3 g-2">
                         </div>
                     </div>
                 </div>
@@ -214,7 +222,7 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>FAQs</h6>
-                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
                     </div>
                     <div class="card-body">
                         <div id="showAllFaqs" class="overflow-auto" style="height: 300px;">
@@ -235,9 +243,9 @@ if ($user_role != 2) {
                 </div>
             </main>
         </div>
-    </div>
 
-    <!-- --------------------------------- -->
+    </div>
+    </div>
 
     <!-- add super admin account modal -->
     <div class="modal fade" id="addSuperAdminModal" tabindex="-1" aria-labelledby="addSuperAdminModalLabel" aria-hidden="true">
@@ -409,7 +417,7 @@ if ($user_role != 2) {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <!-- Icon and subTitle -->
+                    <!-- Icon and Title -->
                     <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
                         <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
                     </div>
@@ -418,17 +426,20 @@ if ($user_role != 2) {
                     <h4 class="my-3 fw-semibold" id="home_titleModalLabel">Update Home Title</h4>
                     <p class="text-muted">Update the home title below.</p>
 
-                    <!-- Home title form -->
-                    <form id="homeTitleForm" action="municipal_maintainability/update_home.php" method="POST">
+                    <!-- Form for Updating Home Title -->
+                    <form action="municipal_maintainability/update_home.php" method="POST">
                         <input type="hidden" id="home_title_id" value="" name="home_title_id">
                         <div class="form-floating mb-3">
                             <input type="text" name="home_title" class="form-control" id="hometitle" placeholder="Home title" required>
                             <label for="hometitle" class="form-label">Home title</label>
                         </div>
 
+                        <!-- Error Display Area -->
+                        <div id="showHomeTitleError"></div>
+
                         <!-- Action Buttons -->
                         <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeTitle" class="btn btn-primary">Update</button>
+                            <button type="submit" name="btnHomeTitle" id="btnHomeTitle" class="btn btn-primary">Update</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
@@ -437,7 +448,7 @@ if ($user_role != 2) {
         </div>
     </div>
 
-    <!-- update subtitle 1 modal -->
+    <!-- update home subtitle 1 modal -->
     <div class="modal fade" id="home_subtitle1Modal" tabindex="-1" aria-labelledby="home_subtitle1ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -452,16 +463,18 @@ if ($user_role != 2) {
                     <p class="text-muted">Update the home subtitle 1 below.</p>
 
                     <!-- Home title form -->
-                    <form id="homeTitleForm" action="municipal_maintainability/update_home.php" method="POST">
+                    <form action="municipal_maintainability/update_home.php" method="POST">
                         <input type="hidden" id="home_subtitle1_id" value="" name="home_subtitle1_id">
                         <div class="form-floating mb-3">
-                            <textarea type="text" name="home_subtitle1" class="form-control" id="homesubtitle1" placeholder="Home subtitle 1" style="height: 250px" required> </textarea>
-                            <label for="homesubtitle1" class="form-label">Home subtitle 1</label>
+                            <textarea type="text" name="home_subtitle1" class="form-control" id="home_subtitle1" placeholder="Home subtitle 1" style="height: 250px" required></textarea>
+                            <label for="home_subtitle1" class="form-label">Home subtitle 1</label>
                         </div>
+
+                        <div id="showHomeSubtitle1Error"></div>
 
                         <!-- Action Buttons -->
                         <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeSubtitle1" class="btn btn-primary">Update</button>
+                            <button type="submit" name="btnHomeSubtitle1" id="btnHomeSubtitle1" class="btn btn-primary">Update</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
@@ -470,7 +483,7 @@ if ($user_role != 2) {
         </div>
     </div>
 
-    <!-- update subtitle 2 modal -->
+    <!-- update home subtitle 2 modal -->
     <div class="modal fade" id="home_subtitle2Modal" tabindex="-1" aria-labelledby="home_subtitle2ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -485,16 +498,18 @@ if ($user_role != 2) {
                     <p class="text-muted">Update the home subtitle 2 below.</p>
 
                     <!-- Home title form -->
-                    <form id="homeTitleForm" action="municipal_maintainability/update_home.php" method="POST">
+                    <form action="municipal_maintainability/update_home.php" method="POST">
                         <input type="hidden" id="home_subtitle2_id" value="" name="home_subtitle2_id">
                         <div class="form-floating mb-3">
-                            <textarea type="text" name="home_subtitle2" class="form-control" id="homesubtitle2" placeholder="Home subtitle 2" style="height: 250px" required> </textarea>
-                            <label for="homesubtitle2" class="form-label">Home subtitle 2</label>
+                            <textarea type="text" name="home_subtitle2" class="form-control" id="home_subtitle2" placeholder="Home subtitle 2" style="height: 250px" required></textarea>
+                            <label for="home_subtitle2" class="form-label">Home subtitle 2</label>
                         </div>
+
+                        <div id="showHomeSubtitle2Error"></div>
 
                         <!-- Action Buttons -->
                         <div class="d-grid gap-3">
-                            <button type="submit" name="btnHomeSubtitle2" class="btn btn-primary">Update</button>
+                            <button type="submit" name="btnHomeSubtitle2" id="btnHomeSubtitle2" class="btn btn-primary">Update</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
@@ -518,17 +533,130 @@ if ($user_role != 2) {
                     <p class="text-muted">Update the home image below.</p>
 
                     <!-- Home Image Form -->
-                    <form id="homeImgForm" action="municipal_maintainability/update_home.php" method="POST" enctype="multipart/form-data">
+                    <form action="municipal_maintainability/update_home.php" method="POST" enctype="multipart/form-data">
                         <input type="hidden" id="home_img_id" name="home_img_id" value="">
 
                         <div class="mb-3">
                             <label for="homeImg" class="form-label">Home Image</label>
-                            <input type="file" name="home_img" class="form-control" id="homeImg" required>
+                            <input type="file" name="home_img" class="form-control" id="homeImg" accept=".jpg, jpeg, .png" required>
                         </div>
+
+                        <div id="showHomeImgError"></div>
 
                         <!-- Action Buttons -->
                         <div class="d-grid gap-3">
                             <button type="submit" name="btnHomeImg" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add services modal -->
+    <div class="modal fade" id="addServicesModal" tabindex="-1" aria-labelledby="addServicesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal services -->
+                    <h4 class="my-3 fw-semibold" id="addServicesModalLabel">Add Services</h4>
+                    <p class="text-muted">add the services below.</p>
+
+                    <!-- services title form -->
+                    <form action="municipal_maintainability/add_services.php" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="addServices_title" class="form-control" id="addServices_title" value="" placeholder="Services Title">
+                            <label for="addServices_title" class="form-label">Services Title</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" name="addServices_desc" class="form-control" id="addServices_desc" placeholder="Services Description" style="height: 250px"></textarea>
+                            <label for="addServices_desc" class="form-label">Services Description</label>
+                        </div>
+
+                        <div id="showAddServicesError"></div>
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnAddServices" id="btnAddServices" class="btn btn-primary">Add service</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- update services modal -->
+    <div class="modal fade" id="updateServicesModal" tabindex="-1" aria-labelledby="updateServicesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal services -->
+                    <h4 class="my-3 fw-semibold" id="updateServicesModalLabel">Edit Services</h4>
+                    <p class="text-muted">Update the services below.</p>
+
+                    <!-- services title form -->
+                    <form action="municipal_maintainability/update_services.php" method="POST">
+                        <input type="hidden" id="updateServices_id" value="" name="updateServices_id">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="updateServices_title" class="form-control" id="updateServices_title" value="" placeholder="Services Title">
+                            <label for="updateServices_title" class="form-label">Services Title</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" name="updateServices_desc" class="form-control" id="updateServices_desc" placeholder="Services Description" style="height: 250px"> </textarea>
+                            <label for="updateServices_desc" class="form-label">Services Description</label>
+                        </div>
+
+                        <div id="showUpdateServicesError"></div>
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnUpdateServices" id="btnUpdateServices" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete service modal -->
+    <div class="modal fade" id="deleteServicesModal" tabindex="-1" aria-labelledby="deleteServicesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-danger-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-trash text-danger" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal delete confirmation -->
+                    <h4 class="my-3 fw-semibold" id="deleteServicesModalLabel">Delete Service</h4>
+                    <p class="text-muted">Are you sure you want to delete the following service?</p>
+
+                    <!-- Service details -->
+                    <div class="mb-3">
+                        <p><strong>Title:</strong> <span id="deleteServices_title"></span></p>
+                        <p><strong>Description:</strong> <span id="deleteServices_desc"></span></p>
+
+                    </div>
+
+                    <!-- Hidden form for deletion -->
+                    <form action="municipal_maintainability/delete_services.php" method="POST">
+                        <input type="hidden" id="deleteServices_id" name="deleteServices_id">
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnDeleteServices" id="btnDeleteServices" class="btn btn-danger">Delete</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
@@ -552,7 +680,7 @@ if ($user_role != 2) {
                     <p class="text-muted">Please fill out the form below to add a new FAQ.</p>
 
                     <!-- Form -->
-                    <form action="municipal_includes/addFaqs.m.php" method="POST">
+                    <form action="municipal_maintainability/addFaqs.m.php" method="POST">
                         <div class="form-floating mb-3">
                             <input type="text" name="question" class="form-control" id="question" placeholder="Question" required>
                             <label for="question" class="form-label">Question</label>
@@ -568,28 +696,6 @@ if ($user_role != 2) {
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- edit faqs modal -->
-    <div class="modal fade" id="editFaqsModal" tabindex="-1" aria-labelledby="editFaqsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center border border-0">
-                    <div class="w-100 text-center">
-                        <h4 class="modal-title " id="editFaqsModalLabel">
-                            <small>
-                                Edit Frequently Asked Questions
-                            </small>
-                        </h4>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div id="showFaqs" class="modal-body">
-
                 </div>
             </div>
         </div>
@@ -632,7 +738,7 @@ if ($user_role != 2) {
                 $("#showAllSuperAdmin").html(data);
             });
 
-            $.post('municipal_includes/showAllFaqs.php', {}, function(data) {
+            $.post('municipal_maintainability/showAllFaqs.php', {}, function(data) {
                 $("#showAllFaqs").html(data);
             });
 
@@ -668,6 +774,199 @@ if ($user_role != 2) {
                     console.error('AJAX Error:', status, error);
                 }
             });
+
+            function editService(serviceId, serviceTitle, serviceDesc) {
+                // Set the service ID, title, and description in the modal fields
+                $('#updateServices_id').val(serviceId);
+                $('#updateServices_desc').val(serviceDesc);
+
+                // Update the modal title or any other elements if necessary
+                $('#updateServices_title').val(serviceTitle);
+
+                // Show the modal
+                $('#updateServicesModal').modal('show');
+            }
+
+            function deleteService(serviceId, serviceTitle, serviceDesc) {
+                // Set the service ID, title, and description in the modal fields
+                $('#deleteServices_id').val(serviceId);
+                $('#deleteServices_desc').text(serviceDesc);
+
+                // Update the modal title or any other elements if necessary
+                $('#deleteServices_title').text(serviceTitle);
+
+                // Show the modal
+                $('#deleteServicesModal').modal('show');
+            }
+
+
+            $.ajax({
+                url: '../includes/show_services.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+                        $('#services_container').empty(); // Clear existing content
+
+                        response.forEach(function(service) {
+                            var serviceCard = `
+                    <div class="col">
+    <div class="card border shadow rounded mb-3">
+        <div class="card-header p-3 fs-6 text-center d-flex justify-content-between align-items-center">
+            <span>${service.services_title}</span>
+            <div class="d-flex">
+                <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
+                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Delete</button>
+            </div>
+        </div>
+        <div class="card-body p-3">
+            <p class="card-text small">${service.services_desc}</p>
+        </div>
+    </div>
+</div>
+
+                `;
+                            $('#services_container').append(serviceCard);
+                        });
+
+                        // Attach click event listener to all Edit buttons after they are added to the DOM
+                        $('.edit-service').on('click', function() {
+                            var serviceId = $(this).data('id');
+                            var serviceTitle = $(this).data('title');
+                            var serviceDesc = $(this).data('desc');
+
+                            // Call the editService function with the service details
+                            editService(serviceId, serviceTitle, serviceDesc);
+                        });
+
+                        $('.delete-service').on('click', function() {
+                            var serviceId = $(this).data('id');
+                            var serviceTitle = $(this).data('title');
+                            var serviceDesc = $(this).data('desc');
+
+                            // Call the deleteService function with the service details
+                            deleteService(serviceId, serviceTitle, serviceDesc);
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+            $('#addServicesModal form').on('submit', function(event) {
+                // Clear any previous error messages
+                $('#showAddServicesError').empty();
+
+                var title = $('#addServices_title').val().trim();
+                var description = $('#addServices_desc').val().trim();
+
+                if (title === '' || description === '') {
+                    event.preventDefault(); // Prevent form submission
+
+                    // Create the alert HTML
+                    var alertHtml = `
+            <div class="alert alert-warning" role="alert">
+                Both the title and description must be filled out.
+            </div>
+        `;
+
+                    // Insert the alert into the #showAddServicesError div
+                    $('#showAddServicesError').html(alertHtml);
+
+                    setTimeout(function() {
+                        $('#showAddServicesError').empty();
+                    }, 3000);
+                }
+            });
+
+            $('#updateServicesModal form').on('submit', function(event) {
+                // Clear any previous error messages
+                $('#showUpdateServicesError').empty();
+
+                var title = $('#updateServices_title').val().trim();
+                var description = $('#updateServices_desc').val().trim();
+
+                if (title === '' || description === '') {
+                    event.preventDefault(); // Prevent form submission
+
+                    // Create the alert HTML
+                    var alertHtml = `
+            <div class="alert alert-warning" role="alert">
+                Both the title and description must be filled out.
+            </div>
+        `;
+
+                    // Insert the alert into the #showUpdateServicesError div
+                    $('#showUpdateServicesError').html(alertHtml);
+
+                    setTimeout(function() {
+                        $('#showUpdateServicesError').empty();
+                    }, 3000);
+                }
+            });
+
+            function validateInput(buttonId, inputId, errorContainerId, errorMessage) {
+                document.getElementById(buttonId).addEventListener('click', function(event) {
+                    var input = document.getElementById(inputId).value.trim();
+                    var errorContainer = document.getElementById(errorContainerId);
+
+                    errorContainer.innerHTML = ''; // Clear any previous errors
+
+                    if (input === '') {
+                        var alertDiv = document.createElement('div');
+                        alertDiv.className = 'alert alert-warning';
+                        alertDiv.role = 'alert';
+                        alertDiv.innerText = errorMessage;
+
+                        errorContainer.appendChild(alertDiv);
+
+                        // Remove the alert after 3 seconds
+                        setTimeout(function() {
+                            alertDiv.remove();
+                        }, 3000);
+
+                        // Prevent the form from submitting
+                        event.preventDefault();
+                    }
+                });
+            }
+
+            document.getElementById('homeImg').addEventListener('change', function(event) {
+                const MAX_SIZE = 8 * 1024 * 1024;
+                const fileInput = event.target;
+                const file = fileInput.files[0]; // Get the selected file
+
+                // Clear previous error messages
+                const errorContainer = document.getElementById('showHomeImgError');
+                errorContainer.innerHTML = '';
+
+                if (file) {
+                    if (file.size > MAX_SIZE) {
+                        // Create and display the error alert
+                        const alertDiv = document.createElement('div');
+                        alertDiv.className = 'alert alert-warning text-center';
+                        alertDiv.role = 'alert';
+                        alertDiv.innerText = 'Image is too large. Maximum allowed size is 8MB.';
+
+                        errorContainer.appendChild(alertDiv);
+
+                        // Clear the error message after 3 seconds
+                        setTimeout(() => {
+                            alertDiv.remove();
+                        }, 3000);
+
+                        // Clear the file input
+                        fileInput.value = '';
+                    }
+                }
+            });
+
+            // Initialize validations for different buttons and inputs
+            validateInput('btnHomeTitle', 'hometitle', 'showHomeTitleError', 'The home title cannot be empty. Please enter a title.');
+            validateInput('btnHomeSubtitle1', 'home_subtitle1', 'showHomeSubtitle1Error', 'The home subtitle 1 cannot be empty. Please enter a subtitle 1.');
+            validateInput('btnHomeSubtitle2', 'home_subtitle2', 'showHomeSubtitle2Error', 'The home subtitle 2 cannot be empty. Please enter a subtitle 2.');
 
             // get super admin info
             function navigateGroups(currentGroup, nextGroup) {
@@ -745,6 +1044,9 @@ function displaySuccessMessage($sessionKey, $title = "Success")
 
 displaySuccessMessage('addSuperAdmin_success_message');
 displaySuccessMessage('update_home_message');
+displaySuccessMessage('add_services_message');
+displaySuccessMessage('update_services_message');
+displaySuccessMessage('delete_services_message');
 displaySuccessMessage('faq_message');
 displaySuccessMessage('delete_faq_message');
 ?>
