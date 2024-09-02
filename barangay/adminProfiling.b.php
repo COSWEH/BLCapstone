@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id'])) {
     exit;
 }
 
-echo ".";
+// echo ".";
 $getUserid = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
 

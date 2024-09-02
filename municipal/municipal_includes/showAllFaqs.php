@@ -19,11 +19,11 @@ if (!$result) {
     <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
         <thead class="table-active text-uppercase text-white">
             <tr>
-                <th class="text-light" style="background-color: #ee7ea0; width: 15%;"><small>Faq ID</small></th>
-                <th class="text-light" style="background-color: #ffaf6e; width: 25%;"><small>Faq Question</small></th>
-                <th class="text-light" style="background-color: #7d8be0; width: 35%;"><small>Faq Answer</small></th>
-                <th class="text-light" style="background-color: #9a81b0; width: 15%;"><small>Faq Created At</small></th>
-                <th class="text-light" style="background-color: #9a81b0; width: 10%;"><small>Action</small></th>
+                <th style="width: 15%;"><small>Faq ID</small></th>
+                <th style="width: 25%;"><small>Faq Question</small></th>
+                <th style="width: 35%;"><small>Faq Answer</small></th>
+                <th style="width: 15%;"><small>Faq Created At</small></th>
+                <th style="width: 10%;"><small>Action</small></th>
             </tr>
 
         </thead>
