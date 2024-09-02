@@ -173,6 +173,44 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
+                <!------maintainability(ewan kung tama spelling)  $('#home-title').text(response.home_title);
+                        $('#home-subtitle1').text(response.home_subtitleOne);
+                        $('#home-subtitle2').text(response.home_subtitleTwo);
+                        $('#home-img').attr('src', 'index_dbImg/' + response.home_img);------>
+                <!-- home -->
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Home</h6>
+                        <div class="row align-items-center mb-4">
+                            <!-- Content Section -->
+                            <div class="col-md-6 text-center text-md-start px-lg-5">
+                                <!-- Title with Edit Button -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h1 id="home-title" class="display-6 mb-0">Loading...</h1>
+                                    <button class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#home_titleModal">Edit</button>
+                                </div>
+                                <!-- Subtitle1 with Edit Button -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <p id="home-subtitle1" class="small mb-0">Loading...</p>
+                                    <button class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle1Modal">Edit</button>
+                                </div>
+                                <!-- Subtitle2 with Edit Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p id="home-subtitle2" class="small mb-0">Loading...</p>
+                                    <button class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#home_subtitle2Modal">Edit</button>
+                                </div>
+                            </div>
+                            <!-- Image Section with Edit Button -->
+                            <div class="col-md-6 px-lg-5 text-center">
+                                <div class="position-relative">
+                                    <img id="home-img" src="" width="300" height="200" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
+                                    <button class="btn btn-sm btn-info position-absolute bottom-0 end-0 m-2" data-bs-toggle="modal" data-bs-target="#home_imgModal">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>FAQs</h6>
@@ -366,6 +404,139 @@ if ($user_role != 2) {
         </div>
     </div>
 
+    <!-- update home title modal -->
+    <div class="modal fade" id="home_titleModal" tabindex="-1" aria-labelledby="home_titleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal Title -->
+                    <h4 class="my-3 fw-semibold" id="home_titleModalLabel">Update Home Title</h4>
+                    <p class="text-muted">Update the home title below.</p>
+
+                    <!-- Home title form -->
+                    <form id="homeTitleForm" action="municipal_maintainability/update_home.php" method="POST">
+                        <input type="hidden" id="home_title_id" value="" name="home_title_id">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="home_title" class="form-control" id="hometitle" placeholder="Home title" required>
+                            <label for="hometitle" class="form-label">Home title</label>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnHomeTitle" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- update subtitle 1 modal -->
+    <div class="modal fade" id="home_subtitle1Modal" tabindex="-1" aria-labelledby="home_subtitle1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal Title -->
+                    <h4 class="my-3 fw-semibold" id="home_subtitle1ModalLabel">Update Subtitle 1</h4>
+                    <p class="text-muted">Update the home subtitle 1 below.</p>
+
+                    <!-- Home title form -->
+                    <form id="homeTitleForm" action="municipal_maintainability/update_home.php" method="POST">
+                        <input type="hidden" id="home_subtitle1_id" value="" name="home_subtitle1_id">
+                        <div class="form-floating mb-3">
+                            <textarea type="text" name="home_subtitle1" class="form-control" id="homesubtitle1" placeholder="Home subtitle 1" style="height: 250px" required> </textarea>
+                            <label for="homesubtitle1" class="form-label">Home subtitle 1</label>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnHomeSubtitle1" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- update subtitle 2 modal -->
+    <div class="modal fade" id="home_subtitle2Modal" tabindex="-1" aria-labelledby="home_subtitle2ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal subTitle 2 -->
+                    <h4 class="my-3 fw-semibold" id="home_subtitle2ModalLabel">Update Subtitle 2</h4>
+                    <p class="text-muted">Update the home subtitle 2 below.</p>
+
+                    <!-- Home title form -->
+                    <form id="homeTitleForm" action="municipal_maintainability/update_home.php" method="POST">
+                        <input type="hidden" id="home_subtitle2_id" value="" name="home_subtitle2_id">
+                        <div class="form-floating mb-3">
+                            <textarea type="text" name="home_subtitle2" class="form-control" id="homesubtitle2" placeholder="Home subtitle 2" style="height: 250px" required> </textarea>
+                            <label for="homesubtitle2" class="form-label">Home subtitle 2</label>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnHomeSubtitle2" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit home img modal -->
+    <div class="modal fade" id="home_imgModal" tabindex="-1" aria-labelledby="home_imgModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and Image -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-image text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal Title -->
+                    <h4 class="my-3 fw-semibold" id="home_imgModalLabel">Edit Home Img</h4>
+                    <p class="text-muted">Update the home image below.</p>
+
+                    <!-- Home Image Form -->
+                    <form id="homeImgForm" action="municipal_maintainability/update_home.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="home_img_id" name="home_img_id" value="">
+
+                        <div class="mb-3">
+                            <label for="homeImg" class="form-label">Home Image</label>
+                            <input type="file" name="home_img" class="form-control" id="homeImg" required>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnHomeImg" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- add faqs modal -->
     <div class="modal fade" id="addFaqsModal" tabindex="-1" aria-labelledby="addFaqsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -392,7 +563,7 @@ if ($user_role != 2) {
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="d-grid gap-3 mx-4">
+                        <div class="d-grid gap-3">
                             <button type="submit" name="btnFaqs" class="btn btn-primary">Add</button>
                             <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
                         </div>
@@ -475,6 +646,29 @@ if ($user_role != 2) {
             // Initial call to load messages
             updateLogs();
 
+            $.ajax({
+                url: '../includes/show_home.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+                        $('#home_title_id').val(response.home_id);
+                        $('#home_subtitle1_id').val(response.home_id);
+                        $('#home_subtitle2_id').val(response.home_id);
+                        $('#home_img_id').val(response.home_id);
+                        $('#home-title').text(response.home_title);
+                        $('#home-subtitle1').text(response.home_subtitleOne);
+                        $('#home-subtitle2').text(response.home_subtitleTwo);
+                        $('#home-img').attr('src', '../index_dbImg/' + response.home_img);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+
             // get super admin info
             function navigateGroups(currentGroup, nextGroup) {
                 $(currentGroup).addClass('d-none');
@@ -549,8 +743,8 @@ function displaySuccessMessage($sessionKey, $title = "Success")
     }
 }
 
-displaySuccessMessage('delete_faq_message', "Success");
 displaySuccessMessage('addSuperAdmin_success_message');
+displaySuccessMessage('update_home_message');
 displaySuccessMessage('faq_message');
 displaySuccessMessage('delete_faq_message');
 ?>

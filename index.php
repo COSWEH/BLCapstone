@@ -1,5 +1,8 @@
 <?php
+include('includes/conn.inc.php');
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -393,9 +396,12 @@ session_start();
         <div class="row align-items-center">
             <!-- Content Section -->
             <div class="col-md-6 text-center text-md-start mb-5 px-lg-5">
-                <h1 class="display-3  mb-5">Welcome to BayanLink</h1>
-                <p class="lead mb-5">At Bayanlink, we connect communities and simplify access to essential services. Our platform provides direct access to official information, streamlines document requests, and enhances civic engagement.</p>
-                <p class="mb-5">Explore our features to see how we make your experience more efficient and engaging.</p>
+                <!-- title -->
+                <h1 id="home-title" class="display-3  mb-5">Loading...</h1>
+                <!-- subtitle 1 -->
+                <p id="home-subtitle1" class="lead mb-5">Loading...</p>
+                <!-- subtitle 2 -->
+                <p id="home-subtitle2" class="mb-5">Loading...</p>
                 <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#registerModal">
                     Get started
                 </button>
@@ -403,7 +409,8 @@ session_start();
             </div>
             <!-- Image Section -->
             <div class="col-md-6 px-lg-5">
-                <img src="img/img1.png" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
+                <!-- img -->
+                <img id="home-img" src="" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
             </div>
         </div>
         <hr>
@@ -590,58 +597,6 @@ session_start();
         </div>
     </footer>
 
-    <script>
-        // JavaScript to handle the steps in the multi-step form
-        document.addEventListener('DOMContentLoaded', function() {
-            const formSteps = document.querySelectorAll('.form-step');
-            let currentStep = 0;
-
-            function showStep(step) {
-                formSteps.forEach((stepElement, index) => {
-                    stepElement.classList.toggle('d-none', index !== step);
-                });
-            }
-
-            function nextStep() {
-                if (currentStep < formSteps.length - 1) {
-                    currentStep++;
-                    showStep(currentStep);
-                }
-            }
-
-            function prevStep() {
-                if (currentStep > 0) {
-                    currentStep--;
-                    showStep(currentStep);
-                }
-            }
-
-            document.getElementById('nextBtn1').addEventListener('click', nextStep);
-            document.getElementById('prevBtn1').addEventListener('click', prevStep);
-            document.getElementById('nextBtn2').addEventListener('click', nextStep);
-            document.getElementById('prevBtn2').addEventListener('click', prevStep);
-            document.getElementById('nextBtn3').addEventListener('click', nextStep);
-            document.getElementById('prevBtn3').addEventListener('click', prevStep);
-            document.getElementById('nextBtn4').addEventListener('click', nextStep);
-            document.getElementById('prevBtn4').addEventListener('click', prevStep);
-            showStep(currentStep);
-
-            // Password visibility toggle
-            const passwordField = document.getElementById('signup_password');
-            const passwordToggle = document.getElementById('password-toggle');
-
-            passwordToggle.addEventListener('click', () => {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    passwordToggle.classList.replace('bi-eye', 'bi-eye-slash');
-                } else {
-                    passwordField.type = 'password';
-                    passwordToggle.classList.replace('bi-eye-slash', 'bi-eye');
-                }
-            });
-        });
-    </script>
-
     <script src="indexMaterials/script.im.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -657,7 +612,81 @@ session_start();
                 setTimeout(showFaqs, 30000);
             }
 
+            function fetchContent() {
+                $.ajax({
+                    url: 'includes/show_home.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#home-title').text(response.home_title);
+                            $('#home-subtitle1').text(response.home_subtitleOne);
+                            $('#home-subtitle2').text(response.home_subtitleTwo);
+                            $('#home-img').attr('src', 'index_dbImg/' + response.home_img);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+
+            fetchContent();
+            setInterval(fetchContent, 1000);
             showFaqs();
+
+            // JavaScript to handle the steps in the multi-step form
+            document.addEventListener('DOMContentLoaded', function() {
+                const formSteps = document.querySelectorAll('.form-step');
+                let currentStep = 0;
+
+                function showStep(step) {
+                    formSteps.forEach((stepElement, index) => {
+                        stepElement.classList.toggle('d-none', index !== step);
+                    });
+                }
+
+                function nextStep() {
+                    if (currentStep < formSteps.length - 1) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                }
+
+                function prevStep() {
+                    if (currentStep > 0) {
+                        currentStep--;
+                        showStep(currentStep);
+                    }
+                }
+
+                document.getElementById('nextBtn1').addEventListener('click', nextStep);
+                document.getElementById('prevBtn1').addEventListener('click', prevStep);
+                document.getElementById('nextBtn2').addEventListener('click', nextStep);
+                document.getElementById('prevBtn2').addEventListener('click', prevStep);
+                document.getElementById('nextBtn3').addEventListener('click', nextStep);
+                document.getElementById('prevBtn3').addEventListener('click', prevStep);
+                document.getElementById('nextBtn4').addEventListener('click', nextStep);
+                document.getElementById('prevBtn4').addEventListener('click', prevStep);
+                showStep(currentStep);
+
+                // Password visibility toggle
+                const passwordField = document.getElementById('signup_password');
+                const passwordToggle = document.getElementById('password-toggle');
+
+                passwordToggle.addEventListener('click', () => {
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                        passwordToggle.classList.replace('bi-eye', 'bi-eye-slash');
+                    } else {
+                        passwordField.type = 'password';
+                        passwordToggle.classList.replace('bi-eye-slash', 'bi-eye');
+                    }
+                });
+            });
 
             const municipalityOptions = [
                 "Aliaga", "Cabanatuan City", "Cabiao", "Carranglan", "Cuyapo",
