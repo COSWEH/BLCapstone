@@ -204,6 +204,11 @@ session_start();
 
                     <div class="container">
                         <form action="signup.code.php" method="POST">
+                            <!-- progress bar -->
+                            <div id="signupProgressBar" class="progress mb-3" role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped" style="width: 10%"></div>
+                            </div>
+
                             <!-- Step 1: Personal Information -->
                             <div id="group1" class="form-step">
                                 <h4 class="h4 mb-3">Personal Information</h4>
@@ -356,10 +361,23 @@ session_start();
                                     <label for="username" class="form-label">Username</label>
                                 </div>
 
-                                <div class="form-floating mb-3" style="position: relative;">
-                                    <input type="password" name="signup_password" class="form-control" id="signup_password" placeholder="Password" required>
-                                    <label for="signup_password" class="form-label">Password</label>
-                                    <i id="password-toggle" class="bi bi-eye" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+                                <div style="position: relative;">
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="signup_password" class="form-control" id="signup_password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters">
+                                        <span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="password-toggle">
+                                            <i class="bi bi-eye-slash-fill"></i>
+                                        </span>
+                                        <label for="signup_password" class="form-label">Password</label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-check mb-3 d-flex align-items-center">
+                                    <input class="form-check-input me-2" type="checkbox" id="agreeTerms">
+                                    <label class="form-check-label text-muted" for="agreeTerms">
+                                        I agree to the <a href="#" class="link-offset-2" data-bs-toggle="modal" data-bs-target="#termsConditionModal">terms and conditions</a>
+                                    </label>
                                 </div>
 
                                 <div class="row">
@@ -369,11 +387,12 @@ session_start();
                                         </button>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <button type="submit" class="btn btn-primary w-100">
+                                        <button type="submit" class="btn btn-primary w-100" id="registerBtn" disabled>
                                             Register <i class="bi bi-check-square"></i>
                                         </button>
                                     </div>
                                 </div>
+
                             </div>
                         </form>
                     </div>
@@ -390,6 +409,68 @@ session_start();
             </div>
         </div>
     </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div class="modal fade" id="termsConditionModal" tabindex="-1" aria-labelledby="termsConditionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header border-0">
+                    <div class="w-100 text-center">
+                        <h4 class="modal-title" id="termsConditionModalLabel">Terms and Conditions</h4>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-toggle="modal" data-bs-target="#registerModal"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body p-4">
+                    <!-- Modal Icon -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-light mx-auto mb-4 shadow" style="height: 60px; width: 60px;">
+                        <i class="bi bi-file-earmark-text-fill text-primary" style="font-size: 30px;"></i>
+                    </div>
+
+                    <!-- Terms and Conditions Text -->
+                    <div class="text-center mb-4">
+                        <h5 class="fw-bold">Welcome to BayanLink</h5>
+                        <p class="text-muted">Please read these Terms and Conditions carefully before using our platform.</p>
+                    </div>
+
+                    <div class="container text-start">
+                        <h6 class="fw-bold">1. Introduction</h6>
+                        <p>BayanLink is a Software as a Service (SaaS) platform designed to facilitate communication and engagement within communities. By accessing or using our services, you agree to comply with and be bound by these Terms and Conditions.</p>
+
+                        <h6 class="fw-bold">2. Use of the Platform</h6>
+                        <p>BayanLink grants you a limited, non-exclusive, non-transferable license to access and use the platform for your community engagement needs, subject to these terms. You agree not to misuse the platform, including but not limited to attempting to gain unauthorized access to our systems or engaging in any activity that disrupts or harms the platform.</p>
+
+                        <h6 class="fw-bold">3. User Responsibilities</h6>
+                        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to provide accurate and complete information when creating your account and to update your information as necessary.</p>
+
+                        <h6 class="fw-bold">4. Privacy and Data Protection</h6>
+                        <p>We take your privacy seriously. Our Privacy Policy outlines how we collect, use, and protect your personal information. By using BayanLink, you consent to the practices described in our Privacy Policy.</p>
+
+                        <h6 class="fw-bold">5. Subscription and Payment</h6>
+                        <p>Access to certain features of BayanLink may require a subscription. By subscribing, you agree to pay the applicable fees as described on our pricing page. Payments are non-refundable, except as required by law.</p>
+
+                        <h6 class="fw-bold">6. Termination</h6>
+                        <p>We reserve the right to suspend or terminate your access to BayanLink at any time, with or without cause, including if you violate these Terms and Conditions. Upon termination, your right to use the platform will immediately cease.</p>
+
+                        <h6 class="fw-bold">7. Changes to the Terms</h6>
+                        <p>We may update these Terms and Conditions from time to time. If we make significant changes, we will notify you by email or through a notice on the platform. Your continued use of BayanLink after any changes indicates your acceptance of the new terms.</p>
+
+                        <h6 class="fw-bold">8. Contact Us</h6>
+                        <p>If you have any questions or concerns about these Terms and Conditions, please contact us:</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Phone:</strong> +639182609219, +639286690296, +639875715334</li>
+                            <li><strong>Email:</strong> <a href="mailto:bayanlink.connects@gmail.com">bayanlink.connects@gmail.com</a>, <a href="mailto:sanisidro@gmail.com">sanisidro@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <!-- Home Section -->
     <section id="home" class="container my-5">
@@ -432,7 +513,7 @@ session_start();
             <div class="col-md-4">
                 <div>
                     <h5 class="mb-1">Contact Phone Number</h5>
-                    <p id="contact_number"><i class="bi bi-telephone-fill"></i> +Loading...</p>
+                    <p id="contact_number"><i class="bi bi-telephone-fill"></i> Loading...</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -448,8 +529,6 @@ session_start();
                 </div>
             </div>
         </div>
-
-
         <hr>
     </section>
 
@@ -517,24 +596,27 @@ session_start();
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-dark text-white text-center py-4">
-        <hr>
+    <footer class="bg-dark text-white text-center py-5">
         <div class="container">
             <div class="row mb-3">
-                <div class="col-md-4 mb-2 mb-md-0">
+                <div class="col-md-6 mb-2 mb-md-0">
                     <h5>About Us</h5>
-                    <p>Learn more about our mission and vision, and how we strive to connect communities and simplify access to essential services.</p>
+                    <p id="footer_about_us"><i class="bi bi-telephone-fill"></i> Loading...</p>
                 </div>
-                <div class="col-md-4 mb-2 mb-md-0">
+                <div class="col-md-6 mb-2 mb-md-0">
                     <h5>Contact Us</h5>
-                    <p><i class="bi bi-telephone-fill"></i> +63 918 260 9219</p>
-                    <p><i class="bi bi-envelope-fill"></i> bayanlink.connects@gmail.com</p>
-                </div>
-                <div class="col-md-4 mb-2 mb-md-0">
-                    <h5>Follow Us</h5>
-                    <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                    <p>
+                        <small id="footer_contact_number">
+                            <i class="bi bi-telephone-fill"></i>
+                            Loading...
+                        </small>
+                    </p>
+                    <p>
+                        <small id="footer_contact_email">
+                            <i class="bi bi-envelope-fill"></i>
+                            Loading...
+                        </small>
+                    </p>
                 </div>
             </div>
             <div class="pt-3">
@@ -549,6 +631,11 @@ session_start();
 
     <script>
         $(document).ready(function() {
+
+            document.getElementById('agreeTerms').addEventListener('change', function() {
+                const registerBtn = document.getElementById('registerBtn');
+                registerBtn.disabled = !this.checked;
+            });
 
             function showFaqs() {
                 $.post("includes/show_faqs.php", {}, function(data) {
@@ -627,16 +714,20 @@ session_start();
                             if (response.contact_number && response.contact_number.length > 0) {
                                 const phoneNumbers = response.contact_number.map(number => `<i class="bi bi-telephone-fill"></i> ${number}`).join('<br>');
                                 $('#contact_number').html(phoneNumbers);
+                                $('#footer_contact_number').html(phoneNumbers);
                             } else {
                                 $('#contact_number').html('No phone numbers available');
+                                $('#footer_contact_number').html('No phone numbers available');
                             }
 
                             // Handle emails
                             if (response.contact_email && response.contact_email.length > 0) {
                                 const emails = response.contact_email.map(email => `<i class="bi bi-envelope-fill"></i> ${email}`).join('<br>');
                                 $('#contact_email').html(emails);
+                                $('#footer_contact_email').html(emails);
                             } else {
                                 $('#contact_email').html('No email addresses available');
+                                $('#footer_contact_email').html('No email addresses available');
                             }
 
                             // Location
@@ -665,6 +756,7 @@ session_start();
                             alert(response.error);
                         } else {
                             $('#about_us').text(response.about_us);
+                            $('#footer_about_us').text(response.about_us);
                             $('#our_mission').text(response.our_mission);
                         }
                     },
@@ -686,55 +778,51 @@ session_start();
             setInterval(fetchAboutMissionContent, 1000);
             showFaqs();
 
-            // JavaScript to handle the steps in the multi-step form
-            document.addEventListener('DOMContentLoaded', function() {
-                const formSteps = document.querySelectorAll('.form-step');
-                let currentStep = 0;
+            // JavaScript to handle the steps in the multi-steps form
+            const formSteps = document.querySelectorAll('.form-step');
+            const progressBar = document.querySelector('.progress-bar');
+            const totalSteps = formSteps.length;
+            let currentStep = 0;
 
-                function showStep(step) {
-                    formSteps.forEach((stepElement, index) => {
-                        stepElement.classList.toggle('d-none', index !== step);
-                    });
-                }
-
-                function nextStep() {
-                    if (currentStep < formSteps.length - 1) {
-                        currentStep++;
-                        showStep(currentStep);
-                    }
-                }
-
-                function prevStep() {
-                    if (currentStep > 0) {
-                        currentStep--;
-                        showStep(currentStep);
-                    }
-                }
-
-                document.getElementById('nextBtn1').addEventListener('click', nextStep);
-                document.getElementById('prevBtn1').addEventListener('click', prevStep);
-                document.getElementById('nextBtn2').addEventListener('click', nextStep);
-                document.getElementById('prevBtn2').addEventListener('click', prevStep);
-                document.getElementById('nextBtn3').addEventListener('click', nextStep);
-                document.getElementById('prevBtn3').addEventListener('click', prevStep);
-                document.getElementById('nextBtn4').addEventListener('click', nextStep);
-                document.getElementById('prevBtn4').addEventListener('click', prevStep);
-                showStep(currentStep);
-
-                // Password visibility toggle
-                const passwordField = document.getElementById('signup_password');
-                const passwordToggle = document.getElementById('password-toggle');
-
-                passwordToggle.addEventListener('click', () => {
-                    if (passwordField.type === 'password') {
-                        passwordField.type = 'text';
-                        passwordToggle.classList.replace('bi-eye', 'bi-eye-slash');
-                    } else {
-                        passwordField.type = 'password';
-                        passwordToggle.classList.replace('bi-eye-slash', 'bi-eye');
-                    }
+            function showStep(step) {
+                formSteps.forEach((stepElement, index) => {
+                    stepElement.classList.toggle('d-none', index !== step);
                 });
-            });
+                updateProgressBar(step);
+            }
+
+            function updateProgressBar(step) {
+                const totalSteps = formSteps.length;
+                const progressPercentage = (step / (totalSteps - 1)) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+            }
+
+
+            function nextStep() {
+                if (currentStep < formSteps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+
+            function prevStep() {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            }
+
+            document.getElementById('nextBtn1').addEventListener('click', nextStep);
+            document.getElementById('nextBtn2').addEventListener('click', nextStep);
+            document.getElementById('nextBtn3').addEventListener('click', nextStep);
+            document.getElementById('nextBtn4').addEventListener('click', nextStep);
+
+            document.getElementById('prevBtn1').addEventListener('click', prevStep);
+            document.getElementById('prevBtn2').addEventListener('click', prevStep);
+            document.getElementById('prevBtn3').addEventListener('click', prevStep);
+            document.getElementById('prevBtn4').addEventListener('click', prevStep);
+            showStep(currentStep);
+
 
             const municipalityOptions = [
                 "Aliaga", "Cabanatuan City", "Cabiao", "Carranglan", "Cuyapo",
@@ -844,8 +932,7 @@ session_start();
 
             // Initialize the toggle for each password field
             togglePasswordVisibility("signinPassword", "showPasswordIcon");
-            togglePasswordVisibility("signupPassword", "signupShowPasswordIcon");
-            togglePasswordVisibility("confirmPassword", "confirmShowPasswordIcon");
+            togglePasswordVisibility("signup_password", "password-toggle");
 
         });
     </script>
