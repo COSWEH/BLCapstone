@@ -20,6 +20,11 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $username = $_SESSION['username'];
 
+    $req_fname = mysqli_real_escape_string($con, $req_fname);
+    $mname = mysqli_real_escape_string($con, $mname);
+    $req_lname = mysqli_real_escape_string($con, $req_lname);
+    $req_placeOfBirth = mysqli_real_escape_string($con, $req_placeOfBirth);
+
     if (
         empty($user_id) || empty($req_fname) || empty($req_lname) || empty($req_contactNo) || empty($req_gender) ||
         empty($req_brgy) || empty($req_purok) || empty($req_age) || empty($req_dateOfBirth) || empty($req_placeOfBirth) ||

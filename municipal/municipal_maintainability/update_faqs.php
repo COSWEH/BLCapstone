@@ -19,7 +19,7 @@ if (isset($_POST['btnDelete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($query) {
         $_SESSION['delete_faq_message'] = "FAQ successfully deleted";
-        header('Location: ../superAdminPost.m.php');
+        header('Location: ../superAdminDashboard.php');
         exit;
     } else {
         die('Error: ' . mysqli_error($con));

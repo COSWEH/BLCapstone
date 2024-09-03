@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $services_title = ucwords(strtolower($services_title));
         $services_desc = capitalizeSentences($services_desc);
 
+        $services_title = mysqli_real_escape_string($con, $services_title);
+        $services_desc = mysqli_real_escape_string($con, $services_desc);
+
         if (empty($services_title) && empty($services_desc)) {
             header('Location: ../superAdminDashboard.php');
             exit;

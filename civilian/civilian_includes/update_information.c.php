@@ -23,15 +23,18 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $civilStatus = $_POST['civilStatus'];
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    $username = $_SESSION['username'];
+    $fname = mysqli_real_escape_string($con, $fname);
+    $mname = mysqli_real_escape_string($con, $mname);
+    $lname = mysqli_real_escape_string($con, $lname);
+    $username = mysqli_real_escape_string($con, $username);
+    $placeOfBirth = mysqli_real_escape_string($con, $placeOfBirth);
 
     if (
         empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) || empty($user_purok) || empty($contactNum)
         || empty($dateOfBirth)
         || empty($placeOfBirth)
-        || empty($civilStatus) || empty($email) || empty($username) || empty($password)
+        || empty($civilStatus) || empty($email) || empty($username)
     ) {
         header('location: ../profile.c.php');
         exit;
@@ -53,8 +56,7 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         civilStatus = '$civilStatus',
         user_purok = '$user_purok',
         user_email = '$email',
-        username = '$username',
-        password = '$password'
+        username = '$username'
     WHERE user_id = '$userid'
 ";
 

@@ -579,6 +579,22 @@ if ($user_role != 0) {
             }
         });
 
+        document.getElementById('dateOfBirth').addEventListener('input', function() {
+            const dob = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDifference = today.getMonth() - dob.getMonth();
+
+            // Adjust if the birthday hasn't occurred yet this year
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            // Update the age input field
+            document.getElementById('user_age').value = age;
+        });
+
+
         // es img
         document.getElementById("eSignature").addEventListener("change", function(event) {
             const fileInput = event.target;

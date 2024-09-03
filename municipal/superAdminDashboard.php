@@ -177,7 +177,7 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Home</h6>
-                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit content</button>
+                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit home</button>
                         <div class="row align-items-center mb-4">
                             <!-- Content Section -->
                             <div class="col-md-6 text-center text-md-start px-lg-5">
@@ -216,6 +216,40 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
+                <!-- contact -->
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Contact</h6>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addContactModal">Add contact</button>
+                    </div>
+                    <div class="card-body" id="showAllContact">
+                        <div id="contact_container" class="row">
+                            <!-- Data will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- about us and mission -->
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>About us and our Mission</h6>
+                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editAboutMissionModal">Edit content</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="overflow-auto" style="height: 300px;">
+                            <h6>About us</h6>
+                            <p>
+                                <small id="about_us"></small>
+                            </p>
+                            <h6>Our mission</h6>
+                            <p>
+                                <small id="our_mission"></small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- faqs -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>FAQs</h6>
@@ -228,6 +262,7 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
+                <!-- logs -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Logs</h6>
@@ -465,7 +500,6 @@ if ($user_role != 2) {
         </div>
     </div>
 
-
     <!-- add services modal -->
     <div class="modal fade" id="addServicesModal" tabindex="-1" aria-labelledby="addServicesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -576,6 +610,166 @@ if ($user_role != 2) {
             </div>
         </div>
     </div>
+
+    <!-- Add Contact modal -->
+    <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!-- Icon and Title -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal Title -->
+                    <div class="text-center">
+                        <h4 class="my-3 fw-semibold" id="addContactModalLabel">Add Contact</h4>
+                        <p class="text-muted">Add contact below.</p>
+                    </div>
+
+                    <div id="submitError" class="text-danger mt-2" style="display: none;">
+                        <div class="alert alert-warning" role="alert">
+                            <i class="bi bi-exclamation-triangle me-2"></i>Please correct the errors before submitting.
+                        </div>
+                    </div>
+
+                    <!-- Form for adding contact -->
+                    <form id="addContactForm" action="municipal_maintainability/add_contact.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="contact_id" name="contact_id">
+
+                        <div class="mb-3">
+                            <label for="contact_number" class="form-label">Phone number :</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+63</span>
+                                <input type="number" name="contact_number" class="form-control" id="contact_number" placeholder="Phone number">
+                            </div>
+                            <div id="phone-alert" class="text-danger mt-2" style="display: none;">
+                                <div class="alert alert-warning" role="alert">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>Please enter a valid Philippines phone number (e.g., 9123456789).
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="contct_email" class="form-label">Email address :</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-envelope"></i>
+                                </span>
+                                <input type="email" name="contct_email" class="form-control" id="contct_email" placeholder="Email address">
+                            </div>
+                            <div id="email-alert" class="text-danger mt-2" style="display: none;">
+                                <div class="alert alert-warning" role="alert">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>Please enter a valid email address.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 position-relative">
+                            <label for="contact_location" class="form-label">Location:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-geo-alt"></i>
+                                </span>
+                                <input type="text" name="contact_location" class="form-control" id="contact_location" placeholder="Location">
+                            </div>
+                            <ul id="autocomplete-results" class="list-group position-absolute w-100 mt-1 overflow-auto" style="max-height: 200px;"></ul>
+                        </div>
+
+                        <!-- No Input Error Message -->
+                        <div id="no-input-error" class="text-danger mt-2" style="display: none;">
+                            <div class="alert alert-warning" role="alert">
+                                <i class="bi bi-exclamation-triangle me-2"></i>Please fill up at least one input field.
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnAddContact" id="btnAddContact" class="btn btn-primary">Add contact</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- delete contact modal -->
+    <div class="modal fade" id="deleteContactModal" tabindex="-1" aria-labelledby="deleteContactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and Title -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-danger-subtle mx-auto" style="height: 60px; width: 60px;">
+                        <i class="bi bi-trash text-danger" style="font-size: 30px;"></i>
+                    </div>
+
+                    <!-- Modal delete confirmation -->
+                    <h4 class="my-3 fw-semibold" id="deleteContactModalLabel">Delete Contact</h4>
+                    <p class="text-muted">Are you sure you want to delete the following contact?</p>
+
+                    <!-- Contact details -->
+                    <div class="mb-3">
+                        <p><strong>Phone Number:</strong> <span id="deleteContact_number"></span></p>
+                        <p><strong>Email:</strong> <span id="deleteContact_email"></span></p>
+                        <p><strong>Location:</strong> <span id="deleteContact_location"></span></p>
+                    </div>
+
+                    <!-- Hidden form for deletion -->
+                    <form action="municipal_maintainability/delete_contact.php" method="POST">
+                        <input type="hidden" id="deleteContact_id" name="deleteContact_id">
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnDeleteContact" id="btnDeleteContact" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- update about mission modal -->
+    <div class="modal fade" id="editAboutMissionModal" tabindex="-1" aria-labelledby="editAboutMissionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and Title -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal Title and Subtitle -->
+                    <h4 class="my-3 fw-semibold" id="editAboutMissionModalLabel">Edit About and Mission</h4>
+                    <p class="text-muted">Update the about and mission below.</p>
+
+                    <!-- Form -->
+                    <form id="updateAboutMissionForm" action="municipal_maintainability/update_about_mission.php" method="POST">
+                        <input type="hidden" id="update_about_mission_id" name="update_about_mission_id">
+
+                        <div class="form-floating mb-3">
+                            <textarea name="update_about_us" class="form-control" id="update_about_us" placeholder="About Us" style="height: 150px"></textarea>
+                            <label for="update_about_us" class="form-label">About Us</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea name="update_our_mission" class="form-control" id="update_our_mission" placeholder="Our Mission" style="height: 150px"></textarea>
+                            <label for="update_our_mission" class="form-label">Our Mission</label>
+                        </div>
+
+                        <!-- Error Message Container -->
+                        <div id="showUpdateAboutMissionError"></div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnUpdateAboutMission" id="btnUpdateAboutMission" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- add faqs modal -->
     <div class="modal fade" id="addFaqsModal" tabindex="-1" aria-labelledby="addFaqsModalLabel" aria-hidden="true">
@@ -760,13 +954,12 @@ if ($user_role != 2) {
                     <div class="card border shadow rounded mb-3">
                         <div class="card-header p-3 fs-6 text-center d-flex justify-content-between align-items-center">
                             <span>${service.services_title}</span>
-                            <div class="d-flex">
-                                <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
-                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Delete</button>
-                            </div>
                         </div>
                         <div class="card-body p-3">
                             <p class="card-text small">${service.services_desc}</p>
+
+                             <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
+                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -799,6 +992,7 @@ if ($user_role != 2) {
                     console.error('AJAX Error:', status, error);
                 }
             });
+
             $('#addServicesModal form').on('submit', function(event) {
                 // Clear any previous error messages
                 $('#showAddServicesError').empty();
@@ -849,6 +1043,211 @@ if ($user_role != 2) {
                 }
             });
 
+            // fetch contact
+            $.ajax({
+                url: 'municipal_maintainability/show_contact.php', // Replace with the path to your PHP script
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        $('#contact_container').html('<p>' + response.error + '</p>');
+                    } else {
+                        let html = '';
+                        response.forEach(contact => {
+                            html += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow border-0 rounded-3">
+                                <div class="card-body">
+                                    <h6>Phone Number</h6>
+                                    <p><small>${contact.contact_number || 'N/A'}</small></p>
+                                    <h6>Email</h6>
+                                    <p><small>${contact.contact_email || 'N/A'}</small></p>
+                                    <h6>Location</h6>
+                                    <p><small>${contact.contact_location || 'N/A'}</small></p>
+                                     <button class="btn btn-danger btn-sm shadow" data-id="${contact.contact_id}" data-number="${contact.contact_number}" data-email="${contact.contact_email}" data-location="${contact.contact_location}" data-bs-toggle="modal" data-bs-target="#deleteContactModal">Delete</button>
+                                </div>
+                            </div>
+                        </div>`;
+                        });
+                        $('#contact_container').html(html);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#contact_container').html('<p>An error occurred while fetching contact data.</p>');
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+
+            // handling invalid input for contact number
+            document.getElementById('contact_number').addEventListener('input', function() {
+                const phoneNumber = this.value;
+                const phoneAlert = document.getElementById('phone-alert');
+
+                // Regex to match Philippine phone numbers: 10 digits after the +63
+                const phonePattern = /^[9]\d{9}$/;
+
+                if (!phonePattern.test(phoneNumber)) {
+                    phoneAlert.style.display = 'block';
+                } else {
+                    phoneAlert.style.display = 'none';
+                    submitError.style.display = 'none';
+                }
+            });
+            // handling invalid input for email address
+            document.getElementById('contct_email').addEventListener('input', function() {
+                const email = this.value;
+                const emailAlert = document.getElementById('email-alert');
+
+                // Simple regex to validate email addresses
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailPattern.test(email)) {
+                    emailAlert.style.display = 'block';
+                } else {
+                    emailAlert.style.display = 'none';
+                    submitError.style.display = 'none';
+                }
+            });
+            // Handle form submission
+            document.getElementById('addContactForm').addEventListener('submit', function(event) {
+                const phoneNumber = document.getElementById('contact_number').value;
+                const email = document.getElementById('contct_email').value;
+                const phoneAlert = document.getElementById('phone-alert').style.display;
+                const emailAlert = document.getElementById('email-alert').style.display;
+                const submitError = document.getElementById('submitError');
+                const noInputError = document.getElementById('no-input-error');
+
+                // Check if there are any validation errors
+                if (phoneAlert === 'block' || emailAlert === 'block') {
+                    // Prevent form submission
+                    event.preventDefault();
+                    // Show the submit error message
+                    submitError.style.display = 'block';
+                    noInputError.style.display = 'none';
+                } else if (!phoneNumber && !email) {
+                    // Prevent form submission if no input fields are filled
+                    event.preventDefault();
+                    // Show the error message for no input
+                    noInputError.style.display = 'block';
+                    submitError.style.display = 'none';
+                } else {
+                    // Hide the error messages if everything is fine
+                    submitError.style.display = 'none';
+                    noInputError.style.display = 'none';
+                }
+            });
+
+            $(document).on('show.bs.modal', '#deleteContactModal', function(event) {
+                let button = $(event.relatedTarget); // Button that triggered the modal
+                let id = button.data('id'); // Extract info from data-id attribute
+                let number = button.data('number');
+                let email = button.data('email');
+                let location = button.data('location');
+
+                console.log(id);
+
+                // Update the modal with the contact details
+                $('#deleteContactModalLabel').text('Delete Contact ID: ' + id);
+                $('#deleteContact_number').text(number);
+                $('#deleteContact_email').text(email);
+                $('#deleteContact_location').text(location);
+                $('#deleteContact_id').val(id);
+            });
+
+            // show all locations
+            const input = document.getElementById('contact_location');
+            const resultsContainer = document.getElementById('autocomplete-results');
+            const locations = [
+                'Brgy. Alua, San Isidro, Nueva Ecija',
+                'Brgy. Calaba, San Isidro, Nueva Ecija',
+                'Brgy. Malapit, San Isidro, Nueva Ecija',
+                'Brgy. Mangga, San Isidro, Nueva Ecija',
+                'Brgy. Poblacion, San Isidro, Nueva Ecija',
+                'Brgy. Pulo, San Isidro, Nueva Ecija',
+                'Brgy. San Roque, San Isidro, Nueva Ecija',
+                'Brgy. Santo Cristo, San Isidro, Nueva Ecija',
+                'Brgy. Tabon, San Isidro, Nueva Ecija'
+            ];
+            let debounceTimeout;
+
+            input.addEventListener('keyup', () => {
+                clearTimeout(debounceTimeout);
+
+                const query = input.value.toLowerCase();
+                if (query.length < 1) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+
+                debounceTimeout = setTimeout(() => {
+                    const filteredLocations = locations.filter(location =>
+                        location.toLowerCase().includes(query)
+                    );
+                    resultsContainer.innerHTML = filteredLocations.map(location => `
+                    <li class="list-group-item list-group-item-action">
+                        ${location}
+                    </li>
+                `).join('');
+                }, 300); // Debounce delay
+            });
+
+            resultsContainer.addEventListener('click', (event) => {
+                const suggestion = event.target.closest('.list-group-item');
+                if (suggestion) {
+                    input.value = suggestion.textContent.trim();
+                    resultsContainer.innerHTML = '';
+                }
+            });
+
+            // fetch about us and mission
+            $.ajax({
+                url: '../includes/show_about_mission.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+                        $('#about_us').text(response.about_us);
+                        $('#our_mission').text(response.our_mission);
+
+                        // fetch to the modal
+                        $('#update_about_mission_id').val(response.about_mission_id);
+                        $('#update_about_us').text(response.about_us);
+                        $('#update_our_mission').text(response.our_mission);
+
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+
+            // handling error for about mission modal
+            document.getElementById('updateAboutMissionForm').addEventListener('submit', function(event) {
+                const aboutUs = document.getElementById('update_about_us').value.trim();
+                const ourMission = document.getElementById('update_our_mission').value.trim();
+                const showError = document.getElementById('showUpdateAboutMissionError');
+
+                // Clear any previous error messages
+                showError.innerHTML = '';
+
+                // Check if both fields are empty
+                if (!aboutUs || !ourMission) {
+                    event.preventDefault();
+                    // Show error message
+                    showError.innerHTML = `
+            <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>Please fill out both the "About Us" and "Our Mission" fields.
+            </div>`;
+
+                    setTimeout(() => {
+                        showError.innerHTML = '';
+                    }, 3000);
+                }
+            });
+
+
             // get super admin info
             function navigateGroups(currentGroup, nextGroup) {
                 $(currentGroup).addClass('d-none');
@@ -878,8 +1277,6 @@ if ($user_role != 2) {
             $('#prevBtn4').click(function() {
                 navigateGroups('#group4', '#group3');
             });
-
-
 
             // Function to toggle password visibility
             function togglePasswordVisibility(inputId, iconId) {
@@ -932,6 +1329,12 @@ displaySuccessMessage('update_content_img_error', 'Invalid Image Size', 'error')
 displaySuccessMessage('add_services_message');
 displaySuccessMessage('update_services_message');
 displaySuccessMessage('delete_services_message');
+
+
+displaySuccessMessage('add_contact_message');
+displaySuccessMessage('delete_contact_message');
+
+displaySuccessMessage('update_aboutMission_message');
 
 displaySuccessMessage('faq_message');
 displaySuccessMessage('delete_faq_message');

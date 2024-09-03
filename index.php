@@ -430,32 +430,26 @@ session_start();
         <p class="text-center mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="contact-card">
-                    <div>
-                        <h5 class="mb-1">Contact Phone Number</h5>
-                        <p><i class="bi bi-telephone-fill"></i> +63 918 260 9219</p>
-                        <p> <i class="bi bi-telephone-fill"></i> +63 928 669 0296</p>
-                    </div>
+                <div>
+                    <h5 class="mb-1">Contact Phone Number</h5>
+                    <p id="contact_number"><i class="bi bi-telephone-fill"></i> +Loading...</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="contact-card">
-                    <div>
-                        <h5 class="mb-1">Our Email Address</h5>
-                        <p><i class="bi bi-envelope-fill"></i> bayanlink.connects@gmail.com</p>
-                        <p><i class="bi bi-envelope-fill"></i> sanisidro@gmail.com</p>
-                    </div>
+                <div>
+                    <h5 class="mb-1">Our Email Address</h5>
+                    <p id="contact_email"><i class="bi bi-envelope-fill"></i> Loading...</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="contact-card">
-                    <div>
-                        <h5 class="mb-1">Our Location</h5>
-                        <p><i class="bi bi-geo-alt-fill"></i> 8W54+QPM, Gapan-Olonga Rd, San Isidro, Nueva Ecija</p>
-                    </div>
+                <div>
+                    <h5 class="mb-1">Our Location</h5>
+                    <p id="contact_location"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
                 </div>
             </div>
         </div>
+
+
         <hr>
     </section>
 
@@ -464,8 +458,8 @@ session_start();
         <div class="row mb-4">
             <div class="col">
                 <h1 class="text-center mb-3">About Us</h1>
-                <p class="lead text-center">
-                    BayanLink is a comprehensive SaaS platform designed to connect communities and enhance local engagement. Our goal is to simplify communication and collaboration between residents, local businesses, and community leaders. By offering intuitive tools and a user-friendly interface, we empower users to stay informed, share updates, and participate actively in their neighborhoods. Join us in creating a more connected and vibrant community.
+                <p id="about_us" class="lead text-center">
+
                 </p>
             </div>
         </div>
@@ -473,8 +467,8 @@ session_start();
         <div class="row mb-4">
             <div class="col">
                 <h1 class="text-center mb-3">Our Mission</h1>
-                <p class="lead text-center">
-                    At BayanLink, our mission is to bridge gaps in community communication and foster stronger local ties. We strive to provide innovative solutions that facilitate seamless interaction among residents and stakeholders. Our platform is built with the vision of enhancing civic engagement and supporting community growth through accessible technology and collaborative features. We are dedicated to making every neighborhood a thriving, connected place where everyone has a voice.
+                <p id="our_mission" class="lead text-center">
+
                 </p>
             </div>
         </div>
@@ -564,6 +558,7 @@ session_start();
                 setTimeout(showFaqs, 30000);
             }
 
+            // fetch home
             function fetchHomeContent() {
                 $.ajax({
                     url: 'includes/show_home.php',
@@ -585,6 +580,7 @@ session_start();
                 });
             }
 
+            // fetch services
             function fetchServicesContent() {
                 $.ajax({
                     url: 'includes/show_services.php',
@@ -617,11 +613,77 @@ session_start();
                 });
             }
 
+            // fetch contact
+            function fetchContactContent() {
+                $.ajax({
+                    url: 'includes/show_contact.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            // Handle phone numbers
+                            if (response.contact_number && response.contact_number.length > 0) {
+                                const phoneNumbers = response.contact_number.map(number => `<i class="bi bi-telephone-fill"></i> ${number}`).join('<br>');
+                                $('#contact_number').html(phoneNumbers);
+                            } else {
+                                $('#contact_number').html('No phone numbers available');
+                            }
+
+                            // Handle emails
+                            if (response.contact_email && response.contact_email.length > 0) {
+                                const emails = response.contact_email.map(email => `<i class="bi bi-envelope-fill"></i> ${email}`).join('<br>');
+                                $('#contact_email').html(emails);
+                            } else {
+                                $('#contact_email').html('No email addresses available');
+                            }
+
+                            // Location
+                            if (response.contact_location && response.contact_location.length > 0) {
+                                const locations = response.contact_location.map(location => `<i class="bi bi-geo-alt-fill"></i> ${location}`).join('<br>');
+                                $('#contact_location').html(locations);
+                            } else {
+                                $('#contact_location').html('Location information not available');
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+            // fetch about us and mission
+            function fetchAboutMissionContent() {
+                $.ajax({
+                    url: 'includes/show_about_mission.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#about_us').text(response.about_us);
+                            $('#our_mission').text(response.our_mission);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+
             fetchHomeContent();
             fetchServicesContent();
+            fetchContactContent()
+            fetchAboutMissionContent();
 
             setInterval(fetchHomeContent, 1000);
             setInterval(fetchServicesContent, 1000);
+            setInterval(fetchContactContent, 1000);
+            setInterval(fetchAboutMissionContent, 1000);
             showFaqs();
 
             // JavaScript to handle the steps in the multi-step form

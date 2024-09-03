@@ -27,6 +27,10 @@ if (isset($_POST['btnHomeContent']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $home_content_subtitle1 = capitalizeSentences($home_content_subtitle1);
     $home_content_subtitle2 = capitalizeSentences($home_content_subtitle2);
 
+    $home_content_title = mysqli_real_escape_string($con, $_POST['home_content_title']);
+    $home_content_subtitle1 = mysqli_real_escape_string($con, $_POST['home_content_subtitle1']);
+    $home_content_subtitle2 = mysqli_real_escape_string($con, $_POST['home_content_subtitle2']);
+
     $upload_dir = '../../index_dbImg/';
     $home_content_img = $_FILES['home_content_img'];
 

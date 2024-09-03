@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2024 at 02:38 PM
+-- Generation Time: Sep 03, 2024 at 03:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,46 @@ SET time_zone = "+00:00";
 --
 -- Database: `bayanlink`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_about_mission`
+--
+
+CREATE TABLE `tbl_about_mission` (
+  `about_mission_id` int(22) NOT NULL,
+  `about_us` text NOT NULL,
+  `our_mission` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_about_mission`
+--
+
+INSERT INTO `tbl_about_mission` (`about_mission_id`, `about_us`, `our_mission`) VALUES
+(1, 'BayanLink is a SaaS platform that connects communities and boosts local engagement. We simplify communication between residents, businesses, and leaders with easy-to-use tools, keeping everyone informed and involved. Join us in building a more connected community.', 'At BayanLink, our mission is to strengthen community communication and connections. We offer innovative solutions that enable seamless interaction among residents and stakeholders, aiming to enhance civic engagement and support community growth. We\'re committed to making every neighborhood a connected, thriving place where everyone has a voice.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_contact`
+--
+
+CREATE TABLE `tbl_contact` (
+  `contact_id` int(22) NOT NULL,
+  `contact_number` varchar(50) DEFAULT NULL,
+  `contact_email` varchar(50) DEFAULT NULL,
+  `contact_location` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_contact`
+--
+
+INSERT INTO `tbl_contact` (`contact_id`, `contact_number`, `contact_email`, `contact_location`) VALUES
+(17, '+639182609219', 'bayanlink.connects@gmail.com', 'Brgy. Malapit, San Isidro, Nueva Ecija'),
+(18, '+639286690296', 'sanisidro@gmail.com', 'Brgy. Poblacion, San Isidro, Nueva Ecija');
 
 -- --------------------------------------------------------
 
@@ -69,7 +109,7 @@ CREATE TABLE `tbl_home` (
 --
 
 INSERT INTO `tbl_home` (`home_id`, `home_title`, `home_subtitleOne`, `home_subtitleTwo`, `home_img`) VALUES
-(2, 'Welcome To Bayanlink', 'At bayanlink, we connect communities and simplify access to essential services. Our platform provides direct access to official information, streamlines document requests, and enhances civic engagement. Tete. Tete\r\n', 'Explore our features to see how we make your experience more efficient and engaging. Tete.', 'img1.png');
+(2, 'BayanLink', 'tete\'\'', 'tete\'\'', 'BayanLinkLogoBlack.png');
 
 -- --------------------------------------------------------
 
@@ -216,7 +256,119 @@ INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
 (125, 'User admin123 updated the home image', '2024-09-02 14:28:24', 5),
 (126, 'User admin123 updated the home image', '2024-09-02 14:33:03', 5),
 (127, 'User admin123 updated the home image', '2024-09-02 14:33:10', 5),
-(128, 'User admin123 updated the home image', '2024-09-02 14:33:51', 5);
+(128, 'User admin123 updated the home image', '2024-09-02 14:33:51', 5),
+(129, 'User admin123 created a post', '2024-09-02 15:33:14', 5),
+(130, 'User admin123 created a post', '2024-09-02 15:33:18', 5),
+(131, 'User admin123 changed the second home subtitle', '2024-09-02 16:57:01', 5),
+(132, 'User admin123 changed the second home subtitle', '2024-09-02 16:57:43', 5),
+(133, 'User admin123 changed the first home subtitle', '2024-09-02 16:57:46', 5),
+(134, 'User admin123 changed the second home subtitle', '2024-09-02 16:59:46', 5),
+(135, 'User admin123 changed the first home subtitle', '2024-09-02 17:01:49', 5),
+(136, 'User admin123 changed the home title', '2024-09-02 17:10:44', 5),
+(137, 'User admin123 changed the first home subtitle', '2024-09-02 17:13:32', 5),
+(138, 'User admin123 changed the first home subtitle', '2024-09-02 17:15:00', 5),
+(139, 'User admin123 changed the first home subtitle', '2024-09-02 17:16:01', 5),
+(140, 'User admin123 changed the second home subtitle', '2024-09-02 17:18:08', 5),
+(141, 'User admin123 changed the home title', '2024-09-02 17:20:37', 5),
+(142, 'User admin123 changed the first home subtitle', '2024-09-02 17:20:46', 5),
+(143, 'User admin123 changed the second home subtitle', '2024-09-02 17:20:57', 5),
+(144, 'User admin123 changed the second home subtitle', '2024-09-02 17:21:04', 5),
+(145, 'User admin123 updated the home image', '2024-09-02 17:21:40', 5),
+(146, 'User admin123 updated the home image', '2024-09-02 17:28:34', 5),
+(147, 'User admin123 updated the home image', '2024-09-02 17:35:37', 5),
+(148, 'User admin123 updated the home image', '2024-09-02 17:37:39', 5),
+(149, 'User admin123 updated the home image', '2024-09-02 17:38:42', 5),
+(150, 'User admin123 changed the second home subtitle', '2024-09-02 17:46:31', 5),
+(151, 'User admin123 changed the second home subtitle', '2024-09-02 17:46:51', 5),
+(152, 'User admin123 changed the second home subtitle', '2024-09-02 17:47:11', 5),
+(153, 'User admin123 changed the second home subtitle', '2024-09-02 17:51:23', 5),
+(154, 'User admin123 changed the second home subtitle', '2024-09-02 18:23:04', 5),
+(155, 'User admin123 changed the second home subtitle', '2024-09-02 18:23:10', 5),
+(156, 'User admin123 changed the second home subtitle', '2024-09-02 18:27:42', 5),
+(157, 'User admin123 changed the second home subtitle', '2024-09-02 18:29:19', 5),
+(158, 'User admin123 changed the second home subtitle', '2024-09-02 18:42:55', 5),
+(159, 'User admin123 changed the second home subtitle', '2024-09-02 18:43:09', 5),
+(160, 'User admin123 changed the second home subtitle', '2024-09-02 18:48:00', 5),
+(161, 'User admin123 added a service', '2024-09-02 18:50:06', 5),
+(162, 'User admin123 changed the second home subtitle', '2024-09-02 18:59:39', 5),
+(163, 'User admin123 added a service', '2024-09-02 19:00:22', 5),
+(164, 'User admin123 added a service', '2024-09-02 19:01:24', 5),
+(165, 'Service deleted by user admin123.', '2024-09-02 19:37:19', 5),
+(166, 'Service deleted by user admin123.', '2024-09-02 19:37:39', 5),
+(167, 'User admin123 changed the second home subtitle', '2024-09-02 19:46:12', 5),
+(168, 'User admin123 added a service', '2024-09-02 19:46:28', 5),
+(169, 'User admin123 updated the home image', '2024-09-02 20:05:46', 5),
+(170, 'User admin123 updated the home image', '2024-09-02 20:06:37', 5),
+(171, 'User admin123 updated the home image', '2024-09-02 20:07:41', 5),
+(172, 'User admin123 added a service', '2024-09-02 20:08:41', 5),
+(173, 'User admin123 changed the second home subtitle', '2024-09-02 20:09:19', 5),
+(174, 'Service deleted by user admin123.', '2024-09-02 20:10:12', 5),
+(175, 'Service deleted by user admin123.', '2024-09-02 20:10:16', 5),
+(176, 'Service deleted by user admin123.', '2024-09-02 20:10:19', 5),
+(177, 'User admin123 added a service', '2024-09-02 20:11:34', 5),
+(178, 'User admin123 changed the home title', '2024-09-02 20:52:43', 5),
+(179, 'User admin123 changed the home content', '2024-09-02 21:39:33', 5),
+(180, 'User admin123 changed the second home subtitle', '2024-09-02 21:49:13', 5),
+(181, 'User admin123 added a FAQs', '2024-09-02 21:53:38', 5),
+(182, 'User admin123 changed the home content', '2024-09-02 22:13:10', 5),
+(183, 'User admin123 changed the home content', '2024-09-02 22:34:10', 5),
+(184, 'User admin123 changed the home content', '2024-09-02 22:38:41', 5),
+(185, 'User admin123 changed the home content', '2024-09-02 22:41:47', 5),
+(186, 'User admin123 changed the home content', '2024-09-02 22:43:19', 5),
+(187, 'User admin123 changed the home content', '2024-09-02 22:43:56', 5),
+(188, 'Contact deleted by user admin123.', '2024-09-03 00:41:40', 5),
+(189, 'Contact deleted by user admin123.', '2024-09-03 00:53:36', 5),
+(190, 'Contact deleted by user admin123.', '2024-09-03 00:54:00', 5),
+(191, 'Contact deleted by user admin123.', '2024-09-03 00:54:20', 5),
+(192, 'Contact deleted by user admin123.', '2024-09-03 11:54:41', 5),
+(193, 'Contact deleted by user admin123.', '2024-09-03 11:54:50', 5),
+(194, 'User admin123 added a contact', '2024-09-03 11:55:07', 5),
+(195, 'User admin123 added a contact', '2024-09-03 11:55:57', 5),
+(196, 'Contact deleted by user admin123.', '2024-09-03 11:57:20', 5),
+(197, 'Contact deleted by user admin123.', '2024-09-03 11:57:27', 5),
+(198, 'User admin123 added a contact', '2024-09-03 11:57:53', 5),
+(199, 'User admin123 added a contact', '2024-09-03 12:11:41', 5),
+(200, 'Contact deleted by user admin123.', '2024-09-03 12:13:25', 5),
+(201, 'User admin123 added a contact', '2024-09-03 12:14:02', 5),
+(202, 'Contact deleted by user admin123.', '2024-09-03 12:16:54', 5),
+(203, 'Contact deleted by user admin123.', '2024-09-03 12:16:58', 5),
+(204, 'Contact deleted by user admin123.', '2024-09-03 12:17:02', 5),
+(205, 'Contact deleted by user admin123.', '2024-09-03 12:17:05', 5),
+(206, 'User admin123 added a contact', '2024-09-03 12:18:53', 5),
+(207, 'Contact deleted by user admin123.', '2024-09-03 12:19:04', 5),
+(208, 'User admin123 added a contact', '2024-09-03 12:19:33', 5),
+(209, 'User admin123 added a contact', '2024-09-03 12:19:56', 5),
+(210, 'User admin123 added a contact', '2024-09-03 12:26:09', 5),
+(211, 'User admin123 added a contact', '2024-09-03 12:28:36', 5),
+(212, 'Contact deleted by user admin123.', '2024-09-03 12:28:55', 5),
+(213, 'User admin123 added a contact', '2024-09-03 12:40:50', 5),
+(214, 'User admin123 added a contact', '2024-09-03 12:43:46', 5),
+(215, 'Contact deleted by user admin123.', '2024-09-03 12:44:01', 5),
+(216, 'Contact deleted by user admin123.', '2024-09-03 12:44:08', 5),
+(217, 'Contact deleted by user admin123.', '2024-09-03 12:44:14', 5),
+(218, 'Service deleted by user admin123.', '2024-09-03 12:51:11', 5),
+(219, 'User admin123 updated a About Us and Our Mission', '2024-09-03 14:14:14', 5),
+(220, 'FAQs deleted by user admin123.', '2024-09-03 14:15:21', 5),
+(221, 'User admin123 added a FAQs', '2024-09-03 14:15:34', 5),
+(222, 'FAQs deleted by user admin123.', '2024-09-03 14:15:39', 5),
+(223, 'User admin123 updated a About Us and Our Mission', '2024-09-03 14:17:28', 5),
+(224, 'User admin123 updated a About Us and Our Mission', '2024-09-03 14:17:42', 5),
+(225, 'User admin123 updated a About Us and Our Mission', '2024-09-03 14:17:52', 5),
+(226, 'User admin123 updated a About Us and Our Mission', '2024-09-03 14:23:36', 5),
+(227, 'User admin123 changed the home content', '2024-09-03 14:24:40', 5),
+(228, 'User admin123 added a service', '2024-09-03 14:26:32', 5),
+(229, 'Service deleted by user admin123.', '2024-09-03 14:26:37', 5),
+(230, 'User admin123 changed the home content', '2024-09-03 14:26:56', 5),
+(231, 'User admin123 updated a post', '2024-09-03 14:27:08', 5),
+(232, 'User Qwerty123 updated a post', '2024-09-03 14:28:01', 1),
+(233, 'User pao updated his/her information', '2024-09-03 14:32:20', 2),
+(234, 'User pao updated his/her information', '2024-09-03 14:32:34', 2),
+(235, 'User pao updated his/her information', '2024-09-03 14:34:26', 2),
+(236, 'User pao requested a Cedula', '2024-09-03 14:57:33', 2),
+(237, 'User pao requested a Job Seeker', '2024-09-03 14:58:28', 2),
+(238, 'User pao requested a Cedula', '2024-09-03 15:03:24', 2),
+(239, 'User pao updated his/her information', '2024-09-03 15:03:56', 2),
+(240, 'User pao updated his/her information', '2024-09-03 15:06:04', 2);
 
 -- --------------------------------------------------------
 
@@ -299,9 +451,11 @@ CREATE TABLE `tbl_posts` (
 --
 
 INSERT INTO `tbl_posts` (`post_id`, `user_id`, `post_brgy`, `post_content`, `post_img`, `post_date`) VALUES
-(1, 1, 'Malapit', 'asdsasd', '[]', '2024-09-01 15:28:26'),
+(1, 1, 'Malapit', 'asdsasd\' \'', '[]', '2024-09-03 14:28:01'),
 (2, 5, 'Municipal', 'asdsadsadsd13131333', '[]', '2024-08-31 21:40:45'),
-(3, 5, 'Municipal', 'ASDASD', '[]', '2024-09-01 20:44:23');
+(3, 5, 'Municipal', 'ASDASD', '[]', '2024-09-01 20:44:23'),
+(4, 5, 'Municipal', 'asdsadsdad', '[]', '2024-09-02 15:33:14'),
+(5, 5, 'Municipal', 'asdsadsadd\'', '[]', '2024-09-03 14:27:08');
 
 -- --------------------------------------------------------
 
@@ -342,7 +496,34 @@ INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_m
 (4, 1, '2024-09-01 18:10:20', 'Asd', 'Asd', 'Asd', '09876543212', 'Male', 'Malapit', '2', 22, '2002-02-22', 'San Isidro', 'Single', 'ss-[BayanLink-66d16cbddfa49].png', 'Job Seeker', 'id-[BayanLink-66d16cbddfa4c].png', 'Pending', ''),
 (5, 2, '2024-09-01 18:12:14', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '3', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d2935843f06].png', 'Business Permit', 'id-[BayanLink-66d2935843f09].png', 'Cancelled', 'Insufficient supporting documents, User account issue, Document no longer applicable, '),
 (6, 4, '2024-09-01 18:12:30', 'Tiktalk', 'Tiktalk', 'Tiktalk', '09876543212', 'Male', 'Malapit', '2', 16, '2007-12-31', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d2cd3a9d187].png', 'Barangay Clearance', 'id-[BayanLink-66d2cd3a9d18a].png', 'Approved', 'Invalid or expired information, Insufficient supporting documents, User account issue, Document no longer applicable, '),
-(7, 2, '2024-09-01 17:12:47', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '3', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d4300fbca1f].png', 'Barangay Clearance', 'id-[BayanLink-66d4300fbca22].png', 'Pending', NULL);
+(7, 2, '2024-09-01 17:12:47', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '3', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d4300fbca1f].png', 'Barangay Clearance', 'id-[BayanLink-66d4300fbca22].png', 'Pending', NULL),
+(8, 2, '2024-09-03 14:57:33', '', 'Pao', '', '09876543212', 'Male', 'Malapit', '2', 34, '1990-04-28', '', 'Single', 'ss-[BayanLink-66d6b35d33af4].png', 'Cedula', 'id-[BayanLink-66d6b35d33af7].png', 'Pending', NULL),
+(9, 2, '2024-09-03 14:58:28', '', 'Addd', '', '0976436762', 'Male', 'Malapit', '2', 8, '2016-02-10', '', 'Single', 'ss-[BayanLink-66d6b393f3dbe].png', 'Job Seeker', 'id-[BayanLink-66d6b393f3dc1].png', 'Pending', NULL),
+(10, 2, '2024-09-03 15:03:24', 'Addd', 'Addd', 'Addd', '0976436762', 'Male', 'Malapit', '2', 13, '2011-06-16', 'San Isidro, Nueva Ecija\' \'', 'Single', 'ss-[BayanLink-66d6b4bcdb1a2].png', 'Cedula', 'id-[BayanLink-66d6b4bcdb1a5].png', 'Pending', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_services`
+--
+
+CREATE TABLE `tbl_services` (
+  `services_id` int(22) NOT NULL,
+  `services_title` text NOT NULL,
+  `services_desc` text NOT NULL,
+  `services_created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_services`
+--
+
+INSERT INTO `tbl_services` (`services_id`, `services_title`, `services_desc`, `services_created_at`) VALUES
+(2, 'Document Requesting and Tracking', 'Easily request and track documents with our streamlined process.', '2024-09-01 12:00:00'),
+(3, 'Enhanced Civic Engagement', 'Engage with your community more effectively through our platform.', '2024-09-01 11:00:00'),
+(4, 'Communication Channels', 'Access various communication channels for better interaction.', '2024-09-01 10:00:00'),
+(5, 'Personalized User Experience', 'Enjoy a personalized experience tailored to your preferences.', '2024-09-01 09:00:00'),
+(6, 'Accessibility and Convenience', 'Experience enhanced accessibility and convenience across the platform.', '2024-09-01 08:00:00');
 
 -- --------------------------------------------------------
 
@@ -402,7 +583,7 @@ CREATE TABLE `tbl_useracc` (
 
 INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_contactNum`, `dateOfBirth`, `user_age`, `placeOfBirth`, `civilStatus`, `user_city`, `user_purok`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
 (1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', '2002-04-29', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '2', 'qwerty123@gmail.com', 'Qwerty123', '$2y$10$ulORW5LZ1bhPitfMf16P8OCxXOj2W6ZSg4r2ctiG/BCHssNYIMw6m', 1, '2024-08-30 17:52:50', NULL, NULL),
-(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '1990-04-28', 34, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '3', 'pao@gmail.com', 'pao', '$2y$10$4nvFdzqFRpdgrcDpLOupQ.ZFCPA4Bagey4Ota1PX5gNCk3sjjUhGC', 0, '2024-08-30 17:54:44', NULL, NULL),
+(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '1990-04-28', 34, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '2', 'pao@gmail.com', 'pao', '$2y$10$4nvFdzqFRpdgrcDpLOupQ.ZFCPA4Bagey4Ota1PX5gNCk3sjjUhGC', 0, '2024-08-30 17:54:44', NULL, NULL),
 (3, 'Yes', 'Malapit', 'Zxc', 'Zxc', 'Zxc', 'Female', '09876543212', '2004-01-01', 20, 'San Isidro', 'Single', 'San Isidro', '2', 'zxc@gmail.com', 'Qwerty123', '$2y$10$hYs6kcCtafVx1Gg7SaFtje2QBGhaa6VbS6Egj74aO0VaL1FzHNp7y', 1, '2024-08-30 21:07:05', NULL, NULL),
 (4, 'Yes', 'Malapit', 'Tiktalk', 'Tiktalk', 'Tiktalk', 'Male', '09876543212', '2007-12-31', 16, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '2', 'tiktalkcompany6969@gmail.com', 'tiktalk', '$2y$10$SqnNyGjWhjv/ZOiH0xJ/XesGMF0UvuShU54bMnTIVIkHcvzY8Lw1m', 0, '2024-08-31 15:58:18', NULL, NULL),
 (5, 'Yes', 'Malapit', 'Admin', 'Admin', 'Admin', 'Male', '09876543212', '1985-12-12', 38, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', '2', 'admin@gmail.com', 'admin123', '$2y$10$UO478AZvC84E/gvG/L9zd.hONFYVHwbtz1.7ATL7KpptBfq7efpGi', 2, '2024-08-31 17:13:37', NULL, NULL);
@@ -410,6 +591,18 @@ INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_about_mission`
+--
+ALTER TABLE `tbl_about_mission`
+  ADD PRIMARY KEY (`about_mission_id`);
+
+--
+-- Indexes for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  ADD PRIMARY KEY (`contact_id`);
 
 --
 -- Indexes for table `tbl_faqs`
@@ -448,6 +641,12 @@ ALTER TABLE `tbl_requests`
   ADD PRIMARY KEY (`req_id`);
 
 --
+-- Indexes for table `tbl_services`
+--
+ALTER TABLE `tbl_services`
+  ADD PRIMARY KEY (`services_id`);
+
+--
 -- Indexes for table `tbl_typedoc`
 --
 ALTER TABLE `tbl_typedoc`
@@ -466,10 +665,22 @@ ALTER TABLE `tbl_useracc`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_about_mission`
+--
+ALTER TABLE `tbl_about_mission`
+  MODIFY `about_mission_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  MODIFY `contact_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `tbl_faqs`
 --
 ALTER TABLE `tbl_faqs`
-  MODIFY `faq_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `faq_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_home`
@@ -481,7 +692,7 @@ ALTER TABLE `tbl_home`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
@@ -493,13 +704,19 @@ ALTER TABLE `tbl_notification`
 -- AUTO_INCREMENT for table `tbl_posts`
 --
 ALTER TABLE `tbl_posts`
-  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_requests`
 --
 ALTER TABLE `tbl_requests`
-  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_services`
+--
+ALTER TABLE `tbl_services`
+  MODIFY `services_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_typedoc`
