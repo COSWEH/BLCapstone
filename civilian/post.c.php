@@ -232,61 +232,87 @@ if ($user_role != 0) {
     </div>
 
     <script>
-        // update status to read
-        document.getElementById("notificationButton").addEventListener("click", function() {
-            // Get the notification count element
-            var notificationCountElement = document.querySelector("#count-notification .badge");
-
-            // Check if the notification count is not empty
-            if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
-                // AJAX request to update notifications status to "read"
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "civilian_includes/update_notifications.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        console.log("All notifications updated to read");
-                        // Clear the notification count badge
-                        document.getElementById("count-notification").innerHTML = '';
-                    }
-                };
-                xhr.send();
-            } else {
-                console.log("No unread notifications to update.");
-            }
-        });
-
         //load brgy post and municipal post from database
         $(document).ready(function() {
-            function loadContent(url, elementId, interval = null) {
-                $.post(url, {}, function(data) {
-                    $(elementId).html(data);
-                    if (interval) {
-                        setTimeout(function() {
-                            loadContent(url, elementId, interval);
-                        }, interval);
-                    }
+            // update status to read
+            document.getElementById("notificationButton").addEventListener("click", function() {
+                // Get the notification count element
+                var notificationCountElement = document.querySelector("#count-notification .badge");
+
+                // Check if the notification count is not empty
+                if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
+                    // AJAX request to update notifications status to "read"
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "civilian_includes/update_notifications.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            console.log("All notifications updated to read");
+                            // Clear the notification count badge
+                            document.getElementById("count-notification").innerHTML = '';
+                        }
+                    };
+                    xhr.send();
+                } else {
+                    console.log("No unread notifications to update.");
+                }
+            });
+
+            $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
+                $("#brgyPost").html(data);
+            });
+            $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
+                $("#municipalPost").html(data);
+            });
+
+            $.post('civilian_includes/show_notification.php', {}, function(data) {
+                $("#notification-content").html(data);
+            });
+
+            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
+                $("#count-notification").html(data);
+            });
+
+            function updateBrgyPost() {
+                $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
+                    $("#brgyPost").html(data);
+                    setTimeout(updateBrgyPost, 30000);
                 });
             }
 
-            // Initial data loading
-            loadContent('civilian_includes/show_brgyPost.c.php', '#brgyPost');
-            loadContent('civilian_includes/show_municipalPost.c.php', '#municipalPost');
-            loadContent('civilian_includes/show_notification.php', '#notification-content');
-            loadContent('civilian_includes/show_notification_count.php', '#count-notification');
+            function updateMunicipalPost() {
+                $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
+                    $("#municipalPost").html(data);
+                    setTimeout(updateMunicipalPost, 30000);
+                });
+            }
 
-            // Periodic updates
-            loadContent('civilian_includes/show_brgyPost.c.php', '#brgyPost', 30000);
-            loadContent('civilian_includes/show_municipalPost.c.php', '#municipalPost', 30000);
-            loadContent('civilian_includes/show_notification.php', '#notification-content', 500);
-            loadContent('civilian_includes/show_notification_count.php', '#count-notification', 500);
+            function updateNotification() {
+                $.post('civilian_includes/show_notification.php', {}, function(data) {
+                    $("#notification-content").html(data);
+                    setTimeout(updateNotification, 500);
+                });
+            }
 
+            function showNotificationCount() {
+                $.post('civilian_includes/show_notification_count.php', {}, function(data) {
+                    $("#count-notification").html(data);
+                    setTimeout(showNotificationCount, 500);
+                });
+            }
+
+
+            // Initial call to load messages
+            updateBrgyPost();
+            updateMunicipalPost();
+            updateNotification();
+            showNotificationCount()
         });
     </script>
 
     <script src="civilianMaterials/script.c.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 <?php

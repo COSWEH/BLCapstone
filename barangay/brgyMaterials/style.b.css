@@ -36,11 +36,6 @@ body {
 	padding: 5px 10px;
 }
 
-/* see more */
-.post-text {
-	overflow: hidden;
-}
-
 @media (max-width: 767.98px) {
 	.row {
 		height: auto;

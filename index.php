@@ -156,7 +156,7 @@ session_start();
                     <div class="w-100 text-center">
                         <h4 class="modal-title" id="forgotPasswordLabel">Forgot Password</h4>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#loginModal"></button>
                 </div>
 
                 <!-- Modal Body -->
@@ -468,9 +468,6 @@ session_start();
             </div>
         </div>
     </div>
-
-
-
 
     <!-- Home Section -->
     <section id="home" class="container my-5">

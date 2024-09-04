@@ -140,14 +140,17 @@ if ($rowCount == 0) {
 
     <!-- es Modal -->
     <div class="modal fade" id="esModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="esModal<?php echo $status; ?>Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="esModal<?php echo $status; ?>Label">View Image</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body text-center">
-                    <img id="esModalImage<?php echo $status; ?>" class="img-fluid" style="max-width: 100%; height: auto;">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-warning-subtle mx-auto mb-3" style="height: 50px; width: 50px;">
+                        <i class="bi bi-image text-warning" style="font-size: 25px;"></i>
+                    </div>
+                    <h5 class="modal-title mb-3">View Image</h5>
+                    <img id="esModalImage<?php echo $status; ?>" class="img-fluid rounded-2" style="max-width: 100%; height: auto;">
+                    <div class="d-grid gap-3 mt-4">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,14 +158,17 @@ if ($rowCount == 0) {
 
     <!-- vid Modal -->
     <div class="modal fade" id="vidModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="vidModal<?php echo $status; ?>Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="vidModal<?php echo $status; ?>Label">View Image</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body text-center">
-                    <img id="vidModalImage<?php echo $status; ?>" class="img-fluid" style="max-width: 100%; height: auto;">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-warning-subtle mx-auto mb-3" style="height: 50px; width: 50px;">
+                        <i class="bi bi-image text-warning" style="font-size: 25px;"></i>
+                    </div>
+                    <h5 class="modal-title mb-3">View Video</h5>
+                    <img id="vidModalImage<?php echo $status; ?>" class="img-fluid rounded-2" style="max-width: 100%; height: auto;">
+                    <div class="d-grid gap-3 mt-4">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -271,38 +277,39 @@ if ($rowCount == 0) {
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.aApprove', function() {
+                let p_id = $(this).data('post-id');
+                console.log(p_id);
+                $('#getApproveReqDocId<?php echo $status; ?>').val(p_id);
+            });
+
+            $(document).on('click', '.aCancel', function() {
+                let p_id = $(this).data('post-id');
+                console.log(p_id);
+                $('#getCancelReqDocId<?php echo $status; ?>').val(p_id);
+            });
+
+            $('#esModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
+                let button = $(event.relatedTarget);
+                let imageSrc = button.data('image-src');
+                let modalImage = $(this).find('#esModalImage<?php echo $status; ?>');
+                modalImage.attr('src', imageSrc);
+            });
+
+            $('#vidModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
+                let button = $(event.relatedTarget);
+                let imageSrc = button.data('image-src');
+                let modalImage = $(this).find('#vidModalImage<?php echo $status; ?>');
+                modalImage.attr('src', imageSrc);
+            });
+
+
+        });
+    </script>
+
 <?php
 }
 ?>
-
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '.aApprove', function() {
-            let p_id = $(this).data('post-id');
-            console.log(p_id);
-            $('#getApproveReqDocId<?php echo $status; ?>').val(p_id);
-        });
-
-        $(document).on('click', '.aCancel', function() {
-            let p_id = $(this).data('post-id');
-            console.log(p_id);
-            $('#getCancelReqDocId<?php echo $status; ?>').val(p_id);
-        });
-
-        $('#esModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
-            let button = $(event.relatedTarget);
-            let imageSrc = button.data('image-src');
-            let modalImage = $(this).find('#esModalImage<?php echo $status; ?>');
-            modalImage.attr('src', imageSrc);
-        });
-
-        $('#vidModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
-            let button = $(event.relatedTarget);
-            let imageSrc = button.data('image-src');
-            let modalImage = $(this).find('#vidModalImage<?php echo $status; ?>');
-            modalImage.attr('src', imageSrc);
-        });
-
-
-    });
-</script>

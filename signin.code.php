@@ -26,14 +26,14 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (password_verify($password, $dbPassword)) {
                     // set koki
                     if ($rememberMe) {
-                        setcookie('email', $email, time() + 1800, "/"); // 30 minutes expiration
-                        setcookie('password', $password, time() + 1800, "/");
+                        // Set cookies with a 7-day expiration
+                        setcookie('email', $email, time() + (7 * 24 * 60 * 60), "/");
+                        setcookie('password', $password, time() + (7 * 24 * 60 * 60), "/");
                     } else {
                         // Clear cookies if "Remember Me" is not checked
                         setcookie('email', '', time() - 3600, "/");
                         setcookie('password', '', time() - 3600, "/");
                     }
-
 
                     // Correct password input
                     $_SESSION['user_id'] = $row['user_id'];

@@ -367,10 +367,15 @@ if ($user_role != 1) {
                     <p class="text-muted">Fill out the form below to add a new document.</p>
 
                     <div class="container">
-                        <form action="brgy_includes/addDocument.php" method="POST">
+                        <form action="brgy_includes/addDocument.php" method="POST" enctype="multipart/form-data">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="documentType" name="documentType" placeholder="Document Type">
+                                <input type="text" class="form-control" id="documentType" name="documentType" placeholder="Document Type" required>
                                 <label for="documentType">Document Type</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="file" class="form-control" id="documentTemplate" name="documentTemplate" placeholder="Document Template" accept=".pdf" required>
+                                <label for="documentType">Document Template</label>
                             </div>
 
                             <div class="d-grid gap-2">
@@ -384,9 +389,6 @@ if ($user_role != 1) {
                         </form>
                     </div>
                 </div>
-
-                <!-- Modal Close Button -->
-                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>

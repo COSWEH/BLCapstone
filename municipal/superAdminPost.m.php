@@ -286,20 +286,32 @@ if ($user_role != 2) {
     <script>
         //load all brgy post from database
         $(document).ready(function() {
-            function loadContent(url, elementId, interval = null) {
-                $.post(url, {}, function(data) {
-                    $(elementId).html(data);
-                    if (interval) {
-                        setTimeout(function() {
-                            loadContent(url, elementId, interval);
-                        }, interval);
-                    }
+            // brgy post
+            $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
+                $("#brgyPost").html(data);
+            });
+
+            // municipalPost
+            $.post('municipal_includes/show_municipalPost.m.php', {}, function(data) {
+                $("#municipalPost").html(data);
+            });
+
+            function updateBrgyPost() {
+                $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
+                    $("#brgyPost").html(data);
+                    setTimeout(updateBrgyPost, 30000);
                 });
             }
 
-            // Initial data loading and periodic updates
-            loadContent('municipal_includes/show_brgyPost.m.php', '#brgyPost', 30000);
-            loadContent('municipal_includes/show_municipalPost.m.php', '#municipalPost');
+            function updateMunicpalPost() {
+                $.post('municipal_includes/show_municipalPost.m.php', {}, function(data) {
+                    $("#municipalPost").html(data);
+                });
+            }
+
+            // Initial call to load brgy post
+            updateBrgyPost();
+            updateMunicpalPost();
 
             let selectedFiles = [];
             document.getElementById("mAddPhotos").addEventListener("change", function(event) {
