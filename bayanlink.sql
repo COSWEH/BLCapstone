@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2024 at 10:27 PM
+-- Generation Time: Sep 05, 2024 at 04:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -110,7 +110,7 @@ CREATE TABLE `tbl_home` (
 --
 
 INSERT INTO `tbl_home` (`home_id`, `home_title`, `home_subtitleOne`, `home_subtitleTwo`, `home_img`) VALUES
-(2, 'BayanLink', 'tete\'\'', 'tete\'\'', 'BayanLinkLogoBlack.png');
+(2, 'Welcome to BayanLink', 'At Bayanlink, we connect communities and simplify access to essential services. Our platform provides direct access to official information, streamlines document requests, and enhances civic engagement.', 'Explore our features to see how we make your experience more efficient and engaging.', 'img1.png');
 
 -- --------------------------------------------------------
 
@@ -124,6 +124,22 @@ CREATE TABLE `tbl_logs` (
   `log_date` datetime NOT NULL,
   `user_id` int(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_logs`
+--
+
+INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
+(1, 'User admin123 changed the home content', '2024-09-05 10:06:04', 5),
+(2, 'User admin123 changed the home content', '2024-09-05 10:08:54', 5),
+(3, 'User pao requested a Job Seeker', '2024-09-05 10:45:56', 2),
+(4, 'User admin123 changed the second home subtitle', '2024-09-05 12:05:42', 5),
+(5, 'User admin123 added a terms and conditions', '2024-09-05 12:37:07', 5),
+(6, 'User admin123 updated the terms and conditions', '2024-09-05 12:45:18', 5),
+(7, 'User admin123 updated the terms and conditions', '2024-09-05 12:45:30', 5),
+(8, 'User admin123 updated the terms and conditions', '2024-09-05 12:45:51', 5),
+(9, 'User admin123 updated the terms and conditions', '2024-09-05 12:51:31', 5),
+(10, 'Terms and Conditions deleted by user admin123.', '2024-09-05 12:53:25', 5);
 
 -- --------------------------------------------------------
 
@@ -198,11 +214,12 @@ CREATE TABLE `tbl_requests` (
 --
 
 INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_status`, `req_reasons`) VALUES
-(1, 2, '2024-09-04 20:52:16', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d8580059604].png', 'Barangay Clearance', 'id-[BayanLink-66d8580059608].png', 'Pending', NULL),
-(2, 2, '2024-09-04 22:05:09', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d858292f544].png', 'Job Seeker', 'id-[BayanLink-66d858292f548].png', 'Approved', NULL),
-(3, 2, '2024-09-04 21:33:27', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d85d06d9961].png', 'Barangay Residency', 'id-[BayanLink-66d85d06d9964].png', 'Cancelled', 'Invalid or expired information, Insufficient supporting documents, '),
-(4, 2, '2024-09-04 21:29:50', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d85d28825a0].png', 'Barangay Indigency', 'id-[BayanLink-66d85d28825a3].png', 'Approved', NULL),
-(5, 2, '2024-09-04 22:17:20', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', '2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'c-[BayanLink-66d8697272b9c].jpg', 'Barangay Clearance', 'doThis-[BayanLink-66d8697272b9f].png', 'Processing', NULL);
+(1, 2, '2024-09-05 15:45:53', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d8580059604].png', 'Barangay Clearance', 'id-[BayanLink-66d8580059608].png', 'Pending', NULL),
+(2, 2, '2024-09-05 15:45:57', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d858292f544].png', 'Job Seeker', 'id-[BayanLink-66d858292f548].png', 'Approved', NULL),
+(3, 2, '2024-09-05 15:46:02', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d85d06d9961].png', 'Barangay Residency', 'id-[BayanLink-66d85d06d9964].png', 'Cancelled', 'Invalid or expired information, Insufficient supporting documents, '),
+(4, 2, '2024-09-05 15:46:07', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d85d28825a0].png', 'Barangay Indigency', 'id-[BayanLink-66d85d28825a3].png', 'Approved', NULL),
+(5, 2, '2024-09-05 15:46:09', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'c-[BayanLink-66d8697272b9c].jpg', 'Barangay Clearance', 'doThis-[BayanLink-66d8697272b9f].png', 'Processing', NULL),
+(6, 2, '2024-09-05 15:46:12', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d91b64b3193].png', 'Job Seeker', 'id-[BayanLink-66d91b64b3195].png', 'Cancelled', NULL);
 
 -- --------------------------------------------------------
 
@@ -222,11 +239,37 @@ CREATE TABLE `tbl_services` (
 --
 
 INSERT INTO `tbl_services` (`services_id`, `services_title`, `services_desc`, `services_created_at`) VALUES
-(2, 'Document Requesting and Tracking', 'Easily request and track documents with our streamlined process.', '2024-09-01 12:00:00'),
+(2, 'Document Requesting And Tracking', 'Easily request and track documents with our streamlined process.', '2024-09-01 12:00:00'),
 (3, 'Enhanced Civic Engagement', 'Engage with your community more effectively through our platform.', '2024-09-01 11:00:00'),
 (4, 'Communication Channels', 'Access various communication channels for better interaction.', '2024-09-01 10:00:00'),
 (5, 'Personalized User Experience', 'Enjoy a personalized experience tailored to your preferences.', '2024-09-01 09:00:00'),
 (6, 'Accessibility and Convenience', 'Experience enhanced accessibility and convenience across the platform.', '2024-09-01 08:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_terms_conditions`
+--
+
+CREATE TABLE `tbl_terms_conditions` (
+  `tm_id` int(22) NOT NULL,
+  `tm_title` varchar(100) NOT NULL,
+  `tm_content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_terms_conditions`
+--
+
+INSERT INTO `tbl_terms_conditions` (`tm_id`, `tm_title`, `tm_content`) VALUES
+(1, 'Introduction', 'Bayanlink is a software as a service (saas) platform designed to facilitate communication and engagement within communities. By accessing or using our services, you agree to comply with and be bound by these terms and conditions.'),
+(2, 'Use of the Platform', 'BayanLink grants you a limited, non-exclusive, non-transferable license to access and use the platform for your community engagement needs, subject to these terms. You agree not to misuse the platform, including but not limited to attempting to gain unauthorized access to our systems or engaging in any activity that disrupts or harms the platform.'),
+(3, 'User Responsibilities', 'You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to provide accurate and complete information when creating your account and to update your information as necessary.'),
+(4, 'Privacy and Data Protection', 'We take your privacy seriously. Our Privacy Policy outlines how we collect, use, and protect your personal information. By using BayanLink, you consent to the practices described in our Privacy Policy.'),
+(5, 'Subscription and Payment', 'Access to certain features of BayanLink may require a subscription. By subscribing, you agree to pay the applicable fees as described on our pricing page. Payments are non-refundable, except as required by law.'),
+(6, 'Termination', 'We reserve the right to suspend or terminate your access to BayanLink at any time, with or without cause, including if you violate these Terms and Conditions. Upon termination, your right to use the platform will immediately cease.'),
+(7, 'Changes to the Terms', 'We may update these Terms and Conditions from time to time. If we make significant changes, we will notify you by email or through a notice on the platform. Your continued use of BayanLink after any changes indicates your acceptance of the new terms.'),
+(8, 'Contact Us', 'If you have any questions or concerns about these Terms and Conditions, please contact us.');
 
 -- --------------------------------------------------------
 
@@ -285,11 +328,11 @@ CREATE TABLE `tbl_useracc` (
 --
 
 INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_contactNum`, `dateOfBirth`, `user_age`, `placeOfBirth`, `civilStatus`, `user_city`, `user_purok`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
-(1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', '2002-04-29', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '2', 'qwerty123@gmail.com', 'Qwerty123', '$2y$10$ulORW5LZ1bhPitfMf16P8OCxXOj2W6ZSg4r2ctiG/BCHssNYIMw6m', 1, '2024-08-30 17:52:50', NULL, NULL),
-(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '1990-04-28', 34, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '2', 'pao@gmail.com', 'pao', '$2y$10$4nvFdzqFRpdgrcDpLOupQ.ZFCPA4Bagey4Ota1PX5gNCk3sjjUhGC', 0, '2024-08-30 17:54:44', NULL, NULL),
-(3, 'Yes', 'Malapit', 'Zxc', 'Zxc', 'Zxc', 'Female', '09876543212', '2004-01-01', 20, 'San Isidro', 'Single', 'San Isidro', '2', 'zxc@gmail.com', 'Qwerty123', '$2y$10$hYs6kcCtafVx1Gg7SaFtje2QBGhaa6VbS6Egj74aO0VaL1FzHNp7y', 1, '2024-08-30 21:07:05', NULL, NULL),
-(4, 'Yes', 'Malapit', 'Tiktalk', 'Tiktalk', 'Tiktalk', 'Male', '09876543212', '2007-12-31', 16, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', '2', 'tiktalkcompany6969@gmail.com', 'tiktalk', '$2y$10$SqnNyGjWhjv/ZOiH0xJ/XesGMF0UvuShU54bMnTIVIkHcvzY8Lw1m', 0, '2024-08-31 15:58:18', NULL, NULL),
-(5, 'Yes', 'Malapit', 'Admin', 'Admin', 'Admin', 'Male', '09876543212', '1985-12-12', 38, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', '2', 'admin@gmail.com', 'admin123', '$2y$10$UO478AZvC84E/gvG/L9zd.hONFYVHwbtz1.7ATL7KpptBfq7efpGi', 2, '2024-08-31 17:13:37', NULL, NULL);
+(1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', '2002-04-29', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'qwerty123@gmail.com', 'Qwerty123', '$2y$10$ulORW5LZ1bhPitfMf16P8OCxXOj2W6ZSg4r2ctiG/BCHssNYIMw6m', 1, '2024-08-30 17:52:50', NULL, NULL),
+(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '1990-04-28', 34, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'pao@gmail.com', 'pao', '$2y$10$4nvFdzqFRpdgrcDpLOupQ.ZFCPA4Bagey4Ota1PX5gNCk3sjjUhGC', 0, '2024-08-30 17:54:44', NULL, NULL),
+(3, 'Yes', 'Malapit', 'Zxc', 'Zxc', 'Zxc', 'Female', '09876543212', '2004-01-01', 20, 'San Isidro', 'Single', 'San Isidro', 'Purok 2', 'zxc@gmail.com', 'Qwerty123', '$2y$10$hYs6kcCtafVx1Gg7SaFtje2QBGhaa6VbS6Egj74aO0VaL1FzHNp7y', 1, '2024-08-30 21:07:05', NULL, NULL),
+(4, 'Yes', 'Malapit', 'Tiktalk', 'Tiktalk', 'Tiktalk', 'Male', '09876543212', '2007-12-31', 16, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'tiktalkcompany6969@gmail.com', 'tiktalk', '$2y$10$SqnNyGjWhjv/ZOiH0xJ/XesGMF0UvuShU54bMnTIVIkHcvzY8Lw1m', 0, '2024-08-31 15:58:18', NULL, NULL),
+(5, 'Yes', 'Malapit', 'Admin', 'Admin', 'Admin', 'Male', '09876543212', '1985-12-12', 38, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', 'Purok 2', 'admin@gmail.com', 'admin123', '$2y$10$UO478AZvC84E/gvG/L9zd.hONFYVHwbtz1.7ATL7KpptBfq7efpGi', 2, '2024-08-31 17:13:37', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -350,6 +393,12 @@ ALTER TABLE `tbl_services`
   ADD PRIMARY KEY (`services_id`);
 
 --
+-- Indexes for table `tbl_terms_conditions`
+--
+ALTER TABLE `tbl_terms_conditions`
+  ADD PRIMARY KEY (`tm_id`);
+
+--
 -- Indexes for table `tbl_typedoc`
 --
 ALTER TABLE `tbl_typedoc`
@@ -395,7 +444,7 @@ ALTER TABLE `tbl_home`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT;
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
@@ -413,13 +462,19 @@ ALTER TABLE `tbl_posts`
 -- AUTO_INCREMENT for table `tbl_requests`
 --
 ALTER TABLE `tbl_requests`
-  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_services`
 --
 ALTER TABLE `tbl_services`
   MODIFY `services_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tbl_terms_conditions`
+--
+ALTER TABLE `tbl_terms_conditions`
+  MODIFY `tm_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_typedoc`

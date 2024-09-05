@@ -287,7 +287,18 @@ session_start();
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="number" name="user_purok" class="form-control" id="user_purok" placeholder="Purok" required>
+                                    <select name="user_purok" class="form-control" id="user_purok" required>
+                                        <option value="" disabled selected>Select Purok</option>
+                                        <option value="Purok 1">Purok 1</option>
+                                        <option value="Purok 2">Purok 2</option>
+                                        <option value="Purok 3">Purok 3</option>
+                                        <option value="Purok 4">Purok 4</option>
+                                        <option value="Purok 5">Purok 5</option>
+                                        <option value="Purok 6">Purok 6</option>
+                                        <option value="Purok 7">Purok 7</option>
+                                        <option value="Purok 8">Purok 8</option>
+                                        <option value="Purok 9">Purok 9</option>
+                                    </select>
                                     <label for="user_purok" class="form-label">Purok</label>
                                 </div>
 
@@ -436,32 +447,20 @@ session_start();
                     </div>
 
                     <div class="container text-start">
-                        <h6 class="fw-bold">1. Introduction</h6>
-                        <p>BayanLink is a Software as a Service (SaaS) platform designed to facilitate communication and engagement within communities. By accessing or using our services, you agree to comply with and be bound by these Terms and Conditions.</p>
+                        <div id="termsContainer">
+                            <!-- Terms and conditions will be dynamically added here -->
+                        </div>
 
-                        <h6 class="fw-bold">2. Use of the Platform</h6>
-                        <p>BayanLink grants you a limited, non-exclusive, non-transferable license to access and use the platform for your community engagement needs, subject to these terms. You agree not to misuse the platform, including but not limited to attempting to gain unauthorized access to our systems or engaging in any activity that disrupts or harms the platform.</p>
 
-                        <h6 class="fw-bold">3. User Responsibilities</h6>
-                        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to provide accurate and complete information when creating your account and to update your information as necessary.</p>
-
-                        <h6 class="fw-bold">4. Privacy and Data Protection</h6>
-                        <p>We take your privacy seriously. Our Privacy Policy outlines how we collect, use, and protect your personal information. By using BayanLink, you consent to the practices described in our Privacy Policy.</p>
-
-                        <h6 class="fw-bold">5. Subscription and Payment</h6>
-                        <p>Access to certain features of BayanLink may require a subscription. By subscribing, you agree to pay the applicable fees as described on our pricing page. Payments are non-refundable, except as required by law.</p>
-
-                        <h6 class="fw-bold">6. Termination</h6>
-                        <p>We reserve the right to suspend or terminate your access to BayanLink at any time, with or without cause, including if you violate these Terms and Conditions. Upon termination, your right to use the platform will immediately cease.</p>
-
-                        <h6 class="fw-bold">7. Changes to the Terms</h6>
-                        <p>We may update these Terms and Conditions from time to time. If we make significant changes, we will notify you by email or through a notice on the platform. Your continued use of BayanLink after any changes indicates your acceptance of the new terms.</p>
-
-                        <h6 class="fw-bold">8. Contact Us</h6>
-                        <p>If you have any questions or concerns about these Terms and Conditions, please contact us:</p>
                         <ul class="list-unstyled">
-                            <li><strong>Phone:</strong> +639182609219, +639286690296, +639875715334</li>
-                            <li><strong>Email:</strong> <a href="mailto:bayanlink.connects@gmail.com">bayanlink.connects@gmail.com</a>, <a href="mailto:sanisidro@gmail.com">sanisidro@gmail.com</a></li>
+                            <li id="tm_contact_number">
+                                <i class="bi bi-telephone-fill"></i>
+                                Loading...
+                            </li>
+                            <li id="tm_contact_email">
+                                <i class="bi bi-envelope-fill"></i>
+                                Loading...
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -642,6 +641,39 @@ session_start();
                 setTimeout(showFaqs, 30000);
             }
 
+            // fetch terms conditions
+            function fetchTermsConditions() {
+                $.ajax({
+                    url: 'includes/show_terms_conditions.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            // Clear the existing content
+                            $('#termsContainer').empty();
+
+                            // Loop through the response and append each term
+                            response.forEach(function(item) {
+                                // Create a new section for each term and append it
+                                var termHtml = `
+                        <div class="term-section">
+                            <p><strong>${item.count}. ${item.tm_title}</strong></p>
+                            <p>${item.tm_content}</p>
+                        </div>
+                    `;
+                                $('#termsContainer').append(termHtml);
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+
             // fetch home
             function fetchHomeContent() {
                 $.ajax({
@@ -712,9 +744,11 @@ session_start();
                                 const phoneNumbers = response.contact_number.map(number => `<i class="bi bi-telephone-fill"></i> ${number}`).join('<br>');
                                 $('#contact_number').html(phoneNumbers);
                                 $('#footer_contact_number').html(phoneNumbers);
+                                $('#tm_contact_number').html(phoneNumbers);
                             } else {
                                 $('#contact_number').html('No phone numbers available');
                                 $('#footer_contact_number').html('No phone numbers available');
+                                $('#tm_contact_number').html('No phone numbers available');
                             }
 
                             // Handle emails
@@ -722,9 +756,11 @@ session_start();
                                 const emails = response.contact_email.map(email => `<i class="bi bi-envelope-fill"></i> ${email}`).join('<br>');
                                 $('#contact_email').html(emails);
                                 $('#footer_contact_email').html(emails);
+                                $('#tm_contact_email').html(emails);
                             } else {
                                 $('#contact_email').html('No email addresses available');
                                 $('#footer_contact_email').html('No email addresses available');
+                                $('#tm_contact_email').html('No email addresses available');
                             }
 
                             // Location
@@ -752,7 +788,7 @@ session_start();
                         if (response.error) {
                             alert(response.error);
                         } else {
-                            $('#about_us').text(response.about_us);
+
                             $('#footer_about_us').text(response.about_us);
                             $('#our_mission').text(response.our_mission);
                         }
@@ -763,12 +799,13 @@ session_start();
                 });
             }
 
-
+            fetchTermsConditions()
             fetchHomeContent();
             fetchServicesContent();
             fetchContactContent()
             fetchAboutMissionContent();
 
+            setInterval(fetchTermsConditions, 1000);
             setInterval(fetchHomeContent, 1000);
             setInterval(fetchServicesContent, 1000);
             setInterval(fetchContactContent, 1000);
@@ -851,9 +888,11 @@ session_start();
                     barangayOptions.forEach(option => {
                         $barangaySelect.append(`<option value="${option}">${option}</option>`);
                     });
+                    $user_city.append('<option value="" disabled selected>Select Municipality</option>');
                     $user_city.append('<option value="San Isidro">San Isidro</option>');
                 } else if (selectedValue === "No") {
                     $barangaySelect.append('<option value="N/A" selected>N/A</option>');
+                    $user_city.append('<option value="" disabled selected>Select Municipality</option>');
                     municipalityOptions.forEach(option => {
                         $user_city.append(`<option value="${option}">${option}</option>`);
                     });
@@ -867,6 +906,12 @@ session_start();
 
             // Initial load
             updateBarangayOptions();
+
+            // for place of birth
+            document.getElementById('user_city').addEventListener('change', function() {
+                var selectedCity = this.value;
+                document.getElementById('placeOfBirth').value = selectedCity + ', Nueva Ecija';
+            });
 
             // Function to handle the navigation between groups
             function navigateGroups(currentGroup, nextGroup, show) {

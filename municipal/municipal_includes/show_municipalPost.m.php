@@ -35,7 +35,7 @@ while ($data = mysqli_fetch_assoc($result)) {
     $get_Time_And_Day = new DateTime($getTime);
 ?>
 
-    <div class="card mb-3 shadow">
+    <div class="card mb-3 shadow border border-2">
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
                 <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">

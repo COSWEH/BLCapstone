@@ -415,9 +415,21 @@ if ($user_role != 0) {
                                     <div class="col">
                                         <?php $user_purok = $_SESSION['user_purok']; ?>
                                         <div class="form-floating mb-3">
-                                            <input id="user_purok" class="form-control" type="text" name="purok" placeholder="Purok" value="<?php echo $user_purok; ?>" required>
+                                            <select id="user_purok" class="form-control" name="purok" required>
+                                                <option value="" disabled>Select Purok</option>
+                                                <option value="Purok 1" <?php if ($user_purok == "Purok 1") echo "selected"; ?>>Purok 1</option>
+                                                <option value="Purok 2" <?php if ($user_purok == "Purok 2") echo "selected"; ?>>Purok 2</option>
+                                                <option value="Purok 3" <?php if ($user_purok == "Purok 3") echo "selected"; ?>>Purok 3</option>
+                                                <option value="Purok 4" <?php if ($user_purok == "Purok 4") echo "selected"; ?>>Purok 4</option>
+                                                <option value="Purok 5" <?php if ($user_purok == "Purok 5") echo "selected"; ?>>Purok 5</option>
+                                                <option value="Purok 6" <?php if ($user_purok == "Purok 6") echo "selected"; ?>>Purok 6</option>
+                                                <option value="Purok 7" <?php if ($user_purok == "Purok 7") echo "selected"; ?>>Purok 7</option>
+                                                <option value="Purok 8" <?php if ($user_purok == "Purok 8") echo "selected"; ?>>Purok 8</option>
+                                                <option value="Purok 9" <?php if ($user_purok == "Purok 9") echo "selected"; ?>>Purok 9</option>
+                                            </select>
                                             <label for="user_purok">Purok</label>
                                         </div>
+
 
                                         <?php $dateOfBirth = $_SESSION['dateOfBirth']; ?>
                                         <div class="form-floating mb-3">

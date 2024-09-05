@@ -62,7 +62,7 @@ if (!$result) {
                     <td><small><?php echo htmlspecialchars($dateOfBirth); ?></small></td>
                     <td><small><?php echo htmlspecialchars($placeOfBirth); ?></small></td>
                     <td><small><?php echo htmlspecialchars($civilStatus); ?></small></td>
-                    <td><button type="button" class="btn btn-sm btn-danger saDelete" data-post-id="<?php echo $superAdminID; ?>" data-bs-toggle="modal" data-bs-target="#deleteSAModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
+                    <td><button type="button" class="btn btn-sm btn-danger saDelete" data-post-id="<?php echo $superAdminID; ?>" data-bs-toggle="modal" data-bs-target="#deleteSAModal">Delete</button></td>
                 </tr>
             <?php
             }

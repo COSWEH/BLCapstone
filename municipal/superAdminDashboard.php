@@ -161,7 +161,7 @@ if ($user_role != 2) {
 
             <!-- Main Content -->
             <main class="col-12 col-md-9 content border rounded p-3">
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Super admin account</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
@@ -173,8 +173,23 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
+                <div class="card mb-3 shadow border border-2 rounded-3">
+                    <div class="ms-3 mt-3">
+                        <h6>Terms and Conditions</h6>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addTMModal">Add</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="overflow-auto" style="height: 300px;">
+                            <!-- terms and conditions content -->
+                            <ul id="termsContainer" class="list-group" aria-live="polite" aria-atomic="true">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- home content-->
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Home</h6>
                         <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit home</button>
@@ -205,7 +220,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- services -->
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Services</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addServicesModal">Add servicess</button>
@@ -217,7 +232,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- contact -->
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Contact</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addContactModal">Add contact</button>
@@ -230,7 +245,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- about us and mission -->
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>About us and our Mission</h6>
                         <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editAboutMissionModal">Edit content</button>
@@ -250,7 +265,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- faqs -->
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>FAQs</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
@@ -263,7 +278,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- logs -->
-                <div class="card mb-3 shadow border-0 rounded-3">
+                <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Logs</h6>
                     </div>
@@ -285,8 +300,8 @@ if ($user_role != 2) {
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <!-- Modal Icon -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-person-plus text-success" style="font-size: 25px;"></i>
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-person-plus text-primary" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal Title -->
@@ -444,14 +459,128 @@ if ($user_role != 2) {
         </div>
     </div>
 
+    <!-- add tm modal -->
+    <div class="modal fade" id="addTMModal" tabindex="-1" aria-labelledby="addTMModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-journal-plus text-primary" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal tm -->
+                    <h4 class="my-3 fw-semibold" id="addTMModalLabel">Add Terms and Conditions</h4>
+                    <p class="text-muted">add the terms and conditions below.</p>
+
+                    <!--  var title = $('#addTM_title').val().trim();
+                var description = $('#addTM_content').val().trim(); -->
+
+                    <!-- services title form -->
+                    <form action="municipal_maintainability/add_terms_conditions.php" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="addTM_title" class="form-control" id="addTM_title" value="" placeholder="Services Title">
+                            <label for="addTM_title" class="form-label">Terms and Conditions Title</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" name="addTM_content" class="form-control" id="addTM_content" placeholder="Services Description" style="height: 250px"></textarea>
+                            <label for="addTM_content" class="form-label">Terms and Condtions Description</label>
+                        </div>
+
+                        <div id="showAddTMError"></div>
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnAddTermsConditions" id="btnAddTermsConditions" class="btn btn-primary">Add terms and conditons</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- update terms conditions modal -->
+    <div class="modal fade" id="updateTMModal" tabindex="-1" aria-labelledby="updateTMModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-success" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal services -->
+                    <h4 class="my-3 fw-semibold" id="updateTMModalLabel">Edit Terms and Conditions</h4>
+                    <p class="text-muted">Update the Terms and Conditions below.</p>
+
+                    <!-- services title form -->
+                    <form action="municipal_maintainability/update_terms_conditions.php" method="POST">
+                        <input type="hidden" id="updateTM_id" value="" name="updateTM_id">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="updateTM_title" class="form-control" id="updateTM_title" value="" placeholder="Terms and Condtions Title">
+                            <label for="updateTM_title" class="form-label">Terms and Condtions Title</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" name="updateTM_content" class="form-control" id="updateTM_content" placeholder="Terms and Condtions Content" style="height: 250px"> </textarea>
+                            <label for="updateTM_content" class="form-label">Terms and Condtions Description</label>
+                        </div>
+
+                        <div id="showUpdateTMError"></div>
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnUpdateTermsConditions" id="btnUpdateTermsConditions" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete tm modal -->
+    <div class="modal fade" id="deleteTMModal" tabindex="-1" aria-labelledby="deleteTMModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <!-- Icon and subTitle -->
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-danger-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-trash text-danger" style="font-size: 25px;"></i>
+                    </div>
+
+                    <!-- Modal tm confirmation -->
+                    <h4 class="my-3 fw-semibold" id="deleteTMModalLabel">Delete Terms and Condtions</h4>
+                    <p class="text-muted">Are you sure you want to delete the following terms and conditions?</p>
+
+                    <!-- tm details -->
+                    <div class="mb-3">
+                        <p><strong>Title:</strong> <span id="deleteTM_title"></span></p>
+                        <p><strong>Content:</strong> <span id="deleteTM_content"></span></p>
+
+                    </div>
+
+                    <!-- Hidden form for deletion -->
+                    <form action="municipal_maintainability/delete_terms_conditions.php" method="POST">
+                        <input type="hidden" id="deleteTM_id" name="deleteTM_id">
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" name="btnDeleteTM" id="btnDeleteTM" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn border border-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- update home content modal -->
     <div class="modal fade" id="editHomeContent" tabindex="-1" aria-labelledby="editHomeContentLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <!-- Icon and Title -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-success" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal Title -->
@@ -507,7 +636,7 @@ if ($user_role != 2) {
                 <div class="modal-body text-center">
                     <!-- Icon and subTitle -->
                     <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                        <i class="bi bi-person-gear text-primary" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal services -->
@@ -543,8 +672,8 @@ if ($user_role != 2) {
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <!-- Icon and subTitle -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-success" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal services -->
@@ -618,7 +747,7 @@ if ($user_role != 2) {
                 <div class="modal-body">
                     <!-- Icon and Title -->
                     <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                        <i class="bi bi-person-vcard text-primary" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal Title -->
@@ -735,8 +864,8 @@ if ($user_role != 2) {
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <!-- Icon and Title -->
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-primary-subtle mx-auto" style="height: 50px; width: 50px;">
-                        <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-success" style="font-size: 25px;"></i>
                     </div>
 
                     <!-- Modal Title and Subtitle -->
@@ -769,7 +898,6 @@ if ($user_role != 2) {
             </div>
         </div>
     </div>
-
 
     <!-- add faqs modal -->
     <div class="modal fade" id="addFaqsModal" tabindex="-1" aria-labelledby="addFaqsModalLabel" aria-hidden="true">
@@ -857,6 +985,127 @@ if ($user_role != 2) {
 
             // Initial call to load messages
             updateLogs();
+
+            function editTermsConditions(tm_id, tm_title, tm_content) {
+                // Set the service ID, title, and description in the modal fields
+                $('#updateTM_id').val(tm_id);
+                $('#updateTM_content').val(tm_content);
+
+                // Update the modal title or any other elements if necessary
+                $('#updateTM_title').val(tm_title);
+
+                // Show the modal
+                $('#updateTMModal').modal('show');
+            }
+
+            function deleteTersConditions(tm_id, tm_title, tm_content) {
+                // Set the service ID, title, and description in the modal fields
+                $('#deleteTM_id').val(tm_id);
+                $('#deleteTM_content').text(tm_content);
+
+                // Update the modal title or any other elements if necessary
+                $('#deleteTM_title').text(tm_title);
+
+                // Show the modal
+                $('#deleteTMModal').modal('show');
+            }
+
+            // fetch terms and conditions
+            $.ajax({
+                url: '../includes/show_terms_conditions.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+
+                        $('#termsContainer').empty();
+
+                        response.forEach(function(item) {
+
+                            var termHtml = `
+                                <li class="list-group-item" role="listitem">
+                                    <p><strong>${item.count}. ${item.tm_title}</strong></p>
+                                    <p>${item.tm_content}</p>
+                                    <button class="btn btn-sm btn-success edit_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">Edit</button>
+                                    <button class="btn btn-sm btn-danger delete_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">Delete</button>
+                                </li>`;
+                            $('#termsContainer').append(termHtml);
+                        });
+
+                        $('.edit_tm').on('click', function() {
+                            let tm_id = $(this).data('id');
+                            let tm_title = $(this).data('title');
+                            let tm_content = $(this).data('content');
+
+                            // Call the editTermsCondition function with the service details
+                            editTermsConditions(tm_id, tm_title, tm_content);
+                        });
+
+                        $('.delete_tm').on('click', function() {
+                            let tm_id = $(this).data('id');
+                            let tm_title = $(this).data('title');
+                            let tm_content = $(this).data('content');
+
+                            // Call the deleteService function with the service details
+                            deleteTersConditions(tm_id, tm_title, tm_content);
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+
+            $('#addTMModal form').on('submit', function(event) {
+                // Clear any previous error messages
+                $('#showAddTMError').empty();
+
+                var title = $('#addTM_title').val().trim();
+                var contetn = $('#addTM_content').val().trim();
+
+                if (title === '' || contetn === '') {
+                    event.preventDefault(); // Prevent form submission
+
+                    // Create the alert HTML
+                    var alertHtml = `
+            <div class="alert alert-warning" role="alert">
+                Both the title and content must be filled out.
+            </div>`;
+
+                    // Insert the alert into the #showAddTMError div
+                    $('#showAddTMError').html(alertHtml);
+
+                    setTimeout(function() {
+                        $('#showAddTMError').empty();
+                    }, 3000);
+                }
+            });
+
+            $('#updateTMModal form').on('submit', function(event) {
+                // Clear any previous error messages
+                $('#showUpdateTMError').empty();
+
+                var title = $('#updateTM_title').val().trim();
+                var content = $('#updateTM_content').val().trim();
+
+                if (title === '' || content === '') {
+                    event.preventDefault(); // Prevent form submission
+
+                    // Create the alert HTML
+                    var alertHtml = `
+            <div class="alert alert-warning" role="alert">
+                Both the title and content must be filled out.
+            </div>`;
+
+                    $('#showUpdateTMError').html(alertHtml);
+
+                    setTimeout(function() {
+                        $('#showUpdateTMError').empty();
+                    }, 3000);
+                }
+            });
 
             // fetch home 
             $.ajax({
@@ -970,18 +1219,18 @@ if ($user_role != 2) {
 
                         // Attach click event listener to all Edit buttons after they are added to the DOM
                         $('.edit-service').on('click', function() {
-                            var serviceId = $(this).data('id');
-                            var serviceTitle = $(this).data('title');
-                            var serviceDesc = $(this).data('desc');
+                            let serviceId = $(this).data('id');
+                            let serviceTitle = $(this).data('title');
+                            let serviceDesc = $(this).data('desc');
 
                             // Call the editService function with the service details
                             editService(serviceId, serviceTitle, serviceDesc);
                         });
 
                         $('.delete-service').on('click', function() {
-                            var serviceId = $(this).data('id');
-                            var serviceTitle = $(this).data('title');
-                            var serviceDesc = $(this).data('desc');
+                            let serviceId = $(this).data('id');
+                            let serviceTitle = $(this).data('title');
+                            let serviceDesc = $(this).data('desc');
 
                             // Call the deleteService function with the service details
                             deleteService(serviceId, serviceTitle, serviceDesc);
@@ -1056,7 +1305,7 @@ if ($user_role != 2) {
                         response.forEach(contact => {
                             html += `
                         <div class="col-md-4 mb-3">
-                            <div class="card shadow border-0 rounded-3">
+                            <div class="card shadow border border-2 rounded-3">
                                 <div class="card-body">
                                     <h6>Phone Number</h6>
                                     <p><small>${contact.contact_number || 'N/A'}</small></p>
@@ -1320,22 +1569,32 @@ function displaySuccessMessage($sessionKey, $title = "Success", $icon = "success
     }
 }
 
+// super admin
 displaySuccessMessage('addSuperAdmin_success_message');
-displaySuccessMessage('update_content_message');
 
+//terms conditions
+displaySuccessMessage('add_tm_message');
+displaySuccessMessage('update_tm_message');
+displaySuccessMessage('delete_tm_message');
+
+//home
+displaySuccessMessage('update_content_message');
 displaySuccessMessage('no_fileds_update_message', 'Oops!', 'warning');
 displaySuccessMessage('update_content_img_error', 'Invalid Image Size', 'error');
 
+//services
 displaySuccessMessage('add_services_message');
 displaySuccessMessage('update_services_message');
 displaySuccessMessage('delete_services_message');
 
-
+//contact
 displaySuccessMessage('add_contact_message');
 displaySuccessMessage('delete_contact_message');
 
+//about mission
 displaySuccessMessage('update_aboutMission_message');
 
+//faqs
 displaySuccessMessage('faq_message');
 displaySuccessMessage('delete_faq_message');
 ?>
