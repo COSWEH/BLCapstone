@@ -21,7 +21,7 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_SESSION['username'];
 
     $req_fname = mysqli_real_escape_string($con, $req_fname);
-    $mname = mysqli_real_escape_string($con, $mname);
+    $req_mname = mysqli_real_escape_string($con, $req_mname);
     $req_lname = mysqli_real_escape_string($con, $req_lname);
     $req_placeOfBirth = mysqli_real_escape_string($con, $req_placeOfBirth);
 
