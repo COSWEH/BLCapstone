@@ -3,7 +3,7 @@ include('../../includes/conn.inc.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('location: ../post.c.php');
+    header('location: ../adminPost.b.php');
     exit;
 }
 

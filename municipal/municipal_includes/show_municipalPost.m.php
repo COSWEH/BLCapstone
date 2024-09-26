@@ -50,7 +50,7 @@ while ($data = mysqli_fetch_assoc($result)) {
     <div class="card mb-3 shadow border border-2">
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
-                <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
+                <img src="../img/municipal-icon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
                 <?php echo "<h6 class='fw-bold'>$municipal</h6>"; ?>
                 <div class="btn-group dropup ms-auto">
                     <button type="button" class="btn btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
@@ -146,7 +146,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                     <div class="card mb-3 shadow border border-0">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
+                                <img src="../img/municipal-icon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
                                 <?php echo "<h6 class='fw-bold'>$municipal</h6>"; ?>
                             </div>
                             <p>
