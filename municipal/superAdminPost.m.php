@@ -113,7 +113,7 @@ if ($user_role != 2) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
                     <button id="theme-toggle" class="btn btn-sm shadow mb-3">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
@@ -155,7 +155,7 @@ if ($user_role != 2) {
             </nav>
 
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
                         <!-- Profile Image -->
@@ -176,14 +176,14 @@ if ($user_role != 2) {
                 </div>
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
-                        <button class="nav-link active flex-fill " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">Municipal</button>
-                        <button class="nav-link flex-fill " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="false">Barangay</button>
+                        <button class="nav-link active flex-fill " id="nav-municipal-tab" data-bs-toggle="tab" data-bs-target="#nav-municipal" type="button" role="tab" aria-controls="nav-municipal" aria-selected="true">Municipal</button>
+                        <button class="nav-link flex-fill " id="nav-brgy-tab" data-bs-toggle="tab" data-bs-target="#nav-brgy" type="button" role="tab" aria-controls="nav-brgy" aria-selected="false">Barangay</button>
                     </div>
                 </nav>
 
                 <div class="tab-content mt-2 p-2 bg-dark-subtle rounded" id="nav-tabContent">
                     <!-- municipal -->
-                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div class="tab-pane fade show active" id="nav-municipal" role="tabpanel" aria-labelledby="nav-municipal-tab" tabindex="0">
                         <!-- show all municipal post -->
                         <div id="municipalPost">
 
@@ -191,7 +191,7 @@ if ($user_role != 2) {
                     </div>
 
                     <!-- barangay -->
-                    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                    <div class="tab-pane fade" id="nav-brgy" role="tabpanel" aria-labelledby="nav-brgy-tab" tabindex="0">
                         <!-- show all barangay post -->
                         <div id="brgyPost">
 
@@ -292,32 +292,33 @@ if ($user_role != 2) {
 
         //load all brgy post from database
         $(document).ready(function() {
-            // brgy post
-            $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
-                $("#brgyPost").html(data);
+
+            $('#nav-brgy-tab').on('click', function(e) {
+                updateBrgyPost();
+
+                console.log('brgy post');
             });
 
-            // municipalPost
-            $.post('municipal_includes/show_municipalPost.m.php', {}, function(data) {
-                $("#municipalPost").html(data);
+            $('#nav-municipal-tab').on('click', function(e) {
+                updateMunicipalPost();
+
+                console.log('municipal post');
             });
 
             function updateBrgyPost() {
                 $.post('municipal_includes/show_brgyPost.m.php', {}, function(data) {
                     $("#brgyPost").html(data);
-                    setTimeout(updateBrgyPost, 30000);
                 });
             }
 
-            function updateMunicpalPost() {
+            function updateMunicipalPost() {
                 $.post('municipal_includes/show_municipalPost.m.php', {}, function(data) {
                     $("#municipalPost").html(data);
                 });
             }
 
             // Initial call to load brgy post
-            updateBrgyPost();
-            updateMunicpalPost();
+            updateMunicipalPost();
 
             let selectedFiles = [];
             document.getElementById("mAddPhotos").addEventListener("change", function(event) {

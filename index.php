@@ -47,21 +47,21 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#home">Home</a>
+                        <a class="nav-link" aria-current="page" href="#home" data-fetch="home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#services">Services</a>
+                        <a class="nav-link" aria-current="page" href="#services" data-fetch="services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#contact">Contact</a>
+                        <a class="nav-link" aria-current="page" href="#contact" data-fetch="contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#about">About</a>
+                        <a class="nav-link" aria-current="page" href="#about" data-fetch="about">About</a>
                     </li>
                 </ul>
 
                 <div class="ms-auto">
-                    <button type="button" class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#registerModal">
+                    <button id="btnNavSignup" type="button" class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#registerModal">
                         Sign up
                     </button>
 
@@ -296,8 +296,6 @@ session_start();
                                         <option value="Purok 5">Purok 5</option>
                                         <option value="Purok 6">Purok 6</option>
                                         <option value="Purok 7">Purok 7</option>
-                                        <option value="Purok 8">Purok 8</option>
-                                        <option value="Purok 9">Purok 9</option>
                                     </select>
                                     <label for="user_purok" class="form-label">Purok</label>
                                 </div>
@@ -421,7 +419,7 @@ session_start();
 
                 <div class="modal-footer border-0">
                     <div class="text-center w-100">
-                        <p class="text-muted">Already have an account? <a class="link-offset-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log in here</a></p>
+                        <p class="text-muted">Already have an account? <a class="link-offset-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login here</a></p>
                     </div>
                 </div>
             </div>
@@ -476,130 +474,124 @@ session_start();
     </div>
 
     <!-- Home Section -->
-    <section id="home" class="container my-5">
-        <div class="row align-items-center">
-            <!-- Content Section -->
-            <div class="col-md-6 text-center text-md-start mb-5 px-lg-5">
-                <!-- title -->
-                <h1 id="home-title" class="display-3  mb-5">Loading...</h1>
-                <!-- subtitle 1 -->
-                <p id="home-subtitle1" class="lead mb-5">Loading...</p>
-                <!-- subtitle 2 -->
-                <p id="home-subtitle2" class="mb-5">Loading...</p>
-                <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#registerModal">
-                    Get started
-                </button>
-
-            </div>
-            <!-- Image Section -->
-            <div class="col-md-6 px-lg-5">
-                <!-- img -->
-                <img id="home-img" src="" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
+    <section id="home" class="text-center text-md-start d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Content Section -->
+                <div class="col-md-6 mb-4 px-lg-5">
+                    <!-- title -->
+                    <h1 id="home-title" class="display-3 text-white mb-4">Loading...</h1>
+                    <!-- subtitle 1 -->
+                    <p id="home-subtitle1" class="lead text-white mb-4">Loading...</p>
+                    <!-- subtitle 2 -->
+                    <p id="home-subtitle2" class="text-white mb-4">Loading...</p>
+                    <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        Get started
+                    </button>
+                </div>
+                <!-- Image Section -->
+                <div class="col-md-6 d-none d-md-block px-lg-5">
+                    <img id="home-img" src="" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
+                </div>
             </div>
         </div>
-        <hr>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="container my-5">
-        <h1 class="text-center mb-4">Our Services</h1>
-        <div id="services_container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <section id="services" class="text-center text-md-start d-flex align-items-center">
+        <div class="container">
+            <h1 class="text-center display-4 text-white mb-4">Our Services</h1>
+            <div id="services_container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+                <!-- Service Cards Will Go Here -->
+            </div>
         </div>
-        <hr>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container my-5">
-        <h1 class="text-center mb-4">Get in Touch with Us!</h1>
-        <p class="text-center mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div>
-                    <h5 class="mb-1">Contact Phone Number</h5>
-                    <p id="contact_number"><i class="bi bi-telephone-fill"></i> Loading...</p>
+    <section id="contact" class="text-center text-md-start d-flex align-items-center">
+        <div class="container">
+            <h1 class="text-center display-4 text-white mb-4">Get in Touch with Us!</h1>
+            <p class="text-center text-white mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div>
+                        <h5 class="mb-1 text-white">Contact Phone Number</h5>
+                        <p id="contact_number" class="text-white"><i class="bi bi-telephone-fill"></i> Loading...</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <h5 class="mb-1">Our Email Address</h5>
-                    <p id="contact_email"><i class="bi bi-envelope-fill"></i> Loading...</p>
+                <div class="col-md-4">
+                    <div>
+                        <h5 class="mb-1 text-white">Our Email Address</h5>
+                        <p id="contact_email" class="text-white"><i class="bi bi-envelope-fill"></i> Loading...</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <h5 class="mb-1">Our Location</h5>
-                    <p id="contact_location"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
+                <div class="col-md-4">
+                    <div>
+                        <h5 class="mb-1 text-white">Our Location</h5>
+                        <p id="contact_location" class="text-white"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="container my-5">
-        <div class="row mb-4">
-            <div class="col">
-                <h1 class="text-center mb-3">About Us</h1>
-                <p id="about_us" class="lead text-center">
-
-                </p>
+    <section id="about" class="text-center text-md-start d-flex align-items-center">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1 class="text-center display-4 text-white mb-3">Our Mission</h1>
+                    <p id="our_mission" class="lead text-white text-center">Loading...</p>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-4">
-            <div class="col">
-                <h1 class="text-center mb-3">Our Mission</h1>
-                <p id="our_mission" class="lead text-center">
-
-                </p>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-12">
-                <h1 class="text-center mb-3">Our Amazing Team</h1>
-                <div class="row g-4">
-                    <div class="col-md-3 text-center">
-                        <img src="img/p1.png" alt="Yvez Santiago" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                        <h6>Yvez Santiago</h6>
-                        <p class="text-muted">Front-end Developer</p>
-                    </div>
-                    <div class="col-md-3 text-center">
-                        <img src="img/p2.png" alt="Kevin Palma" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                        <h6>Kevin Palma</h6>
-                        <p class="text-muted">UI/UX Designer</p>
-                    </div>
-                    <div class="col-md-3 text-center">
-                        <img src="img/p3.png" alt="Vincent Bernardino" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                        <h6>Vincent Bernardino</h6>
-                        <p class="text-muted">Operations Manager</p>
-                    </div>
-                    <div class="col-md-3 text-center">
-                        <img src="img/p4.png" alt="Paolo Ramos" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                        <h6>Paolo Ramos</h6>
-                        <p class="text-muted">Back-end Developer</p>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h1 class="text-center display-4 text-white mb-3">Our Amazing Team</h1>
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-3 text-center">
+                            <img src="img/p1.png" alt="Yvez Santiago" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                            <h6 class="text-white">Yvez Santiago</h6>
+                            <p class="text-muted">Front-end Developer</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <img src="img/p2.png" alt="Kevin Palma" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                            <h6 class="text-white">Kevin Palma</h6>
+                            <p class="text-muted">UI/UX Designer</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <img src="img/p3.png" alt="Vincent Bernardino" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                            <h6 class="text-white">Vincent Bernardino</h6>
+                            <p class="text-muted">Operations Manager</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <img src="img/p4.png" alt="Paolo Ramos" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                            <h6 class="text-white">Paolo Ramos</h6>
+                            <p class="text-muted">Back-end Developer</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr>
+    </section>
 
-        <div class="row mt-5">
-            <div class="col">
-                <h1 class="text-center mb-3">Frequently Asked Questions</h1>
-                <p class="text-center">Find answers to common questions below:</p>
-
-                <div id="faqs">
-
+    <!-- FAQs Section -->
+    <section class="text-center text-md-start d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-center display-4 text-white mb-3">Frequently Asked Questions</h1>
+                    <p class="text-center text-white">Find answers to common questions below:</p>
+                    <div id="faqs" class="text-white">
+                        <!-- FAQ content will go here -->
+                    </div>
                 </div>
-
             </div>
         </div>
-
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-dark text-white text-center py-5">
+    <footer class="bg-dark text-white text-center py-5 border-top">
         <div class="container">
             <div class="row mb-3">
                 <div class="col-md-6 mb-2 mb-md-0">
@@ -640,13 +632,40 @@ session_start();
                 registerBtn.disabled = !this.checked;
             });
 
-            function showFaqs() {
-                $.post("includes/show_faqs.php", {}, function(data) {
-                    $("#faqs").html(data);
-                });
+            $('.nav-link').on('click', function(e) {
 
-                setTimeout(showFaqs, 30000);
-            }
+                // Get the data-fetch attribute to determine which content to fetch
+                const fetchType = $(this).data('fetch');
+
+                // Call the appropriate function based on the clicked link
+                switch (fetchType) {
+                    case 'home':
+                        fetchHomeContent();
+                        console.log('home');
+                        break;
+                    case 'services':
+                        fetchServicesContent();
+                        console.log('services');
+                        break;
+                    case 'contact':
+                        fetchContactContent();
+                        console.log('contact');
+                        break;
+                    case 'about':
+                        fetchAboutMissionContent();
+                        showFaqs();
+                        console.log('about');
+                        console.log('faqs');
+                        break;
+                    default:
+                        console.error('Invalid fetch type:', fetchType);
+                }
+            });
+
+            $('#btnNavSignup').on('click', function(e) {
+                fetchTermsConditions();
+                console.log('terms and conditions');
+            });
 
             // fetch terms conditions
             function fetchTermsConditions() {
@@ -679,7 +698,6 @@ session_start();
                     }
                 });
             }
-
 
             // fetch home
             function fetchHomeContent() {
@@ -806,18 +824,26 @@ session_start();
                 });
             }
 
+            // fetch faqs
+            function showFaqs() {
+                $.post("includes/show_faqs.php", {}, function(data) {
+                    $("#faqs").html(data);
+                });
+            }
+
             fetchTermsConditions()
             fetchHomeContent();
             fetchServicesContent();
             fetchContactContent()
             fetchAboutMissionContent();
-
-            setInterval(fetchTermsConditions, 1000);
-            setInterval(fetchHomeContent, 1000);
-            setInterval(fetchServicesContent, 1000);
-            setInterval(fetchContactContent, 1000);
-            setInterval(fetchAboutMissionContent, 1000);
             showFaqs();
+
+            // a nightmare
+            // setInterval(fetchTermsConditions, 1000);
+            // setInterval(fetchHomeContent, 1000);
+            // setInterval(fetchServicesContent, 1000);
+            // setInterval(fetchContactContent, 1000);
+            // setInterval(fetchAboutMissionContent, 1000);
 
             // JavaScript to handle the steps in the multi-steps form
             const formSteps = document.querySelectorAll('.form-step');

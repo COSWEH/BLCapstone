@@ -25,6 +25,8 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $req_lname = mysqli_real_escape_string($con, $req_lname);
     $req_placeOfBirth = mysqli_real_escape_string($con, $req_placeOfBirth);
 
+    $forOthers = $_POST['requestType'];
+
     if (
         empty($user_id) || empty($req_fname) || empty($req_lname) || empty($req_contactNo) || empty($req_gender) ||
         empty($req_brgy) || empty($req_purok) || empty($req_age) || empty($req_dateOfBirth) || empty($req_placeOfBirth) ||
@@ -38,9 +40,39 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $maxFileSize = 8 * 1024 * 1024; // 8MB in bytes
 
     // Handle the file upload
-    if (isset($_FILES['userValidID']) && isset($_FILES['eSignature'])) {
-        // Handling eSignature file
+    if (isset($_FILES['userValidIDFront']) && isset($_FILES['userValidIDBack']) && isset($_FILES['eSignature'])) {
         $eSignatureFile = $_FILES['eSignature'];
+        $validFrontIDFile = $_FILES['userValidIDFront'];
+        $validBackIDFile = $_FILES['userValidIDBack'];
+
+        if (isset($forOthers) && $forOthers === 'others') {
+            echo $forOthers;
+
+            $authLetter = $_FILES['authLetter'];
+
+            if ($authLetter['error'] !== UPLOAD_ERR_OK) {
+                die('Error: Letter of Consent file upload error.');
+            }
+
+            if ($authLetter['size'] > $maxFileSize) {
+                die('Error: Letter of Consent file size exceeds the limit of 8MB.');
+            }
+
+            $authLetterName = $authLetter['name'];
+            $authLetterTmpName = $authLetter['tmp_name'];
+            $authLetterExtension = strtolower(pathinfo($authLetterName, PATHINFO_EXTENSION));
+            $authLetterBaseName = pathinfo($authLetterName, PATHINFO_FILENAME);
+            $newauthLetterName = $authLetterBaseName . '-[BayanLink-' . uniqid() . '].' . $authLetterExtension;
+
+            $authLetterPath = '../civilian_dbImg/' . $newauthLetterName;
+
+            if (!move_uploaded_file($authLetterTmpName, $authLetterPath)) {
+                die('Error: Failed to move Valid ID file.');
+            }
+        }
+
+
+
         if ($eSignatureFile['error'] !== UPLOAD_ERR_OK) {
             die('Error: E-Signature file upload error.');
         }
@@ -51,33 +83,43 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $eSignatureName = $eSignatureFile['name'];
         $eSignatureTmpName = $eSignatureFile['tmp_name'];
-
         $eSignatureExtension = strtolower(pathinfo($eSignatureName, PATHINFO_EXTENSION));
         $eSignatureBaseName = pathinfo($eSignatureName, PATHINFO_FILENAME);
         $newESignatureName = $eSignatureBaseName . '-[BayanLink-' . uniqid() . '].' . $eSignatureExtension;
 
-        // Handling userValidID file
-        $validIDFile = $_FILES['userValidID'];
-        if (
-            $validIDFile['error'] !== UPLOAD_ERR_OK
-        ) {
+
+        if ($validFrontIDFile['error'] !== UPLOAD_ERR_OK) {
             die('Error: Valid ID file upload error.');
         }
 
-        // Check file size
-        if ($validIDFile['size'] > $maxFileSize) {
+        if ($validFrontIDFile['size'] > $maxFileSize) {
             die('Error: Valid ID file size exceeds the limit of 8MB.');
         }
 
-        $validIDName = $validIDFile['name'];
-        $validIDTmpName = $validIDFile['tmp_name'];
+        $validFrontIDName = $validFrontIDFile['name'];
+        $validFrontIDTmpName = $validFrontIDFile['tmp_name'];
+        $validFrontIDExtension = strtolower(pathinfo($validFrontIDName, PATHINFO_EXTENSION));
+        $validFrontIDBaseName = pathinfo($validFrontIDName, PATHINFO_FILENAME);
+        $newValidFrontIDName = $validFrontIDBaseName . '-[BayanLink-' . uniqid() . '].' . $validFrontIDExtension;
 
-        $validIDExtension = strtolower(pathinfo($validIDName, PATHINFO_EXTENSION));
-        $validIDBaseName = pathinfo($validIDName, PATHINFO_FILENAME);
-        $newValidIDName = $validIDBaseName . '-[BayanLink-' . uniqid() . '].' . $validIDExtension;
+        if ($validBackIDFile['error'] !== UPLOAD_ERR_OK) {
+            die('Error: Valid ID file upload error.');
+        }
+
+        if ($validBackIDFile['size'] > $maxFileSize) {
+            die('Error: Valid ID file size exceeds the limit of 8MB.');
+        }
+
+        $validBackIDName = $validBackIDFile['name'];
+        $validBackIDTmpName = $validBackIDFile['tmp_name'];
+        $validBackIDExtension = strtolower(pathinfo($validBackIDName, PATHINFO_EXTENSION));
+        $validBackIDBaseName = pathinfo($validBackIDName, PATHINFO_FILENAME);
+        $newValidBackIDName = $validBackIDBaseName . '-[BayanLink-' . uniqid() . '].' . $validBackIDExtension;
 
         $eSignaturePath = '../civilian_dbImg/' . $newESignatureName;
-        $validIDPath = '../civilian_dbImg/' . $newValidIDName;
+        $validFrontIDPath = '../civilian_dbImg/' . $newValidFrontIDName;
+        $validBackIDPath = '../civilian_dbImg/' . $newValidBackIDName;
+
 
         // Check directory existence and create if necessary
         if (!is_dir('../civilian_dbImg')) {
@@ -88,11 +130,14 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             );
         }
 
-        // Move uploaded files
+
         if (!move_uploaded_file($eSignatureTmpName, $eSignaturePath)) {
             die('Error: Failed to move E-Signature file.');
         }
-        if (!move_uploaded_file($validIDTmpName, $validIDPath)) {
+        if (!move_uploaded_file($validFrontIDTmpName, $validFrontIDPath)) {
+            die('Error: Failed to move Valid ID file.');
+        }
+        if (!move_uploaded_file($validBackIDTmpName, $validBackIDPath)) {
             die('Error: Failed to move Valid ID file.');
         }
 
@@ -106,9 +151,7 @@ if (isset($_POST['btnReqDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($countUser > 0) {
 
-        // $query = mysqli_query($con, "INSERT INTO `tbl_requests`(`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_brgy`, `req_typeOfDoc`, `req_valid_id`, `req_password`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_lname', '$req_contactNo', '$req_brgy', '$req_typeOfDoc', '$newValidIDName', '$req_password', '$req_status')");
-
-        $query = mysqli_query($con, "INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_mname', '$req_lname', '$req_contactNo', '$req_gender', '$req_brgy', '$req_purok', '$req_age', '$req_dateOfBirth', '$req_placeOfBirth', '$req_civilStatus', '$newESignatureName', '$req_typeOfDoc', '$newValidIDName', '$req_status')");
+        $query = mysqli_query($con, "INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `authLetter`, `req_valid_front_id`, `req_valid_back_id`, `req_status`) VALUES ('', '$user_id', CURRENT_TIMESTAMP, '$req_fname', '$req_mname', '$req_lname', '$req_contactNo', '$req_gender', '$req_brgy', '$req_purok', '$req_age', '$req_dateOfBirth', '$req_placeOfBirth', '$req_civilStatus', '$newESignatureName', '$req_typeOfDoc', '$newauthLetterName', '$newValidFrontIDName', '$newValidBackIDName', '$req_status')");
 
         // add logs
         mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username requested a $req_typeOfDoc', CURRENT_TIMESTAMP,'$user_id')");

@@ -90,7 +90,6 @@ if ($user_role != 0) {
             </div>
 
             <div class="mx-3">
-                <h5 class="mb-3">Menu</h5>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="post.c.php">Post</a>
@@ -111,14 +110,14 @@ if ($user_role != 0) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div class="d-flex justify-content-between mb-3 ">
-                    <button id="theme-toggle" class="btn shadow">
+                    <button id="theme-toggle" class="btn btn-sm shadow">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
                         <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
                     </button>
                     <div class="dropdown ">
-                        <button class="btn shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
+                        <button class="btn btn-sm shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
                             <i class="bi bi-bell-fill"></i>
                             <div id="count-notification">
                             </div>
@@ -157,7 +156,6 @@ if ($user_role != 0) {
                     </h6>
                 </div>
                 <hr>
-                <h3 class="mb-3">Menu</h3>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="post.c.php">Post</a>
@@ -175,7 +173,7 @@ if ($user_role != 0) {
             </nav>
 
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <!-- info -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="card-body">
@@ -530,56 +528,54 @@ if ($user_role != 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // update status to read
-        document.getElementById("notificationButton").addEventListener("click", function() {
-            // Get the notification count element
-            var notificationCountElement = document.querySelector("#count-notification .badge");
-
-            // Check if the notification count is not empty
-            if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
-                // AJAX request to update notifications status to "read"
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "civilian_includes/update_notifications.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        console.log("All notifications updated to read");
-                        // Clear the notification count badge
-                        document.getElementById("count-notification").innerHTML = '';
-                    }
-                };
-                xhr.send();
-            } else {
-                console.log("No unread notifications to update.");
-            }
-        });
-
         $(document).ready(function() {
-            $.post('civilian_includes/show_notification.php', {}, function(data) {
-                $("#notification-content").html(data);
+            // update status to read
+            document.getElementById("notificationButton").addEventListener("click", function() {
+                showNotification();
+
+                // Get the notification count element
+                var notificationCountElement = document.querySelector("#count-notification .badge");
+
+                // Check if the notification count is not empty
+                if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
+                    // AJAX request to update notifications status to "read"
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "civilian_includes/update_notifications.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            console.log("All notifications updated to read");
+                            // Clear the notification count badge
+                            document.getElementById("count-notification").innerHTML = '';
+                        }
+                    };
+                    xhr.send();
+                } else {
+                    console.log("No unread notifications to update.");
+                }
             });
 
-            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                $("#count-notification").html(data);
-            });
-
-            function updateNotification() {
+            function showNotification() {
                 $.post('civilian_includes/show_notification.php', {}, function(data) {
                     $("#notification-content").html(data);
-                    setTimeout(updateNotification, 500);
                 });
             }
 
             function showNotificationCount() {
                 $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                    $("#count-notification").html(data);
-                    setTimeout(showNotificationCount, 500);
+                    // Only update if there's a change to reduce unnecessary DOM manipulation
+                    if ($("#count-notification").html() !== data) {
+                        $("#count-notification").html(data);
+                    }
+                }).fail(function() {
+                    console.error("Failed to retrieve notification count.");
+                }).always(function() {
+                    // Re-run the function after 30 seconds
+                    setTimeout(showNotificationCount, 30000);
                 });
             }
 
-            updateNotification();
             showNotificationCount()
-
 
             const barangayOptions = [
                 "Alua", "Calaba", "Malapit", "Mangga", "Poblacion",

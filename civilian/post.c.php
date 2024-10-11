@@ -92,7 +92,6 @@ if ($user_role != 0) {
             </div>
 
             <div class="mx-3">
-                <h5 class="mb-3">Menu</h5>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link  active-post" aria-current="page" href="post.c.php">Post</a>
@@ -113,14 +112,14 @@ if ($user_role != 0) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div class="d-flex justify-content-between mb-3">
-                    <button id="theme-toggle" class="btn shadow">
+                    <button id="theme-toggle" class="btn btn-sm shadow">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
                         <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
                     </button>
                     <div class="dropdown">
-                        <button class="btn shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
+                        <button class="btn btn-sm shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
                             <i class="bi bi-bell-fill"></i>
                             <div id="count-notification">
                             </div>
@@ -159,7 +158,6 @@ if ($user_role != 0) {
                 </div>
 
                 <hr>
-                <h3 class="mb-3">Menu</h3>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link  active-post" aria-current="page" href="post.c.php">Post</a>
@@ -177,7 +175,7 @@ if ($user_role != 0) {
             </nav>
 
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
                         <button class="nav-link active flex-fill " id="nav-brgy-tab" data-bs-toggle="tab" data-bs-target="#nav-brgy" type="button" role="tab" aria-controls="nav-brgy" aria-selected="true">Barangay</button>
@@ -233,8 +231,10 @@ if ($user_role != 0) {
     <script>
         //load brgy post and municipal post from database
         $(document).ready(function() {
-            // update status to read
+            // update status to read 
             document.getElementById("notificationButton").addEventListener("click", function() {
+                showNotification();
+
                 // Get the notification count element
                 var notificationCountElement = document.querySelector("#count-notification .badge");
 
@@ -257,56 +257,49 @@ if ($user_role != 0) {
                 }
             });
 
-            $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
-                $("#brgyPost").html(data);
+            function showNotification() {
+                $.post('civilian_includes/show_notification.php', {}, function(data) {
+                    $("#notification-content").html(data);
+                });
+            }
+
+            $('#nav-brgy-tab').on('click', function(e) {
+                updateBrgyPost();
             });
 
-            $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
-                $("#municipalPost").html(data);
-            });
-
-            $.post('civilian_includes/show_notification.php', {}, function(data) {
-                $("#notification-content").html(data);
-            });
-
-            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                $("#count-notification").html(data);
+            $('#nav-municipal-tab').on('click', function(e) {
+                updateMunicipalPost();
             });
 
             function updateBrgyPost() {
                 $.post('civilian_includes/show_brgyPost.c.php', {}, function(data) {
                     $("#brgyPost").html(data);
-                    setTimeout(updateBrgyPost, 30000);
                 });
             }
 
             function updateMunicipalPost() {
                 $.post('civilian_includes/show_municipalPost.c.php', {}, function(data) {
                     $("#municipalPost").html(data);
-                    setTimeout(updateMunicipalPost, 30000);
-                });
-            }
-
-            function updateNotification() {
-                $.post('civilian_includes/show_notification.php', {}, function(data) {
-                    $("#notification-content").html(data);
-                    setTimeout(updateNotification, 500);
                 });
             }
 
             function showNotificationCount() {
                 $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                    $("#count-notification").html(data);
-                    setTimeout(showNotificationCount, 500);
+                    // Only update if there's a change to reduce unnecessary DOM manipulation
+                    if ($("#count-notification").html() !== data) {
+                        $("#count-notification").html(data);
+                    }
+                }).fail(function() {
+                    console.error("Failed to retrieve notification count.");
+                }).always(function() {
+                    // Re-run the function after 30 seconds
+                    setTimeout(showNotificationCount, 30000);
                 });
             }
 
-
             // Initial call to load messages
+            showNotificationCount();
             updateBrgyPost();
-            updateMunicipalPost();
-            updateNotification();
-            showNotificationCount()
         });
     </script>
 

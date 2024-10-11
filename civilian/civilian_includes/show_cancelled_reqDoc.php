@@ -48,6 +48,8 @@ while ($data = mysqli_fetch_assoc($result)) {
     $status = $data['req_status'];
     $reasons = $data['req_reasons'];
 
+    $docTypeWithoutBrgy = preg_replace('/\s*\(.*?\)\s*/', '', $docType);
+
     $get_Time_And_Day = new DateTime($reqDate);
     $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
 
@@ -60,7 +62,7 @@ while ($data = mysqli_fetch_assoc($result)) {
         $row = mysqli_fetch_assoc($getDtResult);
 
         $getDocumentTemplate = $row['doc_template'];
-        $pdfFileUrl = '../includes/doc_template/' . $getDocumentTemplate;
+        $pdfFileUrl = 'civilian_includes/doc_template/' . $getDocumentTemplate;
     }
 ?>
 
@@ -69,97 +71,38 @@ while ($data = mysqli_fetch_assoc($result)) {
         <div class="card shadow border border-2">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center text-center ">
-                    <h5 class="card-title mb-0 mx-auto"><?php echo $docType; ?></h5>
-
-                    <button type="button" class="btn btn-sm shadow position-relative btnPreview<?php echo $reqId; ?>" data-doc-type="<?php echo $docType; ?>" data-bs-toggle="modal" data-bs-target="#docTypePreviewModal<?php echo $reqId; ?>">
-                        <i class="bi bi-file-earmark-text-fill fs-5"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
-                            <i class="bi bi-eye-fill fs-4 text-secondary"></i>
-                        </span>
-                    </button>
+                    <h5 class="card-title mb-0 mx-auto"><?php echo $docTypeWithoutBrgy; ?></h5>
+                    <a type="button" class="btn btn-sm shadow position-relative btnPreview<?php echo $reqId; ?>" data-doc-type="<?php echo $docTypeWithoutBrgy; ?>" data-bs-toggle="modal" data-bs-target="#docTypePreviewModal<?php echo $reqId; ?>" data-bs-toggle="tooltip" title="Document Preview">
+                        <i class="bi bi-file-earmark-text-fill"></i>
+                    </a>
+                    <a type="button" class="btn btn-sm shadow ms-2" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $reqId; ?>" data-bs-toggle="tooltip" title="Edit Request">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
                 </div>
                 <hr>
                 <div class="d-flex flex-column mb-2">
                     <div class="d-flex justify-content-between mb-2">
                         <h6>
-                            <i class="bi bi-person-fill me-2">
-                                <span class="ms-2">Name:</span>
-                            </i>
                             <small>
-                                <?php echo $fname . " " . $mname . " " . $lname; ?>
+                                <i class="bi bi-person-fill me-2">
+                                    <span class="ms-2">Name:</span>
+                                </i>
                             </small>
+                            <?php echo $fname . " " . $mname . " " . $lname; ?>
                         </h6>
                     </div>
+
                     <div class="d-flex justify-content-between mb-2">
                         <h6>
-                            <i class="bi bi-phone-fill me-2">
-                                <span class="ms-2">Contact No:</span>
-                            </i>
                             <small>
-                                <?php echo $contactNo; ?>
+                                <i class="bi bi-phone-fill me-2">
+                                    <span class="ms-2">Contact No:</span>
+                                </i>
                             </small>
+                            <?php echo $contactNo; ?>
                         </h6>
                     </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-gender-ambiguous me-2">
-                                <span class="ms-2">Gender:</span>
-                            </i>
-                            <small>
-                                <?php echo $gender; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-house-door-fill me-2">
-                                <span class="ms-2">Barangay:</span>
-                            </i>
-                            <small>
-                                <?php echo $brgy; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-calendar-fill me-2">
-                                <span class="ms-2">Date of Birth:</span>
-                            </i>
-                            <small>
-                                <?php echo $dateOfBirth; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-geo-alt-fill me-2">
-                                <span class="ms-2">Purok:</span>
-                            </i>
-                            <small>
-                                <?php echo $purok; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-geo-alt-fill me-2">
-                                <span class="ms-2">Place of Birth:</span>
-                            </i>
-                            <small>
-                                <?php echo $req_placeOfBirth; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-person-hearts me-2">
-                                <span class="ms-2">Civil Status:</span>
-                            </i>
-                            <small>
-                                <?php echo $req_civilStatus; ?>
-                            </small>
-                        </h6>
-                    </div>
+
                     <div class="d-flex justify-content-between mb-2">
                         <h6>
                             <i class="bi bi-calendar3 me-2">
@@ -170,6 +113,18 @@ while ($data = mysqli_fetch_assoc($result)) {
                             </small>
                         </h6>
                     </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>
+                            <small>
+                                <i class="bi bi-house-door-fill me-2">
+                                    <span class="ms-2">Barangay:</span>
+                                </i>
+                            </small>
+                            <?php echo $brgy; ?>
+                        </h6>
+                    </div>
+
                     <div class="d-flex justify-content-between">
                         <h6>
                             <i class="bi bi-exclamation-triangle-fill">
@@ -218,6 +173,25 @@ while ($data = mysqli_fetch_assoc($result)) {
 
                     <!-- Container for PDF.js -->
                     <div id="pdf-container<?php echo $reqId; ?>" class="row"></div>
+                </div>
+
+                <!-- Modal Close Button -->
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- edit request modal -->
+    <div class="modal fade" id="editModal<?php echo $reqId; ?>" tabindex="-1" aria-labelledby="editModal<?php echo $reqId; ?>Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                        <i class="bi bi-pencil-square text-success" style="font-size: 25px;"></i>
+                    </div>
+
+                    <h5 class="fw-semibold">Edit Document Request</h5>
+
                 </div>
 
                 <!-- Modal Close Button -->

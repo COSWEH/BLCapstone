@@ -175,6 +175,8 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </div>
                     </div>
                 </div>
+                <!-- Modal Close Button -->
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>

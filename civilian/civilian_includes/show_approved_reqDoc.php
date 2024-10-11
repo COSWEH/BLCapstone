@@ -47,6 +47,8 @@ while ($data = mysqli_fetch_assoc($result)) {
     $docType = $data['req_typeOfDoc'];
     $status = $data['req_status'];
 
+    $docTypeWithoutBrgy = preg_replace('/\s*\(.*?\)\s*/', '', $docType);
+
     $get_Time_And_Day = new DateTime($reqDate);
     $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
 
@@ -59,7 +61,7 @@ while ($data = mysqli_fetch_assoc($result)) {
         $row = mysqli_fetch_assoc($getDtResult);
 
         $getDocumentTemplate = $row['doc_template'];
-        $pdfFileUrl = '../includes/doc_template/' . $getDocumentTemplate;
+        $pdfFileUrl = 'civilian_includes/doc_template/' . $getDocumentTemplate;
     }
 ?>
 
@@ -68,158 +70,72 @@ while ($data = mysqli_fetch_assoc($result)) {
         <div class="card shadow border border-2">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center text-center ">
-                    <h5 class="card-title mb-0 mx-auto"><?php echo $docType; ?></h5>
-
-                    <button type="button" class="btn btn-sm shadow position-relative btnPreview<?php echo $reqId; ?>" data-doc-type="<?php echo $docType; ?>" data-bs-toggle="modal" data-bs-target="#docTypePreviewModal<?php echo $reqId; ?>">
-                        <i class="bi bi-file-earmark-text-fill fs-5"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
-                            <i class="bi bi-eye-fill fs-4 text-secondary"></i>
-                        </span>
-                    </button>
+                    <h5 class="card-title mb-0 mx-auto"><?php echo $docTypeWithoutBrgy; ?></h5>
+                    <a type="button" class="btn btn-sm shadow position-relative btnPreview<?php echo $reqId; ?>" data-doc-type="<?php echo $docTypeWithoutBrgy; ?>" data-bs-toggle="modal" data-bs-target="#docTypePreviewModal<?php echo $reqId; ?>" data-bs-toggle="tooltip" title="Document Preview">
+                        <i class="bi bi-file-earmark-text-fill"></i>
+                    </a>
                 </div>
                 <hr>
                 <div class="d-flex flex-column mb-2">
                     <div class="d-flex justify-content-between mb-2">
                         <h6>
-                            <i class="bi bi-person-fill me-2">
-                                <span class="ms-2">Name:</span>
-                            </i>
                             <small>
-                                <?php echo $fname . " " . $mname . " " . $lname; ?>
+                                <i class="bi bi-person-fill me-2">
+                                    <span class="ms-2">Name:</span>
+                                </i>
                             </small>
+                            <?php echo $fname . " " . $mname . " " . $lname; ?>
                         </h6>
                     </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-phone-fill me-2">
-                                <span class="ms-2">Contact No:</span>
-                            </i>
-                            <small>
-                                <?php echo $contactNo; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-gender-ambiguous me-2">
-                                <span class="ms-2">Gender:</span>
-                            </i>
-                            <small>
-                                <?php echo $gender; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-house-door-fill me-2">
-                                <span class="ms-2">Barangay:</span>
-                            </i>
-                            <small>
-                                <?php echo $brgy; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-calendar-fill me-2">
-                                <span class="ms-2">Date of Birth:</span>
-                            </i>
-                            <small>
-                                <?php echo $dateOfBirth; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-geo-alt-fill me-2">
-                                <span class="ms-2">Purok:</span>
-                            </i>
-                            <small>
-                                <?php echo $purok; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-geo-alt-fill me-2">
-                                <span class="ms-2">Place of Birth:</span>
-                            </i>
-                            <small>
-                                <?php echo $req_placeOfBirth; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-person-hearts me-2">
-                                <span class="ms-2">Civil Status:</span>
-                            </i>
-                            <small>
-                                <?php echo $req_civilStatus; ?>
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6>
-                            <i class="bi bi-calendar3 me-2">
-                                <span class="ms-2">Age:</span>
-                            </i>
-                            <small>
-                                <?php echo $age; ?> years old
-                            </small>
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <?php
-                        if ($status == "Approved") {
-                            $percentage = 100;
-                        } elseif ($status == "Processing") {
-                            $percentage = 50;
-                        } else {
-                            $percentage = 0;
-                        }
-                        ?>
-                        <div class="container">
-                            <div class="progress" role="progressbar" aria-label="Progress bar" style="width: 100%;" aria-valuenow="<?php echo $percentage; ?>" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" style="width: <?php echo $percentage; ?>%"></div>
-                            </div>
 
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="text-center position-relative">
-                                    <?php
-                                    if ($percentage >= 0) {
-                                        echo '<i class="bi bi-check-circle-fill text-success"></i>';
-                                        echo '<div><small class="text-success">Pending</small></div>';
-                                    } else {
-                                        echo '<i class="bi bi-check-circle"></i>';
-                                        echo '<div><small>Pending</small></div>';
-                                    }
-                                    ?>
-                                </div>
-                                <div class="text-center position-relative">
-                                    <?php
-                                    if ($percentage >= 50) {
-                                        echo '<i class="bi bi-check-circle-fill text-success"></i>';
-                                        echo '<div><small class="text-success">Processing</small></div>';
-                                    } else {
-                                        echo '<i class="bi bi-check-circle"></i>';
-                                        echo '<div><small>Processing</small></div>';
-                                    }
-                                    ?>
-                                </div>
-                                <div class="text-center position-relative">
-                                    <?php
-                                    if ($percentage >= 100) {
-                                        echo '<i class="bi bi-check-circle-fill text-success"></i>';
-                                        echo '<div><small class="text-success">Approved</small></div>';
-                                    } else {
-                                        echo '<i class="bi bi-check-circle"></i>';
-                                        echo '<div><small>Approved</small></div>';
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>
+                            <small>
+                                <i class="bi bi-phone-fill me-2">
+                                    <span class="ms-2">Contact No:</span>
+                                </i>
+                            </small>
+                            <?php echo $contactNo; ?>
+                        </h6>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>
+                            <small>
+                                <i class="bi bi-calendar3 me-2">
+                                    <span class="ms-2">Age:</span>
+                                </i>
+                            </small>
+                            <?php echo $age; ?> years old
+                        </h6>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>
+                            <small>
+                                <i class="bi bi-house-door-fill me-2">
+                                    <span class="ms-2">Barangay:</span>
+                                </i>
+                            </small>
+                            <?php echo $brgy; ?>
+                        </h6>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6>
+                            <small>
+                                <i class="bi bi-check-circle-fill">
+                                    <span class="ms-2">Status:</span>
+                                </i>
+                            </small>
+                            <span class="text-success">
+                                <?php echo $status; ?>
+                            </span>
+                            <span class="text-body-tertiary">
+                                (You can now go to your respective Barangay halls to pickup your request document)
+                            </span>
+                        </h6>
+
                     </div>
                 </div>
             </div>

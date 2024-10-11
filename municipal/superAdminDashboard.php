@@ -117,7 +117,7 @@ if ($user_role != 2) {
 
     <div class="container-fluid p-3">
         <div class="row g-3">
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
                     <button id="theme-toggle" class="btn btn-sm shadow mb-3 theme-toggle">
                         <i class="bi bi-moon-fill moon-icon" id="moon-icon"></i>
@@ -160,9 +160,9 @@ if ($user_role != 2) {
             </nav>
 
             <!-- Main Content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="card mb-3 shadow border border-2 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Super admin account</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
                     </div>
@@ -174,7 +174,7 @@ if ($user_role != 2) {
                 </div>
 
                 <div class="card mb-3 shadow border border-2 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Terms and Conditions</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addTMModal">Add</button>
                     </div>
@@ -221,7 +221,7 @@ if ($user_role != 2) {
 
                 <!-- services -->
                 <div class="card mb-3 shadow border border-2 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Services</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addServicesModal">Add servicess</button>
                     </div>
@@ -233,7 +233,7 @@ if ($user_role != 2) {
 
                 <!-- contact -->
                 <div class="card mb-3 shadow border border-2 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Contact</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addContactModal">Add contact</button>
                     </div>
@@ -266,7 +266,7 @@ if ($user_role != 2) {
 
                 <!-- faqs -->
                 <div class="card mb-3 shadow border border-2 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>FAQs</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
                     </div>
@@ -356,8 +356,6 @@ if ($user_role != 2) {
                                         <option value="Purok 5">Purok 5</option>
                                         <option value="Purok 6">Purok 6</option>
                                         <option value="Purok 7">Purok 7</option>
-                                        <option value="Purok 8">Purok 8</option>
-                                        <option value="Purok 9">Purok 9</option>
                                     </select>
                                     <label for="user_purok" class="form-label">Purok</label>
                                 </div>
@@ -996,7 +994,6 @@ if ($user_role != 2) {
             function updateLogs() {
                 $.post('municipal_includes/showAllLogs.php', {}, function(data) {
                     $("#showLogs").html(data);
-                    setTimeout(updateLogs, 10000);
                 });
             }
 
@@ -1046,7 +1043,7 @@ if ($user_role != 2) {
                                     <p><strong>${item.count}. ${item.tm_title}</strong></p>
                                     <p>${item.tm_content}</p>
                                     <button class="btn btn-sm btn-success edit_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">Edit</button>
-                                    <button class="btn btn-sm btn-danger delete_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">Delete</button>
+                                    <button class="btn btn-sm btn-danger delete_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}"><i class=" bi bi-trash"></i></button>
                                 </li>`;
                             $('#termsContainer').append(termHtml);
                         });
@@ -1225,7 +1222,7 @@ if ($user_role != 2) {
                             <p class="card-text small">${service.services_desc}</p>
 
                              <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
-                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Delete</button>
+                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}"><i class=" bi bi-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -1330,7 +1327,7 @@ if ($user_role != 2) {
                                     <p><small>${contact.contact_email || 'N/A'}</small></p>
                                     <h6>Location</h6>
                                     <p><small>${contact.contact_location || 'N/A'}</small></p>
-                                     <button class="btn btn-danger btn-sm shadow" data-id="${contact.contact_id}" data-number="${contact.contact_number}" data-email="${contact.contact_email}" data-location="${contact.contact_location}" data-bs-toggle="modal" data-bs-target="#deleteContactModal">Delete</button>
+                                     <button class="btn btn-danger btn-sm shadow" data-id="${contact.contact_id}" data-number="${contact.contact_number}" data-email="${contact.contact_email}" data-location="${contact.contact_location}" data-bs-toggle="modal" data-bs-target="#deleteContactModal"><i class=" bi bi-trash"></i></button>
                                 </div>
                             </div>
                         </div>`;

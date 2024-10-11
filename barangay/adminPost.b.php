@@ -91,7 +91,6 @@ if ($user_role != 1) {
             </div>
 
             <div class="mx-3">
-                <h5 class="mb-3">Menu</h5>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active-post" aria-current="page" href="adminPost.b.php">Post</a>
@@ -115,7 +114,7 @@ if ($user_role != 1) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
                     <button id="theme-toggle" class="btn btn-sm shadow mb-3">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
@@ -137,7 +136,6 @@ if ($user_role != 1) {
                         </h6>
                     </div>
                     <hr>
-                    <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active-post" aria-current="page" href="adminPost.b.php">Post</a>
@@ -158,7 +156,7 @@ if ($user_role != 1) {
                 <button type="button" class="btn mt-3 w-100 rounded-5 mt-auto" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
             </nav>
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <!-- create post -->
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
@@ -284,21 +282,17 @@ if ($user_role != 1) {
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('postContent').addEventListener('input', function() {
-            this.style.height = 'auto'; // Reset height first to calculate new height
-            this.style.height = (this.scrollHeight) + 'px'; // Set new height based on scrollHeight
-        });
 
+    <script>
         //load all brgy post from database
         $(document).ready(function() {
-            // brgyPost
-            $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
-                $("#brgyPost").html(data);
+
+            $('#nav-brgy-tab').on('click', function(e) {
+                updateBrgyPost();
             });
-            // municipalPost
-            $.post('brgy_includes/show_municipalPost.b.php', {}, function(data) {
-                $("#municipalPost").html(data);
+
+            $('#nav-municipal-tab').on('click', function(e) {
+                updateMunicipalPost();
             });
 
             function updateBrgyPost() {
@@ -307,16 +301,19 @@ if ($user_role != 1) {
                 });
             }
 
-            function updateMunicpalPost() {
+            function updateMunicipalPost() {
                 $.post('brgy_includes/show_municipalPost.b.php', {}, function(data) {
                     $("#municipalPost").html(data);
-                    setTimeout(updateMunicpalPost, 30000);
                 });
             }
 
             // Initial call to load messages
             updateBrgyPost();
-            updateMunicpalPost();
+
+            document.getElementById('postContent').addEventListener('input', function() {
+                this.style.height = 'auto'; // Reset height first to calculate new height
+                this.style.height = (this.scrollHeight) + 'px'; // Set new height based on scrollHeight
+            });
 
             // show selected photos to the create post modal
             let selectedFiles = [];

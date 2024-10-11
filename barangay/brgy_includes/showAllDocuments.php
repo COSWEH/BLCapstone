@@ -7,7 +7,9 @@ if (empty($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] != 'POST') {
     exit;
 }
 
-$getDocType = "SELECT * FROM `tbl_typedoc`";
+$brgyDoc = $_SESSION['user_brgy'];
+
+$getDocType = "SELECT * FROM `tbl_typedoc` WHERE `brgydoc` = '$brgyDoc'";
 $result = mysqli_query($con, $getDocType);
 
 if (!$result) {
@@ -29,11 +31,12 @@ if (!$result) {
             while ($data = mysqli_fetch_assoc($result)) {
                 $id = $data['id'];
                 $docType = $data['docType'];
+                $docTypeWithoutBrgy = preg_replace('/\s*\(.*?\)\s*/', '', $docType);
             ?>
                 <tr>
                     <td><small><?php echo htmlspecialchars($id); ?></small></td>
-                    <td><small><?php echo htmlspecialchars($docType); ?></small></td>
-                    <td><button type="button" class="btn btn-sm btn-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal">Delete <i class="bi bi-trash ms-2"></i></button></td>
+                    <td><small><?php echo htmlspecialchars($docTypeWithoutBrgy); ?></small></td>
+                    <td><button type="button" class="btn btn-sm btn-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal"><i class="bi bi-trash"></i></button></td>
                 </tr>
 
             <?php

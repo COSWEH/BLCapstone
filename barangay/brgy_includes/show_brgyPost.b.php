@@ -543,9 +543,9 @@ while ($data = mysqli_fetch_assoc($result)) {
 
             console.log(p_id);
 
-            $.post('brgy_includes/deletePost.b.php', {
-                value: p_id
-            });
+            // $.post('brgy_includes/deletePost.b.php', {
+            //     value: p_id
+            // });
         });
     });
 </script>

@@ -89,7 +89,6 @@ if ($user_role != 1) {
             </div>
 
             <div class="mx-3">
-                <h5 class="mb-3">Menu</h5>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="adminPost.b.php">Post</a>
@@ -113,7 +112,7 @@ if ($user_role != 1) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
                     <button id="theme-toggle" class="btn btn-sm shadow mb-3">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
@@ -136,7 +135,6 @@ if ($user_role != 1) {
                         </h6>
                     </div>
                     <hr>
-                    <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="adminPost.b.php">Post</a>
@@ -157,7 +155,7 @@ if ($user_role != 1) {
             </nav>
 
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Admin account</h6>
@@ -250,8 +248,6 @@ if ($user_role != 1) {
                                         <option value="Purok 5">Purok 5</option>
                                         <option value="Purok 6">Purok 6</option>
                                         <option value="Purok 7">Purok 7</option>
-                                        <option value="Purok 8">Purok 8</option>
-                                        <option value="Purok 9">Purok 9</option>
                                     </select>
                                     <label for="user_purok" class="form-label">Purok</label>
                                 </div>
@@ -504,30 +500,28 @@ if ($user_role != 1) {
 </html>
 <?php
 // Function to display SweetAlert messages
-function displayAlert($type, $message, $title)
+function displaySuccessMessage($sessionKey, $title = "Success", $icon = "success")
 {
-    echo '<script>
-            Swal.fire({
-                title: "' . $title . '",
-                text: "' . $message . '",
-                icon: "' . $type . '",
-            });
-        </script>';
-}
-
-// Define session messages and their configurations
-$alerts = [
-    'delete_message' => ['type' => 'success', 'title' => 'Success'],
-    'addAdmin_success_message' => ['type' => 'success', 'title' => 'Success'],
-    'delete_docType_message' => ['type' => 'success', 'title' => 'Success'],
-    'add_doc_message' => ['type' => 'success', 'title' => 'Success']
-];
-
-// Iterate over each session key and display the alert if set
-foreach ($alerts as $sessionKey => $alertConfig) {
     if (isset($_SESSION[$sessionKey])) {
-        displayAlert($alertConfig['type'], $_SESSION[$sessionKey], $alertConfig['title']);
+        echo '<script>
+                Swal.fire({
+                    title: "' . $title . '",
+                    text: "' . $_SESSION[$sessionKey] . '",
+                    icon: "' . $icon . '",
+                });
+            </script>';
         unset($_SESSION[$sessionKey]);
     }
 }
+
+displaySuccessMessage('delete_message');
+displaySuccessMessage('addAdmin_success_message');
+displaySuccessMessage('delete_docType_message');
+displaySuccessMessage('add_doc_message');
+displaySuccessMessage('required_add_doc_message', 'Oops', 'warning');
+displaySuccessMessage('pdf_only_add_doc_message', 'Oops', 'warning');
+displaySuccessMessage('error_upload_add_doc_message', 'Error', 'error');
+displaySuccessMessage('failed_add_doc_message', 'Failed', 'error');
+displaySuccessMessage('alrExist_add_doc_message', 'Oops', 'warning');
+
 ?>

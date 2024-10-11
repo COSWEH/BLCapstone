@@ -89,7 +89,6 @@ if ($user_role != 1) {
             </div>
 
             <div class="mx-3">
-                <h5 class="mb-3">Menu</h5>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="adminPost.b.php">Post</a>
@@ -113,7 +112,7 @@ if ($user_role != 1) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div>
                     <button id="theme-toggle" class="btn btn-sm shadow mb-3">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
@@ -136,7 +135,6 @@ if ($user_role != 1) {
                         </h6>
                     </div>
                     <hr>
-                    <h3 class="mb-3">Menu</h3>
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="adminPost.b.php">Post</a>
@@ -157,7 +155,7 @@ if ($user_role != 1) {
             </nav>
 
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="form-floating mb-3 shadow border border-3 rounded-3">
                     <input type="text" class="form-control" id="searchByName" name="search" placeholder="Search" required>
                     <label for="search" class="form-label">

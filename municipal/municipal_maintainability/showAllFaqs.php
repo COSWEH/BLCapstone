@@ -42,7 +42,7 @@ if (!$result) {
                     <td><small><?php echo htmlspecialchars($faq_question); ?></small></td>
                     <td><small><?php echo htmlspecialchars($faq_answer); ?></small></td>
                     <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
-                    <td><button type="button" class="btn btn-sm btn-danger faqsDelete" data-post-id="<?php echo $faq_id; ?>" data-bs-toggle="modal" data-bs-target="#deleteFaqsModal">Delete <i class=" bi bi-trash ms-2"></i></button></td>
+                    <td><button type="button" class="btn btn-sm btn-danger faqsDelete" data-post-id="<?php echo $faq_id; ?>" data-bs-toggle="modal" data-bs-target="#deleteFaqsModal"><i class=" bi bi-trash"></i></button></td>
                 </tr>
             <?php
             }

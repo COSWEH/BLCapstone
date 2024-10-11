@@ -89,7 +89,6 @@ if ($user_role != 0) {
             </div>
 
             <div class="mx-3">
-                <h5 class="mb-3">Menu</h5>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="post.c.php">Post</a>
@@ -110,14 +109,14 @@ if ($user_role != 0) {
     <div class="container-fluid p-3">
         <div class="row g-3">
             <!-- left -->
-            <nav class="col-md-3 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar border rounded p-3 bg-body-tertiary d-flex flex-column">
                 <div class="d-flex justify-content-between mb-3">
-                    <button id="theme-toggle" class="btn shadow">
+                    <button id="theme-toggle" class="btn btn-sm shadow">
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
                         <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
                     </button>
                     <div class="dropdown">
-                        <button class="btn shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
+                        <button class="btn btn-sm shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
                             <i class="bi bi-bell-fill"></i>
                             <div id="count-notification">
                             </div>
@@ -155,7 +154,6 @@ if ($user_role != 0) {
                     </h6>
                 </div>
                 <hr>
-                <h3 class="mb-3">Menu</h3>
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="post.c.php">Post</a>
@@ -173,7 +171,7 @@ if ($user_role != 0) {
             </nav>
 
             <!-- main content -->
-            <main class="col-12 col-md-9 content border rounded p-3">
+            <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="card mb-3 shadow p-3">
                     <div class="d-flex align-items-center">
                         <!-- Profile Image -->
@@ -185,7 +183,7 @@ if ($user_role != 0) {
                             echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                         }
                         ?>
-                        <button type="button" class="btn btn-lg ms-3  rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#reqDocModal">
+                        <button id="requestDoc" type="button" class="btn btn-lg ms-3  rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#reqDocModal">
                             <i class="bi bi-file-earmark-text-fill me-2"></i>
                             Request document
                         </button>
@@ -254,7 +252,6 @@ if ($user_role != 0) {
                     </div>
                 </div>
 
-
             </main>
         </div>
     </div>
@@ -277,6 +274,8 @@ if ($user_role != 0) {
                         <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST" enctype="multipart/form-data">
                             <!-- Step 1: Request For and Document Type -->
                             <div id="step1" class="form-step">
+                                <div id="authLetterSizeError"></div>
+
                                 <div class="text-start">
                                     <label class="form-label">Request For :</label>
                                     <div class="row mb-3">
@@ -300,6 +299,11 @@ if ($user_role != 0) {
                                         <!-- show all document type from database -->
                                     </select>
                                     <label for="documentType">Document Type</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input id="authLetter" class="form-control" type="file" name="authLetter" accept=".jpg, jpeg, .png" hidden required>
+                                    <label id="lblauthLetter" for="authLetter" class="form-label" hidden>Authorization Letter</label>
                                 </div>
 
                                 <div class="row">
@@ -504,18 +508,28 @@ if ($user_role != 0) {
                                 <h4 class="h4  mb-3">Final Information</h4>
                                 <div class="row">
                                     <div class="col">
+
+                                        <div id="errorMessages"></div>
+                                        <div id="esImgSizeError"></div>
+                                        <div id="viImgSizeErrorFront"></div>
+                                        <div id="viImgSizeErrorBack"></div>
+
                                         <div class="form-floating mb-3">
                                             <input id="eSignature" class="form-control" type="file" name="eSignature" accept=".jpg, jpeg, .png" required>
                                             <label for="eSignature" class="form-label">E-Signature</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input id="userValidID" class="form-control" type="file" name="userValidID" accept=".jpg, jpeg, .png" required>
-                                            <label for="userValidID" class="form-label">Valid ID</label>
+                                            <input id="userValidIDFront" class="form-control" type="file" name="userValidIDFront" accept=".jpg, jpeg, .png" required>
+                                            <label for="userValidIDFront" class="form-label">Front Valid ID</label>
                                         </div>
+                                        <div class="form-floating mb-3">
+                                            <input id="userValidIDBack" class="form-control" type="file" name="userValidIDBack" accept=".jpg, jpeg, .png" required>
+                                            <label for="userValidIDBack" class="form-label">Back Valid ID</label>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div id="esImgSizeError"></div>
-                                <div id="viImgSizeError"></div>
+
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <button type="button" class="btn btn-secondary  w-100" id="prevBtn5">
@@ -565,199 +579,300 @@ if ($user_role != 0) {
         </div>
     </div>
 
+    <script src="civilianMaterials/script.c.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        document.getElementById("notificationButton").addEventListener("click", function() {
-            // Get the notification count element
-            var notificationCountElement = document.querySelector("#count-notification .badge");
-
-            // Check if the notification count is not empty
-            if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
-                // AJAX request to update notifications status to "read"
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "civilian_includes/update_notifications.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        console.log("All notifications updated to read");
-                        // Clear the notification count badge
-                        document.getElementById("count-notification").innerHTML = '';
-                    }
-                };
-                xhr.send();
-            } else {
-                console.log("No unread notifications to update.");
-            }
-        });
-
-        document.getElementById('dateOfBirth').addEventListener('input', function() {
-            const dob = new Date(this.value);
-            const today = new Date();
-            let age = today.getFullYear() - dob.getFullYear();
-            const monthDifference = today.getMonth() - dob.getMonth();
-
-            // Adjust if the birthday hasn't occurred yet this year
-            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
-                age--;
-            }
-
-            // Update the age input field
-            document.getElementById('user_age').value = age;
-        });
-
-
-        // es img
-        document.getElementById("eSignature").addEventListener("change", function(event) {
-            const fileInput = event.target;
-            const files = fileInput.files;
-            const maxSize = 8 * 1024 * 1024; // 8MB in bytes
-            const validFiles = [];
-
-            // Loop through each file in the FileList
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i]; // Get the individual file
-                // Check if the file size exceeds 8MB
-                if (file.size > maxSize) {
-                    $('#esImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
-                    console.log("Skipped image (too large):", file.name);
-
-                    // Clear the error message after 3 seconds
-                    setTimeout(() => {
-                        $('#esImgSizeError').html('');
-                    }, 3000);
-
-                    // Skip this file
-                    continue;
-                }
-
-                // Log the file's name and size
-                console.log("File Name:", file.name);
-                console.log("File Size:", file.size); // Size in bytes
-
-                // Add valid files to the array
-                validFiles.push(file);
-            }
-
-            // Clear the input field and reassign valid files
-            if (validFiles.length === 0) {
-                fileInput.value = ''; // Clear the file input if no valid files
-            } else {
-                // Create a new DataTransfer object to assign the valid files
-                const dataTransfer = new DataTransfer();
-                validFiles.forEach(file => dataTransfer.items.add(file));
-                fileInput.files = dataTransfer.files; // Update the file input with valid files
-            }
-        });
-
-        // uv img
-        document.getElementById("userValidID").addEventListener("change", function(event) {
-            const fileInput = event.target;
-            const files = fileInput.files;
-            const maxSize = 8 * 1024 * 1024; // 8MB in bytes
-            const validFiles = [];
-
-            // Loop through each file in the FileList
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i]; // Get the individual file
-                // Check if the file size exceeds 8MB
-                if (file.size > maxSize) {
-                    $('#viImgSizeError').html('<div class="alert alert-danger text-center" role="alert">Image is too large</div>');
-                    console.log("Skipped image (too large):", file.name);
-
-                    // Clear the error message after 3 seconds
-                    setTimeout(() => {
-                        $('#viImgSizeError').html('');
-                    }, 3000);
-
-                    // Skip this file
-                    continue;
-                }
-
-                // Log the file's name and size
-                console.log("File Name:", file.name);
-                console.log("File Size:", file.size); // Size in bytes
-
-                // Add valid files to the array
-                validFiles.push(file);
-            }
-
-            // Clear the input field and reassign valid files
-            if (validFiles.length === 0) {
-                fileInput.value = ''; // Clear the file input if no valid files
-            } else {
-                // Create a new DataTransfer object to assign the valid files
-                const dataTransfer = new DataTransfer();
-                validFiles.forEach(file => dataTransfer.items.add(file));
-                fileInput.files = dataTransfer.files; // Update the file input with valid files
-            }
-        });
-
-
         $(document).ready(function() {
+            document.getElementById("notificationButton").addEventListener("click", function() {
+                console.log('notif');
+                showNotification();
+
+                // Get the notification count element
+                var notificationCountElement = document.querySelector("#count-notification .badge");
+
+                // Check if the notification count is not empty
+                if (notificationCountElement && notificationCountElement.innerText.trim() !== "") {
+                    // AJAX request to update notifications status to "read"
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "civilian_includes/update_notifications.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            console.log("All notifications updated to read");
+                            // Clear the notification count badge
+                            document.getElementById("count-notification").innerHTML = '';
+                        }
+                    };
+                    xhr.send();
+                } else {
+                    console.log("No unread notifications to update.");
+                }
+            });
+
+            document.getElementById('dateOfBirth').addEventListener('input', function() {
+                const dob = new Date(this.value);
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const monthDifference = today.getMonth() - dob.getMonth();
+
+                // Adjust if the birthday hasn't occurred yet this year
+                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+
+                // Update the age input field
+                document.getElementById('user_age').value = age;
+            });
+
+            //lc img
+            document.getElementById("authLetter").addEventListener("change", function(event) {
+                const fileInput = event.target;
+                const files = fileInput.files;
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+                const validFiles = [];
+
+                // Loop through each file in the FileList
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i]; // Get the individual file
+                    // Check if the file size exceeds 8MB
+                    if (file.size > maxSize) {
+                        $('#authLetterSizeError').html('<div class="alert alert-warning text-center" role="alert">Image is too large</div>');
+                        console.log("Skipped image (too large):", file.name);
+
+                        // Clear the error message after 3 seconds
+                        setTimeout(() => {
+                            $('#authLetterSizeError').html('');
+                        }, 3000);
+
+                        // Skip this file
+                        continue;
+                    }
+
+                    // Log the file's name and size
+                    console.log("File Name:", file.name);
+                    console.log("File Size:", file.size); // Size in bytes
+
+                    // Add valid files to the array
+                    validFiles.push(file);
+                }
+
+                // Clear the input field and reassign valid files
+                if (validFiles.length === 0) {
+                    fileInput.value = ''; // Clear the file input if no valid files
+                } else {
+                    // Create a new DataTransfer object to assign the valid files
+                    const dataTransfer = new DataTransfer();
+                    validFiles.forEach(file => dataTransfer.items.add(file));
+                    fileInput.files = dataTransfer.files; // Update the file input with valid files
+                }
+            });
+
+            // es img
+            document.getElementById("eSignature").addEventListener("change", function(event) {
+                const fileInput = event.target;
+                const files = fileInput.files;
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+                const validFiles = [];
+
+                // Loop through each file in the FileList
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i]; // Get the individual file
+                    // Check if the file size exceeds 8MB
+                    if (file.size > maxSize) {
+                        $('#esImgSizeError').html('<div class="alert alert-warning text-center" role="alert">Image is too large</div>');
+                        console.log("Skipped image (too large):", file.name);
+
+                        // Clear the error message after 3 seconds
+                        setTimeout(() => {
+                            $('#esImgSizeError').html('');
+                        }, 3000);
+
+                        // Skip this file
+                        continue;
+                    }
+
+                    // Log the file's name and size
+                    console.log("File Name:", file.name);
+                    console.log("File Size:", file.size); // Size in bytes
+
+                    // Add valid files to the array
+                    validFiles.push(file);
+                }
+
+                // Clear the input field and reassign valid files
+                if (validFiles.length === 0) {
+                    fileInput.value = ''; // Clear the file input if no valid files
+                } else {
+                    // Create a new DataTransfer object to assign the valid files
+                    const dataTransfer = new DataTransfer();
+                    validFiles.forEach(file => dataTransfer.items.add(file));
+                    fileInput.files = dataTransfer.files; // Update the file input with valid files
+                }
+            });
+
+            // uv img
+            document.getElementById("userValidIDFront").addEventListener("change", function(event) {
+                const fileInput = event.target;
+                const files = fileInput.files;
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+                const validFiles = [];
+
+                // Loop through each file in the FileList
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i]; // Get the individual file
+                    // Check if the file size exceeds 8MB
+                    if (file.size > maxSize) {
+                        $('#viImgSizeErrorFront').html('<div class="alert alert-warning text-center" role="alert">Image is too large</div>');
+                        console.log("Skipped image (too large):", file.name);
+
+                        // Clear the error message after 3 seconds
+                        setTimeout(() => {
+                            $('#viImgSizeErrorFront').html('');
+                        }, 3000);
+
+                        // Skip this file
+                        continue;
+                    }
+
+                    // Log the file's name and size
+                    console.log("File Name:", file.name);
+                    console.log("File Size:", file.size); // Size in bytes
+
+                    // Add valid files to the array
+                    validFiles.push(file);
+                }
+
+                // Clear the input field and reassign valid files
+                if (validFiles.length === 0) {
+                    fileInput.value = ''; // Clear the file input if no valid files
+                } else {
+                    // Create a new DataTransfer object to assign the valid files
+                    const dataTransfer = new DataTransfer();
+                    validFiles.forEach(file => dataTransfer.items.add(file));
+                    fileInput.files = dataTransfer.files; // Update the file input with valid files
+                }
+            });
+
+            document.getElementById("userValidIDBack").addEventListener("change", function(event) {
+                const fileInput = event.target;
+                const files = fileInput.files;
+                const maxSize = 8 * 1024 * 1024; // 8MB in bytes
+                const validFiles = [];
+
+                // Loop through each file in the FileList
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i]; // Get the individual file
+                    // Check if the file size exceeds 8MB
+                    if (file.size > maxSize) {
+                        $('#viImgSizeErrorBack').html('<div class="alert alert-warning text-center" role="alert">Image is too large</div>');
+                        console.log("Skipped image (too large):", file.name);
+
+                        // Clear the error message after 3 seconds
+                        setTimeout(() => {
+                            $('#viImgSizeErrorBack').html('');
+                        }, 3000);
+
+                        // Skip this file
+                        continue;
+                    }
+
+                    // Log the file's name and size
+                    console.log("File Name:", file.name);
+                    console.log("File Size:", file.size); // Size in bytes
+
+                    // Add valid files to the array
+                    validFiles.push(file);
+                }
+
+                // Clear the input field and reassign valid files
+                if (validFiles.length === 0) {
+                    fileInput.value = ''; // Clear the file input if no valid files
+                } else {
+                    // Create a new DataTransfer object to assign the valid files
+                    const dataTransfer = new DataTransfer();
+                    validFiles.forEach(file => dataTransfer.items.add(file));
+                    fileInput.files = dataTransfer.files; // Update the file input with valid files
+                }
+            });
 
             function updateCount(endpoint, selector) {
                 $.post(endpoint, {}, function(data) {
                     $(selector).html(data);
-                    setTimeout(function() {
-                        updateCount(endpoint, selector);
-                    }, 30000);
                 });
             }
 
+            // initial call to get every status count
             updateCount('civilian_includes/get_pending_count.php', '#count-pending');
             updateCount('civilian_includes/get_processing_count.php', '#count-processing');
             updateCount('civilian_includes/get_approved_count.php', '#count-approved');
             updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
 
-
-            $.ajax({
-                url: '../includes/getDocTypes.php',
-                type: 'POST',
-                dataType: 'html',
-                success: function(data) {
-                    $("#documentType").html(data);
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX Error: " + status + error);
-                }
+            // btn request doc
+            $('#requestDoc').on('click', function(e) {
+                getDocumentType();
             });
 
+            // get document type 
+            function getDocumentType() {
+                $.ajax({
+                    url: 'civilian_includes/getDocTypes.php',
+                    type: 'POST',
+                    dataType: 'html',
+                    success: function(data) {
+                        console.log(data);
+                        $("#documentType").html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: " + status + error);
+                    }
+                });
+            }
 
-            $.post('civilian_includes/show_notification.php', {}, function(data) {
-                $("#notification-content").html(data);
-            });
-
-            function updateNotification() {
+            function showNotification() {
                 $.post('civilian_includes/show_notification.php', {}, function(data) {
                     $("#notification-content").html(data);
-                    setTimeout(updateNotification, 500);
                 });
             }
 
             function showNotificationCount() {
                 $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                    $("#count-notification").html(data);
-                    setTimeout(showNotificationCount, 500);
+                    // Only update if there's a change to reduce unnecessary DOM manipulation
+                    if ($("#count-notification").html() !== data) {
+                        $("#count-notification").html(data);
+                    }
+                }).fail(function() {
+                    console.error("Failed to retrieve notification count.");
+                }).always(function() {
+                    // Re-run the function after 30 seconds
+                    setTimeout(showNotificationCount, 30000);
                 });
             }
 
-            updateNotification();
             showNotificationCount()
-
-            $.post('civilian_includes/show_notification_count.php', {}, function(data) {
-                $("#count-notification").html(data);
-            });
 
             $('#nav-pending-tab').on('click', function() {
                 loadRequestDocs('pending');
+                updateCount('civilian_includes/get_pending_count.php', '#count-pending');
+                console.log('pending tab');
             });
+
             $('#nav-processing-tab').on('click', function() {
                 loadRequestDocs('processing');
+                updateCount('civilian_includes/get_processing_count.php', '#count-processing');
+                console.log('processing tab');
             });
+
             $('#nav-approved-tab').on('click', function() {
                 loadRequestDocs('approved');
+                updateCount('civilian_includes/get_approved_count.php', '#count-approved');
+                console.log('approved tab');
             });
+
             $('#nav-cancelled-tab').on('click', function() {
                 loadRequestDocs('cancelled');
+                updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
+                console.log('cancelled tab');
             });
 
             function loadRequestDocs(status) {
@@ -766,26 +881,24 @@ if ($user_role != 0) {
                 });
             }
 
-            function updateReqDocs() {
-                const statuses = ['pending', 'processing', 'approved', 'cancelled'];
-
-                statuses.forEach(status => {
-                    loadRequestDocs(status);
-                });
-
-                setTimeout(updateReqDocs, 30000);
-            }
-
-            // Initial load
-            updateReqDocs();
+            loadRequestDocs('pending');
 
             // others selected
             function updateFields() {
                 if ($('#forOthers').is(':checked')) {
                     // Clear the fields if "Others" is selected
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #placeOfBirth, #civilStatus').prop('disabled', false).val('');
+                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #civilStatus').prop('disabled', false).val('');
+                    $('#placeOfBirth').prop('disabled', false);
+
+                    $('#authLetter, #lblauthLetter').prop('hidden', false);
+                    $('#authLetter, #lblauthLetter').prop('disabled', false);
+
+
                 } else if ($('#forYourself').is(':checked')) {
                     // Restore values and disable fields if "Yourself" is selected
+                    $('#authLetter, #lblauthLetter').prop('hidden', true);
+                    $('#authLetter, #lblauthLetter').prop('disabled', true);
+
                     $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
                     $('#middleName').val('<?php echo $_SESSION['user_mname']; ?>').prop('disabled', true);
                     $('#lastName').val('<?php echo $_SESSION['user_lname']; ?>').prop('disabled', true);
@@ -801,11 +914,92 @@ if ($user_role != 0) {
 
                 }
 
+
                 $('#btnReqDocument').on('click', function() {
                     console.log('clicked');
                     $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #placeOfBirth, #civilStatus').prop('disabled', false);
+
+                    validateForm();
                 });
 
+            }
+
+            function validateForm() {
+                // Get the values of the inputs
+                const documentType = document.getElementById('documentType').value;
+                const authLetter = document.getElementById('authLetter').value;
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const middleName = document.getElementById('middleName').value;
+                const contactNumber = document.getElementById('contactNumber').value;
+                const user_gender = document.getElementById('user_gender').value;
+                const user_brgy = document.getElementById('user_brgy').value;
+                const user_purok = document.getElementById('user_purok').value;
+                const dateOfBirth = document.getElementById('dateOfBirth').value;
+                const user_age = document.getElementById('user_age').value;
+                const placeOfBirth = document.getElementById('placeOfBirth').value;
+                const civilStatus = document.getElementById('civilStatus').value;
+                const eSignature = document.getElementById('eSignature').value;
+                const userValidIDFront = document.getElementById('userValidIDFront').value;
+                const userValidIDBack = document.getElementById('userValidIDBack').value;
+
+                const isForOthers = document.getElementById('forOthers').checked;
+
+                // Initialize an array to hold error messages
+                let errors = [];
+
+                // Validate each input and add respective error message if empty
+                if (!documentType) errors.push("Document Type is required.");
+
+                // Conditionally validate "Authorization Letter" based on whether "forOthers" is selected
+                if (isForOthers) {
+                    const authLetter = document.getElementById('authLetter').value;
+                    if (!authLetter) errors.push("Authorization Letter is required.");
+                }
+
+                if (!firstName) errors.push("First Name is required.");
+                if (!lastName) errors.push("Last Name is required.");
+                if (!middleName) errors.push("Middle Name is required.");
+                if (!contactNumber) errors.push("Contact Number is required.");
+                if (!user_gender) errors.push("Sex is required.");
+                if (!user_brgy) errors.push("Barangay is required.");
+                if (!user_purok) errors.push("Purok is required.");
+                if (!dateOfBirth) errors.push("Date of Birth is required.");
+                if (!user_age) errors.push("Age is required.");
+                if (!placeOfBirth) errors.push("Place of Birth is required.");
+                if (!civilStatus) errors.push("Civil Status is required.");
+
+                if (!eSignature) errors.push("E-Signature is required.");
+                if (!userValidIDFront) errors.push("Front ID is required.");
+                if (!userValidIDBack) errors.push("Back ID is required.");
+
+                // Clear any existing error messages before adding new ones
+                const errorContainer = document.getElementById('errorMessages');
+                errorContainer.innerHTML = '';
+
+                // If there are errors, display them
+                if (errors.length > 0) {
+                    errors.forEach(function(error) {
+                        // Create an alert div for each error
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'alert alert-warning text-center';
+                        errorDiv.setAttribute('role', 'alert');
+                        errorDiv.innerHTML = `<i class="bi bi-exclamation-circle-fill mx-3" style="font-size: 1.5rem;"></i> ${error}`;
+
+                        // Append the error div to the errorMessages container
+                        document.getElementById('errorMessages').appendChild(errorDiv);
+                    });
+
+                    setTimeout(function() {
+                        errorContainer.innerHTML = '';
+                    }, 3000);
+
+                    // Prevent form submission or other actions
+                    return false;
+                } else {
+                    // If no errors, allow form submission or further actions
+                    return true;
+                }
             }
 
             updateFields();
@@ -874,9 +1068,7 @@ if ($user_role != 0) {
 
         });
     </script>
-    <script src="civilianMaterials/script.c.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 <?php
