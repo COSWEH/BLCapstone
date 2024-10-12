@@ -341,7 +341,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 <!-- File Uploads -->
                                 <label class="form-label">
                                     Upload Identification Documents:
-                                    <small class="text-warning d-block">(<i class="bi bi-exclamation-circle me-2"></i>Please upload only the incorrect documents that need replacement.)</small>
+                                    <small class="text-warning d-block"><i class="bi bi-exclamation-circle me-2"></i>Please upload only the incorrect documents that need replacement.</small>
                                 </label>
 
                                 <div class="form-floating mb-2">
@@ -406,7 +406,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 <!-- File Uploads -->
                                 <label class="form-label">
                                     Upload Identification Documents:
-                                    <small class="text-warning d-block">(<i class="bi bi-exclamation-circle me-2"></i>Please upload only the incorrect documents that need replacement.)</small>
+                                    <small class="text-warning d-block"><i class="bi bi-exclamation-circle me-2"></i>Please upload only the incorrect documents that need replacement.</small>
                                 </label>
 
                                 <div class="form-floating mb-2">
