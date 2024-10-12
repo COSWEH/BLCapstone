@@ -28,16 +28,14 @@ if ($rowCount == 0) {
         <table class="table align-middle table-bordered border border-3 table-hover text-center text-capitalized">
             <thead class="table-active text-uppercase text-white">
                 <tr>
-                    <th class="col-2"><small>Document Type</small></th>
-                    <th class="col-2"><small>Requester</small></th>
-                    <th class="col-1"><small>Authentication Letter</small></th>
-                    <th class="col-3"><small>Identification</small></th>
-                    <th class="col-1"><small>Contact No.</small></th>
-                    <th class="col-1"><small>Date Requested</small></th>
-                    <th><small>Status</small></th>
+                    <th class="col-1"><small>Document Type</small></th>
+                    <th class="col-1"><small>Requester</small></th>
+                    <th class="col-4"><small>Supporting Documents</small></th>
+                    <th class="col-2"><small>Contact No.</small></th>
+                    <th class="col-2"><small>Date Requested</small></th>
+                    <th class="col-1"><small>Status</small></th>
                     <th class="col-1"><small>Manage</small></th>
                 </tr>
-
             </thead>
             <tbody>
                 <?php
@@ -74,39 +72,52 @@ if ($rowCount == 0) {
                     <tr>
                         <td><small><?php echo htmlspecialchars($docTypeWithoutBrgy); ?></small></td>
                         <td><small><?php echo htmlspecialchars($fname . " " . $mname . " " . $lname); ?></small></td>
-                        <td>
-                            <?php if (!empty($authLetter)) { ?>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#esModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>">
-                                    <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                </a>
-                            <?php } ?>
-                        </td>
-                        <td>
-                            <?php if (!empty($data['req_eSignature'])) { ?>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#esModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_eSignature']); ?>">
-                                    <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_eSignature']); ?>" class="img-fluid rounded mb-2" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                </a>
-                            <?php } else { ?>
-                                <span>No E-Signature</span>
-                            <?php } ?>
+                        <td aria-current="page"
+                            data-bs-toggle="modal"
+                            data-bs-target="#supportingDocsModal<?php echo $reqId; ?>">
+                            <div class="row g-2">
+                                <!-- Auth Letter -->
+                                <div class="col text-center">
+                                    <?php if (!empty($authLetter)) { ?>
+                                        <a href="#" class="supporting-doc" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['authLetter']); ?>">
+                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                        </a>
+                                    <?php } ?>
+                                </div>
 
-                            <!-- Front ID -->
-                            <?php if (!empty($data['req_valid_front_id'])) { ?>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_front_id']); ?>">
-                                    <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_front_id']); ?>" class="img-fluid rounded mb-2" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                </a>
-                            <?php } else { ?>
-                                <span>No Front ID</span>
-                            <?php } ?>
+                                <!-- E-Signature -->
+                                <div class="col text-center">
+                                    <?php if (!empty($data['req_eSignature'])) { ?>
+                                        <a href="#" class="supporting-doc" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_eSignature']); ?>">
+                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_eSignature']); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                        </a>
+                                    <?php } else { ?>
+                                        <span>No E-Signature</span>
+                                    <?php } ?>
+                                </div>
 
-                            <!-- Back ID -->
-                            <?php if (!empty($data['req_valid_back_id'])) { ?>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_back_id']); ?>">
-                                    <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_back_id']); ?>" class="img-fluid rounded mb-2" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                </a>
-                            <?php } else { ?>
-                                <span>No Back ID</span>
-                            <?php } ?>
+                                <!-- Front ID -->
+                                <div class="col text-center">
+                                    <?php if (!empty($data['req_valid_front_id'])) { ?>
+                                        <a href="#" class="supporting-doc" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_front_id']); ?>">
+                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_front_id']); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                        </a>
+                                    <?php } else { ?>
+                                        <span>No Front ID</span>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- Back ID -->
+                                <div class="col text-center">
+                                    <?php if (!empty($data['req_valid_back_id'])) { ?>
+                                        <a href="#" class="supporting-doc" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_back_id']); ?>">
+                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($data['req_valid_back_id']); ?>" class="img-fluid rounded" style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                        </a>
+                                    <?php } else { ?>
+                                        <span>No Back ID</span>
+                                    <?php } ?>
+                                </div>
+                            </div>
                         </td>
                         <td><small><?php echo htmlspecialchars($contactNo); ?></small></td>
                         <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
@@ -147,6 +158,7 @@ if ($rowCount == 0) {
                         </td>
                     </tr>
 
+                    <!-- see more modal -->
                     <div class="modal fade" id="seeMoreModal<?php echo $reqId; ?>" tabindex="-1" aria-labelledby="seeMoreModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -198,13 +210,23 @@ if ($rowCount == 0) {
                                         </div>
 
                                         <div class="col-12">
-                                            <p><strong>Identification</strong></p>
-                                            <div class="d-flex flex-wrap align-items-start">
+                                            <p><strong>Supporting Documents</strong></p>
+                                            <div class="row row-cols-2 row-cols-md-4 g-3">
+                                                <!-- Authentication Letter -->
+                                                <div class="col">
+                                                    <?php if (!empty($authLetter)) { ?>
+                                                        <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>">
+                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>" class="img-fluid rounded" style="max-width: 100%; max-height: 100px; object-fit: cover;">
+                                                        </a>
+                                                        <p class="text-center mt-1"><small>Authentication Letter</small></p>
+                                                    <?php } ?>
+                                                </div>
+
                                                 <!-- E-Signature -->
-                                                <div class="me-3 mb-2">
+                                                <div class="col">
                                                     <?php if (!empty($req_eSignature)) { ?>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#esModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
-                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100px; max-height: 100px; object-fit: cover;" alt="E-Signature">
+                                                        <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
+                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100%; max-height: 100px; object-fit: cover;" alt="E-Signature">
                                                         </a>
                                                         <p class="text-center mt-1"><small>E-Signature</small></p>
                                                     <?php } else { ?>
@@ -213,10 +235,10 @@ if ($rowCount == 0) {
                                                 </div>
 
                                                 <!-- Front ID -->
-                                                <div class="me-3 mb-2">
+                                                <div class="col">
                                                     <?php if (!empty($req_valid_front_id)) { ?>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_front_id); ?>">
-                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_front_id); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100px; max-height: 100px; object-fit: cover;" alt="Front ID">
+                                                        <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_front_id); ?>">
+                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_front_id); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100%; max-height: 100px; object-fit: cover;" alt="Front ID">
                                                         </a>
                                                         <p class="text-center mt-1"><small>Front ID</small></p>
                                                     <?php } else { ?>
@@ -225,10 +247,10 @@ if ($rowCount == 0) {
                                                 </div>
 
                                                 <!-- Back ID -->
-                                                <div class="mb-2">
+                                                <div class="col">
                                                     <?php if (!empty($req_valid_back_id)) { ?>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#vidModal<?php echo $status; ?>" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_back_id); ?>">
-                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_back_id); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100px; max-height: 100px; object-fit: cover;" alt="Back ID">
+                                                        <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_back_id); ?>">
+                                                            <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_back_id); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100%; max-height: 100px; object-fit: cover;" alt="Back ID">
                                                         </a>
                                                         <p class="text-center mt-1"><small>Back ID</small></p>
                                                     <?php } else { ?>
@@ -262,46 +284,155 @@ if ($rowCount == 0) {
                         </div>
                     </div>
 
+                    <!-- Supporting Docs Modal -->
+                    <div class="modal fade" id="supportingDocsModal<?php echo $reqId; ?>" tabindex="-1" aria-labelledby="supportingDocsModal<?php echo $reqId; ?>Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-info-subtle mx-auto mb-3" style="height: 50px; width: 50px;">
+                                        <i class="bi bi-info-circle text-info" style="font-size: 25px;"></i>
+                                    </div>
+                                    <h5 class="modal-title mb-3 text-center">View Supporting Documents</h5>
+
+                                    <div class="step<?php echo $reqId; ?>">
+                                        <p>Authentication Letter</p>
+                                        <?php if (!empty($authLetter)) { ?>
+                                            <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>">
+                                                <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($authLetter); ?>" class="img-fluid rounded" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                                            </a>
+                                        <?php } ?>
+                                        <div class="row mt-2">
+                                            <div class="col-12 mb-2">
+                                                <button type="button" class="btn btn-primary w-100" id="nextBtn1<?php echo $reqId; ?>">
+                                                    Next <i class="bi bi-arrow-right-square"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step<?php echo $reqId; ?>" style="display: none;">
+                                        <p><small>E-Signature</small></p>
+                                        <?php if (!empty($req_eSignature)) { ?>
+                                            <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>">
+                                                <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_eSignature); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100%; max-height: 100%; object-fit: cover;" alt="E-Signature">
+                                            </a>
+                                        <?php } else { ?>
+                                            <span class="text-muted">No E-Signature</span>
+                                        <?php } ?>
+                                        <div class="row mt-2">
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <button type="button" class="btn btn-secondary w-100" id="prevBtn1<?php echo $reqId; ?>">
+                                                    <i class="bi bi-arrow-left-square"></i> Previous
+                                                </button>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <button type="button" class="btn btn-primary w-100" id="nextBtn2<?php echo $reqId; ?>">
+                                                    Next <i class="bi bi-arrow-right-square"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step<?php echo $reqId; ?>" style="display: none;">
+                                        <p class="mt-1"><small>Front ID</small></p>
+                                        <?php if (!empty($req_valid_front_id)) { ?>
+                                            <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_front_id); ?>">
+                                                <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_front_id); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100%; max-height: 100%; object-fit: cover;" alt="Front ID">
+                                            </a>
+                                        <?php } else { ?>
+                                            <span class="text-muted">No Front ID</span>
+                                        <?php } ?>
+                                        <div class="row mt-2">
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <button type="button" class="btn btn-secondary w-100" id="prevBtn2<?php echo $reqId; ?>">
+                                                    <i class="bi bi-arrow-left-square"></i> Previous
+                                                </button>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <button type="button" class="btn btn-primary w-100" id="nextBtn3<?php echo $reqId; ?>">
+                                                    Next <i class="bi bi-arrow-right-square"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step<?php echo $reqId; ?>" style="display: none;">
+                                        <p class="mt-1"><small>Back ID</small></p>
+                                        <?php if (!empty($req_valid_back_id)) { ?>
+                                            <a href="#" data-image-src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_back_id); ?>">
+                                                <img src="../civilian/civilian_dbImg/<?php echo htmlspecialchars($req_valid_back_id); ?>" class="img-fluid border rounded shadow-sm" style="max-width: 100%; max-height: 100%; object-fit: cover;" alt="Back ID">
+                                            </a>
+                                        <?php } else { ?>
+                                            <span class="text-muted">No Back ID</span>
+                                        <?php } ?>
+                                        <div class="row mt-2">
+                                            <div class="col-12 mb-2">
+                                                <button type="button" class="btn btn-secondary w-100" id="prevBtn3<?php echo $reqId; ?>">
+                                                    <i class="bi bi-arrow-left-square"></i> Previous
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        $(document).ready(function() {
+                            <?php
+
+                            if (!empty($authLetter)) {
+                                echo 'let currentStep = 0;';
+                            } else {
+                                echo 'let currentStep = 1;';
+                            }
+
+                            ?>
+
+                            const steps = document.querySelectorAll('.step<?php echo $reqId; ?>');
+
+                            function showStep(step) {
+                                steps.forEach((s, index) => {
+                                    s.style.display = (index === step) ? 'block' : 'none';
+                                });
+                            }
+
+                            function nextStep() {
+                                if (currentStep < steps.length - 1) {
+                                    currentStep++;
+                                    showStep(currentStep);
+                                }
+                            }
+
+                            function prevStep() {
+                                if (currentStep > 0) {
+                                    currentStep--;
+                                    showStep(currentStep);
+                                }
+                            }
+
+                            document.getElementById('nextBtn1<?php echo $reqId; ?>').addEventListener('click', nextStep);
+                            document.getElementById('nextBtn2<?php echo $reqId; ?>').addEventListener('click', nextStep);
+                            document.getElementById('nextBtn3<?php echo $reqId; ?>').addEventListener('click', nextStep);
+
+                            document.getElementById('prevBtn1<?php echo $reqId; ?>').addEventListener('click', prevStep);
+                            document.getElementById('prevBtn2<?php echo $reqId; ?>').addEventListener('click', prevStep);
+                            document.getElementById('prevBtn3<?php echo $reqId; ?>').addEventListener('click', prevStep);
+
+                            // Show the first step initially
+                            showStep(currentStep);
+                        });
+                    </script>
+
                 <?php
                 }
                 ?>
             </tbody>
         </table>
-    </div>
-
-
-    <!-- es Modal -->
-    <div class="modal fade" id="esModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="esModal<?php echo $status; ?>Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-info-subtle mx-auto mb-3" style="height: 50px; width: 50px;">
-                        <i class="bi bi-image text-info" style="font-size: 25px;"></i>
-                    </div>
-                    <h5 class="modal-title mb-3">View Image</h5>
-                    <img id="esModalImage<?php echo $status; ?>" class="img-fluid rounded-2" style="max-width: 100%; height: auto;">
-
-                </div>
-                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- vid Modal -->
-    <div class="modal fade" id="vidModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="vidModal<?php echo $status; ?>Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <div class="d-flex justify-content-center align-items-center rounded-circle bg-info-subtle mx-auto mb-3" style="height: 50px; width: 50px;">
-                        <i class="bi bi-image text-info" style="font-size: 25px;"></i>
-                    </div>
-                    <h5 class="modal-title mb-3">View Video</h5>
-                    <img id="vidModalImage<?php echo $status; ?>" class="img-fluid rounded-2" style="max-width: 100%; height: auto;">
-
-                </div>
-                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-        </div>
     </div>
 
     <!-- cancel modal -->
@@ -420,20 +551,6 @@ if ($rowCount == 0) {
                 let p_id = $(this).data('post-id');
                 console.log(p_id);
                 $('#getCancelReqDocId<?php echo $status; ?>').val(p_id);
-            });
-
-            $('#esModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
-                let button = $(event.relatedTarget);
-                let imageSrc = button.data('image-src');
-                let modalImage = $(this).find('#esModalImage<?php echo $status; ?>');
-                modalImage.attr('src', imageSrc);
-            });
-
-            $('#vidModal<?php echo $status; ?>').on('show.bs.modal', function(event) {
-                let button = $(event.relatedTarget);
-                let imageSrc = button.data('image-src');
-                let modalImage = $(this).find('#vidModalImage<?php echo $status; ?>');
-                modalImage.attr('src', imageSrc);
             });
 
             const seeMoreLinks = document.querySelectorAll('[data-bs-target^="#seeMoreModal"]');

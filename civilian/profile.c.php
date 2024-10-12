@@ -80,12 +80,15 @@ if ($user_role != 0) {
                         echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
                     }
                     ?>
-                    <p class="mb-0">
-                        <?php
-                        $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
-                        echo ucwords($fullname);
-                        ?>
-                    </p>
+                    <div>
+                        <p class="mb-1">
+                            <?php
+                            $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
+                            echo ucwords($fullname);
+                            ?>
+                        </p>
+                        <span class="badge text-bg-primary">Resident</span>
+                    </div>
                 </div>
             </div>
 
@@ -148,12 +151,13 @@ if ($user_role != 0) {
                         echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
                     }
                     ?>
-                    <h6 class="mb-3">
+                    <h6 class="mb-1">
                         <?php
                         $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
                         echo ucwords($fullname);
                         ?>
                     </h6>
+                    <span class="badge text-bg-primary">Resident</span>
                 </div>
                 <hr>
                 <ul class="navbar-nav flex-column">
@@ -253,13 +257,6 @@ if ($user_role != 0) {
                             <div class="col-sm-6">
                                 <p class="mb-2"><strong>Username:</strong></p>
                                 <p class="text-muted" id="username"><?php echo $_SESSION['username']; ?></p>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-sm-12">
-                                <p class="mb-2"><strong>Password:</strong></p>
-                                <p class="text-muted">********</p>
                             </div>
                         </div>
 
@@ -427,48 +424,42 @@ if ($user_role != 0) {
                                             <option value="Purok 5" <?php echo $selectedPurok === 'Purok 5' ? 'selected' : ''; ?>>Purok 5</option>
                                             <option value="Purok 6" <?php echo $selectedPurok === 'Purok 6' ? 'selected' : ''; ?>>Purok 6</option>
                                             <option value="Purok 7" <?php echo $selectedPurok === 'Purok 7' ? 'selected' : ''; ?>>Purok 7</option>
-                                            <option value="Purok 8" <?php echo $selectedPurok === 'Purok 8' ? 'selected' : ''; ?>>Purok 8</option>
-                                            <option value="Purok 9" <?php echo $selectedPurok === 'Purok 9' ? 'selected' : ''; ?>>Purok 9</option>
                                         </select>
                                         <label for="user_purok" class="form-label">Purok</label>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="form-floating mb-3">
-                                    <input type="tel" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
-                                    <label for="user_contactNum" class="form-label">Contact Number</label>
-                                </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="number" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
+                                <label for="user_contactNum" class="form-label">Contact Number</label>
                             </div>
 
-                            <div>
-                                <div class="form-floating mb-3">
-                                    <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required
-                                        value="<?php echo isset($_SESSION['dateOfBirth']) ? htmlspecialchars($_SESSION['dateOfBirth']) : ''; ?>">
-                                    <label for="dateOfBirth">Date of Birth</label>
-                                </div>
+                            <div class="form-floating mb-3">
+                                <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required
+                                    value="<?php echo isset($_SESSION['dateOfBirth']) ? htmlspecialchars($_SESSION['dateOfBirth']) : ''; ?>">
+                                <label for="dateOfBirth">Date of Birth</label>
                             </div>
 
-                            <div>
-                                <div class="form-floating mb-3">
-                                    <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required
-                                        value="<?php echo isset($_SESSION['placeOfBirth']) ? htmlspecialchars($_SESSION['placeOfBirth']) : ''; ?>">
-                                    <label for="placeOfBirth">Place of Birth</label>
-                                </div>
+                            <div class="form-floating mb-3">
+                                <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required
+                                    value="<?php echo isset($_SESSION['placeOfBirth']) ? htmlspecialchars($_SESSION['placeOfBirth']) : ''; ?>">
+                                <label for="placeOfBirth">Place of Birth</label>
                             </div>
 
-                            <div>
-                                <div class="form-floating mb-3">
-                                    <select id="civilStatus" name="civilStatus" class="form-select" required>
-                                        <option value="" disabled <?php echo !isset($_SESSION['civilStatus']) ? 'selected' : ''; ?>>Choose Status</option>
-                                        <option value="Single" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Single' ? 'selected' : ''; ?>>Single</option>
-                                        <option value="Married" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Married' ? 'selected' : ''; ?>>Married</option>
-                                        <option value="Widowed" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
-                                        <option value="Divorced" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
-                                    </select>
-                                    <label for="civilStatus">Civil Status</label>
-                                </div>
+
+
+                            <div class="form-floating mb-3">
+                                <select id="civilStatus" name="civilStatus" class="form-select" required>
+                                    <option value="" disabled <?php echo !isset($_SESSION['civilStatus']) ? 'selected' : ''; ?>>Choose Status</option>
+                                    <option value="Single" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Single' ? 'selected' : ''; ?>>Single</option>
+                                    <option value="Married" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Married' ? 'selected' : ''; ?>>Married</option>
+                                    <option value="Widowed" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Widowed' ? 'selected' : ''; ?>>Widowed</option>
+                                    <option value="Divorced" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Divorced' ? 'selected' : ''; ?>>Divorced</option>
+                                </select>
+                                <label for="civilStatus">Civil Status</label>
                             </div>
+
 
                             <h4 class="h4 ">Account Information</h4>
                             <!-- Email and Username -->

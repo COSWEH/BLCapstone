@@ -195,9 +195,6 @@ if ($user_role != 1) {
                                     <option value="Purok 5">Purok 5</option>
                                     <option value="Purok 6">Purok 6</option>
                                     <option value="Purok 7">Purok 7</option>
-                                    <option value="Purok 8">Purok 8</option>
-                                    <option value="Purok 9">Purok 9</option>
-                                    <option value="Purok 10">Purok 10</option>
                                 </select>
                             </div>
 

@@ -82,12 +82,15 @@ if ($user_role != 0) {
                         echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
                     }
                     ?>
-                    <p class="mb-0">
-                        <?php
-                        $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
-                        echo ucwords($fullname);
-                        ?>
-                    </p>
+                    <div>
+                        <p class="mb-1">
+                            <?php
+                            $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
+                            echo ucwords($fullname);
+                            ?>
+                        </p>
+                        <span class="badge text-bg-primary">Resident</span>
+                    </div>
                 </div>
             </div>
 
@@ -149,12 +152,13 @@ if ($user_role != 0) {
                         echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
                     }
                     ?>
-                    <h6 class="mb-3">
+                    <h6 class="mb-1">
                         <?php
                         $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
                         echo ucwords($fullname);
                         ?>
                     </h6>
+                    <span class="badge text-bg-primary">Resident</span>
                 </div>
 
                 <hr>

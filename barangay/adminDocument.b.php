@@ -249,18 +249,26 @@ if ($user_role != 1) {
 
     <script>
         $(document).ready(function() {
+            let activeTab = 'pending';
+
+            function loadRequestDocs(status) {
+                $.post(`brgy_includes/show_${status}_reqDoc.php`, {}, function(data) {
+                    $(`#show_${status}_reqDoc`).html(data);
+                });
+            }
+
             function updateCount(endpoint, selector) {
                 $.post(endpoint, {}, function(data) {
                     $(selector).html(data);
                 });
             }
 
+            loadRequestDocs(activeTab);
+
             updateCount('brgy_includes/get_pending_count.php', '#count-pending');
             updateCount('brgy_includes/get_processing_count.php', '#count-processing');
             updateCount('brgy_includes/get_approved_count.php', '#count-approved');
             updateCount('brgy_includes/get_cancelled_count.php', '#count-cancelled');
-
-            let activeTab = 'pending';
 
             $('#nav-pending-tab').on('click', function() {
                 activeTab = 'pending';
@@ -293,14 +301,6 @@ if ($user_role != 1) {
 
                 console.log('cancelled tab');
             });
-
-            function loadRequestDocs(status) {
-                $.post(`brgy_includes/show_${status}_reqDoc.php`, {}, function(data) {
-                    $(`#show_${status}_reqDoc`).html(data);
-                });
-            }
-
-            loadRequestDocs('pending');
 
             $('#searchByName').on('keyup', function() {
                 let searchQuery = $(this).val(); // Get the search query

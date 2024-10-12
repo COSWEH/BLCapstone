@@ -66,7 +66,7 @@ if (!$result) {
 ?>
 
 <div class="table-responsive">
-    <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalize">
+    <table class="table align-middle table-bordered border border-3 table-hover text-center text-capitalize">
         <thead class="table-active text-uppercase text-white">
             <tr>
                 <th style="background-color: #323D42; color: #CBDCED; width: 12.5%;"><small>Full Name</small></th>

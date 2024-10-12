@@ -20,10 +20,9 @@ if ($rowCount == 0) {
 } else {
 ?>
     <div class="table-responsive">
-        <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
+        <table class="table align-middle table-bordered border border-3 table-hover text-center text-capitalized">
             <thead class="table-active text-uppercase text-white">
                 <tr>
-                    <th style="width: 25%;"><small>LOG ID</small></th>
                     <th style="width: 25%;"><small>LOG DESCRIPTION</small></th>
                     <th style="width: 25%;"><small>LOG DATE</small></th>
                     <th style="width: 25%;"><small>USER ID</small></th>
@@ -42,7 +41,6 @@ if ($rowCount == 0) {
                     $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
                 ?>
                     <tr>
-                        <td><small><?php echo htmlspecialchars($log_id); ?></small></td>
                         <td><small><?php echo htmlspecialchars($log_desc); ?></small></td>
                         <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>
                         <td><small><?php echo htmlspecialchars($user_id); ?></small></td>

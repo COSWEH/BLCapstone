@@ -16,10 +16,9 @@ if (!$result) {
 ?>
 
 <div class="table-responsive ">
-    <table class="table table-responsive table-bordered border border-3 table-hover text-center text-capitalized">
+    <table class="table align-middle table-bordered border border-3 table-hover text-center text-capitalized">
         <thead class="table-active text-uppercase text-white">
             <tr>
-                <th style="width: 15%;"><small>Faq ID</small></th>
                 <th style="width: 25%;"><small>Faq Question</small></th>
                 <th style="width: 35%;"><small>Faq Answer</small></th>
                 <th style="width: 15%;"><small>Faq Created At</small></th>
@@ -38,7 +37,6 @@ if (!$result) {
                 $formattedDate = $get_Time_And_Day->format('Y-m-d H:i:s');
             ?>
                 <tr>
-                    <td><small><?php echo htmlspecialchars($faq_id); ?></small></td>
                     <td><small><?php echo htmlspecialchars($faq_question); ?></small></td>
                     <td><small><?php echo htmlspecialchars($faq_answer); ?></small></td>
                     <td><small><?php echo htmlspecialchars($formattedDate); ?></small></td>

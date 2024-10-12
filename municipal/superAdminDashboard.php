@@ -163,7 +163,7 @@ if ($user_role != 2) {
             <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
-                        <h6>Super admin account</h6>
+                        <h6>Manage Municipal Accounts</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
                     </div>
                     <div class="card-body">
@@ -176,7 +176,7 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Terms and Conditions</h6>
-                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addTMModal">Add</button>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addTMModal">Add terms and conditions</button>
                     </div>
                     <div class="card-body">
                         <div class="overflow-auto" style="height: 300px;">
@@ -223,7 +223,7 @@ if ($user_role != 2) {
                 <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Services</h6>
-                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addServicesModal">Add servicess</button>
+                        <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addServicesModal">Add services</button>
                     </div>
                     <div class="card-body">
                         <div id="services_container" class="row row-cols-2 row-cols-lg-3 g-2">

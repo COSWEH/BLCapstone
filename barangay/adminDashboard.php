@@ -157,9 +157,9 @@ if ($user_role != 1) {
             <!-- main content -->
             <main class="col-12 col-md-10 content border rounded p-3">
                 <div class="card mb-3 shadow border-0 rounded-3">
-                    <div class="ms-3 mt-3">
-                        <h6>Admin account</h6>
-                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdmin">Add account</button>
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
+                        <h6>Manage Barangay Accounts</h6>
+                        <button class="btn btn-sm btn-primary" aria-current="page" data-bs-toggle="modal" data-bs-target="#addAdmin">Add account</button>
                     </div>
                     <div class="card-body">
 
@@ -170,9 +170,9 @@ if ($user_role != 1) {
                 </div>
 
                 <div class="card mb-3 shadow border-0 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Types of documents</h6>
-                        <button class="btn btn-sm btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#addDocumentModal">Add document</button>
+                        <button class="btn btn-sm btn-primary" aria-current="page" data-bs-toggle="modal" data-bs-target="#addDocumentModal">Add document</button>
                     </div>
                     <div class="card-body">
 

@@ -79,12 +79,15 @@ if ($user_role != 0) {
                         echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
                     }
                     ?>
-                    <p class="mb-0">
-                        <?php
-                        $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
-                        echo ucwords($fullname);
-                        ?>
-                    </p>
+                    <div>
+                        <p class="mb-1">
+                            <?php
+                            $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
+                            echo ucwords($fullname);
+                            ?>
+                        </p>
+                        <span class="badge text-bg-primary">Resident</span>
+                    </div>
                 </div>
             </div>
 
@@ -146,12 +149,13 @@ if ($user_role != 0) {
                         echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
                     }
                     ?>
-                    <h6 class="mb-3">
+                    <h6 class="mb-1">
                         <?php
                         $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
                         echo ucwords($fullname);
                         ?>
                     </h6>
+                    <span class="badge text-bg-primary">Resident</span>
                 </div>
                 <hr>
                 <ul class="navbar-nav flex-column">
@@ -426,8 +430,6 @@ if ($user_role != 0) {
                                                 <option value="Purok 5" <?php if ($user_purok == "Purok 5") echo "selected"; ?>>Purok 5</option>
                                                 <option value="Purok 6" <?php if ($user_purok == "Purok 6") echo "selected"; ?>>Purok 6</option>
                                                 <option value="Purok 7" <?php if ($user_purok == "Purok 7") echo "selected"; ?>>Purok 7</option>
-                                                <option value="Purok 8" <?php if ($user_purok == "Purok 8") echo "selected"; ?>>Purok 8</option>
-                                                <option value="Purok 9" <?php if ($user_purok == "Purok 9") echo "selected"; ?>>Purok 9</option>
                                             </select>
                                             <label for="user_purok">Purok</label>
                                         </div>
@@ -802,12 +804,6 @@ if ($user_role != 0) {
                 });
             }
 
-            // initial call to get every status count
-            updateCount('civilian_includes/get_pending_count.php', '#count-pending');
-            updateCount('civilian_includes/get_processing_count.php', '#count-processing');
-            updateCount('civilian_includes/get_approved_count.php', '#count-approved');
-            updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
-
             // btn request doc
             $('#requestDoc').on('click', function(e) {
                 getDocumentType();
@@ -849,7 +845,18 @@ if ($user_role != 0) {
                 });
             }
 
+            function loadRequestDocs(status) {
+                $.post(`civilian_includes/show_${status}_reqDoc.php`, {}, function(data) {
+                    $(`#show_${status}_reqDoc`).html(data);
+                });
+            }
+
+            loadRequestDocs('pending');
             showNotificationCount()
+            updateCount('civilian_includes/get_pending_count.php', '#count-pending');
+            updateCount('civilian_includes/get_processing_count.php', '#count-processing');
+            updateCount('civilian_includes/get_approved_count.php', '#count-approved');
+            updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
 
             $('#nav-pending-tab').on('click', function() {
                 loadRequestDocs('pending');
@@ -874,14 +881,6 @@ if ($user_role != 0) {
                 updateCount('civilian_includes/get_cancelled_count.php', '#count-cancelled');
                 console.log('cancelled tab');
             });
-
-            function loadRequestDocs(status) {
-                $.post(`civilian_includes/show_${status}_reqDoc.php`, {}, function(data) {
-                    $(`#show_${status}_reqDoc`).html(data);
-                });
-            }
-
-            loadRequestDocs('pending');
 
             // others selected
             function updateFields() {
@@ -1064,8 +1063,6 @@ if ($user_role != 0) {
 
             // Add event listeners to navigation buttons
             addNavigationListeners(nextButtons, prevButtons);
-
-
         });
     </script>
 
@@ -1089,6 +1086,7 @@ $alerts = [
     'reqDoc_message' => ['type' => 'success', 'title' => 'Success'],
     'reqDoc_invalid_password' => ['type' => 'error', 'title' => 'Error'],
     'cancelReq_message' => ['type' => 'success', 'title' => 'Success'],
+    'edit_req_doc' => ['type' => 'success', 'title' => 'Success'],
 ];
 
 foreach ($alerts as $sessionKey => $alertConfig) {

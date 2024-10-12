@@ -174,14 +174,14 @@ while ($data = mysqli_fetch_assoc($result)) {
                         </div>
                     </div>
 
-                    <button class="btn btn-sm border btnCancelRequest" data-post-id="<?php echo $reqId; ?>" data-bs-toggle="modal" data-bs-target="#cancelRequestModal">Cancel Request</button>
+                    <button class="btn btn-sm border btnCancelRequest" data-req-id="<?php echo $reqId; ?>" data-bs-toggle="modal" data-bs-target="#cancelRequestModal<?php echo $status; ?>">Cancel Request</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- cancel request modal -->
-    <div class="modal fade" id="cancelRequestModal" tabindex="-1" aria-labelledby="cancelRequestModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelRequestModal<?php echo $status; ?>" tabindex="-1" aria-labelledby="cancelRequestModal<?php echo $status; ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center">
@@ -287,7 +287,7 @@ while ($data = mysqli_fetch_assoc($result)) {
 <script>
     $(document).ready(function() {
         $(document).on('click', '.btnCancelRequest', function() {
-            let p_id = $(this).data('post-id'); // Retrieve post ID from update button
+            let p_id = $(this).data('req-id'); // Retrieve post ID from update button
             $('#getReqID').val(p_id);
 
             console.log(p_id);
