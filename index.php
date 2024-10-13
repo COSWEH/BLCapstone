@@ -480,11 +480,11 @@ session_start();
                 <!-- Content Section -->
                 <div class="col-md-6 mb-4 px-lg-5">
                     <!-- title -->
-                    <h1 id="home-title" class="display-3 text-white mb-4">Loading...</h1>
+                    <h1 id="home-title" class="display-3 mb-4">Loading...</h1>
                     <!-- subtitle 1 -->
-                    <p id="home-subtitle1" class="lead text-white mb-4">Loading...</p>
+                    <p id="home-subtitle1" class="lead mb-4">Loading...</p>
                     <!-- subtitle 2 -->
-                    <p id="home-subtitle2" class="text-white mb-4">Loading...</p>
+                    <p id="home-subtitle2" class="mb-4">Loading...</p>
                     <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
                         Get started
                     </button>
@@ -500,7 +500,7 @@ session_start();
     <!-- Services Section -->
     <section id="services" class="text-center text-md-start d-flex align-items-center">
         <div class="container">
-            <h1 class="text-center display-4 text-white mb-4">Our Services</h1>
+            <h1 class="text-center display-4 mb-4">Our Services</h1>
             <div id="services_container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
                 <!-- Service Cards Will Go Here -->
             </div>
@@ -510,25 +510,25 @@ session_start();
     <!-- Contact Section -->
     <section id="contact" class="text-center text-md-start d-flex align-items-center">
         <div class="container">
-            <h1 class="text-center display-4 text-white mb-4">Get in Touch with Us!</h1>
-            <p class="text-center text-white mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
+            <h1 class="text-center display-4 mb-4">Get in Touch with Us!</h1>
+            <p class="text-center mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
             <div class="row g-4 justify-content-center">
                 <div class="col-md-4">
                     <div>
-                        <h5 class="mb-1 text-white">Contact Phone Number</h5>
-                        <p id="contact_number" class="text-white"><i class="bi bi-telephone-fill"></i> Loading...</p>
+                        <h5 class="mb-1">Contact Phone Number</h5>
+                        <p id="contact_number"><i class="bi bi-telephone-fill"></i> Loading...</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div>
-                        <h5 class="mb-1 text-white">Our Email Address</h5>
-                        <p id="contact_email" class="text-white"><i class="bi bi-envelope-fill"></i> Loading...</p>
+                        <h5 class="mb-1">Our Email Address</h5>
+                        <p id="contact_email"><i class="bi bi-envelope-fill"></i> Loading...</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div>
-                        <h5 class="mb-1 text-white">Our Location</h5>
-                        <p id="contact_location" class="text-white"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
+                        <h5 class="mb-1">Our Location</h5>
+                        <p id="contact_location"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
                     </div>
                 </div>
             </div>
@@ -540,33 +540,33 @@ session_start();
         <div class="container">
             <div class="row mb-4">
                 <div class="col">
-                    <h1 class="text-center display-4 text-white mb-3">Our Mission</h1>
-                    <p id="our_mission" class="lead text-white text-center">Loading...</p>
+                    <h1 class="text-center display-4 mb-3">Our Mission</h1>
+                    <p id="our_mission" class="lead text-center">Loading...</p>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col-12">
-                    <h1 class="text-center display-4 text-white mb-3">Our Amazing Team</h1>
+                    <h1 class="text-center display-4  mb-3">Our Amazing Team</h1>
                     <div class="row g-4 justify-content-center">
                         <div class="col-md-3 text-center">
                             <img src="img/p1.png" alt="Yvez Santiago" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6 class="text-white">Yvez Santiago</h6>
+                            <h6>Yvez Santiago</h6>
                             <p class="text-muted">Front-end Developer</p>
                         </div>
                         <div class="col-md-3 text-center">
                             <img src="img/p2.png" alt="Kevin Palma" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6 class="text-white">Kevin Palma</h6>
+                            <h6>Kevin Palma</h6>
                             <p class="text-muted">UI/UX Designer</p>
                         </div>
                         <div class="col-md-3 text-center">
                             <img src="img/p3.png" alt="Vincent Bernardino" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6 class="text-white">Vincent Bernardino</h6>
+                            <h6>Vincent Bernardino</h6>
                             <p class="text-muted">Operations Manager</p>
                         </div>
                         <div class="col-md-3 text-center">
                             <img src="img/p4.png" alt="Paolo Ramos" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6 class="text-white">Paolo Ramos</h6>
+                            <h6>Paolo Ramos</h6>
                             <p class="text-muted">Back-end Developer</p>
                         </div>
                     </div>
@@ -580,9 +580,9 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="text-center display-4 text-white mb-3">Frequently Asked Questions</h1>
-                    <p class="text-center text-white">Find answers to common questions below:</p>
-                    <div id="faqs" class="text-white">
+                    <h1 class="text-center display-4 mb-3">Frequently Asked Questions</h1>
+                    <p class="text-center">Find answers to common questions below:</p>
+                    <div id="faqs">
                         <!-- FAQ content will go here -->
                     </div>
                 </div>
@@ -591,31 +591,10 @@ session_start();
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-dark text-white text-center py-5 border-top">
+    <footer class="bg-dark text-light text-center py-5 border-top">
         <div class="container">
-            <div class="row mb-3">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <h5>About Us</h5>
-                    <p id="footer_about_us"><i class="bi bi-telephone-fill"></i> Loading...</p>
-                </div>
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <h5>Contact Us</h5>
-                    <p>
-                        <small id="footer_contact_number">
-                            <i class="bi bi-telephone-fill"></i>
-                            Loading...
-                        </small>
-                    </p>
-                    <p>
-                        <small id="footer_contact_email">
-                            <i class="bi bi-envelope-fill"></i>
-                            Loading...
-                        </small>
-                    </p>
-                </div>
-            </div>
             <div class="pt-3">
-                <p class="mb-0">&copy; <span id="current-year"></span> BayanLink. All rights reserved.</p>
+                <p>&copy; <span id="current-year"></span> BayanLink. All rights reserved.</p>
             </div>
         </div>
     </footer>

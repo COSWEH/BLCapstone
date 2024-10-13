@@ -161,6 +161,30 @@ if ($user_role != 2) {
 
             <!-- Main Content -->
             <main class="col-12 col-md-10 content border rounded p-3">
+                <!-- number of civilians -->
+                <div class="card mb-3 shadow border-0 rounded-3 col col-lg-3 col-sm-6">
+                    <div class="form-floating">
+                        <select id="brgyFilter" class="form-select" required>
+                            <option value="All" selected>All</option>
+                            <option value="Alua">Alua</option>
+                            <option value="Calaba">Calaba</option>
+                            <option value="Malapit">Malapit</option>
+                            <option value="Mangga">Mangga</option>
+                            <option value="Poblacion">Poblacion</option>
+                            <option value="Pulo">Pulo</option>
+                            <option value="San Roque">San Roque</option>
+                            <option value="Sto. Cristo">Sto. Cristo</option>
+                            <option value="Tabon">Tabon</option>
+                        </select>
+                        <label for="user_brgy" class="form-label">Barangay</label>
+                    </div>
+                </div>
+
+                <div id="showBrgyAnalytics">
+
+                </div>
+
+
                 <div class="card mb-3 shadow border border-2 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Manage Municipal Accounts</h6>
@@ -976,8 +1000,33 @@ if ($user_role != 2) {
         var selectedCity = "<?php echo $_SESSION['user_city']; ?>";
         document.getElementById('placeOfBirth').value = selectedCity + ', Nueva Ecija';
 
-
         $(document).ready(function() {
+            $.post('municipal_includes/brgyusersAnalytics.php', {}, function(data) {
+                $("#showBrgyAnalytics").html(data);
+            });
+
+            //display brgy that is selected
+            function filterResidents() {
+                let brgyFilter = $('#brgyFilter').val();
+                console.log(brgyFilter);
+
+                $.ajax({
+                    url: 'municipal_includes/brgyUsersAnalytics.php',
+                    method: 'POST',
+                    data: {
+                        brgy: brgyFilter,
+                    },
+                    success: function(response) {
+                        $('#showBrgyAnalytics').html(response); // Update the residents list with the response
+                    }
+                });
+            }
+
+            // Trigger the filterResidents function when any of the select dropdowns change
+            $('#brgyFilter').on('change', function() {
+                filterResidents();
+            });
+
             //load all logs from database
             $.post('municipal_includes/showAllLogs.php', {}, function(data) {
                 $("#showLogs").html(data);

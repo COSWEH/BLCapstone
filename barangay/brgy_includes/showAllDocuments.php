@@ -21,9 +21,8 @@ if (!$result) {
     <table class="table align-middle table-bordered border border-3 table-hover text-center text-capitalized">
         <thead class="table-active text-uppercase text-white">
             <tr>
-                <th style="width: 33.33%;"><small>Document ID</small></th>
-                <th style="width: 33.33%;"><small>Document Type</small></th>
-                <th style="width: 33.33%;"><small>Action</small></th>
+                <th style="width: 50%;"><small>Document Type</small></th>
+                <th style="width: 50%;"><small>Action</small></th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +33,6 @@ if (!$result) {
                 $docTypeWithoutBrgy = preg_replace('/\s*\(.*?\)\s*/', '', $docType);
             ?>
                 <tr>
-                    <td><small><?php echo htmlspecialchars($id); ?></small></td>
                     <td><small><?php echo htmlspecialchars($docTypeWithoutBrgy); ?></small></td>
                     <td><button type="button" class="btn btn-sm btn-danger aDelete" data-doc-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#docTypeModal"><i class="bi bi-trash"></i></button></td>
                 </tr>

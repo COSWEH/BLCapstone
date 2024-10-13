@@ -11,10 +11,14 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id'])) {
 // echo ".";
 $getUserid = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
+$adminBrgy = $_SESSION['user_brgy'];
 
 // Validate the user against the database
 $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
 $countUser = mysqli_num_rows($checkUser);
+
+$getRegisteredUsers = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_brgy` = '$adminBrgy' && `role_id` = 0");
+$countGetRegisteredUsers = mysqli_num_rows($getRegisteredUsers);
 
 // If user does not exist, sign out
 if ($countUser < 1) {
@@ -26,6 +30,23 @@ if ($countUser < 1) {
 if ($user_role != 1) {
     header('Location: ../unauthorized.php');
     exit;
+}
+
+function countMaleFemaleUsers($con, $adminBrgy, $sex)
+{
+    $getUserSex = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_brgy` = '$adminBrgy' && `user_gender` = '$sex' && `role_id` = 0");
+    $countGetUserSex = mysqli_num_rows($getUserSex);
+
+    return $countGetUserSex;
+}
+
+function countDocumentReleased($con, $adminBrgy, $docType)
+{
+    $adminBrgy = strtolower($adminBrgy);
+    $getDocType = mysqli_query($con, "SELECT * FROM `tbl_requests` WHERE `req_brgy` = '$adminBrgy' && `req_typeOfDoc` = '$docType($adminBrgy)' && `req_status` = 'Approved'");
+    $countGetDocType = mysqli_num_rows($getDocType);
+
+    return $countGetDocType;
 }
 ?>
 
@@ -156,6 +177,89 @@ if ($user_role != 1) {
 
             <!-- main content -->
             <main class="col-12 col-md-10 content border rounded p-3">
+
+                <!-- number of civilians -->
+                <div class="card mb-3 shadow border-0 rounded-3">
+                    <div class="row">
+                        <div class="col col-lg-4 col-sm-12">
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-people-fill fs-1 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo $countGetRegisteredUsers; ?>
+                                </h2>
+                            </div>
+                            <h6 class="text-center mb-3">Total Registered Users in Barangay</h6>
+                        </div>
+
+                        <div class="col col-lg-4 col-sm-12">
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-gender-male fs-1 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo countMaleFemaleUsers($con, $adminBrgy, 'Male'); ?>
+                                </h2>
+                            </div>
+                            <h6 class="text-center mb-3">Total Male Users in Barangay</h6>
+                        </div>
+
+                        <div class="col col-lg-4 col-sm-12">
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-gender-female fs-1 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo countMaleFemaleUsers($con, $adminBrgy, 'Female'); ?>
+                                </h2>
+                            </div>
+                            <h6 class="text-center mb-3">Total Female Users in Barangay</h6>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- number of document relased -->
+                <div class="card mb-3 shadow border-0 rounded-3 p-2">
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-6 col-sm-12">
+                            <h6 class="mt-3 text-center">Barangay Clearance</h6>
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Clearance'); ?>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-3 col-md-6 col-sm-12">
+                            <h6 class="mt-3 text-center">Barangay Indigency</h6>
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Indigency'); ?>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-3 col-md-6 col-sm-12">
+                            <h6 class="mt-3 text-center">Barangay Residency</h6>
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Residency'); ?>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-3 col-md-6 col-sm-12">
+                            <h6 class="mt-3 text-center">Job Seeker</h6>
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                <h2 class="fw-bold me-5">
+                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Job Seeker'); ?>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="ms-3 mb-3">Total Document Released</h6>
+                </div>
+
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Manage Barangay Accounts</h6>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2024 at 11:11 AM
+-- Generation Time: Oct 13, 2024 at 07:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -130,31 +130,18 @@ CREATE TABLE `tbl_logs` (
 --
 
 INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
-(1, 'User pao requested a Barangay Clearance(malapit)', '2024-10-07 21:43:44', 2),
-(2, 'User pao requested a Barangay Clearance(malapit)', '2024-10-07 21:45:34', 2),
-(3, 'User pao requested a Barangay Indigency(malapit)', '2024-10-07 22:01:44', 2),
-(4, 'User Qwerty123 proccessed a document', '2024-10-08 00:05:14', 1),
-(5, 'User Qwerty123 approved a document', '2024-10-08 15:32:23', 1),
-(6, 'User Qwerty123 proccessed a document', '2024-10-08 15:46:16', 1),
-(7, 'User Qwerty123 cancelled a document', '2024-10-08 16:05:58', 1),
-(8, 'User pao requested a Job Seeker(malapit)', '2024-10-09 20:47:04', 2),
-(9, 'User Qwerty123 proccessed a document', '2024-10-09 20:48:18', 1),
-(10, 'User Qwerty123 created a post', '2024-10-09 23:15:48', 1),
-(11, 'User Qwerty123 deleted a post', '2024-10-09 23:15:57', 1),
-(12, 'User Qwerty123 created a post', '2024-10-10 14:28:53', 1),
-(13, 'User Qwerty123 deleted a post', '2024-10-10 14:28:57', 1),
-(14, 'User Qwerty123 updated a post', '2024-10-10 14:32:16', 1),
-(15, 'User Qwerty123 created a post', '2024-10-10 14:36:07', 1),
-(16, 'User Qwerty123 deleted a post', '2024-10-10 14:36:11', 1),
-(17, 'User Qwerty123 created a post', '2024-10-10 14:36:38', 1),
-(18, 'User Qwerty123 deleted a post', '2024-10-10 14:36:55', 1),
-(19, 'User pao9999 requested a Barangay Residency(malapit)', '2024-10-11 10:23:36', 37),
-(20, 'User Qwerty123 proccessed a document', '2024-10-11 10:25:57', 1),
-(21, 'User Qwerty123 approved a document', '2024-10-11 10:26:26', 1),
-(22, 'User pao9999 requested a Job Seeker(malapit)', '2024-10-11 10:27:29', 37),
-(23, 'User Qwerty123 cancelled a document', '2024-10-11 10:28:02', 1),
-(24, 'User Qwerty123 created a post', '2024-10-11 10:30:43', 1),
-(25, 'Admin account registered by Qwerty123.', '2024-10-11 10:34:39', 1);
+(1, 'User pao requested a Barangay Clearance(malapit)', '2024-10-13 15:33:42', 2),
+(2, 'User Qwerty123 proccessed a document', '2024-10-13 15:33:52', 1),
+(3, 'User Qwerty123 approved a document', '2024-10-13 15:39:59', 1),
+(4, 'User qqqqq requested a Job Seeker(poblacion)', '2024-10-13 16:00:00', 10),
+(5, 'User Qwerty123 proccessed a document', '2024-10-13 16:00:31', 1),
+(6, 'User Qwerty123 approved a document', '2024-10-13 16:00:56', 1),
+(7, 'User pao requested a Barangay Clearance(malapit)', '2024-10-13 18:51:21', 2),
+(8, 'User Qwerty123 proccessed a document', '2024-10-13 18:51:39', 1),
+(9, 'User Qwerty123 approved a document', '2024-10-13 18:51:50', 1),
+(10, 'User qqqqq requested a Barangay Indigency(poblacion)', '2024-10-13 18:53:15', 10),
+(11, 'User Qwerty123 proccessed a document', '2024-10-13 18:54:08', 1),
+(12, 'User Qwerty123 approved a document', '2024-10-13 18:54:16', 1);
 
 -- --------------------------------------------------------
 
@@ -175,30 +162,14 @@ CREATE TABLE `tbl_notification` (
 --
 
 INSERT INTO `tbl_notification` (`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES
-(1, 2, 'Processed', 'read', '2024-10-05 11:56:07'),
-(2, 2, 'Processed', 'read', '2024-10-05 11:57:05'),
-(3, 2, 'Approved', 'read', '2024-10-05 12:00:07'),
-(4, 2, 'Approved', 'read', '2024-10-05 12:00:11'),
-(5, 2, 'Processed', 'read', '2024-10-05 12:01:03'),
-(6, 2, 'Approved', 'read', '2024-10-05 12:02:08'),
-(7, 2, 'Processed', 'read', '2024-10-05 14:23:30'),
-(8, 2, 'Approved', 'read', '2024-10-05 14:24:11'),
-(9, 2, 'Processed', 'read', '2024-10-05 14:25:54'),
-(10, 2, 'Approved', 'read', '2024-10-05 14:27:04'),
-(11, 2, 'Processed', 'read', '2024-10-05 14:34:23'),
-(12, 2, 'Approved', 'read', '2024-10-05 14:42:21'),
-(13, 2, 'Cancelled', 'read', '2024-10-05 14:44:57'),
-(14, 2, 'Processed', 'read', '2024-10-05 15:01:31'),
-(15, 2, 'Approved', 'read', '2024-10-05 15:04:17'),
-(16, 2, 'Processed', 'read', '2024-10-05 15:09:33'),
-(17, 2, 'Processed', 'read', '2024-10-08 00:05:14'),
-(18, 2, 'Approved', 'read', '2024-10-08 15:32:23'),
-(19, 2, 'Processed', 'read', '2024-10-08 15:46:16'),
-(20, 2, 'Cancelled', 'read', '2024-10-08 16:05:58'),
-(21, 2, 'Processed', 'read', '2024-10-09 20:48:18'),
-(22, 37, 'Processed', 'read', '2024-10-11 10:25:57'),
-(23, 37, 'Approved', 'read', '2024-10-11 10:26:26'),
-(24, 37, 'Cancelled', 'unread', '2024-10-11 10:28:02');
+(1, 2, 'Processed', 'unread', '2024-10-13 15:33:52'),
+(2, 2, 'Approved', 'unread', '2024-10-13 15:39:59'),
+(3, 10, 'Processed', 'read', '2024-10-13 16:00:31'),
+(4, 10, 'Approved', 'read', '2024-10-13 16:00:56'),
+(5, 2, 'Processed', 'unread', '2024-10-13 18:51:39'),
+(6, 2, 'Approved', 'unread', '2024-10-13 18:51:50'),
+(7, 10, 'Processed', 'unread', '2024-10-13 18:54:08'),
+(8, 10, 'Approved', 'unread', '2024-10-13 18:54:16');
 
 -- --------------------------------------------------------
 
@@ -260,12 +231,10 @@ CREATE TABLE `tbl_requests` (
 --
 
 INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `authLetter`, `req_valid_front_id`, `req_valid_back_id`, `req_status`, `req_reasons`) VALUES
-(1, 2, '2024-10-07 21:43:44', 'Adasd', 'Asdasd', 'Asdasdasd', '09876543212', 'Male', 'Malapit', 'Purok 2', 23, '2001-01-01', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-6703e590c5913].png', 'Barangay Clearance(malapit)', 'brgyPost-[BayanLink-6703e590c5682].jpg', 'id-[BayanLink-6703e590c5917].png', 'id-[BayanLink-6703e590c5919].png', 'Pending', NULL),
-(2, 2, '2024-10-08 15:32:23', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 23, '2001-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-6703e5fe8ba90].png', 'Barangay Clearance(malapit)', '', 'id-[BayanLink-6703e5fe8ba94].png', 'id-[BayanLink-6703e5fe8ba95].png', 'Approved', NULL),
-(3, 2, '2024-10-08 16:05:58', 'Asdasd', 'Asdasd', 'Asdasd', '09876543212', 'Male', 'Malapit', 'Purok 2', 23, '2000-11-11', 'San Isidro, Nueva Ecija', 'Single', 'c-[BayanLink-6703e9c85be37].jpg', 'Barangay Indigency(malapit)', 'brgyPost2-[BayanLink-6703e9c85bbb9].jpg', 'as-[BayanLink-6703e9c85be3a].png', 'doThis-[BayanLink-6703e9c85be3c].png', 'Cancelled', 'Duplicate submission, Invalid or expired information, User account issue, Document no longer applicable, '),
-(4, 2, '2024-10-09 20:48:18', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 23, '2001-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-67067b4846851].png', 'Job Seeker(malapit)', '', 'id-[BayanLink-67067b4846855].png', 'id-[BayanLink-67067b4846856].png', 'Processing', NULL),
-(5, 37, '2024-10-11 10:26:26', 'Paolo', 'Marvel', 'Ramos', '09876543121', 'Male', 'Malapit', 'Purok 2', 22, '2002-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-67088c2884106].png', 'Barangay Residency(malapit)', '', 'id-[BayanLink-67088c288410a].png', 'id-[BayanLink-67088c288410b].png', 'Approved', NULL),
-(6, 37, '2024-10-11 10:28:02', 'Paolo', 'Marvel', 'Ramos', '09876543121', 'Male', 'Malapit', 'Purok 2', 22, '2002-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-67088d117e393].png', 'Job Seeker(malapit)', '', 'id-[BayanLink-67088d117e397].png', 'id-[BayanLink-67088d117e399].png', 'Cancelled', 'Incomplete request details, Duplicate submission, Invalid or expired information, Insufficient supporting documents, User account issue, Document no longer applicable, sige');
+(1, 2, '2024-10-13 15:39:59', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 22, '2002-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-670b77d6e708f].png', 'Barangay Clearance(malapit)', '', 'id-[BayanLink-670b77d6e7093].png', 'id-[BayanLink-670b77d6e7095].png', 'Approved', NULL),
+(2, 10, '2024-10-13 16:00:56', 'Qqqqq', 'Qqqqq', 'Qqqqq', '09876543212', 'Male', 'Poblacion', 'Purok 1', 23, '2001-01-01', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-670b7e0011f63].png', 'Job Seeker(poblacion)', '', 'id-[BayanLink-670b7e0011f67].png', 'id-[BayanLink-670b7e0011f69].png', 'Approved', NULL),
+(3, 2, '2024-10-13 18:51:50', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 22, '2002-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-670ba629d53a5].png', 'Barangay Clearance(malapit)', '', 'id-[BayanLink-670ba629d53a9].png', 'id-[BayanLink-670ba629d53aa].png', 'Approved', NULL),
+(4, 10, '2024-10-13 18:54:16', 'Qqqqq', 'Qqqqq', 'Qqqqq', '09876543212', 'Male', 'Poblacion', 'Purok 1', 23, '2001-01-01', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-670ba69b2bd46].png', 'Barangay Indigency(poblacion)', '', 'id-[BayanLink-670ba69b2bd4a].png', 'id-[BayanLink-670ba69b2bd4c].png', 'Approved', NULL);
 
 -- --------------------------------------------------------
 
@@ -407,7 +376,7 @@ CREATE TABLE `tbl_useracc` (
 
 INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_contactNum`, `dateOfBirth`, `user_age`, `placeOfBirth`, `civilStatus`, `user_city`, `user_purok`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
 (1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', '2002-04-29', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'qwerty123@gmail.com', 'Qwerty123', '$2y$10$ulORW5LZ1bhPitfMf16P8OCxXOj2W6ZSg4r2ctiG/BCHssNYIMw6m', 1, '2024-08-30 17:52:50', NULL, NULL),
-(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '2001-04-28', 23, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'pao@gmail.com', 'pao', '$2y$10$XJrxMneiIKx6/lzOQDatPeJ.22aZj4fn1UCuB7z1auIWQLaZSLX6G', 0, '2024-08-30 17:54:44', NULL, NULL),
+(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '2002-04-28', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'pao@gmail.com', 'pao', '$2y$10$XJrxMneiIKx6/lzOQDatPeJ.22aZj4fn1UCuB7z1auIWQLaZSLX6G', 0, '2024-08-30 17:54:44', NULL, NULL),
 (3, 'Yes', 'Malapit', 'Zxc', 'Zxc', 'Zxc', 'Female', '09876543212', '2004-01-01', 20, 'San Isidro', 'Single', 'San Isidro', 'Purok 2', 'zxc@gmail.com', 'Qwerty123', '$2y$10$hYs6kcCtafVx1Gg7SaFtje2QBGhaa6VbS6Egj74aO0VaL1FzHNp7y', 0, '2024-08-30 21:07:05', NULL, NULL),
 (5, 'Yes', 'Malapit', 'Admin', 'Admin', 'Admin', 'Male', '09876543212', '1985-12-12', 38, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', 'Purok 2', 'admin@gmail.com', 'admin123', '$2y$10$UO478AZvC84E/gvG/L9zd.hONFYVHwbtz1.7ATL7KpptBfq7efpGi', 2, '2024-08-31 17:13:37', NULL, NULL),
 (10, 'Yes', 'Poblacion', 'Qqqqq', 'Qqqqq', 'Qqqqq', 'Male', '09876543212', '2001-01-01', 23, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'qqqqq@gmail.com', 'qqqqq', '$2y$10$kBEWADlwrLYKowAInb4AAu/gvCRtIHuEodmGxUHND.jZSIaDMugFe', 0, '2024-09-15 20:44:27', NULL, NULL),
@@ -548,13 +517,13 @@ ALTER TABLE `tbl_home`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `notify_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `notify_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_posts`
@@ -566,7 +535,7 @@ ALTER TABLE `tbl_posts`
 -- AUTO_INCREMENT for table `tbl_requests`
 --
 ALTER TABLE `tbl_requests`
-  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_services`
