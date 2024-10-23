@@ -48,8 +48,54 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             $imgBaseName = pathinfo($imgName, PATHINFO_FILENAME);
             $newImgName = $imgBaseName . '-[BayanLink-' . uniqid() . '].' . $imgExtension;
 
-            // move to the local folder
-            move_uploaded_file($tmpName, '../brgy_dbImages/' . $newImgName);
+            $imageResource = null;
+
+            switch ($imgExtension) {
+                case 'jpeg':
+                case 'jpg':
+                    $imageResource = imagecreatefromjpeg($tmpName);
+                    break;
+                case 'png':
+                    $imageResource = imagecreatefrompng($tmpName);
+                    break;
+                case 'gif':
+                    $imageResource = imagecreatefromgif($tmpName);
+                    break;
+                default:
+                    die('Unsupported image format.');
+            }
+
+            $originalWidth = imagesx($imageResource);
+            $originalHeight = imagesy($imageResource);
+
+            $newImageResource = imagecreatetruecolor(750, 750);
+            $backgroundColor = imagecolorallocate($newImageResource, 18, 18, 20);
+            imagefill($newImageResource, 0, 0, $backgroundColor);
+
+            $scale = min(750 / $originalWidth, 750 / $originalHeight);
+            $newWidth = (int)($originalWidth * $scale);
+            $newHeight = (int)($originalHeight * $scale);
+
+            imagecopyresampled($newImageResource, $imageResource, (750 - $newWidth) / 2, (750 - $newHeight) / 2, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
+
+            // Save the resized image
+            switch ($imgExtension) {
+                case 'jpeg':
+                case 'jpg':
+                    imagejpeg($newImageResource, '../brgy_dbImages/' . $newImgName);
+                    break;
+                case 'png':
+                    imagepng($newImageResource, '../brgy_dbImages/' . $newImgName);
+                    break;
+                case 'gif':
+                    imagegif($newImageResource, '../brgy_dbImages/' . $newImgName);
+                    break;
+            }
+
+            // Free up memory
+            imagedestroy($imageResource);
+            imagedestroy($newImageResource);
+
             $selectedImgArray[] = $newImgName;
         }
     } else {

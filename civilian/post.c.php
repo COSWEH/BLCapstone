@@ -76,20 +76,27 @@ if ($user_role != 0) {
                 <div class="d-flex align-items-center mt-2">
                     <?php
                     $getGender = $_SESSION['user_gender'];
-                    if ($getGender == "Male") {
-                        echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
+                    $getUserProfile = $_SESSION['user_profile'];
+
+                    if (!empty($getUserProfile)) {
+                        echo '<img src="civilian_dbImg/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                     } else {
-                        echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
+                        if ($getGender == "Male") {
+                            echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        } else {
+                            echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        }
                     }
+
                     ?>
                     <div>
-                        <p class="mb-1">
+                        <p class="mb-1 ms-1">
                             <?php
                             $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
                             echo ucwords($fullname);
                             ?>
                         </p>
-                        <span class="badge text-bg-primary">Resident</span>
+                        <span class="badge text-bg-primary ms-1">Resident</span>
                     </div>
                 </div>
             </div>
@@ -146,10 +153,16 @@ if ($user_role != 0) {
                 <div class=" text-center">
                     <?php
                     $getGender = $_SESSION['user_gender'];
-                    if ($getGender == "Male") {
-                        echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                    $getUserProfile = $_SESSION['user_profile'];
+
+                    if (!empty($getUserProfile)) {
+                        echo '<img src="civilian_dbImg/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
                     } else {
-                        echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                        if ($getGender == "Male") {
+                            echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                        } else {
+                            echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                        }
                     }
                     ?>
                     <h6 class="mb-1">

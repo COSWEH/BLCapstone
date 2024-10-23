@@ -9,6 +9,7 @@ if (isset($_POST['baBtnCreatePost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $imgCount = count($_FILES['bgAddPhotos']['name']);
         $imgArray = array();
         $maxSize = 8 * 1024 * 1024; // 8MB in bytes
+        $targetDimension = 750;
 
         for ($i = 0; $i < $imgCount; $i++) {
             $imgName = $_FILES['bgAddPhotos']['name'][$i];
@@ -26,8 +27,65 @@ if (isset($_POST['baBtnCreatePost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             $imgBaseName = pathinfo($imgName, PATHINFO_FILENAME);
             $newImgName = $imgBaseName . '-[BayanLink-' . uniqid() . '].' . $imgExtension;
 
-            // move to the local folder
-            move_uploaded_file($tmpName, '../brgy_dbImages/' . $newImgName);
+            // Load the image
+            list($width, $height) = getimagesize($tmpName);
+            $imageResource = null;
+
+            switch ($imgExtension) {
+                case 'jpeg':
+                case 'jpg':
+                    $imageResource = imagecreatefromjpeg($tmpName);
+                    break;
+                case 'png':
+                    $imageResource = imagecreatefrompng($tmpName);
+                    break;
+                case 'gif':
+                    $imageResource = imagecreatefromgif($tmpName);
+                    break;
+                default:
+                    die('Unsupported image format.');
+            }
+
+            $squareImage = imagecreatetruecolor($targetDimension, $targetDimension);
+
+            $bgColor = imagecolorallocate($squareImage, 18, 18, 20);
+            imagefill($squareImage, 0, 0, $bgColor);
+
+            // Determine new width and height to fit the target size
+            if ($width > $height) {
+                $newWidth = $targetDimension;
+                $newHeight = intval($height * ($targetDimension / $width));
+            } else {
+                $newHeight = $targetDimension;
+                $newWidth = intval($width * ($targetDimension / $height));
+            }
+
+            // Center the image in the square
+            $xOffset = intval(($targetDimension - $newWidth) / 2);
+            $yOffset = intval(($targetDimension - $newHeight) / 2);
+
+            // Resize the image and place it in the square canvas
+            imagecopyresampled($squareImage, $imageResource, $xOffset, $yOffset, 0, 0, $newWidth, $newHeight, $width, $height);
+
+            // Save the new image to the local folder
+            $destination = '../brgy_dbImages/' . $newImgName;
+            switch ($imgExtension) {
+                case 'jpeg':
+                case 'jpg':
+                    imagejpeg($squareImage, $destination);
+                    break;
+                case 'png':
+                    imagepng($squareImage, $destination);
+                    break;
+                case 'gif':
+                    imagegif($squareImage, $destination);
+                    break;
+            }
+
+            // Free memory
+            imagedestroy($imageResource);
+            imagedestroy($squareImage);
+
             $imgArray[] = $newImgName;
         }
         $imgArray = json_encode($imgArray);

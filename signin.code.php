@@ -54,6 +54,7 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['password'] = $row['password'];
                     $_SESSION['role_id'] = $row['role_id'];
+                    $_SESSION['user_profile'] = $row['user_profile'];
 
                     if ($_SESSION['role_id'] == 2) {
                         header('Location: municipal/superAdminPost.m.php');

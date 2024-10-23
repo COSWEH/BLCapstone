@@ -74,20 +74,26 @@ if ($user_role != 0) {
                 <div class="d-flex align-items-center mt-2">
                     <?php
                     $getGender = $_SESSION['user_gender'];
-                    if ($getGender == "Male") {
-                        echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
+                    $getUserProfile = $_SESSION['user_profile'];
+
+                    if (!empty($getUserProfile)) {
+                        echo '<img src="civilian_dbImg/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                     } else {
-                        echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">';
+                        if ($getGender == "Male") {
+                            echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        } else {
+                            echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        }
                     }
                     ?>
                     <div>
-                        <p class="mb-1">
+                        <p class="mb-1 ms-1">
                             <?php
                             $fullname = $_SESSION['user_fname'] . " " . $_SESSION['user_mname'] . " " . $_SESSION['user_lname'];
                             echo ucwords($fullname);
                             ?>
                         </p>
-                        <span class="badge text-bg-primary">Resident</span>
+                        <span class="badge text-bg-primary ms-1">Resident</span>
                     </div>
                 </div>
             </div>
@@ -145,10 +151,16 @@ if ($user_role != 0) {
                 <div class="text-center">
                     <?php
                     $getGender = $_SESSION['user_gender'];
-                    if ($getGender == "Male") {
-                        echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                    $getUserProfile = $_SESSION['user_profile'];
+
+                    if (!empty($getUserProfile)) {
+                        echo '<img src="civilian_dbImg/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
                     } else {
-                        echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                        if ($getGender == "Male") {
+                            echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                        } else {
+                            echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                        }
                     }
                     ?>
                     <h6 class="mb-1">
@@ -336,10 +348,38 @@ if ($user_role != 0) {
                     <p class="text-muted">Update your personal information as needed.</p>
 
                     <div class="container">
-                        <form action="civilian_includes/update_information.c.php" method="POST">
+                        <form action="civilian_includes/update_information.c.php" method="POST" enctype="multipart/form-data">
                             <h4 class="h4 ">Personal Information</h4>
+                            <div class="mb-2 position-relative">
+                                <div>
+                                    <?php
+                                    $getGender = $_SESSION['user_gender'];
+                                    $getUserProfile = $_SESSION['user_profile'];
+
+                                    if (!empty($getUserProfile)) {
+                                        echo '<img id="profileImage" src="civilian_dbImg/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                                    } else {
+                                        if ($getGender == "Male") {
+                                            echo '<img id="profileImage" src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                                        } else {
+                                            echo '<img id="profileImage" src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">';
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <button type="button" class="btn rounded-circle position-absolute bottom-0 start-50 translate-middle-x" id="uploadIconBtn" title="Change Profile Picture">
+                                    <i class="bi bi-camera fs-4"></i>
+                                </button>
+
+                                <!-- Hidden file input for selecting new profile image -->
+                                <input type="file" id="profileImageInput" name="profile_image" class="d-none" accept="image/*">
+
+                                <!-- Hidden input to store the current profile picture filename -->
+                                <input type="hidden" name="current_profile_image" value="<?php echo !empty($getUserProfile) ? $getUserProfile : ''; ?>">
+                            </div>
+
                             <!-- Dropdown for San Isidro -->
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-2">
                                 <?php
                                 $selectedValue = isset($_SESSION['fromSanIsidro']) ? $_SESSION['fromSanIsidro'] : '';
                                 ?>
@@ -352,7 +392,7 @@ if ($user_role != 0) {
                             </div>
 
                             <!-- Barangay -->
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-2">
                                 <select name="barangay" id="user_brgy" class="form-select" required>
                                     <option value="" disabled selected>Select Barangay</option>
                                     <option value="Alua">Alua</option>
@@ -369,7 +409,7 @@ if ($user_role != 0) {
                             </div>
                             <hr>
                             <!-- Full Name -->
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-md-4">
                                     <div class="form-floating mb-2">
                                         <input type="text" name="fname" class="form-control" id="user_fname" placeholder="First Name" required pattern="^[a-zA-Z\s\-]+$" value="<?php echo $_SESSION['user_fname']; ?>">
@@ -392,7 +432,7 @@ if ($user_role != 0) {
                             <!-- gender -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating mb-2">
                                         <select name="gender" id="user_gender" class="form-select" required>
                                             <option value="" disabled>Select Male or Female</option>
                                             <?php
@@ -414,7 +454,7 @@ if ($user_role != 0) {
                                     <?php
                                     $selectedPurok = isset($_SESSION['user_purok']) ? $_SESSION['user_purok'] : '';
                                     ?>
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating mb-2">
                                         <select name="user_purok" class="form-select" id="user_purok" required>
                                             <option value="" disabled <?php echo $selectedPurok === '' ? 'selected' : ''; ?>>Select Purok</option>
                                             <option value="Purok 1" <?php echo $selectedPurok === 'Purok 1' ? 'selected' : ''; ?>>Purok 1</option>
@@ -430,18 +470,18 @@ if ($user_role != 0) {
                                 </div>
                             </div>
 
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-2">
                                 <input type="number" name="contactNum" class="form-control" id="user_contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789)" value="<?php echo $_SESSION['user_contactNum']; ?>">
                                 <label for="user_contactNum" class="form-label">Contact Number</label>
                             </div>
 
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-2">
                                 <input id="dateOfBirth" class="form-control" type="date" name="dateOfBirth" placeholder="Date of Birth" required
                                     value="<?php echo isset($_SESSION['dateOfBirth']) ? htmlspecialchars($_SESSION['dateOfBirth']) : ''; ?>">
                                 <label for="dateOfBirth">Date of Birth</label>
                             </div>
 
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-2">
                                 <input id="placeOfBirth" class="form-control" type="text" name="placeOfBirth" placeholder="Place of Birth" required
                                     value="<?php echo isset($_SESSION['placeOfBirth']) ? htmlspecialchars($_SESSION['placeOfBirth']) : ''; ?>">
                                 <label for="placeOfBirth">Place of Birth</label>
@@ -449,7 +489,7 @@ if ($user_role != 0) {
 
 
 
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-2">
                                 <select id="civilStatus" name="civilStatus" class="form-select" required>
                                     <option value="" disabled <?php echo !isset($_SESSION['civilStatus']) ? 'selected' : ''; ?>>Choose Status</option>
                                     <option value="Single" <?php echo isset($_SESSION['civilStatus']) && $_SESSION['civilStatus'] == 'Single' ? 'selected' : ''; ?>>Single</option>
@@ -463,7 +503,7 @@ if ($user_role != 0) {
 
                             <h4 class="h4 ">Account Information</h4>
                             <!-- Email and Username -->
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-2">
                                         <input type="email" name="email" class="form-control" id="user_email" placeholder="Email Address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="e.g., juandelacruz143@gmail.com" value="<?php echo $_SESSION['user_email']; ?>">
@@ -520,6 +560,22 @@ if ($user_role != 0) {
 
     <script>
         $(document).ready(function() {
+            document.getElementById('uploadIconBtn').addEventListener('click', function() {
+                document.getElementById('profileImageInput').click();
+            });
+
+            // Show the preview of the selected image
+            document.getElementById('profileImageInput').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('profileImage').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
             // update status to read
             document.getElementById("notificationButton").addEventListener("click", function() {
                 showNotification();

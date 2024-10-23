@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2024 at 07:35 PM
+-- Generation Time: Oct 23, 2024 at 11:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -141,7 +141,57 @@ INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
 (9, 'User Qwerty123 approved a document', '2024-10-13 18:51:50', 1),
 (10, 'User qqqqq requested a Barangay Indigency(poblacion)', '2024-10-13 18:53:15', 10),
 (11, 'User Qwerty123 proccessed a document', '2024-10-13 18:54:08', 1),
-(12, 'User Qwerty123 approved a document', '2024-10-13 18:54:16', 1);
+(12, 'User Qwerty123 approved a document', '2024-10-13 18:54:16', 1),
+(13, 'User pao updated his/her information', '2024-10-23 09:39:56', 2),
+(14, 'User pao updated his/her information', '2024-10-23 09:40:06', 2),
+(15, 'User pao updated his/her information', '2024-10-23 09:47:29', 2),
+(16, 'User pao updated his/her information', '2024-10-23 09:47:54', 2),
+(17, 'User pao updated his/her information', '2024-10-23 09:48:33', 2),
+(18, 'User pao updated his/her information', '2024-10-23 09:49:19', 2),
+(19, 'User pao updated his/her information', '2024-10-23 10:16:25', 2),
+(20, 'User pao updated his/her information', '2024-10-23 10:16:53', 2),
+(21, 'User pao updated his/her information', '2024-10-23 10:18:28', 2),
+(22, 'User Qwerty123 created a post', '2024-10-23 11:11:51', 1),
+(23, 'User Qwerty123 updated a post', '2024-10-23 11:12:19', 1),
+(24, 'User Qwerty123 updated a post', '2024-10-23 11:12:36', 1),
+(25, 'User Qwerty123 deleted a post', '2024-10-23 11:12:44', 1),
+(26, 'User Qwerty123 created a post', '2024-10-23 11:12:52', 1),
+(27, 'User Qwerty123 deleted a post', '2024-10-23 11:13:06', 1),
+(28, 'User Qwerty123 deleted a post', '2024-10-23 11:13:10', 1),
+(29, 'User Qwerty123 deleted a post', '2024-10-23 11:13:13', 1),
+(30, 'User Qwerty123 created a post', '2024-10-23 11:13:41', 1),
+(31, 'User Qwerty123 deleted a post', '2024-10-23 11:16:51', 1),
+(32, 'User Qwerty123 created a post', '2024-10-23 11:16:59', 1),
+(33, 'User Qwerty123 deleted a post', '2024-10-23 11:17:07', 1),
+(34, 'User Qwerty123 created a post', '2024-10-23 11:17:31', 1),
+(35, 'User Qwerty123 created a post', '2024-10-23 11:19:39', 1),
+(36, 'User Qwerty123 created a post', '2024-10-23 11:20:10', 1),
+(37, 'User Qwerty123 created a post', '2024-10-23 11:20:32', 1),
+(38, 'User Qwerty123 deleted a post', '2024-10-23 11:21:02', 1),
+(39, 'User Qwerty123 deleted a post', '2024-10-23 11:21:17', 1),
+(40, 'User Qwerty123 deleted a post', '2024-10-23 11:21:20', 1),
+(41, 'User Qwerty123 deleted a post', '2024-10-23 11:21:28', 1),
+(42, 'User Qwerty123 created a post', '2024-10-23 11:21:49', 1),
+(43, 'User Qwerty123 created a post', '2024-10-23 11:22:01', 1),
+(44, 'User Qwerty123 deleted a post', '2024-10-23 11:22:27', 1),
+(45, 'User Qwerty123 deleted a post', '2024-10-23 11:22:34', 1),
+(46, 'User Qwerty123 created a post', '2024-10-23 11:26:50', 1),
+(47, 'User Qwerty123 updated a post', '2024-10-23 11:27:03', 1),
+(48, 'User Qwerty123 updated a post', '2024-10-23 11:27:32', 1),
+(49, 'User Qwerty123 updated a post', '2024-10-23 11:27:44', 1),
+(50, 'User Qwerty123 deleted a post', '2024-10-23 11:32:40', 1),
+(51, 'User admin123 created a post', '2024-10-23 11:34:58', 5),
+(52, 'User admin123 deleted a posts', '2024-10-23 11:35:08', 5),
+(53, 'User admin123 deleted a posts', '2024-10-23 11:35:10', 5),
+(54, 'User admin123 deleted a posts', '2024-10-23 11:35:14', 5),
+(55, 'User admin123 created a post', '2024-10-23 11:37:24', 5),
+(56, 'User admin123 updated a post', '2024-10-23 11:37:39', 5),
+(57, 'User admin123 deleted a posts', '2024-10-23 11:37:55', 5),
+(58, 'User admin123 created a post', '2024-10-23 11:38:19', 5),
+(59, 'User admin123 updated a post', '2024-10-23 11:38:57', 5),
+(60, 'User admin123 deleted a posts', '2024-10-23 11:39:06', 5),
+(61, 'User Qwerty123 created a post', '2024-10-23 11:39:56', 1),
+(62, 'User Qwerty123 deleted a post', '2024-10-23 11:40:02', 1);
 
 -- --------------------------------------------------------
 
@@ -162,12 +212,12 @@ CREATE TABLE `tbl_notification` (
 --
 
 INSERT INTO `tbl_notification` (`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES
-(1, 2, 'Processed', 'unread', '2024-10-13 15:33:52'),
-(2, 2, 'Approved', 'unread', '2024-10-13 15:39:59'),
+(1, 2, 'Processed', 'read', '2024-10-13 15:33:52'),
+(2, 2, 'Approved', 'read', '2024-10-13 15:39:59'),
 (3, 10, 'Processed', 'read', '2024-10-13 16:00:31'),
 (4, 10, 'Approved', 'read', '2024-10-13 16:00:56'),
-(5, 2, 'Processed', 'unread', '2024-10-13 18:51:39'),
-(6, 2, 'Approved', 'unread', '2024-10-13 18:51:50'),
+(5, 2, 'Processed', 'read', '2024-10-13 18:51:39'),
+(6, 2, 'Approved', 'read', '2024-10-13 18:51:50'),
 (7, 10, 'Processed', 'unread', '2024-10-13 18:54:08'),
 (8, 10, 'Approved', 'unread', '2024-10-13 18:54:16');
 
@@ -185,16 +235,6 @@ CREATE TABLE `tbl_posts` (
   `post_img` text NOT NULL,
   `post_date` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_posts`
---
-
-INSERT INTO `tbl_posts` (`post_id`, `user_id`, `post_brgy`, `post_content`, `post_img`, `post_date`) VALUES
-(1, 5, 'Municipal', 'Narito po muli ang datos ngayong araw ng Martes (June 28), 3PM sa Covid-19 Bulletin ng ating Bayan kada barangay mula sa ating Municipal Health Office at Municipal IATF. \r\nWala po tayong active case/s. \r\nNgayon po ay mayroon tayong 792 Confirmed Covid-19 cases. 719 po dito ay recovered o gumaling na. Dagdag po dito ang 73 Confirmed Deaths. \r\nWala rin po tayong Suspected. Ang  suspected case/s ay na-swab test na indibidwal at hinihintay po ang resulta nito. Ang iba naman po ay mga indibidwal na may mga sintomas na nararanasan. \r\nIbayong pagiingat pa din po dahil ito na po ang “new normal” dahil sa virus na Covid 19.\r\nTulong-tulong po tayong labanan ang Covid 19 mga kapwa Isidoreans. Sumunod tayo sa health protocols. Kaya natin! ', '[\"municipalPost-[BayanLink-66f76752995ce].jpg\"]', '2024-09-28 10:17:54'),
-(3, 5, 'Municipal', 'CALL FOR DONATIONS!!! 📣📣📣\r\nWe are urgently seeking your help in collecting 1.5 PLASTIC BOTTLES\r\nThis will help in the creation of SPILL BOOMS and contain OIL SPILLS in the affected coastal areas.\r\nFor donations, please drop off the bottle at MENRO - San Isidro,Nueva Ecija Office located at the Ground Floor, Municipal Hall, San Isidro, Nueva Ecija\r\nThank you so much for cooperating.', '[\"municipalPost2-[BayanLink-66f79b2eaa331].jpg\",\"12-[BayanLink-66f79b4689780].png\",\"brgyPost-[BayanLink-66f79b46899ed].jpg\"]', '2024-09-28 13:59:34'),
-(11, 1, 'Malapit', '𝐒𝐂𝐇𝐎𝐎𝐋 𝐒𝐔𝐏𝐏𝐋𝐈𝐄𝐒 𝐃𝐈𝐒𝐓𝐑𝐈𝐁𝐔𝐓𝐈𝐎𝐍 𝟐𝟎𝟐𝟒\r\n𝐀𝐮𝐠𝐮𝐬𝐭 𝟑, 𝟐𝟎𝟐𝟒 | 𝟏𝟎 𝐀𝐌\r\nSa lahat po ng may 𝐒𝐓𝐔𝐁 na nabigyan bukas po ay magtungo kayo sa 𝐛𝐚𝐫𝐚𝐧𝐠𝐚𝐲. Nakalista din po ang pangalan niyo sa aming 𝐒𝐘𝐒𝐓𝐄𝐌 kung kaya\'t kilala po namin kung sino lamang ang nakalista.\r\nKami po ay humihingi ng pasensya dahil na-late po ang aming announcement dahilan na maraming inasikaso ang SK Council. Maraming Salamat po!\r\nPara po sa hindi makakapunta bukas, ichat niyo lamang po kami at magsschedule po ulit kami ng release ng supplies.\r\nMula kay, 𝐒𝐊 𝐂𝐇𝐀𝐈𝐑𝐏𝐄𝐑𝐒𝐎𝐍 𝐃𝐚𝐟𝐧𝐞𝐲 𝐊𝐚𝐭𝐞 𝐂. 𝐃𝐞 𝐋𝐞𝐨𝐧 𝐚𝐭 𝐒𝐊 𝐌𝐞𝐦𝐛𝐞𝐫𝐬 ang munting handog na ito para ngayong pasukan.\r\nMarami pang susunod! 🫡', '[]', '2024-10-10 14:32:16'),
-(17, 1, 'Malapit', 'hjshdsad dkhashsa sahdsahd skajhdshda\r\nhjshdsad dkhashsa sahdsahd skajhdshdahjshdsad dkhashsa sahdsahd skajhdshdahjshdsad dkhashsa sahdsahd skajhdshda', '[\"12-[BayanLink-67088dd328efe].png\",\"brgyPost-[BayanLink-67088dd3291eb].jpg\",\"brgyPost2-[BayanLink-67088dd32944d].jpg\",\"municipalPost2-[BayanLink-67088dd3296bb].jpg\"]', '2024-10-11 10:30:43');
 
 -- --------------------------------------------------------
 
@@ -365,6 +405,7 @@ CREATE TABLE `tbl_useracc` (
   `username` varchar(55) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(55) NOT NULL,
+  `user_profile` text DEFAULT NULL,
   `user_create_at` datetime DEFAULT current_timestamp(),
   `reset_token_hash` varchar(64) DEFAULT NULL,
   `reset_token_expires_at` datetime DEFAULT NULL
@@ -374,38 +415,38 @@ CREATE TABLE `tbl_useracc` (
 -- Dumping data for table `tbl_useracc`
 --
 
-INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_contactNum`, `dateOfBirth`, `user_age`, `placeOfBirth`, `civilStatus`, `user_city`, `user_purok`, `user_email`, `username`, `password`, `role_id`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
-(1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', '2002-04-29', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'qwerty123@gmail.com', 'Qwerty123', '$2y$10$ulORW5LZ1bhPitfMf16P8OCxXOj2W6ZSg4r2ctiG/BCHssNYIMw6m', 1, '2024-08-30 17:52:50', NULL, NULL),
-(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '2002-04-28', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'pao@gmail.com', 'pao', '$2y$10$XJrxMneiIKx6/lzOQDatPeJ.22aZj4fn1UCuB7z1auIWQLaZSLX6G', 0, '2024-08-30 17:54:44', NULL, NULL),
-(3, 'Yes', 'Malapit', 'Zxc', 'Zxc', 'Zxc', 'Female', '09876543212', '2004-01-01', 20, 'San Isidro', 'Single', 'San Isidro', 'Purok 2', 'zxc@gmail.com', 'Qwerty123', '$2y$10$hYs6kcCtafVx1Gg7SaFtje2QBGhaa6VbS6Egj74aO0VaL1FzHNp7y', 0, '2024-08-30 21:07:05', NULL, NULL),
-(5, 'Yes', 'Malapit', 'Admin', 'Admin', 'Admin', 'Male', '09876543212', '1985-12-12', 38, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', 'Purok 2', 'admin@gmail.com', 'admin123', '$2y$10$UO478AZvC84E/gvG/L9zd.hONFYVHwbtz1.7ATL7KpptBfq7efpGi', 2, '2024-08-31 17:13:37', NULL, NULL),
-(10, 'Yes', 'Poblacion', 'Qqqqq', 'Qqqqq', 'Qqqqq', 'Male', '09876543212', '2001-01-01', 23, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'qqqqq@gmail.com', 'qqqqq', '$2y$10$kBEWADlwrLYKowAInb4AAu/gvCRtIHuEodmGxUHND.jZSIaDMugFe', 0, '2024-09-15 20:44:27', NULL, NULL),
-(11, 'Yes', 'Alua', 'John', 'A.', 'Doe', 'Male', '09123456781', '1995-06-01', 29, 'San Isidro', 'Single', 'San Isidro', 'Purok 1', 'john.doe1@example.com', 'john.doe1', '$2y$10$NE0i8x2o6lpALC9C8tTLUunqJPAQh2afgezfqSzdTW7xDumaw7yCu', 0, '2024-09-26 19:36:46', NULL, NULL),
-(12, 'Yes', 'Calaba', 'Jane', 'B.', 'Smith', 'Female', '09123456782', '1993-04-22', 31, 'San Isidro', 'Married', 'San Isidro', 'Purok 2', 'jane.smith@example.com', 'jane.smith', '$2y$10$BvbUM4WdpQjPS6H1cKzze.lImQC.SzyjZOaQypFIe6lbU5l4dqy26', 0, '2024-09-26 19:36:46', NULL, NULL),
-(13, 'Yes', 'Mangga', 'Alex', 'C.', 'Johnson', 'Male', '09123456783', '1989-07-13', 35, 'San Isidro', 'Single', 'San Isidro', 'Purok 3', 'alex.johnson@example.com', 'alex.johnson', '$2y$10$Jbnxk.AsHXZET1buA614t.fwFVY476G1PO45l3FqFAlcsd5iaWKZG', 0, '2024-09-26 19:36:46', NULL, NULL),
-(14, 'Yes', 'Poblacion', 'Emily', 'D.', 'Davis', 'Female', '09123456784', '1998-09-05', 26, 'San Isidro', 'Married', 'San Isidro', 'Purok 4', 'emily.davis@example.com', 'emily.davis', '$2y$10$619wW2UXcrdQ.SDjiBy7v.kPj8nN2vZpqkMH.pAgpIM3mHr1jKI5m', 0, '2024-09-26 19:36:46', NULL, NULL),
-(15, 'Yes', 'Pulo', 'Michael', 'E.', 'Wilson', 'Male', '09123456785', '1992-12-30', 32, 'San Isidro', 'Single', 'San Isidro', 'Purok 5', 'michael.wilson@example.com', 'michael.wilson', '$2y$10$e0JkfF3...', 0, '2024-09-26 19:36:46', NULL, NULL),
-(16, 'Yes', 'Tabon', 'Sarah', 'F.', 'Miller', 'Female', '09123456786', '1991-03-17', 33, 'San Isidro', 'Married', 'San Isidro', 'Purok 6', 'sarah.miller@example.com', 'sarah.miller', '$2y$10$1VQwQzLqZ9RXReoLVFRfJ.AiIXHQsaO3caN9t9Obgma5Ordfkja/i', 0, '2024-09-26 19:36:46', NULL, NULL),
-(17, 'Yes', 'San Roque', 'David', 'G.', 'Brown', 'Male', '09123456787', '1997-11-24', 27, 'San Isidro', 'Single', 'San Isidro', 'Purok 7', 'david.brown@example.com', 'david.brown', '$2y$10$cLvGM2J0xTj0ZQYP8Zh2UOTXceoAWSLm.FB7c9wHlPx8tGmTRvlzy', 0, '2024-09-26 19:36:46', NULL, NULL),
-(18, 'Yes', 'Sto. Cristo', 'Olivia', 'H.', 'Clark', 'Female', '09123456788', '1996-05-10', 28, 'San Isidro', 'Married', 'San Isidro', 'Purok 8', 'olivia.clark@example.com', 'olivia.clark', '$2y$10$fqRH3v1Hp0vHSflQabV5muswWCP25hGB1w.KbA278yxdWN9wFL2/.', 0, '2024-09-26 19:36:46', NULL, NULL),
-(19, 'Yes', 'Calaba', 'Ethan', 'I.', 'Martinez', 'Male', '09123456789', '1988-02-14', 36, 'San Isidro', 'Single', 'San Isidro', 'Purok 9', 'ethan.martinez@example.com', 'ethan.martinez', '$2y$10$fSPJ/mkmai9wog6x6smgIO6BVUeqKEEFqWC1ZqtvpLHBhQUEApN3e', 0, '2024-09-26 19:36:46', NULL, NULL),
-(20, 'Yes', 'Alua', 'Isabella', 'J.', 'Lopez', 'Female', '09123456780', '1994-08-20', 30, 'San Isidro', 'Married', 'San Isidro', 'Purok 10', 'isabella.lopez@example.com', 'isabella.lopez', '$2y$10$C90WbBZru7q5PD4HCrr25uuncWx1jOO7wgi.vpgQl0dBqhoNegvKu', 0, '2024-09-26 19:36:46', NULL, NULL),
-(21, 'Yes', 'Calaba', 'Liam', 'K.', 'Young', 'Male', '09123456790', '1987-04-15', 37, 'San Isidro', 'Single', 'San Isidro', 'Purok 1', 'liam.young@example.com', 'liam.young', '$2y$10$Z34Zy1ermWLgZzzu2a.cY.PrsOyuUB6K.sD5Fksw5b6kSD55HxBOC', 0, '2024-09-26 20:57:54', NULL, NULL),
-(22, 'Yes', 'Mangga', 'Emma', 'L.', 'Hall', 'Female', '09123456791', '1990-10-30', 34, 'San Isidro', 'Married', 'San Isidro', 'Purok 2', 'emma.hall@example.com', 'emma.hall', '$2y$10$g.uIN.jzv/Be1SMtqEfcNeIpnv1p7NfE8xdjKEGqkcocBPZ6XIkqy', 0, '2024-09-26 20:57:54', NULL, NULL),
-(23, 'Yes', 'Poblacion', 'Noah', 'M.', 'King', 'Male', '09123456792', '1995-02-07', 29, 'San Isidro', 'Single', 'San Isidro', 'Purok 3', 'noah.king@example.com', 'noah.king', '$2y$10$0Km6c6ZIF5QeVY96ZWZp9.QLk7UOYgXoNpQimiy/px5cFfDHd1GLu', 0, '2024-09-26 20:57:54', NULL, NULL),
-(24, 'Yes', 'Pulo', 'Sophia', 'N.', 'Wright', 'Female', '09123456793', '1988-06-12', 36, 'San Isidro', 'Married', 'San Isidro', 'Purok 4', 'sophia.wright@example.com', 'sophia.wright', '$2y$10$jMgr9EsyMY.PO88L7cMNa.hrXCpvhAUYQ1O3wXGPAt4hy/vZIuAru', 0, '2024-09-26 20:57:54', NULL, NULL),
-(25, 'Yes', 'Tabon', 'James', 'O.', 'Hill', 'Male', '09123456794', '1985-09-21', 39, 'San Isidro', 'Single', 'San Isidro', 'Purok 5', 'james.hill@example.com', 'james.hill', '$2y$10$jvmk9.nfA435Yf98Dhc14.8WY3zaO3aVQW5KYVWVdhhhy/8kMjXQ6', 0, '2024-09-26 20:57:54', NULL, NULL),
-(26, 'Yes', 'San Roque', 'Ava', 'P.', 'Green', 'Female', '09123456795', '1992-01-18', 32, 'San Isidro', 'Married', 'San Isidro', 'Purok 6', 'ava.green@example.com', 'ava.green', '$2y$10$rbogefNZ1LB2Zv5u5UeXIODtuyix469oDBNkXGmU7YuzvDJQPN/x2', 0, '2024-09-26 20:57:54', NULL, NULL),
-(27, 'Yes', 'Sto. Cristo', 'Lucas', 'Q.', 'Scott', 'Male', '09123456796', '1993-11-01', 31, 'San Isidro', 'Single', 'San Isidro', 'Purok 7', 'lucas.scott@example.com', 'lucas.scott', '$2y$10$UJN3TmnUD1.44sgA8AQWd.2trAeFOmqEOwduZz0eBUZkFtWkVKDhW', 0, '2024-09-26 20:57:54', NULL, NULL),
-(28, 'Yes', 'Alua', 'Mia', 'R.', 'Adams', 'Female', '09123456797', '1996-03-25', 28, 'San Isidro', 'Married', 'San Isidro', 'Purok 8', 'mia.adams@example.com', 'mia.adams', '$2y$10$a9LWPw8coTpnAOswgWlak.Vu0YEFEzm8Exv3ghtUbBmupzdWUM1x6', 0, '2024-09-26 20:57:54', NULL, NULL),
-(29, 'Yes', 'Calaba', 'Henry', 'S.', 'Baker', 'Male', '09123456798', '1994-05-09', 30, 'San Isidro', 'Single', 'San Isidro', 'Purok 9', 'henry.baker@example.com', 'henry.baker', '$2y$10$Viog0RFe/zWSvFSMlS4KdOpckOpqUJBoeEE5zmc/CaRMQeUeK4Xfm', 0, '2024-09-26 20:57:54', NULL, NULL),
-(30, 'Yes', 'Mangga', 'Amelia', 'T.', 'Nelson', 'Female', '09123456799', '1989-08-13', 35, 'San Isidro', 'Married', 'San Isidro', 'Purok 10', 'amelia.nelson@example.com', 'amelia.nelson', '$2y$10$vNAS2WzfLWzS/XC6zPIT8e4CahPW8a.6o3AHSkQTKUpVPkyrnBxMu', 0, '2024-09-26 20:57:54', NULL, NULL),
-(31, 'No', 'N/a', 'Oap', 'Oap', 'Oap', 'Male', '09876543212', '2002-04-28', 22, 'Cabanatuan City, Nueva Ecija', 'Single', 'Cabanatuan City', 'Purok 2', 'randomgmail@gmail.com', 'ooap', '$2y$10$4yjdqLwaAdQ66cEb7jnQveF4fVYEmaHo/qK/rCec0NR6NDaEBpu0W', 0, '2024-09-28 12:21:33', NULL, NULL),
-(32, 'Yes', 'Malapit', 'John', 'John', 'John', 'Male', '09876543212', '2000-04-04', 24, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'johnjohn@gmail.com', 'admin123', '$2y$10$sE5ErPZ2U2SB6TrYIVZXj.O5Sx/ZACKsEpADABde1H5vTtqcFZx1u', 2, '2024-09-28 12:52:54', NULL, NULL),
-(35, 'Yes', 'Malapit', 'Smith', 'Smith', 'Smith', 'Male', '09876543212', '2002-04-04', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'tiktalkcompany6969@gmail.com', 'tiktalk', '$2y$10$QGi8z8SWBgoeQJSjnnJOg.QRCufp5fDjN46lrATxsfLpF3BhxTuM.', 0, '2024-09-28 14:44:06', NULL, NULL),
-(36, 'Yes', 'Malapit', 'John', 'John', 'John', 'Male', '09876543212', '2000-01-20', 24, 'San Isidro, Nueva Ecija', 'Divorced', 'San Isidro', 'Purok 2', 'john6969@gmail.com', 'John6969', '$2y$10$DgltqmNY4MWRjjFiKNejiO41wQadxI4dFyirbr48YcPvJFLxInqcW', 0, '2024-10-08 20:38:21', NULL, NULL),
-(37, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543121', '2002-04-28', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'kennethmgloria23@gmail.com', 'pao9999', '$2y$10$ek9SlKdq8oiTPL77Gn8gUe.fFQ3PvLU.rU.HkQbBUUorr8i4Jv2rW', 0, '2024-10-11 10:20:44', NULL, NULL),
-(38, 'Yes', 'Malapit', 'Ramos', 'Marvel', 'Ramos', 'Male', '09876543212', '2000-01-01', 24, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', 'Purok 2', 'edkennethmgloria23@gmail.com', 'Qwerty123', '$2y$10$.xPMkKsPBtiJqWr/lIjV/On/4q9lKjBNVDNot6gLaqmF/QDe4bcUW', 1, '2024-10-11 10:34:39', NULL, NULL);
+INSERT INTO `tbl_useracc` (`user_id`, `fromSanIsidro`, `user_brgy`, `user_fname`, `user_mname`, `user_lname`, `user_gender`, `user_contactNum`, `dateOfBirth`, `user_age`, `placeOfBirth`, `civilStatus`, `user_city`, `user_purok`, `user_email`, `username`, `password`, `role_id`, `user_profile`, `user_create_at`, `reset_token_hash`, `reset_token_expires_at`) VALUES
+(1, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543212', '2002-04-29', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'qwerty123@gmail.com', 'Qwerty123', '$2y$10$ulORW5LZ1bhPitfMf16P8OCxXOj2W6ZSg4r2ctiG/BCHssNYIMw6m', 1, NULL, '2024-08-30 17:52:50', NULL, NULL),
+(2, 'Yes', 'Malapit', 'Pao', 'Pao', 'Pao', 'Male', '09876543212', '2002-04-28', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'pao@gmail.com', 'pao', '$2y$10$XJrxMneiIKx6/lzOQDatPeJ.22aZj4fn1UCuB7z1auIWQLaZSLX6G', 0, '67185cf479852.jpg', '2024-08-30 17:54:44', NULL, NULL),
+(3, 'Yes', 'Malapit', 'Zxc', 'Zxc', 'Zxc', 'Female', '09876543212', '2004-01-01', 20, 'San Isidro', 'Single', 'San Isidro', 'Purok 2', 'zxc@gmail.com', 'Qwerty123', '$2y$10$hYs6kcCtafVx1Gg7SaFtje2QBGhaa6VbS6Egj74aO0VaL1FzHNp7y', 0, NULL, '2024-08-30 21:07:05', NULL, NULL),
+(5, 'Yes', 'Malapit', 'Admin', 'Admin', 'Admin', 'Male', '09876543212', '1985-12-12', 38, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', 'Purok 2', 'admin@gmail.com', 'admin123', '$2y$10$UO478AZvC84E/gvG/L9zd.hONFYVHwbtz1.7ATL7KpptBfq7efpGi', 2, NULL, '2024-08-31 17:13:37', NULL, NULL),
+(10, 'Yes', 'Poblacion', 'Qqqqq', 'Qqqqq', 'Qqqqq', 'Male', '09876543212', '2001-01-01', 23, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'qqqqq@gmail.com', 'qqqqq', '$2y$10$kBEWADlwrLYKowAInb4AAu/gvCRtIHuEodmGxUHND.jZSIaDMugFe', 0, NULL, '2024-09-15 20:44:27', NULL, NULL),
+(11, 'Yes', 'Alua', 'John', 'A.', 'Doe', 'Male', '09123456781', '1995-06-01', 29, 'San Isidro', 'Single', 'San Isidro', 'Purok 1', 'john.doe1@example.com', 'john.doe1', '$2y$10$NE0i8x2o6lpALC9C8tTLUunqJPAQh2afgezfqSzdTW7xDumaw7yCu', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(12, 'Yes', 'Calaba', 'Jane', 'B.', 'Smith', 'Female', '09123456782', '1993-04-22', 31, 'San Isidro', 'Married', 'San Isidro', 'Purok 2', 'jane.smith@example.com', 'jane.smith', '$2y$10$BvbUM4WdpQjPS6H1cKzze.lImQC.SzyjZOaQypFIe6lbU5l4dqy26', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(13, 'Yes', 'Mangga', 'Alex', 'C.', 'Johnson', 'Male', '09123456783', '1989-07-13', 35, 'San Isidro', 'Single', 'San Isidro', 'Purok 3', 'alex.johnson@example.com', 'alex.johnson', '$2y$10$Jbnxk.AsHXZET1buA614t.fwFVY476G1PO45l3FqFAlcsd5iaWKZG', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(14, 'Yes', 'Poblacion', 'Emily', 'D.', 'Davis', 'Female', '09123456784', '1998-09-05', 26, 'San Isidro', 'Married', 'San Isidro', 'Purok 4', 'emily.davis@example.com', 'emily.davis', '$2y$10$619wW2UXcrdQ.SDjiBy7v.kPj8nN2vZpqkMH.pAgpIM3mHr1jKI5m', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(15, 'Yes', 'Pulo', 'Michael', 'E.', 'Wilson', 'Male', '09123456785', '1992-12-30', 32, 'San Isidro', 'Single', 'San Isidro', 'Purok 5', 'michael.wilson@example.com', 'michael.wilson', '$2y$10$e0JkfF3...', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(16, 'Yes', 'Tabon', 'Sarah', 'F.', 'Miller', 'Female', '09123456786', '1991-03-17', 33, 'San Isidro', 'Married', 'San Isidro', 'Purok 6', 'sarah.miller@example.com', 'sarah.miller', '$2y$10$1VQwQzLqZ9RXReoLVFRfJ.AiIXHQsaO3caN9t9Obgma5Ordfkja/i', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(17, 'Yes', 'San Roque', 'David', 'G.', 'Brown', 'Male', '09123456787', '1997-11-24', 27, 'San Isidro', 'Single', 'San Isidro', 'Purok 7', 'david.brown@example.com', 'david.brown', '$2y$10$cLvGM2J0xTj0ZQYP8Zh2UOTXceoAWSLm.FB7c9wHlPx8tGmTRvlzy', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(18, 'Yes', 'Sto. Cristo', 'Olivia', 'H.', 'Clark', 'Female', '09123456788', '1996-05-10', 28, 'San Isidro', 'Married', 'San Isidro', 'Purok 8', 'olivia.clark@example.com', 'olivia.clark', '$2y$10$fqRH3v1Hp0vHSflQabV5muswWCP25hGB1w.KbA278yxdWN9wFL2/.', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(19, 'Yes', 'Calaba', 'Ethan', 'I.', 'Martinez', 'Male', '09123456789', '1988-02-14', 36, 'San Isidro', 'Single', 'San Isidro', 'Purok 9', 'ethan.martinez@example.com', 'ethan.martinez', '$2y$10$fSPJ/mkmai9wog6x6smgIO6BVUeqKEEFqWC1ZqtvpLHBhQUEApN3e', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(20, 'Yes', 'Alua', 'Isabella', 'J.', 'Lopez', 'Female', '09123456780', '1994-08-20', 30, 'San Isidro', 'Married', 'San Isidro', 'Purok 10', 'isabella.lopez@example.com', 'isabella.lopez', '$2y$10$C90WbBZru7q5PD4HCrr25uuncWx1jOO7wgi.vpgQl0dBqhoNegvKu', 0, NULL, '2024-09-26 19:36:46', NULL, NULL),
+(21, 'Yes', 'Calaba', 'Liam', 'K.', 'Young', 'Male', '09123456790', '1987-04-15', 37, 'San Isidro', 'Single', 'San Isidro', 'Purok 1', 'liam.young@example.com', 'liam.young', '$2y$10$Z34Zy1ermWLgZzzu2a.cY.PrsOyuUB6K.sD5Fksw5b6kSD55HxBOC', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(22, 'Yes', 'Mangga', 'Emma', 'L.', 'Hall', 'Female', '09123456791', '1990-10-30', 34, 'San Isidro', 'Married', 'San Isidro', 'Purok 2', 'emma.hall@example.com', 'emma.hall', '$2y$10$g.uIN.jzv/Be1SMtqEfcNeIpnv1p7NfE8xdjKEGqkcocBPZ6XIkqy', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(23, 'Yes', 'Poblacion', 'Noah', 'M.', 'King', 'Male', '09123456792', '1995-02-07', 29, 'San Isidro', 'Single', 'San Isidro', 'Purok 3', 'noah.king@example.com', 'noah.king', '$2y$10$0Km6c6ZIF5QeVY96ZWZp9.QLk7UOYgXoNpQimiy/px5cFfDHd1GLu', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(24, 'Yes', 'Pulo', 'Sophia', 'N.', 'Wright', 'Female', '09123456793', '1988-06-12', 36, 'San Isidro', 'Married', 'San Isidro', 'Purok 4', 'sophia.wright@example.com', 'sophia.wright', '$2y$10$jMgr9EsyMY.PO88L7cMNa.hrXCpvhAUYQ1O3wXGPAt4hy/vZIuAru', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(25, 'Yes', 'Tabon', 'James', 'O.', 'Hill', 'Male', '09123456794', '1985-09-21', 39, 'San Isidro', 'Single', 'San Isidro', 'Purok 5', 'james.hill@example.com', 'james.hill', '$2y$10$jvmk9.nfA435Yf98Dhc14.8WY3zaO3aVQW5KYVWVdhhhy/8kMjXQ6', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(26, 'Yes', 'San Roque', 'Ava', 'P.', 'Green', 'Female', '09123456795', '1992-01-18', 32, 'San Isidro', 'Married', 'San Isidro', 'Purok 6', 'ava.green@example.com', 'ava.green', '$2y$10$rbogefNZ1LB2Zv5u5UeXIODtuyix469oDBNkXGmU7YuzvDJQPN/x2', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(27, 'Yes', 'Sto. Cristo', 'Lucas', 'Q.', 'Scott', 'Male', '09123456796', '1993-11-01', 31, 'San Isidro', 'Single', 'San Isidro', 'Purok 7', 'lucas.scott@example.com', 'lucas.scott', '$2y$10$UJN3TmnUD1.44sgA8AQWd.2trAeFOmqEOwduZz0eBUZkFtWkVKDhW', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(28, 'Yes', 'Alua', 'Mia', 'R.', 'Adams', 'Female', '09123456797', '1996-03-25', 28, 'San Isidro', 'Married', 'San Isidro', 'Purok 8', 'mia.adams@example.com', 'mia.adams', '$2y$10$a9LWPw8coTpnAOswgWlak.Vu0YEFEzm8Exv3ghtUbBmupzdWUM1x6', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(29, 'Yes', 'Calaba', 'Henry', 'S.', 'Baker', 'Male', '09123456798', '1994-05-09', 30, 'San Isidro', 'Single', 'San Isidro', 'Purok 9', 'henry.baker@example.com', 'henry.baker', '$2y$10$Viog0RFe/zWSvFSMlS4KdOpckOpqUJBoeEE5zmc/CaRMQeUeK4Xfm', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(30, 'Yes', 'Mangga', 'Amelia', 'T.', 'Nelson', 'Female', '09123456799', '1989-08-13', 35, 'San Isidro', 'Married', 'San Isidro', 'Purok 10', 'amelia.nelson@example.com', 'amelia.nelson', '$2y$10$vNAS2WzfLWzS/XC6zPIT8e4CahPW8a.6o3AHSkQTKUpVPkyrnBxMu', 0, NULL, '2024-09-26 20:57:54', NULL, NULL),
+(31, 'No', 'N/a', 'Oap', 'Oap', 'Oap', 'Male', '09876543212', '2002-04-28', 22, 'Cabanatuan City, Nueva Ecija', 'Single', 'Cabanatuan City', 'Purok 2', 'randomgmail@gmail.com', 'ooap', '$2y$10$4yjdqLwaAdQ66cEb7jnQveF4fVYEmaHo/qK/rCec0NR6NDaEBpu0W', 0, NULL, '2024-09-28 12:21:33', NULL, NULL),
+(32, 'Yes', 'Malapit', 'John', 'John', 'John', 'Male', '09876543212', '2000-04-04', 24, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'johnjohn@gmail.com', 'admin123', '$2y$10$sE5ErPZ2U2SB6TrYIVZXj.O5Sx/ZACKsEpADABde1H5vTtqcFZx1u', 2, NULL, '2024-09-28 12:52:54', NULL, NULL),
+(35, 'Yes', 'Malapit', 'Smith', 'Smith', 'Smith', 'Male', '09876543212', '2002-04-04', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 1', 'tiktalkcompany6969@gmail.com', 'tiktalk', '$2y$10$QGi8z8SWBgoeQJSjnnJOg.QRCufp5fDjN46lrATxsfLpF3BhxTuM.', 0, NULL, '2024-09-28 14:44:06', NULL, NULL),
+(36, 'Yes', 'Malapit', 'John', 'John', 'John', 'Male', '09876543212', '2000-01-20', 24, 'San Isidro, Nueva Ecija', 'Divorced', 'San Isidro', 'Purok 2', 'john6969@gmail.com', 'John6969', '$2y$10$DgltqmNY4MWRjjFiKNejiO41wQadxI4dFyirbr48YcPvJFLxInqcW', 0, NULL, '2024-10-08 20:38:21', NULL, NULL),
+(37, 'Yes', 'Malapit', 'Paolo', 'Marvel', 'Ramos', 'Male', '09876543121', '2002-04-28', 22, 'San Isidro, Nueva Ecija', 'Single', 'San Isidro', 'Purok 2', 'kennethmgloria23@gmail.com', 'pao9999', '$2y$10$ek9SlKdq8oiTPL77Gn8gUe.fFQ3PvLU.rU.HkQbBUUorr8i4Jv2rW', 0, NULL, '2024-10-11 10:20:44', NULL, NULL),
+(38, 'Yes', 'Malapit', 'Ramos', 'Marvel', 'Ramos', 'Male', '09876543212', '2000-01-01', 24, 'San Isidro, Nueva Ecija', 'Married', 'San Isidro', 'Purok 2', 'edkennethmgloria23@gmail.com', 'Qwerty123', '$2y$10$.xPMkKsPBtiJqWr/lIjV/On/4q9lKjBNVDNot6gLaqmF/QDe4bcUW', 1, NULL, '2024-10-11 10:34:39', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -517,7 +558,7 @@ ALTER TABLE `tbl_home`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
@@ -529,7 +570,7 @@ ALTER TABLE `tbl_notification`
 -- AUTO_INCREMENT for table `tbl_posts`
 --
 ALTER TABLE `tbl_posts`
-  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `post_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tbl_requests`

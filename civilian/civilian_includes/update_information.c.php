@@ -30,6 +30,39 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = mysqli_real_escape_string($con, $username);
     $placeOfBirth = mysqli_real_escape_string($con, $placeOfBirth);
 
+    $currentProfileImage = $_SESSION['user_profile'];
+    $newImageName = $_POST['current_profile_image']; // Default to the current image
+
+    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0) {
+        // New image uploaded
+        $imageFileType = strtolower(pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION));
+        $newImageName = uniqid() . '.' . $imageFileType; // Generate unique filename
+
+        // Set upload directory
+        $targetDir = "../civilian_dbImg/";
+        $targetFile = $targetDir . $newImageName;
+
+        // Delete old profile image if it exists and is not the default image
+        if (
+            !empty($currentProfileImage) && $currentProfileImage != 'male-user.png' && $currentProfileImage != 'female-user.png'
+        ) {
+            $oldImagePath = $targetDir . $currentProfileImage;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath); // Delete the old image
+            }
+        }
+
+        // Move uploaded file to the target directory
+        if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) {
+            echo 'file uploaded';
+        } else {
+            $_SESSION['update_message'] = "Error uploading the new profile image!";
+            $_SESSION['update_message_code'] = "Error";
+            header('location: ../profile.c.php');
+            exit;
+        }
+    }
+
     if (
         empty($userid) || empty($fromSanIsidro) || empty($barangay) || empty($fname) || empty($lname) || empty($gender) || empty($user_purok) || empty($contactNum)
         || empty($dateOfBirth)
@@ -56,9 +89,10 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         civilStatus = '$civilStatus',
         user_purok = '$user_purok',
         user_email = '$email',
-        username = '$username'
+        username = '$username',
+        user_profile = '$newImageName' -- Add the profile image here
     WHERE user_id = '$userid'
-";
+    ";
 
     if (mysqli_query($con, $query)) {
         // update session variables
@@ -76,6 +110,7 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_purok'] = $user_purok;
         $_SESSION['user_email'] = $email;
         $_SESSION['username'] = $username;
+        $_SESSION['user_profile'] = $newImageName;
 
         // add logs
         mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username updated his/her information', CURRENT_TIMESTAMP,'$userid')");
