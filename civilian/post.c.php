@@ -17,6 +17,8 @@ $user_brgy = $_SESSION['user_brgy'];
 $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
 $countUser = mysqli_num_rows($checkUser);
 
+$isfromSanIsidro = $_SESSION['fromSanIsidro'];
+
 // If user does not exist, sign out
 if ($countUser < 1) {
     header('Location: ../signout.php');
@@ -109,9 +111,16 @@ if ($user_role != 0) {
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="profile.c.php">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="document.c.php">Request Document</a>
-                    </li>
+                    <?php
+
+                    if ($isfromSanIsidro == "Yes") {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="document.c.php">Request Document</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
                 <hr>
                 <button type="button" class="btn w-100 rounded-5 mb-3" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
@@ -182,9 +191,16 @@ if ($user_role != 0) {
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="profile.c.php">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="document.c.php">Request Document</a>
-                    </li>
+                    <?php
+
+                    if ($isfromSanIsidro == "Yes") {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="document.c.php">Request Document</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
                 <hr>
 

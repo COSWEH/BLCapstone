@@ -16,6 +16,14 @@ $user_role = $_SESSION['role_id'];
 $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
 $countUser = mysqli_num_rows($checkUser);
 
+$isfromSanIsidro = $_SESSION['fromSanIsidro'];
+
+// if user exixt but not from san isdiro
+if ($isfromSanIsidro == "No") {
+    header('Location: post.c.php');
+    exit;
+}
+
 // If user does not exist, sign out
 if ($countUser < 1) {
     header('Location: ../signout.php');
@@ -105,9 +113,16 @@ if ($user_role != 0) {
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="profile.c.php">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active-post" aria-current="page" href="document.c.php">Request Document</a>
-                    </li>
+                    <?php
+
+                    if ($isfromSanIsidro == "Yes") {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="document.c.php">Request Document</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
                 <hr>
                 <button type="button" class="btn w-100 rounded-5 mb-3" data-bs-toggle="modal" data-bs-target="#signoutModal"><i class="bi bi-box-arrow-left"></i> Sign out </button>
@@ -177,9 +192,16 @@ if ($user_role != 0) {
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="profile.c.php">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link  active-document" aria-current="page" href="document.c.php">Request Document</a>
-                    </li>
+                    <?php
+
+                    if ($isfromSanIsidro == "Yes") {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link active-document " aria-current="page" href="document.c.php">Request Document</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                     <hr>
                 </ul>
 
@@ -196,7 +218,7 @@ if ($user_role != 0) {
                         $getUserProfile = $_SESSION['user_profile'];
 
                         if (!empty($getUserProfile)) {
-                            echo '<img src="../img/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                            echo '<img src="civilian_dbImg/' . $getUserProfile . '" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
                         } else {
                             if ($getGender == "Male") {
                                 echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
