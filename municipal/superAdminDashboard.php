@@ -318,7 +318,7 @@ if ($user_role != 2) {
     </div>
     </div>
 
-    <!-- add super admin account modal -->
+    <!-- add brgy / municipal admin account modal -->
     <div class="modal fade" id="addSuperAdminModal" tabindex="-1" aria-labelledby="addSuperAdminModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -329,7 +329,7 @@ if ($user_role != 2) {
                     </div>
 
                     <!-- Modal Title -->
-                    <h6 class="my-3 fw-semibold">Add Super Admin Account</h6>
+                    <h6 class="my-3 fw-semibold">Add Municipal or Brgy Admin Account</h6>
                     <p class="text-muted">Please fill in the necessary information to create a new super admin account.</p>
 
                     <div class="container">
@@ -454,6 +454,16 @@ if ($user_role != 2) {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-floating mb-3">
+                                    <select name="user_role" class="form-control" id="user_role" required>
+                                        <option value="" disabled selected>Select account type</option>
+                                        <option value="2">Municipal</option>
+                                        <option value="1">Barangay</option>
+                                    </select>
+                                    <label for="user_role" class="form-label">Account type</label>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-floating mb-3 position-relative">

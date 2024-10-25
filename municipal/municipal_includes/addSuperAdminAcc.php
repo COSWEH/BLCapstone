@@ -27,6 +27,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['signupPassword'];
     $confirmPassword = $_POST['confirmPassword'];
+    $user_role = $_POST['user_role'];
 
 
     $_SESSION['superAdmin_fname'] = $fname;
@@ -41,6 +42,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['superAdmin_email'] = $email;
     $_SESSION['superAdmin_username'] = $username;
     $_SESSION['superAdmin_password'] = $password;
+    $_SESSION['user_role'] = $user_role;
 
 
     function validateName($name)
