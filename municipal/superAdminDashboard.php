@@ -161,31 +161,31 @@ if ($user_role != 2) {
 
             <!-- Main Content -->
             <main class="col-12 col-md-10 content border rounded p-3">
-                <!-- number of civilians -->
-                <div class="card mb-3 shadow border-0 rounded-3 col col-lg-3 col-sm-6">
-                    <div class="form-floating">
-                        <select id="brgyFilter" class="form-select" required>
-                            <option value="All" selected>All</option>
-                            <option value="Alua">Alua</option>
-                            <option value="Calaba">Calaba</option>
-                            <option value="Malapit">Malapit</option>
-                            <option value="Mangga">Mangga</option>
-                            <option value="Poblacion">Poblacion</option>
-                            <option value="Pulo">Pulo</option>
-                            <option value="San Roque">San Roque</option>
-                            <option value="Sto. Cristo">Sto. Cristo</option>
-                            <option value="Tabon">Tabon</option>
-                        </select>
-                        <label for="user_brgy" class="form-label">Barangay</label>
+                <div class="card mb-3 shadow border-0 rounded-3 p-3">
+                    <div class="card mb-3 border-0 rounded-3 col col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <select id="brgyFilter" class="form-select" required>
+                                <option value="All" selected>All</option>
+                                <option value="Alua">Alua</option>
+                                <option value="Calaba">Calaba</option>
+                                <option value="Malapit">Malapit</option>
+                                <option value="Mangga">Mangga</option>
+                                <option value="Poblacion">Poblacion</option>
+                                <option value="Pulo">Pulo</option>
+                                <option value="San Roque">San Roque</option>
+                                <option value="Sto. Cristo">Sto. Cristo</option>
+                                <option value="Tabon">Tabon</option>
+                            </select>
+                            <label for="user_brgy" class="form-label">Barangay</label>
+                        </div>
+                    </div>
+
+                    <div id="showBrgyAnalytics">
+
                     </div>
                 </div>
 
-                <div id="showBrgyAnalytics">
-
-                </div>
-
-
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Manage Municipal Accounts</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addSuperAdminModal">Add account</button>
@@ -197,7 +197,7 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Terms and Conditions</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addTMModal">Add terms and conditions</button>
@@ -213,7 +213,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- home content-->
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Home</h6>
                         <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit home</button>
@@ -244,7 +244,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- services -->
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Services</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addServicesModal">Add services</button>
@@ -256,7 +256,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- contact -->
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Contact</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addContactModal">Add contact</button>
@@ -269,7 +269,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- about us and mission -->
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>About us and our Mission</h6>
                         <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editAboutMissionModal">Edit content</button>
@@ -289,7 +289,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- faqs -->
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>FAQs</h6>
                         <button class="btn btn-sm btn-primary shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFaqsModal">Add faqs</button>
@@ -302,7 +302,7 @@ if ($user_role != 2) {
                 </div>
 
                 <!-- logs -->
-                <div class="card mb-3 shadow border border-2 rounded-3">
+                <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Logs</h6>
                     </div>
