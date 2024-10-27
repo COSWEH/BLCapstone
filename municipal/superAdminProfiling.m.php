@@ -164,7 +164,7 @@ if ($user_role != 2) {
 
             <!-- main content -->
             <main class="col-12 col-md-10 content border rounded p-3">
-                <div class="form-floating mb-3 shadow border border-3 rounded-3">
+                <div class="form-floating mb-3 rounded-3">
                     <input type="text" class="form-control" id="searchByName" name="search" placeholder="Search" required>
                     <label for="search" class="form-label">
                         <small>
@@ -173,9 +173,8 @@ if ($user_role != 2) {
                         </small>
                     </label>
                 </div>
-                <hr>
 
-                <div class="card shadow border border-3 rounded-3">
+                <div class="card border-0 rounded-3">
                     <div class="ms-3 mt-3">
                         <h6>Filter Options</h6>
                     </div>
@@ -245,9 +244,8 @@ if ($user_role != 2) {
                         </div>
                     </div>
                 </div>
-                <hr>
 
-                <h6 class="ms-1 mb-3 fw-bold">List of residents in your city</h6>
+                <h6 class="ms-1 mb-3">List of residents in your city</h6>
                 <div id="showAllResidents" class=" fs-5">
 
                 </div>

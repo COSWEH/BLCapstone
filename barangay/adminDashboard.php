@@ -56,7 +56,7 @@ function countDocumentReleased($con, $adminBrgy, $docType)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profiling</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="brgyMaterials/style.b.css">
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -179,8 +179,8 @@ function countDocumentReleased($con, $adminBrgy, $docType)
             <main class="col-12 col-md-10 content border rounded p-3">
 
                 <!-- number of civilians -->
-                <div class="card mb-3 shadow border-0 rounded-3">
-                    <div class="row">
+                <div class="card mb-3 shadow border-0 rounded-3 p-3">
+                    <div class="row mb-3">
                         <div class="col col-lg-4 col-sm-12">
                             <div class="card-body d-flex justify-content-center align-items-center">
                                 <h6><i class="bi bi-people-fill fs-1 text-success me-3"></i></h6>
@@ -212,54 +212,99 @@ function countDocumentReleased($con, $adminBrgy, $docType)
                         </div>
                     </div>
 
-                </div>
+                    <!-- number of document relased -->
+                    <div class="card mb-3 border-0 rounded-3 p-2">
+                        <div class="row">
+                            <div class="col col-lg-3 col-md-6 col-sm-12">
+                                <h6 class="mt-3 text-center">Barangay Clearance</h6>
+                                <div class="card-body d-flex justify-content-center align-items-center">
+                                    <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                    <h2 class="fw-bold me-5">
+                                        <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Clearance'); ?>
+                                    </h2>
+                                </div>
+                            </div>
 
-                <!-- number of document relased -->
-                <div class="card mb-3 shadow border-0 rounded-3 p-2">
-                    <div class="row">
-                        <div class="col col-lg-3 col-md-6 col-sm-12">
-                            <h6 class="mt-3 text-center">Barangay Clearance</h6>
-                            <div class="card-body d-flex justify-content-center align-items-center">
-                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
-                                <h2 class="fw-bold me-5">
-                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Clearance'); ?>
-                                </h2>
+                            <div class="col col-lg-3 col-md-6 col-sm-12">
+                                <h6 class="mt-3 text-center">Barangay Indigency</h6>
+                                <div class="card-body d-flex justify-content-center align-items-center">
+                                    <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                    <h2 class="fw-bold me-5">
+                                        <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Indigency'); ?>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col col-lg-3 col-md-6 col-sm-12">
+                                <h6 class="mt-3 text-center">Barangay Residency</h6>
+                                <div class="card-body d-flex justify-content-center align-items-center">
+                                    <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                    <h2 class="fw-bold me-5">
+                                        <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Residency'); ?>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col col-lg-3 col-md-6 col-sm-12">
+                                <h6 class="mt-3 text-center">Job Seeker</h6>
+                                <div class="card-body d-flex justify-content-center align-items-center">
+                                    <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
+                                    <h2 class="fw-bold me-5">
+                                        <?php echo countDocumentReleased($con, $adminBrgy, 'Job Seeker'); ?>
+                                    </h2>
+                                </div>
                             </div>
                         </div>
+                        <h6 class="ms-3 mb-3">Total Document Released</h6>
 
-                        <div class="col col-lg-3 col-md-6 col-sm-12">
-                            <h6 class="mt-3 text-center">Barangay Indigency</h6>
-                            <div class="card-body d-flex justify-content-center align-items-center">
-                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
-                                <h2 class="fw-bold me-5">
-                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Indigency'); ?>
-                                </h2>
-                            </div>
+                        <div class="ms-auto">
+                            <button class="btn btn-success btn-sm" aria-current="page" data-bs-toggle="modal" data-bs-target="#generateReportModal">Generate report</button>
                         </div>
 
-                        <div class="col col-lg-3 col-md-6 col-sm-12">
-                            <h6 class="mt-3 text-center">Barangay Residency</h6>
-                            <div class="card-body d-flex justify-content-center align-items-center">
-                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
-                                <h2 class="fw-bold me-5">
-                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Barangay Residency'); ?>
-                                </h2>
-                            </div>
-                        </div>
+                        <!-- generate report modal -->
+                        <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="generateReportModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <!-- Modal Icon -->
+                                        <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                                            <i class="bi bi-file-earmark-text text-success" style="font-size: 25px;"></i>
+                                        </div>
 
-                        <div class="col col-lg-3 col-md-6 col-sm-12">
-                            <h6 class="mt-3 text-center">Job Seeker</h6>
-                            <div class="card-body d-flex justify-content-center align-items-center">
-                                <h6><i class="bi bi-file-earmark-check-fill fs-2 text-success me-3"></i></h6>
-                                <h2 class="fw-bold me-5">
-                                    <?php echo countDocumentReleased($con, $adminBrgy, 'Job Seeker'); ?>
-                                </h2>
+                                        <!-- Modal Title -->
+                                        <h6 class="my-3 fw-semibold">Generate Report</h6>
+                                        <p class="text-muted">Select the date range to generate a detailed analytics report.</p>
+
+                                        <div class="container">
+                                            <form action="brgy_includes/generateReport.php" method="POST">
+                                                <div class="row g-2 mb-3 text-start">
+                                                    <div class="col">
+                                                        <label for="startDate" class="form-label">Start Date</label>
+                                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="endDate" class="form-label">End Date</label>
+                                                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-grid gap-2 mt-4">
+                                                    <button type="submit" name="btnGenerateReport" class="btn btn-success">Generate Report</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal Close Button -->
+                                    <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <h6 class="ms-3 mb-3">Total Document Released</h6>
+
                 </div>
 
+                <!-- types of doc -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Types of documents</h6>
@@ -347,6 +392,10 @@ function countDocumentReleased($con, $adminBrgy, $docType)
             $.post('brgy_includes/showAllDocuments.php', {}, function(data) {
                 $("#showAllDocuments").html(data);
             });
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("startDate").value = today;
+            document.getElementById("endDate").value = today;
         });
     </script>
     <script src="brgyMaterials/script.b.js"></script>

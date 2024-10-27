@@ -182,7 +182,7 @@ function countDocumentReleased($con, $allDocType, $brgy)
 
                 <!-- Modal Title -->
                 <h6 class="my-3 fw-semibold">Generate Report</h6>
-                <p class="text-muted">Select the report type and date range to generate a detailed analytics report.</p>
+                <p class="text-muted">Select the date range to generate a detailed analytics report.</p>
 
                 <div class="container">
                     <form action="municipal_includes/generateReport.php" method="POST">

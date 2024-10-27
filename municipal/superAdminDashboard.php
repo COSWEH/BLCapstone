@@ -185,6 +185,7 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
+                <!-- municipal accout -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Manage Municipal Accounts</h6>
@@ -197,6 +198,7 @@ if ($user_role != 2) {
                     </div>
                 </div>
 
+                <!-- terms and conditions -->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3 me-3 d-flex justify-content-between align-items-center">
                         <h6>Terms and Conditions</h6>
@@ -215,9 +217,13 @@ if ($user_role != 2) {
                 <!-- home content-->
                 <div class="card mb-3 shadow border-0 rounded-3">
                     <div class="ms-3 mt-3">
-                        <h6>Home</h6>
-                        <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit home</button>
-                        <div class="row align-items-center mb-4">
+
+                        <div class="d-flex justify-content-between align-items-center ms-3 mt-3 me-3">
+                            <h6>Home</h6>
+                            <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editHomeContent">Edit home</button>
+                        </div>
+
+                        <div class="row align-items-center mb-3 mt-3">
                             <!-- Content Section -->
                             <div class="col-md-6 text-center text-md-start px-lg-5">
                                 <!-- Title with Edit Button -->
@@ -270,10 +276,11 @@ if ($user_role != 2) {
 
                 <!-- about us and mission -->
                 <div class="card mb-3 shadow border-0 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="d-flex justify-content-between align-items-center ms-3 mt-3 me-3">
                         <h6>About us and our Mission</h6>
                         <button class="btn btn-sm btn-success shadow" aria-current="page" data-bs-toggle="modal" data-bs-target="#editAboutMissionModal">Edit content</button>
                     </div>
+
                     <div class="card-body">
                         <div class="overflow-auto" style="height: 300px;">
                             <h6>About us</h6>
@@ -303,9 +310,53 @@ if ($user_role != 2) {
 
                 <!-- logs -->
                 <div class="card mb-3 shadow border-0 rounded-3">
-                    <div class="ms-3 mt-3">
+                    <div class="d-flex justify-content-between align-items-center ms-3 mt-3 me-3">
                         <h6>Logs</h6>
+                        <div>
+                            <button class="btn btn-success btn-sm" aria-current="page" data-bs-toggle="modal" data-bs-target="#generateReportLogsModal">Generate report</button>
+                        </div>
+
+                        <div class="modal fade" id="generateReportLogsModal" tabindex="-1" aria-labelledby="generateReportLogsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <!-- Modal Icon -->
+                                        <div class="d-flex justify-content-center align-items-center rounded-circle bg-success-subtle mx-auto" style="height: 50px; width: 50px;">
+                                            <i class="bi bi-file-earmark-text text-success" style="font-size: 25px;"></i>
+                                        </div>
+
+                                        <!-- Modal Title -->
+                                        <h6 class="my-3 fw-semibold">Generate Report</h6>
+                                        <p class="text-muted">Select the date range to generate a detailed analytics report.</p>
+
+                                        <div class="container">
+                                            <form action="municipal_includes/generateReportLogs.php" method="POST">
+                                                <div class="row g-2 mb-3 text-start">
+                                                    <div class="col">
+                                                        <label for="startDate" class="form-label">Start Date</label>
+                                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="endDate" class="form-label">End Date</label>
+                                                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-grid gap-2 mt-4">
+                                                    <button type="submit" name="btnGenerateReportLogs" class="btn btn-success">Generate Report</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal Close Button -->
+                                    <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                     <div class="card-body">
                         <div id="showLogs" class="overflow-auto" style="height: 300px;">
                             <!-- Logs content -->
@@ -1011,6 +1062,10 @@ if ($user_role != 2) {
         document.getElementById('placeOfBirth').value = selectedCity + ', Nueva Ecija';
 
         $(document).ready(function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("startDate").value = today;
+            document.getElementById("endDate").value = today;
+
             $.post('municipal_includes/brgyusersAnalytics.php', {}, function(data) {
                 $("#showBrgyAnalytics").html(data);
             });
@@ -1098,11 +1153,17 @@ if ($user_role != 2) {
                         response.forEach(function(item) {
 
                             var termHtml = `
-                                <li class="list-group-item" role="listitem">
-                                    <p><strong>${item.count}. ${item.tm_title}</strong></p>
-                                    <p>${item.tm_content}</p>
-                                    <button class="btn btn-sm btn-success edit_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">Edit</button>
-                                    <button class="btn btn-sm btn-danger delete_tm" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}"><i class=" bi bi-trash"></i></button>
+                                <li class="list-group-item d-flex justify-content-between align-items-start" role="listitem">
+                                    <div>
+                                        <p><strong>${item.count}. ${item.tm_title}</strong></p>
+                                        <p>${item.tm_content}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center ms-3 mt-3">
+                                        <button class="btn btn-sm btn-success edit_tm me-1" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">Edit</button>
+                                        <button class="btn btn-sm btn-danger delete_tm me-1" data-id="${item.tm_id}" data-title="${item.tm_title}" data-content="${item.tm_content}">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
                                 </li>`;
                             $('#termsContainer').append(termHtml);
                         });
@@ -1272,21 +1333,23 @@ if ($user_role != 2) {
 
                         response.forEach(function(service) {
                             var serviceCard = `
-                    <div class="col">
-                    <div class="card border shadow rounded mb-3">
-                        <div class="card-header p-3 fs-6 text-center d-flex justify-content-between align-items-center">
-                            <span>${service.services_title}</span>
-                        </div>
-                        <div class="card-body p-3">
-                            <p class="card-text small">${service.services_desc}</p>
+                                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                    <div class="card border shadow rounded">
+                                        <div class="card-header p-3 fs-6 d-flex justify-content-between align-items-center">
+                                            <span>${service.services_title}</span>
+                                        </div>
+                                        <div class="card-body p-3 d-flex flex-column">
+                                            <p class="card-text small">${service.services_desc}</p>
 
-                             <button class="btn btn-sm btn-success shadow me-2 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
-                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}"><i class=" bi bi-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                                `;
+                                            <div class="mt-auto d-flex justify-content-end">
+                                                <button class="btn btn-sm btn-success shadow me-1 edit-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">Edit</button>
+                                                <button class="btn btn-sm btn-danger shadow delete-service" data-id="${service.services_id}" data-title="${service.services_title}" data-desc="${service.services_desc}">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
                             $('#services_container').append(serviceCard);
                         });
 
@@ -1377,19 +1440,24 @@ if ($user_role != 2) {
                         let html = '';
                         response.forEach(contact => {
                             html += `
-                        <div class="col-md-4 mb-3">
-                            <div class="card shadow border border-2 rounded-3">
-                                <div class="card-body">
-                                    <h6>Phone Number</h6>
-                                    <p><small>${contact.contact_number || 'N/A'}</small></p>
-                                    <h6>Email</h6>
-                                    <p><small>${contact.contact_email || 'N/A'}</small></p>
-                                    <h6>Location</h6>
-                                    <p><small>${contact.contact_location || 'N/A'}</small></p>
-                                     <button class="btn btn-danger btn-sm shadow" data-id="${contact.contact_id}" data-number="${contact.contact_number}" data-email="${contact.contact_email}" data-location="${contact.contact_location}" data-bs-toggle="modal" data-bs-target="#deleteContactModal"><i class=" bi bi-trash"></i></button>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow border border-2 rounded-3">
+                                        <div class="card-body">
+                                            <h6>Phone Number</h6>
+                                            <p><small>${contact.contact_number || 'N/A'}</small></p>
+                                            <h6>Email</h6>
+                                            <p><small>${contact.contact_email || 'N/A'}</small></p>
+                                            <h6>Location</h6>
+                                            <p><small>${contact.contact_location || 'N/A'}</small></p>
+                                            <div class="d-flex justify-content-end mt-3">
+                                                <button class="btn btn-danger btn-sm shadow" data-id="${contact.contact_id}" data-number="${contact.contact_number}" data-email="${contact.contact_email}" data-location="${contact.contact_location}" data-bs-toggle="modal" data-bs-target="#deleteContactModal">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>`;
+                                `;
                         });
                         $('#contact_container').html(html);
                     }

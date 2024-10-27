@@ -174,7 +174,6 @@ if ($user_role != 1) {
                             Create post
                         </button>
                     </div>
-                    <hr>
                 </div>
 
                 <nav>

@@ -16,7 +16,7 @@ if (!$result) {
 ?>
 
 <div class="table-responsive ">
-    <table class="table align-middle table-bordered border border-3 table-hover text-center text-capitalized">
+    <table class="table align-middle table-hover text-center text-capitalized">
         <thead class="table-active text-uppercase text-white">
             <tr>
                 <th style="width: 25%;"><small>Faq Question</small></th>

@@ -57,12 +57,30 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['user_profile'] = $row['user_profile'];
 
                     if ($_SESSION['role_id'] == 2) {
+
+                        // add logs for municipal account
+                        $user_name = $row['username'];
+                        $userid = $row['user_id'];
+                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name successfully login', CURRENT_TIMESTAMP,'$userid')");
+
                         header('Location: municipal/superAdminPost.m.php');
                         $_SESSION['success_message'] = "Successfully login!";
                     } elseif ($_SESSION['role_id'] == 1) {
+
+                        // add logs for brgy account
+                        $user_name = $row['username'];
+                        $userid = $row['user_id'];
+                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name successfully login', CURRENT_TIMESTAMP,'$userid')");
+
                         header('Location: barangay/adminPost.b.php');
                         $_SESSION['success_message'] = "Successfully login!";
                     } else {
+
+                        // add logs for civilian account
+                        $user_name = $row['username'];
+                        $userid = $row['user_id'];
+                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name successfully login', CURRENT_TIMESTAMP,'$userid')");
+
                         header('Location: civilian/post.c.php');
                         $_SESSION['success_message'] = "Successfully login!";
                     }

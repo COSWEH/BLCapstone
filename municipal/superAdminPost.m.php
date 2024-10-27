@@ -172,7 +172,6 @@ if ($user_role != 2) {
                             Create post
                         </button>
                     </div>
-                    <hr>
                 </div>
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
