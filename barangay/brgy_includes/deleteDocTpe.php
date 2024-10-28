@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btnDeleteDocType'])) {
     // add logs
     $userid = $_SESSION['user_id'];
     $user_name = $_SESSION['username'];
-    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Document deleted by user $user_name.', CURRENT_TIMESTAMP,'$userid')");
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Document deleted successfully.', CURRENT_TIMESTAMP,'$userid')");
 
     if ($query) {
         $_SESSION['delete_docType_message'] = "Document has been successfully deleted.";

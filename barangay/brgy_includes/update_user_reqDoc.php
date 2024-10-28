@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
-        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username proccessed a document', CURRENT_TIMESTAMP,'$user_id')");
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Document processed successfully.', CURRENT_TIMESTAMP,'$user_id')");
 
         $message = "
             <h2 style='color: #2c3e50;'>Document Request Processed</h2>
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // add logs
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
-        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username approved a document', CURRENT_TIMESTAMP,'$user_id')");
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Document approved successfully.', CURRENT_TIMESTAMP,'$user_id')");
 
         $message = "
             <h2 style='color: #2c3e50;'>Document Request Approved</h2>
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
-        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username cancelled a document', CURRENT_TIMESTAMP,'$user_id')");
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Document cancelled successfully.', CURRENT_TIMESTAMP,'$user_id')");
 
         $cancellationReason = trim($cancellationReason);
         $cancellationReason = rtrim($cancellationReason, ', ');

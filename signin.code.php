@@ -61,7 +61,7 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                         // add logs for municipal account
                         $user_name = $row['username'];
                         $userid = $row['user_id'];
-                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name successfully login', CURRENT_TIMESTAMP,'$userid')");
+                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Successfully logged in.', CURRENT_TIMESTAMP,'$userid')");
 
                         header('Location: municipal/superAdminPost.m.php');
                         $_SESSION['success_message'] = "Successfully login!";
@@ -70,7 +70,7 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                         // add logs for brgy account
                         $user_name = $row['username'];
                         $userid = $row['user_id'];
-                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name successfully login', CURRENT_TIMESTAMP,'$userid')");
+                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Successfully logged in.', CURRENT_TIMESTAMP,'$userid')");
 
                         header('Location: barangay/adminPost.b.php');
                         $_SESSION['success_message'] = "Successfully login!";
@@ -79,7 +79,7 @@ if (isset($_POST['btnSignin']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                         // add logs for civilian account
                         $user_name = $row['username'];
                         $userid = $row['user_id'];
-                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name successfully login', CURRENT_TIMESTAMP,'$userid')");
+                        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Successfully logged in.', CURRENT_TIMESTAMP,'$userid')");
 
                         header('Location: civilian/post.c.php');
                         $_SESSION['success_message'] = "Successfully login!";

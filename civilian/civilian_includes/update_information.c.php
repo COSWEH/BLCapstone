@@ -113,7 +113,7 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_profile'] = $newImageName;
 
         // add logs
-        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username updated his/her information', CURRENT_TIMESTAMP,'$userid')");
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Account information updated successfully.', CURRENT_TIMESTAMP,'$userid')");
 
         $_SESSION['update_message'] = "Updated successfully!";
         $_SESSION['update_message_code'] = "Success";

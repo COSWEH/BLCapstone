@@ -59,10 +59,10 @@ if (isset($_POST['btnAddDocument']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     // add logs
     $userid = $_SESSION['user_id'];
     $username = $_SESSION['username'];
-    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username added a document', CURRENT_TIMESTAMP,'$userid')");
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Document added successfully.', CURRENT_TIMESTAMP,'$userid')");
 
     if ($query) {
-        $_SESSION['add_doc_message'] = "Document successfully addedd";
+        $_SESSION['add_doc_message'] = "Document added successfully.";
         header('Location: ../adminDashboard.php');
         exit;
     } else {

@@ -242,6 +242,7 @@ if (isset($_POST['sumbitDocRequest']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+        $user_id = $_SESSION['user_id'];
         // Update the database with the new values
         $query = mysqli_query($con, "UPDATE `tbl_requests` SET 
                 `req_eSignature` = '$eSignatureName',
@@ -252,8 +253,10 @@ if (isset($_POST['sumbitDocRequest']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 `req_reasons` = NULL 
                 WHERE `req_id` = '$getSubmitReqDocId'");
 
+        mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','$docType document edited successfully.', CURRENT_TIMESTAMP,'$user_id')");
+
         if ($query) {
-            $_SESSION['edit_req_doc'] = "Document successfully edited!";
+            $_SESSION['edit_req_doc'] = "Document edited successfully.";
             header('Location: ../document.c.php');
             exit;
         } else {

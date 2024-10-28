@@ -102,7 +102,7 @@ if (isset($_POST['maBtnCreatePost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // add logs
     $user_name = $_SESSION['username'];
-    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $user_name created a post', CURRENT_TIMESTAMP,'$userid')");
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Post created successfully.', CURRENT_TIMESTAMP,'$userid')");
 
 
     if ($query) {

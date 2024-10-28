@@ -35,6 +35,15 @@ if (isset($_POST['btnGenerateReportLogs']) && $_SERVER['REQUEST_METHOD'] == 'POS
     $adminFullname = $admin_fname . " " . $admin_mname . " " . $admin_lname;
 
     $getAllLogsByDate = "SELECT * FROM `tbl_logs` WHERE `log_date` BETWEEN '$startDate' AND '$endDate' ";
+
+    $getAllLogsByDate = "
+        SELECT l.log_id, l.user_id, l.log_date, l.log_desc, u.user_fname, u.user_mname, u.user_lname, u.username 
+        FROM tbl_logs AS l 
+        INNER JOIN tbl_useracc AS u ON l.user_id = u.user_id 
+        WHERE l.log_date BETWEEN '$startDate' AND '$endDate' 
+        ORDER BY l.log_date DESC
+    ";
+
     $logsResult = mysqli_query($con, $getAllLogsByDate);
 
     if (!$logsResult) {
@@ -45,125 +54,7 @@ if (isset($_POST['btnGenerateReportLogs']) && $_SERVER['REQUEST_METHOD'] == 'POS
     exit;
 }
 
-$bootstrapCss = "
-.container {
-    width: 100%;
-    padding: 10px;
-    margin: 0 auto;
-}
-.mt-5 {
-    margin-top: 1.5rem;
-}
-.mb-4 {
-    margin-bottom: 1rem;
-}
-.text-light {
-    color: #f8f9fa !important;
-}
-.bg-success {
-    background-color: #28a745 !important;
-}
-.text-center {
-    text-align: center;
-}
-.rounded {
-    border-radius: .2rem;
-}
-.lead {
-    font-size: 1rem;
-}
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .2rem;
-}
-.card-body {
-    flex: 1 1 auto;
-    padding: 10px;
-}
-.shadow-sm {
-    box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .075) !important;
-}
-
-.mb-0 {
-    margin-bottom: 0 !important;
-}
-.mb-3 {
-    margin-bottom: .5rem !important;
-}
-.mt-4 {
-    margin-top: .75rem !important;
-}
-.card-title {
-    margin-bottom: .5rem;
-}
-.display-4 {
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1.1;
-}
-.h5 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    line-height: 1.2;
-}
-.lead {
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.4;
-}
-.p-3 {
-    padding: .5rem !important;
-}
-.py-3 {
-    padding-top: .5rem !important;
-    padding-bottom: .5rem !important;
-}
-.mb-3 {
-    margin-bottom: .5rem !important;
-}
-.mb-4 {
-    margin-bottom: 1rem !important;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: .5rem 1rem;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, .125);
-}
-
-/* Additional table styling */
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-}
-.table-bordered {
-    border: 1px solid #dee2e6;
-}
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, .05);
-}
-.table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, .075);
-}
-.table-success {
-    color: #155724;
-    background-color: #c3e6cb;
-}
-.text-uppercase {
-    text-transform: uppercase;
-}
-";
-
+$bootstrapCss = ".container { width: 100%; padding: 10px; margin: 0 auto; } .mt-5 { margin-top: 1.5rem; } .mb-4 { margin-bottom: 1rem; } .text-light { color: #f8f9fa !important; } .bg-success { background-color: #28a745 !important; } .text-center { text-align: center; } .rounded { border-radius: .2rem; } .lead { font-size: 1rem; } .card { position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 1px solid rgba(0, 0, 0, .125); border-radius: .2rem; } .card-body { flex: 1 1 auto; padding: 10px; } .shadow-sm { box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .075) !important; } .mb-0 { margin-bottom: 0 !important; } .mb-3 { margin-bottom: .5rem !important; } .mt-4 { margin-top: .75rem !important; } .card-title { margin-bottom: .5rem; } .display-4 { font-size: 2rem; font-weight: 300; line-height: 1.1; } .h5 { font-size: 1.1rem; font-weight: 500; line-height: 1.2; } .lead { font-size: 1rem; font-weight: 300; line-height: 1.4; } .p-3 { padding: .5rem !important; } .py-3 { padding-top: .5rem !important; padding-bottom: .5rem !important; } .mb-3 { margin-bottom: .5rem !important; } .mb-4 { margin-bottom: 1rem !important; } .list-group-item { position: relative; display: block; padding: .5rem 1rem; margin-bottom: -1px; background-color: #fff; border: 1px solid rgba(0, 0, 0, .125); } .table { width: 100%; margin-bottom: 1rem; color: #212529; } .table-bordered { border: 1px solid #dee2e6; } .table-striped tbody tr:nth-of-type(odd) { background-color: rgba(0, 0, 0, .05); } .table-hover tbody tr:hover { background-color: rgba(0, 0, 0, .075); } .table-success { color: #155724; background-color: #c3e6cb; } .text-uppercase { text-transform: uppercase; }";
 
 $currentDateTime = date('Y-m-d H:i:s');
 $currentYear = date('Y');
@@ -190,10 +81,12 @@ $html = <<<HTML
             <table class="table align-middle table-bordered table-striped table-hover text-center text-capitalized">
                 <thead class="table-active text-uppercase text-white">
                     <tr>
-                        <th><small>Log ID</small></th>
-                        <th><small>Log Description</small></th>
-                        <th><small>Log Date</small></th>
+                         <th><small>Log ID</small></th>
                         <th><small>User ID</small></th>
+                        <th><small>Username </small></th>
+                        <th><small>Log Date</small></th>
+                        <th><small>Log Time</small></th>
+                        <th><small>Log Description</small></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -205,16 +98,23 @@ if (mysqli_num_rows($logsResult) === 0) {
 } else {
     while ($data = mysqli_fetch_assoc($logsResult)) {
         $log_id = htmlspecialchars($data['log_id']);
+        $user_id = htmlspecialchars($data['user_id']);
+        $username = htmlspecialchars($data['username']);
         $log_desc = htmlspecialchars($data['log_desc']);
         $log_date = htmlspecialchars($data['log_date']);
-        $user_id = htmlspecialchars($data['user_id']);
+
+        $get_Time_And_Day = new DateTime($log_date);
+        $formattedDate = $get_Time_And_Day->format('Y-m-d');
+        $formattedTime = $get_Time_And_Day->format('h:i:s A');
 
         $html .= "
             <tr>
                 <td><small>$log_id</small></td>
-                <td><small>$log_desc</small></td>
-                <td><small>$log_date</small></td>
                 <td><small>$user_id</small></td>
+                <td><small>$username</small></td>
+                <td><small>$formattedDate</small></td>
+                <td><small>$formattedTime</small></td>
+                <td><small>$log_desc</small></td>
             </tr>
         ";
     }

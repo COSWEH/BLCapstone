@@ -97,7 +97,7 @@ if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST
                 $insert = mysqli_query($con, "INSERT INTO tbl_useracc (user_id, fromSanIsidro, user_brgy, user_fname, user_mname, user_lname, user_gender, user_contactNum, dateOfBirth, user_age, placeOfBirth, civilStatus, user_city, user_purok, user_email, username, password, role_id, user_create_at) VALUES ('', '$fromSanIsidro', '$barangay', '$fname', '$mname', '$lname', '$gender', '$contactNum', '$dateOfBirth', '$age', '$placeOfBirth', '$civilStatus', '$user_city', '$purok', '$email', '$username', '$password', '$role_id', CURRENT_TIMESTAMP)");
 
                 // add logs Super Admin account deleted by user admin123.
-                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('',' $user_type account registered by $username.', CURRENT_TIMESTAMP,'$user_id')");
+                mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','New $user_type account successfully registered in the system.', CURRENT_TIMESTAMP,'$user_id')");
 
                 if ($insert) {
                     $_SESSION['addSuperAdmin_success_message'] = "$user_type account registered successfully!";

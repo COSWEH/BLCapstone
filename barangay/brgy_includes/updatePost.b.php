@@ -133,7 +133,7 @@ if (isset($_POST['baBtnEditPost']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     WHERE `post_id` = '$post_id'");
 
     // add logs
-    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','User $username updated a post', CURRENT_TIMESTAMP,'$userid')");
+    mysqli_query($con, "INSERT INTO `tbl_logs`(`log_id`, `log_desc`, `log_date`, `user_id`) VALUES ('','Post updated successfully.', CURRENT_TIMESTAMP,'$userid')");
 
     // Check for success
     if ($query) {
