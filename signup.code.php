@@ -55,7 +55,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     function validatePhoneNumber($phoneNumber)
     {
-        $pattern = "/^(09\d{9}|639\d{9})$/";
+        $pattern = "/^(09\d{9}|\+639\d{9})$/";
         return preg_match($pattern, $phoneNumber) === 1;
     }
 

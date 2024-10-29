@@ -13,7 +13,7 @@ session_start();
 
 if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $fromSanIsidro = ucwords(strtolower($_SESSION['fromSanIsidro']));
-    $barangay = ucwords(strtolower($_SESSION['user_brgy']));
+    $barangay = ucwords(strtolower($_POST['user_brgy']));
     $fname = ucwords(strtolower($_POST['fname']));
     $mname = ucwords(strtolower($_POST['mname']));
     $lname = ucwords(strtolower($_POST['lname']));
@@ -29,7 +29,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirmPassword = $_POST['confirmPassword'];
     $user_role = $_POST['user_role'];
 
-
+    $_SESSION['superAdmin_brgy'] = $barangay;
     $_SESSION['superAdmin_fname'] = $fname;
     $_SESSION['superAdmin_mname'] = $mname;
     $_SESSION['superAdmin_lname'] = $lname;
@@ -59,7 +59,7 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     function validatePhoneNumber($phoneNumber)
     {
-        $pattern = "/^(09\d{9}|639\d{9})$/";
+        $pattern = "/^(09\d{9}|\+639\d{9})$/";
         return preg_match($pattern, $phoneNumber) === 1;
     }
 
@@ -189,10 +189,10 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         // Concatenate error messages into a single string
         $error_message = implode("<br>", $errors);
         $_SESSION['addAdmin_error_message'] = $error_message;
-        header('location: ../superAdminDashboard.m.php');
+        header('location: ../superAdminDashboard.php');
         exit;
     }
 } else {
-    header('location: ../superAdminDashboard.m.php');
+    header('location: ../superAdminDashboard.php');
     exit;
 }

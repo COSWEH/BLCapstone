@@ -301,7 +301,7 @@ session_start();
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="number" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+                                    <input type="tel" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|\+639\d{9})$" maxlength="13" title="Enter a valid contact number (e.g., 09123456789 or +639123456789)" oninput="this.value = this.value.replace(/[^0-9+]/g, '')">
                                     <label for="contactNum" class="form-label">Contact Number</label>
                                 </div>
 

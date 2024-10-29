@@ -139,21 +139,23 @@ if ($user_role != 0) {
                         <i class="bi bi-moon-fill" id="moon-icon"></i>
                         <i class="bi bi-brightness-high-fill" id="sun-icon" style="display:none;"></i>
                     </button>
-                    <div class="dropdown">
-                        <button class="btn btn-sm shadow position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificationButton">
-                            <i class="bi bi-bell-fill"></i>
-                            <div id="count-notification">
-                            </div>
-                        </button>
-                        <div class="dropdown-menu">
-                            <div class="card border border-0" style="width: 300px;">
-                                <!-- Notification Header -->
-                                <div class="card-header">
-                                    <h6 class="mb-0">
-                                        Notifications
-                                    </h6>
+                    <!-- notification button -->
+                    <button class="btn btn-sm shadow position-relative" type="button" data-bs-toggle="modal" data-bs-target="#notificationModal" id="notificationButton">
+                        <i class="bi bi-bell-fill"></i>
+                        <div id="count-notification"></div>
+                    </button>
+
+                    <!-- Notification Modal -->
+                    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm mt-5 ms-5">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div id="notification-content" class="p-3" style="height: 200px; overflow-y: auto;">
+                                <!-- Modal Body with Notifications -->
+                                <div class="modal-body" id="notification-content" style=" overflow-y: auto;">
                                     <!-- Your notification content here -->
                                 </div>
                             </div>
@@ -402,7 +404,7 @@ if ($user_role != 0) {
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-floating mb-3">
-                                            <input id="contactNumber" class="form-control" type="text" name="contNumber" placeholder="Contact Number" value="<?php echo $_SESSION['user_contactNum']; ?>" required>
+                                            <input id="contactNumber" class="form-control" type="tel" name="contNumber" placeholder="Contact Number" value="<?php echo $_SESSION['user_contactNum']; ?>" required pattern="^(09\d{9}|\+639\d{9})$" maxlength="13" title="Enter a valid contact number (e.g., 09123456789 or +639123456789)" oninput="this.value = this.value.replace(/[^0-9+]/g, '')">
                                             <label for="contactNumber">Contact Number</label>
                                         </div>
                                         <div class="form-floating mb-3">

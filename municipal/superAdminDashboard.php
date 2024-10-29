@@ -436,7 +436,24 @@ if ($user_role != 2) {
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
+                                    <select name="user_brgy" id="user_brgy" class="form-select" required>
+                                        <option value="" disabled selected>Select Barangay</option>
+                                        <option value="Alua">Alua</option>
+                                        <option value="Calaba">Calaba</option>
+                                        <option value="Malapit">Malapit</option>
+                                        <option value="Mangga">Mangga</option>
+                                        <option value="Poblacion">Poblacion</option>
+                                        <option value="Pulo">Pulo</option>
+                                        <option value="San Roque">San Roque</option>
+                                        <option value="Sto. Cristo">Sto. Cristo</option>
+                                        <option value="Tabon">Tabon</option>
+                                    </select>
+                                    <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="tel" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|\+639\d{9})$" maxlength="13" title="Enter a valid contact number (e.g., 09123456789 or +639123456789)" oninput="this.value = this.value.replace(/[^0-9+]/g, '')">
+
                                     <label for="contactNum" class="form-label">Contact Number</label>
                                 </div>
                                 <div class="row">
@@ -1710,8 +1727,13 @@ function displaySuccessMessage($sessionKey, $title = "Success", $icon = "success
     }
 }
 
-// super admin
+// super admin admin
 displaySuccessMessage('addSuperAdmin_success_message');
+displaySuccessMessage('delete_message');
+
+// add account addAdmin_error_message
+displaySuccessMessage('addAdmin_error_message', 'Invalid', 'error');
+
 
 //terms conditions
 displaySuccessMessage('add_tm_message');

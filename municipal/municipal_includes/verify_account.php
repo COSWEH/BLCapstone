@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['verification_code']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $fromSanIsidro = $_SESSION['fromSanIsidro'];
-    $barangay = $_SESSION['user_brgy'];
+    $barangay = $_SESSION['superAdmin_brgy'];
     $fname = $_SESSION['superAdmin_fname'];
     $mname = $_SESSION['superAdmin_mname'];
     $lname = $_SESSION['superAdmin_lname'];

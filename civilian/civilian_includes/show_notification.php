@@ -61,7 +61,7 @@
 
                         $get_Time_And_Day = new DateTime($getTime);
     ?>
-                        <div class="card-body p-2 bg-body-secondary rounded">
+                        <div class="card-body p-2 rounded">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <div>
@@ -83,7 +83,7 @@
                     }
                 } else {
                     // Handle the case where no notifications are found
-                    echo '<div class="card-body p-2 bg-body-secondary rounded">';
+                    echo '<div class="card-body p-2 rounded">';
                     echo '<small>No notifications found.</small>';
                     echo '</div>';
                 }
@@ -93,7 +93,7 @@
             }
         } else {
             // Handle the case where req_id is null
-            echo '<div class="card-body p-2 bg-body-secondary rounded">';
+            echo '<div class="card-body p-2 rounded">';
             echo '<small>No notifications available.</small>';
             echo '</div>';
         }
