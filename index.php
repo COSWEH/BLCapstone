@@ -58,6 +58,9 @@ session_start();
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#about" data-fetch="about">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#showCC" data-fetch="cc">Citizen's Charter</a>
+                    </li>
                 </ul>
 
                 <div class="ms-auto">
@@ -78,6 +81,13 @@ session_start();
             </div>
         </div>
     </nav>
+
+    <section id="showCC" style="display: none;">
+        <?php
+        include('includes/citizens_charter.php');
+        ?>
+    </section>
+
 
     <!-- Sign in Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -474,121 +484,123 @@ session_start();
     </div>
 
     <!-- Home Section -->
-    <section id="home" class="text-center text-md-start d-flex align-items-center">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Content Section -->
-                <div class="col-md-6 mb-4 px-lg-5">
-                    <!-- title -->
-                    <h1 id="home-title" class="display-3 mb-4">Loading...</h1>
-                    <!-- subtitle 1 -->
-                    <p id="home-subtitle1" class="lead mb-4">Loading...</p>
-                    <!-- subtitle 2 -->
-                    <p id="home-subtitle2" class="mb-4">Loading...</p>
-                    <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
-                        Get started
-                    </button>
-                </div>
-                <!-- Image Section -->
-                <div class="col-md-6 d-none d-md-block px-lg-5">
-                    <img id="home-img" src="" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="text-center text-md-start d-flex align-items-center">
-        <div class="container">
-            <h1 class="text-center display-4 mb-4">Our Services</h1>
-            <div id="services_container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
-                <!-- Service Cards Will Go Here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="text-center text-md-start d-flex align-items-center">
-        <div class="container">
-            <h1 class="text-center display-4 mb-4">Get in Touch with Us!</h1>
-            <p class="text-center mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4">
-                    <div>
-                        <h5 class="mb-1">Contact Phone Number</h5>
-                        <p id="contact_number"><i class="bi bi-telephone-fill"></i> Loading...</p>
+    <div id="showLandingPage">
+        <section id="home" class="text-center text-md-start d-flex align-items-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Content Section -->
+                    <div class="col-md-6 mb-4 px-lg-5">
+                        <!-- title -->
+                        <h1 id="home-title" class="display-3 mb-4">Loading...</h1>
+                        <!-- subtitle 1 -->
+                        <p id="home-subtitle1" class="lead mb-4">Loading...</p>
+                        <!-- subtitle 2 -->
+                        <p id="home-subtitle2" class="mb-4">Loading...</p>
+                        <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            Get started
+                        </button>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div>
-                        <h5 class="mb-1">Our Email Address</h5>
-                        <p id="contact_email"><i class="bi bi-envelope-fill"></i> Loading...</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div>
-                        <h5 class="mb-1">Our Location</h5>
-                        <p id="contact_location"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
+                    <!-- Image Section -->
+                    <div class="col-md-6 d-none d-md-block px-lg-5">
+                        <img id="home-img" src="" width="600" height="400" alt="Bayanlink Overview" class="img-fluid rounded shadow-sm">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="text-center text-md-start d-flex align-items-center">
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1 class="text-center display-4 mb-3">Our Mission</h1>
-                    <p id="our_mission" class="lead text-center">Loading...</p>
+        <!-- Services Section -->
+        <section id="services" class="text-center text-md-start d-flex align-items-center">
+            <div class="container">
+                <h1 class="text-center display-4 mb-4">Our Services</h1>
+                <div id="services_container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+                    <!-- Service Cards Will Go Here -->
                 </div>
             </div>
+        </section>
 
-            <div class="row mb-4">
-                <div class="col-12">
-                    <h1 class="text-center display-4  mb-3">Our Amazing Team</h1>
-                    <div class="row g-4 justify-content-center">
-                        <div class="col-md-3 text-center">
-                            <img src="img/p1.png" alt="Yvez Santiago" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6>Yvez Santiago</h6>
-                            <p class="text-muted">Front-end Developer</p>
+        <!-- Contact Section -->
+        <section id="contact" class="text-center text-md-start d-flex align-items-center">
+            <div class="container">
+                <h1 class="text-center display-4 mb-4">Get in Touch with Us!</h1>
+                <p class="text-center mb-4">If you have any inquiries and want to get in touch with us, we'll be happy to help you!</p>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div>
+                            <h5 class="mb-1">Contact Phone Number</h5>
+                            <p id="contact_number"><i class="bi bi-telephone-fill"></i> Loading...</p>
                         </div>
-                        <div class="col-md-3 text-center">
-                            <img src="img/p2.png" alt="Kevin Palma" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6>Kevin Palma</h6>
-                            <p class="text-muted">UI/UX Designer</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h5 class="mb-1">Our Email Address</h5>
+                            <p id="contact_email"><i class="bi bi-envelope-fill"></i> Loading...</p>
                         </div>
-                        <div class="col-md-3 text-center">
-                            <img src="img/p3.png" alt="Vincent Bernardino" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6>Vincent Bernardino</h6>
-                            <p class="text-muted">Operations Manager</p>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <img src="img/p4.png" alt="Paolo Ramos" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
-                            <h6>Paolo Ramos</h6>
-                            <p class="text-muted">Back-end Developer</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h5 class="mb-1">Our Location</h5>
+                            <p id="contact_location"><i class="bi bi-geo-alt-fill"></i> Loading...</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FAQs Section -->
-    <section class="text-center text-md-start d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h1 class="text-center display-4 mb-3">Frequently Asked Questions</h1>
-                    <p class="text-center">Find answers to common questions below:</p>
-                    <div id="faqs">
-                        <!-- FAQ content will go here -->
+        <!-- About Section -->
+        <section id="about" class="text-center text-md-start d-flex align-items-center">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col">
+                        <h1 class="text-center display-4 mb-3">Our Mission</h1>
+                        <p id="our_mission" class="lead text-center">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h1 class="text-center display-4  mb-3">Our Amazing Team</h1>
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-md-3 text-center">
+                                <img src="img/p1.png" alt="Yvez Santiago" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                                <h6>Yvez Santiago</h6>
+                                <p class="text-muted">Front-end Developer</p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <img src="img/p2.png" alt="Kevin Palma" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                                <h6>Kevin Palma</h6>
+                                <p class="text-muted">UI/UX Designer</p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <img src="img/p3.png" alt="Vincent Bernardino" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                                <h6>Vincent Bernardino</h6>
+                                <p class="text-muted">Operations Manager</p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <img src="img/p4.png" alt="Paolo Ramos" class="img-fluid rounded-circle mb-2" style="width: 100px; height: 100px;">
+                                <h6>Paolo Ramos</h6>
+                                <p class="text-muted">Back-end Developer</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- FAQs Section -->
+        <section class="text-center text-md-start d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="text-center display-4 mb-3">Frequently Asked Questions</h1>
+                        <p class="text-center">Find answers to common questions below:</p>
+                        <div id="faqs">
+                            <!-- FAQ content will go here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Footer Section -->
     <footer class="bg-dark text-light text-center py-5 border-top">
@@ -605,16 +617,35 @@ session_start();
 
     <script>
         $(document).ready(function() {
-
             document.getElementById('agreeTerms').addEventListener('change', function() {
                 const registerBtn = document.getElementById('registerBtn');
                 registerBtn.disabled = !this.checked;
             });
 
+            const fetchType = localStorage.getItem('fetchType');
+
+            if (fetchType === 'cc') {
+                $('#showCC').show();
+                $('#showLandingPage').hide();
+            } else {
+                $('#showCC').hide();
+                $('#showLandingPage').show();
+            }
+
             $('.nav-link').on('click', function(e) {
 
                 // Get the data-fetch attribute to determine which content to fetch
                 const fetchType = $(this).data('fetch');
+
+                if (fetchType === 'cc') {
+                    $('#showCC').show();
+                    $('#showLandingPage').hide();
+                } else {
+                    $('#showCC').hide();
+                    $('#showLandingPage').show();
+                }
+
+                localStorage.setItem('fetchType', fetchType);
 
                 // Call the appropriate function based on the clicked link
                 switch (fetchType) {
@@ -635,6 +666,9 @@ session_start();
                         showFaqs();
                         console.log('about');
                         console.log('faqs');
+                        break;
+                    case 'cc':
+                        console.log('cc');
                         break;
                     default:
                         console.error('Invalid fetch type:', fetchType);
