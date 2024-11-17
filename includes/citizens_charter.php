@@ -37,12 +37,21 @@
                 <div class="col text-center">
                     <a href="#" id="cat5" class="fw-bold text-decoration-none text-success link-offset-3">Category 5</a>
                 </div>
+                <div class="col text-center">
+                    <a href="#" id="cat6" class="fw-bold text-decoration-none text-success link-offset-3">Category 6</a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" id="cat7" class="fw-bold text-decoration-none text-success link-offset-3">Category 7</a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" id="cat8" class="fw-bold text-decoration-none text-success link-offset-3">Category 8</a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" id="cat9" class="fw-bold text-decoration-none text-success link-offset-3">Category 9</a>
+                </div>
             </div>
         </div>
     </nav>
-
-
-
 
     <div id="showCat1">
         <?php
@@ -71,6 +80,30 @@
     <div id="showCat5">
         <?php
         include('cc/category_5.php');
+        ?>
+    </div>
+
+    <div id="showCat6">
+        <?php
+        include('cc/category_6.php');
+        ?>
+    </div>
+
+    <div id="showCat7">
+        <?php
+        include('cc/category_7.php');
+        ?>
+    </div>
+
+    <div id="showCat8">
+        <?php
+        include('cc/category_8.php');
+        ?>
+    </div>
+
+    <div id="showCat9">
+        <?php
+        include('cc/category_9.php');
         ?>
     </div>
 </div>
