@@ -23,31 +23,52 @@
         <div class="container-fluid">
             <div class="row w-100">
                 <div class="col text-center">
-                    <a href="#" id="cat1" class="fw-bold text-decoration-none text-primary link-offset-3 active">Category 1</a>
+                    <a href="#" id="cat1" class="fw-bold text-decoration-none text-primary link-offset-3 active"
+                        title="Office of the Municipal Civil Registrar">
+                        OMCR
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat2" class="fw-bold text-decoration-none text-success link-offset-3">Category 2</a>
+                    <a href="#" id="cat2" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Municipal Social Welfare and Development Office External Services">
+                        MSWD
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat3" class="fw-bold text-decoration-none text-success link-offset-3">Category 3</a>
+                    <a href="#" id="cat3" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Office of the Municipal Treasurer External Services">
+                        MTO
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat4" class="fw-bold text-decoration-none text-success link-offset-3">Category 4</a>
+                    <a href="#" id="cat4" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Office of the Municipal Agriculturist External Services">
+                        OMA
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat5" class="fw-bold text-decoration-none text-success link-offset-3">Category 5</a>
+                    <a href="#" id="cat5" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Office of the Municipal Assessor External Services">
+                        OMAss
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat6" class="fw-bold text-decoration-none text-success link-offset-3">Category 6</a>
+                    <a href="#" id="cat6" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Municipal Health Office External Services">
+                        MHO
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat7" class="fw-bold text-decoration-none text-success link-offset-3">Category 7</a>
+                    <a href="#" id="cat7" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Office of the Municipal Accountant Internal Services">
+                        OMAc
+                    </a>
                 </div>
                 <div class="col text-center">
-                    <a href="#" id="cat8" class="fw-bold text-decoration-none text-success link-offset-3">Category 8</a>
-                </div>
-                <div class="col text-center">
-                    <a href="#" id="cat9" class="fw-bold text-decoration-none text-success link-offset-3">Category 9</a>
+                    <a href="#" id="cat8" class="fw-bold text-decoration-none text-success link-offset-3"
+                        title="Office of the Municipal Disaster Risk Reduction and Management External Services">
+                        MDRRMO
+                    </a>
                 </div>
             </div>
         </div>
@@ -98,12 +119,6 @@
     <div id="showCat8">
         <?php
         include('cc/category_8.php');
-        ?>
-    </div>
-
-    <div id="showCat9">
-        <?php
-        include('cc/category_9.php');
         ?>
     </div>
 </div>
