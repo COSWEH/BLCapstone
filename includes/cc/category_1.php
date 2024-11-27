@@ -3,6 +3,7 @@
         <h3 class="mb-0 text-center fw-bold">OFFICE OF THE MUNICIPAL CIVIL REGISTRAR</h3>
     </div>
     <div class="card-body">
+
         <h4 class="fw-bold">1. Birth Registration (Timely & Delayed)</h4>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Very vital municipality's assessment of progress and development.</li>
