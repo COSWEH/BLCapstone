@@ -147,6 +147,78 @@
         include('cc/category_8.php');
         ?>
     </div>
+
+    <!-- faqs -->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                    What is a Citizen's Charter?
+                </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    A Citizen's Charter is a document that outlines the services provided by a government office or agency, including the procedures, requirements, service fees, and timelines for availing of these services. It promotes transparency, efficiency, and accountability in public service delivery.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    What are the components of a Citizen's Charter?
+                </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    A Citizen's Charter typically includes: <br>
+                    - A list of services provided <br>
+                    - Step-by-step procedures <br>
+                    - Requirements and necessary documents <br>
+                    - Service fees (if applicable) <br>
+                    - Estimated processing times <br>
+                    - Contact details of responsible personnel <br>
+                    - Feedback and complaint mechanisms
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    How does the Citizen's Charter benefit the public?
+                </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    The Citizen's Charter benefits the public by providing clear and accessible information about government services, reducing red tape, ensuring faster service delivery, and holding government offices accountable for their commitments.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                    Where can I find the Citizen's Charter in my municipality?
+                </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    The Citizen's Charter is usually displayed in government offices, such as municipal halls, and can also be accessed on the official websites of local government units or agencies.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                    What should I do if a government office fails to comply with the Citizen's Charter?
+                </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    If a government office fails to comply with its Citizen's Charter, you can file a complaint through the designated feedback and complaint mechanism specified in the Charter or report it to the Civil Service Commission (CSC) or the Anti-Red Tape Authority (ARTA).
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
